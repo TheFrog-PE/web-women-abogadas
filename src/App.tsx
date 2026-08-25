@@ -625,13 +625,24 @@ export function App() {
 
             {/* HEADER CONTACT CTA (DESKTOP) */}
             <button 
-              className="btn btn-fuchsia desktop-cta-btn"
+              className="desktop-cta-btn"
               onClick={() => {
                 setActiveTab('miembros');
                 setSelectedArticle(null);
                 setViewingEventDetail(false);
               }}
-              style={{ fontSize: '0.85rem' }}
+              style={{ 
+                fontSize: '0.85rem',
+                fontWeight: '700',
+                padding: '0.6rem 1.4rem',
+                borderRadius: '9999px',
+                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
+                color: '#FFFFFF',
+                border: 'none',
+                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.35)',
+                cursor: 'pointer',
+                transition: 'all 0.25s ease'
+              }}
             >
               Únete a WIC
             </button>
@@ -734,15 +745,19 @@ export function App() {
                     color: '#FFFFFF'
                   }}>
                     <span className="anim-fade-up anim-d1" style={{ 
-                      backgroundColor: '#af1daa', 
-                      color: '#FFF', 
-                      padding: '0.4rem 1.25rem', 
+                      backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+                      color: '#e6affc', 
+                      border: '1px solid rgba(230, 175, 252, 0.4)',
+                      backdropFilter: 'blur(6px)',
+                      padding: '0.45rem 1.4rem', 
                       borderRadius: '9999px', 
-                      fontSize: '0.8rem', 
-                      fontWeight: '700', 
+                      fontSize: '0.78rem', 
+                      fontWeight: '800', 
                       marginBottom: '1.25rem',
-                      letterSpacing: '1.5px',
-                      display: 'inline-block'
+                      letterSpacing: '2px',
+                      textTransform: 'uppercase',
+                      display: 'inline-block',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
                     }}>
                       WIC COLOMBIA
                     </span>
@@ -767,9 +782,19 @@ export function App() {
                     </p>
                     <div className="anim-fade-up anim-d4">
                       <button 
-                        className="btn btn-fuchsia"
+                        className="btn"
                         onClick={slide.action}
-                        style={{ fontSize: '1rem', padding: '0.85rem 2.5rem', backgroundColor: '#af1daa' }}
+                        style={{ 
+                          fontSize: '1rem', 
+                          padding: '0.85rem 2.5rem', 
+                          background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
+                          color: '#FFFFFF',
+                          border: 'none',
+                          boxShadow: '0 8px 25px rgba(175, 29, 170, 0.4)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.5rem'
+                        }}
                       >
                         {slide.btnText} <ChevronRight size={18} />
                       </button>
@@ -1056,7 +1081,7 @@ export function App() {
                   
                   {/* TEXTO + BOTÓN */}
                   <div className="reveal-left">
-                    <span style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.85rem' }}>
+                    <span style={{ backgroundColor: '#f4f4f4', color: '#af1daa', border: '1px solid #e6affc', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.78rem', letterSpacing: '1px' }}>
                       EVENTO DESTACADO
                     </span>
                     <h2 style={{ fontSize: '2.2rem', marginTop: '1rem', marginBottom: '1.25rem', lineHeight: '1.3' }}>
@@ -2189,12 +2214,14 @@ export function App() {
                     {/* BADGES ROL Y LINKEDIN */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                       <span style={{ 
-                        backgroundColor: '#af1daa', 
-                        color: '#FFFFFF', 
-                        padding: '0.4rem 1rem', 
-                        fontSize: '0.8rem', 
-                        fontWeight: '700',
-                        borderRadius: '4px'
+                        backgroundColor: '#f4f4f4', 
+                        color: '#af1daa', 
+                        border: '1px solid #e6affc',
+                        padding: '0.35rem 1rem', 
+                        fontSize: '0.78rem', 
+                        fontWeight: '800',
+                        borderRadius: '9999px',
+                        letterSpacing: '0.5px'
                       }}>
                         {selectedMember.role}
                       </span>

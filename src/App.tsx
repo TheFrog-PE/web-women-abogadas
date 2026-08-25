@@ -734,7 +734,7 @@ export function App() {
                     color: '#FFFFFF'
                   }}>
                     <span className="anim-fade-up anim-d1" style={{ 
-                      backgroundColor: 'rgba(217, 27, 92, 0.9)', 
+                      backgroundColor: '#af1daa', 
                       color: '#FFF', 
                       padding: '0.4rem 1.25rem', 
                       borderRadius: '9999px', 
@@ -769,7 +769,7 @@ export function App() {
                       <button 
                         className="btn btn-fuchsia"
                         onClick={slide.action}
-                        style={{ fontSize: '1rem', padding: '0.85rem 2.5rem', backgroundColor: '#80008C' }}
+                        style={{ fontSize: '1rem', padding: '0.85rem 2.5rem', backgroundColor: '#af1daa' }}
                       >
                         {slide.btnText} <ChevronRight size={18} />
                       </button>
@@ -824,10 +824,10 @@ export function App() {
             </section>
 
             {/* SECCIÓN ¿QUIÉNES SOMOS? (SEGÚN MAQUETA OFICIAL 01-INICIO.SVG) */}
-            <section style={{ backgroundColor: '#F6F2FF', padding: '5rem 1.5rem', borderBottom: '1px solid #E2E8F0', textAlign: 'center' }}>
+            <section style={{ backgroundColor: '#f4f4f4', padding: '5rem 1.5rem', borderBottom: '1px solid #E2E8F0', textAlign: 'center' }}>
               <div className="reveal" style={{ maxWidth: '850px', margin: '0 auto' }}>
                 <h2 style={{ 
-                  color: '#8F008D', 
+                  color: '#af1daa', 
                   fontSize: '2.5rem', 
                   fontFamily: 'sans-serif', 
                   fontWeight: '800', 
@@ -845,7 +845,7 @@ export function App() {
                       setActiveTab('miembros');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    style={{ backgroundColor: '#80008C', padding: '0.85rem 2.5rem', fontSize: '1rem' }}
+                    style={{ backgroundColor: '#af1daa', padding: '0.85rem 2.5rem', fontSize: '1rem' }}
                   >
                     Miembros
                   </button>
@@ -854,13 +854,13 @@ export function App() {
             </section>
 
             {/* SECCIÓN MISIÓN Y VISIÓN (FONDO FUCSIA COMPLETO Y LETRA BLANCA - SEGÚN INSTRUCCIÓN) */}
-            <section style={{ backgroundColor: '#D91B5C', color: '#FFFFFF', padding: '5rem 1.5rem' }}>
+            <section style={{ backgroundColor: '#af1daa', color: '#FFFFFF', padding: '5rem 1.5rem' }}>
               <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
                 <div className="reveal" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
                   <h2 style={{ color: '#FFFFFF', fontSize: '2.3rem', marginBottom: '1rem' }}>
                     Nuestra Misión & Visión
                   </h2>
-                  <p style={{ fontSize: '1.1rem', color: '#FDF2F5', maxWidth: '750px', margin: '0 auto' }}>
+                  <p style={{ fontSize: '1.1rem', color: '#f4f4f4', maxWidth: '750px', margin: '0 auto' }}>
                     Construyendo la red intersectorial de mujeres líderes en integridad, ética corporativa y cumplimiento normativo en Colombia.
                   </p>
                 </div>
@@ -877,7 +877,7 @@ export function App() {
                   }}>
                     <div style={{ 
                       backgroundColor: '#FFFFFF', 
-                      color: '#D91B5C', 
+                      color: '#af1daa', 
                       width: '56px', 
                       height: '56px', 
                       borderRadius: '50%', 
@@ -904,7 +904,7 @@ export function App() {
                   }}>
                     <div style={{ 
                       backgroundColor: '#FFFFFF', 
-                      color: '#D91B5C', 
+                      color: '#af1daa', 
                       width: '56px', 
                       height: '56px', 
                       borderRadius: '50%', 
@@ -929,7 +929,7 @@ export function App() {
             <section style={{ padding: '5rem 1.5rem', backgroundColor: '#FFFFFF' }}>
               <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
                 <div className="reveal" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                  <span style={{ color: '#D91B5C', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.85rem' }}>
+                  <span style={{ color: '#af1daa', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.85rem' }}>
                     NUESTROS EJES ESTRATÉGICOS
                   </span>
                   <h2 style={{ fontSize: '2.2rem', marginTop: '0.5rem' }}>Pilares Fundamentales</h2>
@@ -949,8 +949,8 @@ export function App() {
                       width: '80px', 
                       height: '80px', 
                       borderRadius: '50%', 
-                      backgroundColor: '#FDF2F5', 
-                      color: '#D91B5C', 
+                      backgroundColor: '#f4f4f4', 
+                      color: '#af1daa', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
@@ -976,8 +976,8 @@ export function App() {
                       width: '80px', 
                       height: '80px', 
                       borderRadius: '50%', 
-                      backgroundColor: '#FDF2F5', 
-                      color: '#D91B5C', 
+                      backgroundColor: '#f4f4f4', 
+                      color: '#af1daa', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
@@ -1003,8 +1003,8 @@ export function App() {
                       width: '80px', 
                       height: '80px', 
                       borderRadius: '50%', 
-                      backgroundColor: '#FDF2F5', 
-                      color: '#D91B5C', 
+                      backgroundColor: '#f4f4f4', 
+                      color: '#af1daa', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
@@ -1030,8 +1030,8 @@ export function App() {
                       width: '80px', 
                       height: '80px', 
                       borderRadius: '50%', 
-                      backgroundColor: '#FDF2F5', 
-                      color: '#D91B5C', 
+                      backgroundColor: '#f4f4f4', 
+                      color: '#af1daa', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
@@ -1056,7 +1056,7 @@ export function App() {
                   
                   {/* TEXTO + BOTÓN */}
                   <div className="reveal-left">
-                    <span style={{ backgroundColor: '#FDF2F5', color: '#D91B5C', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.85rem' }}>
+                    <span style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.85rem' }}>
                       EVENTO DESTACADO
                     </span>
                     <h2 style={{ fontSize: '2.2rem', marginTop: '1rem', marginBottom: '1.25rem', lineHeight: '1.3' }}>
@@ -1145,7 +1145,7 @@ export function App() {
                 alignItems: 'center'
               }}>
                 <span className="anim-fade-up anim-d1" style={{ 
-                  backgroundColor: 'rgba(217, 27, 92, 0.9)', 
+                  backgroundColor: 'rgba(175, 29, 170, 0.9)', 
                   color: '#FFFFFF', 
                   padding: '0.4rem 1.25rem', 
                   fontSize: '0.75rem', 
@@ -1167,12 +1167,12 @@ export function App() {
               </div>
             </section>
 
-            <div style={{ backgroundColor: '#FAF8FF', padding: '4rem 1.5rem' }}>
+            <div style={{ backgroundColor: '#f4f4f4', padding: '4rem 1.5rem' }}>
               <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
                 {/* SI ESTAMOS EN LA VISTA DE DETALLE DEL PRIMER DESAYUNO */}
                 {viewingEventDetail ? (
-                  <div style={{ margin: '0 -1.5rem', backgroundColor: '#FAF8FF' }}>
+                  <div style={{ margin: '0 -1.5rem', backgroundColor: '#f4f4f4' }}>
 
                     {/* ── HERO MORADO SPLIT (MAQUETA) ── */}
                     <div className="events-hero-split" style={{
@@ -1233,14 +1233,14 @@ export function App() {
                       </div>
 
                       {/* Columna derecha: foto recortada con gradiente */}
-                      <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#E9D5FF' }}>
+                      <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#e6affc' }}>
                         <img
                           src={currentEvent.heroImage}
                           alt={currentEvent.title}
                           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
                           onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
                         />
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #6B0F8C 0%, transparent 40%)' }} />
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #af1daa 0%, transparent 40%)' }} />
                       </div>
                     </div>
 
@@ -1259,7 +1259,7 @@ export function App() {
                               </div>
                             ))}
                           </div>
-                          <h3 style={{ color: '#6B0F8C', fontSize: '1.2rem', fontWeight: '800', marginBottom: '1rem' }}>
+                          <h3 style={{ color: '#af1daa', fontSize: '1.2rem', fontWeight: '800', marginBottom: '1rem' }}>
                             {currentEvent.isPast ? 'Galería Fotografías & Memorias' : 'Descripción del evento'}
                           </h3>
                           {currentEvent.description.map((descParagraph, idx) => (
@@ -1271,7 +1271,7 @@ export function App() {
 
                         {/* Derecha: Panel Lateral (Inscripción O Resumen de Evento Realizado) */}
                         {!currentEvent.isPast ? (
-                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E9D5FF', boxShadow: '0 8px 32px rgba(107,15,140,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
+                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
                             <h4 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
                               Inscripción al Evento
                             </h4>
@@ -1292,11 +1292,11 @@ export function App() {
                               />
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: '#475569', cursor: 'pointer' }}>
-                                  <input type="radio" name="modalidad" defaultChecked style={{ accentColor: '#8F008D' }} />
+                                  <input type="radio" name="modalidad" defaultChecked style={{ accentColor: '#af1daa' }} />
                                   Presencial - Bogotá
                                 </label>
                                 <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: '#475569', cursor: 'pointer' }}>
-                                  <input type="radio" name="modalidad" style={{ accentColor: '#8F008D' }} />
+                                  <input type="radio" name="modalidad" style={{ accentColor: '#af1daa' }} />
                                   Virtual (Transmisión en Vivo)
                                 </label>
                               </div>
@@ -1304,28 +1304,28 @@ export function App() {
 
                             <button
                               onClick={() => alert('¡Inscripción enviada! Recibirás confirmación a tu correo.')}
-                              style={{ width: '100%', background: 'linear-gradient(90deg, #6B0F8C, #C026D3)', color: '#FFFFFF', border: 'none', padding: '0.9rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.95rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px' }}
+                              style={{ width: '100%', background: 'linear-gradient(90deg, #af1daa, #eb54ff)', color: '#FFFFFF', border: 'none', padding: '0.9rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.95rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px' }}
                             >
                               INSCRIBIRSE AL EVENTO
                             </button>
-                            <span style={{ display: 'block', textAlign: 'center', color: '#8F008D', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}>
+                            <span style={{ display: 'block', textAlign: 'center', color: '#af1daa', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}>
                               Descargar documento informativo
                             </span>
 
-                            <div style={{ borderTop: '1px solid #F3E8FF', marginTop: '1.5rem', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            <div style={{ borderTop: '1px solid #f4f4f4', marginTop: '1.5rem', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', fontSize: '0.85rem' }}>
-                                <Calendar size={16} style={{ color: '#8F008D', flexShrink: 0 }} />
+                                <Calendar size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
                                 <span><strong style={{ color: '#1E1B4B' }}>{currentEvent.dateStr}</strong></span>
                               </div>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', fontSize: '0.85rem' }}>
-                                <MapPin size={16} style={{ color: '#8F008D', flexShrink: 0 }} />
+                                <MapPin size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
                                 <span><strong style={{ color: '#1E1B4B' }}>{currentEvent.location}</strong></span>
                               </div>
                             </div>
                           </div>
                         ) : (
-                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E9D5FF', boxShadow: '0 8px 32px rgba(107,15,140,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
-                            <div style={{ backgroundColor: '#F3E8FF', color: '#8F008D', padding: '0.35rem 0.85rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.7rem', width: 'fit-content', marginBottom: '1rem', letterSpacing: '1px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.35rem 0.85rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.7rem', width: 'fit-content', marginBottom: '1rem', letterSpacing: '1px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                               <CheckCircle2 size={14} /> EVENTO FINALIZADO
                             </div>
                             <h4 style={{ color: '#1E1B4B', fontSize: '1.15rem', fontWeight: '800', marginBottom: '0.4rem' }}>
@@ -1335,7 +1335,7 @@ export function App() {
                               Las inscripciones para este evento han concluido. Puedes consultar la galería oficial y descargar las memorias en PDF.
                             </p>
 
-                            <div style={{ backgroundColor: '#FAF8FF', border: '1px solid #E9D5FF', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', border: '1px solid #e6affc', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
                                 <span style={{ color: '#64748B' }}>Estado:</span>
                                 <strong style={{ color: '#16A34A' }}>Concluido</strong>
@@ -1347,25 +1347,25 @@ export function App() {
                               {currentEvent.attendeesCount && (
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
                                   <span style={{ color: '#64748B' }}>Asistencia:</span>
-                                  <strong style={{ color: '#8F008D' }}>{currentEvent.attendeesCount}</strong>
+                                  <strong style={{ color: '#af1daa' }}>{currentEvent.attendeesCount}</strong>
                                 </div>
                               )}
                             </div>
 
                             <button
                               onClick={() => alert('Descargando memorias técnicas del evento en PDF...')}
-                              style={{ width: '100%', background: 'linear-gradient(90deg, #6B0F8C, #C026D3)', color: '#FFFFFF', border: 'none', padding: '0.9rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                              style={{ width: '100%', background: 'linear-gradient(90deg, #af1daa, #eb54ff)', color: '#FFFFFF', border: 'none', padding: '0.9rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                             >
                               <Download size={18} /> DESCARGAR MEMORIAS (PDF)
                             </button>
 
-                            <div style={{ borderTop: '1px solid #F3E8FF', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            <div style={{ borderTop: '1px solid #e6affc', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', fontSize: '0.85rem' }}>
-                                <Calendar size={16} style={{ color: '#8F008D', flexShrink: 0 }} />
+                                <Calendar size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
                                 <span><strong style={{ color: '#1E1B4B' }}>{currentEvent.dateStr}</strong></span>
                               </div>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', fontSize: '0.85rem' }}>
-                                <MapPin size={16} style={{ color: '#8F008D', flexShrink: 0 }} />
+                                <MapPin size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
                                 <span><strong style={{ color: '#1E1B4B' }}>{currentEvent.location}</strong></span>
                               </div>
                             </div>
@@ -1382,8 +1382,8 @@ export function App() {
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                           {currentEvent.agenda.map((item, i) => (
-                            <div key={i} className={`reveal delay-${i + 1} card-hover`} style={{ backgroundColor: '#FFFFFF', borderRadius: '10px', padding: '1.25rem 1.75rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.5rem', alignItems: 'center', border: '1px solid #E9D5FF' }}>
-                              <span style={{ color: '#8F008D', fontWeight: '800', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>{item.time}</span>
+                            <div key={i} className={`reveal delay-${i + 1} card-hover`} style={{ backgroundColor: '#FFFFFF', borderRadius: '10px', padding: '1.25rem 1.75rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.5rem', alignItems: 'center', border: '1px solid #e6affc' }}>
+                              <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>{item.time}</span>
                               <div>
                                 <p style={{ color: '#1E1B4B', fontWeight: '700', fontSize: '1rem', margin: '0 0 0.25rem' }}>{item.title}</p>
                                 <p style={{ color: '#64748B', fontSize: '0.82rem', margin: 0 }}>{item.desc}</p>
@@ -1397,18 +1397,18 @@ export function App() {
                       {/* ── EXPOSITORES DEDICADOS ── */}
                       <div style={{ marginBottom: '4.5rem' }}>
                         <div className="reveal" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                          <span style={{ color: '#8F008D', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>PANELISTAS INVITADOS</span>
+                          <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>PANELISTAS INVITADOS</span>
                           <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem' }}>EXPOSITORES</h2>
                         </div>
                         <div className="events-speakers-grid">
                           {currentEvent.speakers.map((m, i) => (
-                            <div key={i} className={`reveal-scale delay-${i + 1} card-hover`} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #E9D5FF', textAlign: 'center', padding: '1.5rem 1rem', boxShadow: '0 4px 16px rgba(107,15,140,0.06)', overflow: 'hidden' }}>
+                            <div key={i} className={`reveal-scale delay-${i + 1} card-hover`} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1px solid #e6affc', textAlign: 'center', padding: '1.5rem 1rem', boxShadow: '0 4px 16px rgba(175,29,170,0.06)', overflow: 'hidden' }}>
                               <div style={{ position: 'relative', display: 'inline-block', marginBottom: '1rem' }}>
-                                <img src={m.photo} alt={m.name} style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top center', border: '3px solid #E9D5FF', backgroundColor: '#CBD5E1', display: 'block' }} onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = AVATAR_FALLBACK; }} />
-                                <span style={{ position: 'absolute', top: 0, right: 0, backgroundColor: '#8F008D', color: '#FFF', fontSize: '0.55rem', fontWeight: '700', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>WIC</span>
+                                <img src={m.photo} alt={m.name} style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top center', border: '3px solid #e6affc', backgroundColor: '#CBD5E1', display: 'block' }} onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = AVATAR_FALLBACK; }} />
+                                <span style={{ position: 'absolute', top: 0, right: 0, backgroundColor: '#af1daa', color: '#FFF', fontSize: '0.55rem', fontWeight: '700', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>WIC</span>
                               </div>
                               <h4 style={{ fontSize: '0.95rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.3rem', lineHeight: '1.25' }}>{m.name}</h4>
-                              <span style={{ color: '#8F008D', fontSize: '0.72rem', fontWeight: '600', display: 'block' }}>{m.role}</span>
+                              <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '600', display: 'block' }}>{m.role}</span>
                             </div>
                           ))}
                         </div>
@@ -1418,10 +1418,10 @@ export function App() {
 
                     {/* ── GALERÍA DE FOTOS AUMENTADA DEL EVENTO CULMINADO (ANTES DEL FOOTER) ── */}
                     {currentEvent.isPast && (
-                      <div className="reveal" style={{ backgroundColor: '#FAF8FF', padding: '4rem 2rem', borderRadius: '24px', marginBottom: '2.5rem', border: '1px solid #E9D5FF' }}>
+                      <div className="reveal" style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem', borderRadius: '24px', marginBottom: '2.5rem', border: '1px solid #e6affc' }}>
                         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                            <span style={{ color: '#8F008D', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
                               GALERÍA OFICIAL DE FOTOGRAFÍAS
                             </span>
                             <h2 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem', marginBottom: '0.5rem' }}>
@@ -1473,7 +1473,7 @@ export function App() {
                           ] as [string,string][]).map(([n,l], i) => (
                             <div key={l} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                               <div style={{ textAlign: 'center', minWidth: '90px' }}>
-                                <span style={{ fontSize: '5rem', fontWeight: '900', color: '#C026D3', display: 'block', lineHeight: 1 }}>{n}</span>
+                                <span style={{ fontSize: '5rem', fontWeight: '900', color: '#eb54ff', display: 'block', lineHeight: 1 }}>{n}</span>
                                 <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '2px', marginTop: '0.5rem', display: 'block' }}>{l}</span>
                               </div>
                               {i < 3 && <span style={{ fontSize: '4rem', color: 'rgba(255,255,255,0.15)', lineHeight: 1 }}>:</span>}
@@ -1482,7 +1482,7 @@ export function App() {
                         </div>
                         <button
                           onClick={() => alert('¡Inscripción lista!')}
-                          style={{ background: 'linear-gradient(90deg,#6B0F8C,#C026D3)', color: '#FFF', border: 'none', padding: '0.9rem 2.8rem', borderRadius: '9999px', fontWeight: '800', fontSize: '1rem', cursor: 'pointer', letterSpacing: '0.5px' }}
+                          style={{ background: 'linear-gradient(90deg,#af1daa,#eb54ff)', color: '#FFF', border: 'none', padding: '0.9rem 2.8rem', borderRadius: '9999px', fontWeight: '800', fontSize: '1rem', cursor: 'pointer', letterSpacing: '0.5px' }}
                         >
                           INSCRÍBETE AL EVENTO
                         </button>
@@ -1490,13 +1490,13 @@ export function App() {
                     )}
 
                     {/* ── AUSPICIADORES ── */}
-                    <div style={{ backgroundColor: '#FAF8FF', padding: '4rem 2rem' }}>
+                    <div style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem' }}>
                       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-                        <span style={{ color: '#8F008D', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
+                        <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
                         <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem', marginBottom: '2.5rem' }}>Auspiciadores</h2>
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
                           {[1,2,3,4].map(i => (
-                            <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', width: '160px', height: '80px', border: '1px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(107,15,140,0.06)' }}>
+                            <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', width: '160px', height: '80px', border: '1px solid #e6affc', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(175, 29, 170,0.06)' }}>
                               <span style={{ color: '#CBD5E1', fontSize: '0.75rem', fontWeight: '600' }}>LOGO EMPRESA</span>
                             </div>
                           ))}
@@ -1515,7 +1515,7 @@ export function App() {
                       </p>
                       <button
                         onClick={() => alert('Gracias por tu interés. Nos pondremos en contacto contigo pronto.')}
-                        style={{ backgroundColor: '#FFFFFF', color: '#6B0F8C', border: 'none', padding: '0.85rem 2.5rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.95rem', cursor: 'pointer' }}
+                        style={{ backgroundColor: '#FFFFFF', color: '#af1daa', border: 'none', padding: '0.85rem 2.5rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.95rem', cursor: 'pointer' }}
                       >
                         CONTACTAR AL ORGANIZADOR
                       </button>
@@ -1526,7 +1526,7 @@ export function App() {
                       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
                           <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B' }}>OTROS EVENTOS REALIZADOS</h2>
-                          <span style={{ color: '#8F008D', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1px' }}>2 EVENTOS</span>
+                          <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1px' }}>2 EVENTOS</span>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
                           {[
@@ -1549,7 +1549,7 @@ export function App() {
                               <img src={ev.src} alt={ev.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }} />
                               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,0,30,0.82) 0%, rgba(10,0,30,0.2) 50%, transparent 100%)' }} />
                               <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem', right: '1.25rem' }}>
-                                <span style={{ color: '#E9D5FF', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '2px', display: 'block', marginBottom: '0.35rem' }}>{ev.date}</span>
+                                <span style={{ color: '#e6affc', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '2px', display: 'block', marginBottom: '0.35rem' }}>{ev.date}</span>
                                 <p style={{ color: '#FFFFFF', fontWeight: '800', fontSize: '1.05rem', margin: '0 0 0.35rem', lineHeight: '1.3' }}>{ev.label}</p>
                                 <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem' }}>{ev.lugar}</span>
                               </div>
@@ -1573,8 +1573,8 @@ export function App() {
                       </div>
 
                       <div style={{
-                        backgroundColor: '#fdf4f4',
-                        border: '1.5px solid #e6a7fc',
+                        backgroundColor: '#f4f4f4',
+                        border: '1.5px solid #e6affc',
                         borderRadius: '16px',
                         padding: '3.5rem 2rem',
                         textAlign: 'center',
@@ -1590,8 +1590,8 @@ export function App() {
                       </div>
                     </div>
 
-                    {/* 3. SECCIÓN EVENTO PREVIO (DESAYUNO WIC COLOMBIA) CON FONDO OFICIAL #fdf4f4 */}
-                    <div style={{ backgroundColor: '#fdf4f4', borderRadius: '24px', padding: '3.5rem 2rem', marginBottom: '4rem', border: '1.5px solid #e6a7fc' }}>
+                    {/* 3. SECCIÓN EVENTO PREVIO (DESAYUNO WIC COLOMBIA) CON FONDO OFICIAL #f4f4f4 */}
+                    <div style={{ backgroundColor: '#f4f4f4', borderRadius: '24px', padding: '3.5rem 2rem', marginBottom: '4rem', border: '1.5px solid #e6affc' }}>
                       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                         
                         {/* CABECERA Y BADGE DESTACADO */}
@@ -1603,7 +1603,7 @@ export function App() {
                             Desayuno WIC Colombia
                           </h2>
                           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                            <span style={{ backgroundColor: '#cb54ff', color: '#FFFFFF', padding: '0.4rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '800', boxShadow: '0 2px 8px rgba(203,84,255,0.3)' }}>
+                            <span style={{ backgroundColor: '#eb54ff', color: '#FFFFFF', padding: '0.4rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '800', boxShadow: '0 2px 8px rgba(203,84,255,0.3)' }}>
                               ✨ Más de 30 Asistentes
                             </span>
                             <span style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -1613,7 +1613,7 @@ export function App() {
                         </div>
 
                         {/* DESCRIPCIÓN DEL EVENTO */}
-                        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem 2.5rem', marginBottom: '3rem', border: '1px solid #e6a7fc', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
+                        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem 2.5rem', marginBottom: '3rem', border: '1px solid #e6affc', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
                           <h3 style={{ color: '#af1daa', fontSize: '1.2rem', fontWeight: '800', marginBottom: '0.75rem' }}>
                             Descripción del Evento
                           </h3>
@@ -1633,7 +1633,7 @@ export function App() {
                               { time: '08:30 – 09:30', title: 'Ponencia Principal: Gobierno Corporativo y Compliance', desc: 'Conferencia sobre buenas prácticas de gobierno e integridad corporativa.', sala: 'Auditorio' },
                               { time: '09:30 – 10:30', title: 'Mesa de Diálogo & Cierre', desc: 'Espacio de preguntas, conclusiones y compromisos de la red.', sala: 'Salón Principal' },
                             ].map((item, i) => (
-                              <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.15rem 1.5rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.25rem', alignItems: 'center', border: '1px solid #e6a7fc' }}>
+                              <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.15rem 1.5rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.25rem', alignItems: 'center', border: '1px solid #e6affc' }}>
                                 <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '0.85rem' }}>{item.time}</span>
                                 <div>
                                   <p style={{ color: '#1E1B4B', fontWeight: '700', fontSize: '0.95rem', margin: '0 0 0.2rem' }}>{item.title}</p>
@@ -1650,7 +1650,7 @@ export function App() {
                           <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '1.5rem' }}>
                             Expositora
                           </h3>
-                          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem', border: '1px solid #e6a7fc', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', maxWidth: '720px', margin: '0 auto', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
+                          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem', border: '1px solid #e6affc', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', maxWidth: '720px', margin: '0 auto', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
                             <img 
                               src="/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg" 
                               alt="Adriana Patricia Gómez Barajas" 
@@ -1676,7 +1676,7 @@ export function App() {
                           </p>
                           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }} className="events-past-gallery-grid">
                             {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                              <div key={num} className="card-hover" style={{ borderRadius: '12px', overflow: 'hidden', height: '180px', backgroundColor: '#FFFFFF', border: '1px solid #e6a7fc', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                              <div key={num} className="card-hover" style={{ borderRadius: '12px', overflow: 'hidden', height: '180px', backgroundColor: '#FFFFFF', border: '1px solid #e6affc', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                                 <img 
                                   src={`/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (${num}).jpg`} 
                                   alt={`Desayuno WIC ${num}`}
@@ -1701,19 +1701,19 @@ export function App() {
 
                           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
                             {/* COLABORADOR 1 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                               <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
                               <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
                             </div>
 
                             {/* COLABORADOR 2 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                               <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
                               <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Preciado Abogados</h4>
                             </div>
 
                             {/* COLABORADOR 3 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                               <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ height: '44px', objectFit: 'contain', marginBottom: '0.4rem' }} />
                               <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>WIC Colombia</h4>
                             </div>
@@ -1735,23 +1735,23 @@ export function App() {
                         <button 
                           className="btn btn-fuchsia" 
                           onClick={() => setActiveTab('miembros')}
-                          style={{ padding: '0.85rem 2rem', backgroundColor: '#AA26B3', fontWeight: '700', letterSpacing: '0.5px' }}
+                          style={{ padding: '0.85rem 2rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px' }}
                         >
                           ÚNETE (JOIN US)
                         </button>
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div className="card-hover" style={{ backgroundColor: '#FAF8FF', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #F3E8FF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#AA26B3' }}>+75</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+75</span>
                           <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px' }}>MIEMBROS</span>
                         </div>
-                        <div className="card-hover" style={{ backgroundColor: '#FAF8FF', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #F3E8FF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#AA26B3' }}>+10</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+10</span>
                           <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px', textAlign: 'right' }}>BENEFICIOS EXCLUSIVOS</span>
                         </div>
-                        <div className="card-hover" style={{ backgroundColor: '#FAF8FF', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #F3E8FF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#AA26B3' }}>+5</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+5</span>
                           <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px', textAlign: 'right' }}>EVENTOS AL AÑO</span>
                         </div>
                       </div>
@@ -1790,7 +1790,7 @@ export function App() {
               />
               <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <span className="anim-fade-up anim-d1" style={{ 
-                  backgroundColor: 'rgba(217, 27, 92, 0.9)', 
+                  backgroundColor: 'rgba(175, 29, 170, 0.9)', 
                   color: '#FFFFFF', 
                   padding: '0.4rem 1.25rem', 
                   fontSize: '0.75rem', 
@@ -1839,7 +1839,7 @@ export function App() {
                     borderRadius: '10px',
                     padding: '0.75rem 1.25rem',
                   }}>
-                    <Search size={20} style={{ color: '#AA26B3', flexShrink: 0 }} />
+                    <Search size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
                     <input 
                       type="text"
                       placeholder="Buscar por nombre de afiliada, cargo o sector..."
@@ -1874,8 +1874,8 @@ export function App() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        backgroundColor: selectedTag !== 'Todos' ? '#FDF2F8' : '#F8FAFC',
-                        border: selectedTag !== 'Todos' ? '1.5px solid #AA26B3' : '1px solid #CBD5E1',
+                        backgroundColor: selectedTag !== 'Todos' ? '#f4f4f4' : '#F8FAFC',
+                        border: selectedTag !== 'Todos' ? '1.5px solid #af1daa' : '1px solid #CBD5E1',
                         borderRadius: '10px',
                         padding: '0.75rem 1.25rem',
                         cursor: 'pointer',
@@ -1885,12 +1885,12 @@ export function App() {
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', overflow: 'hidden' }}>
-                        <Filter size={16} style={{ color: selectedTag !== 'Todos' ? '#AA26B3' : '#64748B', flexShrink: 0 }} />
-                        <span style={{ fontSize: '0.88rem', fontWeight: selectedTag !== 'Todos' ? '700' : '600', color: selectedTag !== 'Todos' ? '#AA26B3' : '#334155', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                        <Filter size={16} style={{ color: selectedTag !== 'Todos' ? '#af1daa' : '#64748B', flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.88rem', fontWeight: selectedTag !== 'Todos' ? '700' : '600', color: selectedTag !== 'Todos' ? '#af1daa' : '#334155', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                           {selectedTag === 'Todos' ? 'Todas las Especialidades / Tags' : `Tag: ${selectedTag}`}
                         </span>
                       </div>
-                      <ChevronDown size={18} style={{ color: selectedTag !== 'Todos' ? '#AA26B3' : '#64748B', transform: isTagDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease', flexShrink: 0 }} />
+                      <ChevronDown size={18} style={{ color: selectedTag !== 'Todos' ? '#af1daa' : '#64748B', transform: isTagDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease', flexShrink: 0 }} />
                     </div>
 
                     {/* MENÚ FLOTANTE DESPLEGABLE CON SCROLLBAR ELEGANTE */}
@@ -1916,8 +1916,8 @@ export function App() {
                             borderRadius: '8px',
                             fontSize: '0.85rem',
                             fontWeight: selectedTag === 'Todos' ? '700' : '500',
-                            color: selectedTag === 'Todos' ? '#AA26B3' : '#334155',
-                            backgroundColor: selectedTag === 'Todos' ? '#FDF2F8' : 'transparent',
+                            color: selectedTag === 'Todos' ? '#af1daa' : '#334155',
+                            backgroundColor: selectedTag === 'Todos' ? '#f4f4f4' : 'transparent',
                             cursor: 'pointer',
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -1926,7 +1926,7 @@ export function App() {
                           }}
                         >
                           <span>Todas las Especialidades</span>
-                          {selectedTag === 'Todos' && <CheckCircle2 size={14} style={{ color: '#AA26B3' }} />}
+                          {selectedTag === 'Todos' && <CheckCircle2 size={14} style={{ color: '#af1daa' }} />}
                         </div>
 
                         {availableMemberTags.map((tag) => {
@@ -1940,8 +1940,8 @@ export function App() {
                                 borderRadius: '8px',
                                 fontSize: '0.85rem',
                                 fontWeight: isSelected ? '700' : '500',
-                                color: isSelected ? '#AA26B3' : '#475569',
-                                backgroundColor: isSelected ? '#FDF2F8' : 'transparent',
+                                color: isSelected ? '#af1daa' : '#475569',
+                                backgroundColor: isSelected ? '#f4f4f4' : 'transparent',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -1950,7 +1950,7 @@ export function App() {
                               }}
                             >
                               <span>{tag}</span>
-                              {isSelected && <CheckCircle2 size={14} style={{ color: '#AA26B3' }} />}
+                              {isSelected && <CheckCircle2 size={14} style={{ color: '#af1daa' }} />}
                             </div>
                           );
                         })}
@@ -1964,11 +1964,11 @@ export function App() {
                 {(searchMember || selectedTag !== 'Todos') && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #F1F5F9' }}>
                     <span style={{ fontSize: '0.85rem', color: '#64748B' }}>
-                      Filtrando por: {selectedTag !== 'Todos' && <strong style={{ color: '#AA26B3' }}>Tag: {selectedTag}</strong>} {searchMember && <span style={{ marginLeft: '0.4rem' }}>Texto: "{searchMember}"</span>}
+                      Filtrando por: {selectedTag !== 'Todos' && <strong style={{ color: '#af1daa' }}>Tag: {selectedTag}</strong>} {searchMember && <span style={{ marginLeft: '0.4rem' }}>Texto: "{searchMember}"</span>}
                     </span>
                     <button 
                       onClick={() => { setSearchMember(''); setSelectedTag('Todos'); }}
-                      style={{ background: 'none', border: 'none', color: '#AA26B3', fontSize: '0.8rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline' }}
+                      style={{ background: 'none', border: 'none', color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline' }}
                     >
                       Limpiar filtros
                     </button>
@@ -2014,7 +2014,7 @@ export function App() {
                       </p>
                       <button 
                         onClick={() => { setSearchMember(''); setSelectedTag('Todos'); }}
-                        style={{ backgroundColor: '#AA26B3', color: '#FFFFFF', border: 'none', padding: '0.65rem 1.6rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer' }}
+                        style={{ backgroundColor: '#af1daa', color: '#FFFFFF', border: 'none', padding: '0.65rem 1.6rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer' }}
                       >
                         Ver todas las miembros
                       </button>
@@ -2066,7 +2066,7 @@ export function App() {
                         </div>
 
                         <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                          <div style={{ color: '#D91B5C', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
+                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
                             {member.role}
                           </div>
                           <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3' }}>
@@ -2084,9 +2084,9 @@ export function App() {
                                   key={tIdx} 
                                   onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
                                   style={{ 
-                                    backgroundColor: '#FDF2F8', 
-                                    color: '#AA26B3', 
-                                    border: '1px solid #FBCFE8', 
+                                    backgroundColor: '#f4f4f4', 
+                                    color: '#af1daa', 
+                                    border: '1px solid #e6affc', 
                                     fontSize: '0.65rem', 
                                     fontWeight: '700', 
                                     padding: '0.2rem 0.55rem', 
@@ -2189,7 +2189,7 @@ export function App() {
                     {/* BADGES ROL Y LINKEDIN */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                       <span style={{ 
-                        backgroundColor: '#AA26B3', 
+                        backgroundColor: '#af1daa', 
                         color: '#FFFFFF', 
                         padding: '0.4rem 1rem', 
                         fontSize: '0.8rem', 
@@ -2206,15 +2206,15 @@ export function App() {
                           rel="noreferrer"
                           title="Perfil en LinkedIn"
                           style={{ 
-                            border: '1.5px solid #AA26B3',
-                            color: '#AA26B3', 
+                            border: '1.5px solid #af1daa',
+                            color: '#af1daa', 
                             padding: '0.35rem 0.6rem', 
                             borderRadius: '4px', 
                             display: 'inline-flex', 
                             alignItems: 'center', 
                             justifyContent: 'center',
                             textDecoration: 'none',
-                            backgroundColor: '#FDF2F8'
+                            backgroundColor: '#f4f4f4'
                           }}
                         >
                           <LinkedinIcon size={16} />
@@ -2225,14 +2225,14 @@ export function App() {
                     {/* BIOGRAFÍA PROFESIONAL */}
                     <div style={{ marginBottom: '1.5rem' }}>
                       <span style={{ 
-                        color: '#AA26B3', 
+                        color: '#af1daa', 
                         fontSize: '0.75rem', 
                         fontWeight: '700', 
                         letterSpacing: '0.5px', 
                         textTransform: 'uppercase',
                         display: 'block',
                         marginBottom: '0.5rem',
-                        borderBottom: '1px solid #F3E8FF',
+                        borderBottom: '1px solid #e6affc',
                         paddingBottom: '0.4rem'
                       }}>
                         BIOGRAFÍA PROFESIONAL
@@ -2279,7 +2279,7 @@ export function App() {
                       <button 
                         onClick={() => alert(`Iniciando contacto con ${selectedMember.name}`)}
                         style={{ 
-                          backgroundColor: '#80008C', 
+                          backgroundColor: '#af1daa', 
                           color: '#FFFFFF', 
                           border: 'none', 
                           padding: '0.65rem 1.5rem', 
@@ -2467,7 +2467,7 @@ export function App() {
                     {/* CITA DESTACADA (PULL-QUOTE BOX) */}
                     <div style={{ 
                       backgroundColor: '#FDF4FF', 
-                      borderLeft: '4px solid #AA26B3', 
+                      borderLeft: '4px solid #af1daa', 
                       borderRadius: '0 12px 12px 0', 
                       padding: '1.75rem 2rem', 
                       marginBottom: '2rem',
@@ -2476,7 +2476,7 @@ export function App() {
                       <p style={{ color: '#7B1FA2', fontFamily: 'serif', fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
                         "El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones."
                       </p>
-                      <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#E9D5FF', fontFamily: 'serif', lineHeight: 1, pointerEvents: 'none' }}>”</span>
+                      <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: 'serif', lineHeight: 1, pointerEvents: 'none' }}>”</span>
                     </div>
 
                     {/* SUBTÍTULO 1 */}
@@ -2491,15 +2491,15 @@ export function App() {
                     {/* LISTA CON ICONOS DE ESCUDO/CHECK */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem', paddingLeft: '0.5rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#AA26B3', flexShrink: 0 }} />
+                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
                         <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Identificación temprana de riesgos regulatorios en nuevos mercados.</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#AA26B3', flexShrink: 0 }} />
+                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
                         <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Reducción de costos por reprocesos en el diseño de productos.</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#AA26B3', flexShrink: 0 }} />
+                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
                         <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Fortalecimiento de la cultura ética desde la base de la operación.</span>
                       </div>
                     </div>
@@ -2515,13 +2515,13 @@ export function App() {
 
                     {/* TARJETAS DE DESTACADO EN GRID DE 2 COLUMNAS */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2.5rem' }}>
-                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #80008C', padding: '1.25rem', borderRadius: '8px' }}>
+                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
                         <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>Integración Temprana</h4>
                         <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
                           Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.
                         </p>
                       </div>
-                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #80008C', padding: '1.25rem', borderRadius: '8px' }}>
+                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
                         <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>Intervención Continua</h4>
                         <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
                           Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.
@@ -2541,7 +2541,7 @@ export function App() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #F1F5F9', marginBottom: '2rem' }}>
                       <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                         {['CORPORATE COMPLIANCE', 'ÉTICA E INTEGRIDAD', 'GESTIÓN DE RIESGOS'].map((tag, tIdx) => (
-                          <span key={tIdx} style={{ backgroundColor: '#FDF2F8', color: '#AA26B3', fontSize: '0.68rem', fontWeight: '700', padding: '0.3rem 0.65rem', borderRadius: '4px' }}>
+                          <span key={tIdx} style={{ backgroundColor: '#f4f4f4', color: '#af1daa', fontSize: '0.68rem', fontWeight: '700', padding: '0.3rem 0.65rem', borderRadius: '4px' }}>
                             # {tag}
                           </span>
                         ))}
@@ -2604,7 +2604,7 @@ export function App() {
                             navigator.clipboard.writeText(window.location.href);
                             alert('¡Enlace copiado al portapapeles!');
                           }}
-                          style={{ backgroundColor: '#80008C' }}
+                          style={{ backgroundColor: '#af1daa' }}
                           title="Copiar Enlace"
                         >
                           <Share2 size={14} />
@@ -2620,9 +2620,9 @@ export function App() {
                           const prev = articlesList.find(a => a.id !== selectedArticle.id);
                           if (prev) openArticleDetail(prev);
                         }}
-                        style={{ backgroundColor: '#FAF8FF', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #F3E8FF', cursor: 'pointer' }}
+                        style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #f4f4f4', cursor: 'pointer' }}
                       >
-                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#AA26B3', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
+                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#af1daa', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
                           ← ANTERIOR
                         </span>
                         <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#1E1B4B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -2635,9 +2635,9 @@ export function App() {
                           const next = articlesList.find(a => a.id !== selectedArticle.id);
                           if (next) openArticleDetail(next);
                         }}
-                        style={{ backgroundColor: '#FAF8FF', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #F3E8FF', cursor: 'pointer', textAlign: 'right' }}
+                        style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #f4f4f4', cursor: 'pointer', textAlign: 'right' }}
                       >
-                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#AA26B3', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
+                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#af1daa', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
                           SIGUIENTE →
                         </span>
                         <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#1E1B4B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -2656,13 +2656,13 @@ export function App() {
                       <h3 style={{ fontSize: '1rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                         BUSCAR ARTÍCULO
                       </h3>
-                      <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#FAF8FF', border: '1px solid #E9D5FF', borderRadius: '6px', padding: '0.5rem 0.85rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f4f4f4', border: '1px solid #e6affc', borderRadius: '6px', padding: '0.5rem 0.85rem' }}>
                         <input 
                           type="text" 
                           placeholder="¿Qué estás buscando?" 
                           style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', fontSize: '0.85rem', color: '#1E1B4B' }}
                         />
-                        <Search size={16} style={{ color: '#AA26B3' }} />
+                        <Search size={16} style={{ color: '#af1daa' }} />
                       </div>
                     </div>
 
@@ -2718,7 +2718,7 @@ export function App() {
                     </div>
 
                     {/* WIDGET 3: CATEGORÍAS (CAJA PÚRPURA OSCURA SEGÚN MAQUETA) */}
-                    <div style={{ backgroundColor: '#6A1B9A', color: '#FFFFFF', padding: '1.75rem', borderRadius: '12px', boxShadow: '0 8px 20px rgba(106,27,154,0.15)' }}>
+                    <div style={{ backgroundColor: '#af1daa', color: '#FFFFFF', padding: '1.75rem', borderRadius: '12px', boxShadow: '0 8px 20px rgba(175,29,170,0.15)' }}>
                       <h3 style={{ fontSize: '1rem', fontFamily: 'serif', fontWeight: '700', color: '#FFFFFF', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                         CATEGORÍAS
                       </h3>
@@ -2831,7 +2831,7 @@ export function App() {
                       width: '100%',
                       boxSizing: 'border-box'
                     }}>
-                      <Search size={18} style={{ color: '#80008C', marginRight: '0.5rem', flexShrink: 0 }} />
+                      <Search size={18} style={{ color: '#af1daa', marginRight: '0.5rem', flexShrink: 0 }} />
                       <input 
                         type="text" 
                         placeholder="Busca una publicación o tema..."
@@ -2860,7 +2860,7 @@ export function App() {
                       <button 
                         onClick={() => {}}
                         style={{ 
-                          backgroundColor: '#80008C', 
+                          backgroundColor: '#af1daa', 
                           color: '#FFFFFF', 
                           border: 'none', 
                           padding: '0.55rem 1rem', 
@@ -2879,7 +2879,7 @@ export function App() {
 
                     {/* COMPONENTE DESPLEGABLE PERSONALIZADO DE ÁREAS (CUSTOM REACT UI DROPDOWN - NO ES SELECT NATIVO DEL NAVEGADOR) */}
                     <div className="mobile-areas-select-container" style={{ position: 'relative', width: '100%', marginBottom: '1.75rem' }}>
-                      <label style={{ fontSize: '0.75rem', fontWeight: '800', color: '#80008C', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: '800', color: '#af1daa', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                         <Filter size={14} /> FILTRAR POR ÁREA DE INTERÉS:
                       </label>
 
@@ -2893,17 +2893,17 @@ export function App() {
                           alignItems: 'center',
                           justifyContent: 'space-between',
                           backgroundColor: '#FFFFFF',
-                          border: isMobileAreaDropdownOpen ? '2px solid #80008C' : '1.5px solid #E9D5FF',
+                          border: isMobileAreaDropdownOpen ? '2px solid #af1daa' : '1.5px solid #e6affc',
                           borderRadius: isMobileAreaDropdownOpen ? '12px 12px 0 0' : '12px',
                           padding: '0.85rem 1.15rem',
                           cursor: 'pointer',
-                          boxShadow: '0 4px 12px rgba(128,0,140,0.06)',
+                          boxShadow: '0 4px 12px rgba(175, 29, 170,0.06)',
                           transition: 'all 0.2s ease',
                           boxSizing: 'border-box'
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', overflow: 'hidden', minWidth: 0 }}>
-                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#80008C', flexShrink: 0 }}></span>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#af1daa', flexShrink: 0 }}></span>
                           <span style={{ fontSize: '0.88rem', fontWeight: '700', color: '#1E1B4B', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
                             {selectedArticleCategory === 'Todas' ? 'Todas las Áreas' : selectedArticleCategory}
                           </span>
@@ -2911,7 +2911,7 @@ export function App() {
                         <ChevronDown 
                           size={18} 
                           style={{ 
-                            color: '#80008C', 
+                            color: '#af1daa', 
                             transition: 'transform 0.25s ease', 
                             transform: isMobileAreaDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                             flexShrink: 0 
@@ -2927,7 +2927,7 @@ export function App() {
                           left: 0,
                           right: 0,
                           backgroundColor: '#FFFFFF',
-                          border: '2px solid #80008C',
+                          border: '2px solid #af1daa',
                           borderTop: 'none',
                           borderRadius: '0 0 12px 12px',
                           boxShadow: '0 12px 28px rgba(10, 0, 30, 0.15)',
@@ -2962,8 +2962,8 @@ export function App() {
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'space-between',
-                                  backgroundColor: isSelected ? '#FDF2F8' : 'transparent',
-                                  color: isSelected ? '#80008C' : '#334155',
+                                  backgroundColor: isSelected ? '#f4f4f4' : 'transparent',
+                                  color: isSelected ? '#af1daa' : '#334155',
                                   fontWeight: isSelected ? '700' : '500',
                                   fontSize: '0.88rem',
                                   cursor: 'pointer',
@@ -2972,7 +2972,7 @@ export function App() {
                                 }}
                               >
                                 <span>{area === 'Todas' ? 'Todas las Áreas' : area}</span>
-                                {isSelected && <CheckCircle2 size={16} style={{ color: '#80008C' }} />}
+                                {isSelected && <CheckCircle2 size={16} style={{ color: '#af1daa' }} />}
                               </div>
                             );
                           })}
@@ -3013,9 +3013,9 @@ export function App() {
                                 setIsMobileAreaDropdownOpen(false);
                               }}
                               style={{
-                                backgroundColor: isAct ? '#80008C' : '#FFFFFF',
+                                backgroundColor: isAct ? '#af1daa' : '#FFFFFF',
                                 color: isAct ? '#FFFFFF' : '#475569',
-                                border: isAct ? '1px solid #80008C' : '1px solid #E2E8F0',
+                                border: isAct ? '1px solid #af1daa' : '1px solid #E2E8F0',
                                 padding: '0.4rem 0.85rem',
                                 borderRadius: '9999px',
                                 fontSize: '0.78rem',
@@ -3023,7 +3023,7 @@ export function App() {
                                 whiteSpace: 'nowrap',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
-                                boxShadow: isAct ? '0 2px 8px rgba(128,0,140,0.25)' : 'none',
+                                boxShadow: isAct ? '0 2px 8px rgba(175, 29, 170,0.25)' : 'none',
                                 flexShrink: 0
                               }}
                             >
@@ -3067,7 +3067,7 @@ export function App() {
                               </p>
                               <button 
                                 onClick={() => { setSearchArticle(''); setSelectedArticleCategory('Todas'); }}
-                                style={{ backgroundColor: '#80008C', color: '#FFF', border: 'none', padding: '0.5rem 1.25rem', fontSize: '0.8rem', borderRadius: '4px', fontWeight: '700' }}
+                                style={{ backgroundColor: '#af1daa', color: '#FFF', border: 'none', padding: '0.5rem 1.25rem', fontSize: '0.8rem', borderRadius: '4px', fontWeight: '700' }}
                               >
                                 Ver todas las publicaciones
                               </button>
@@ -3110,7 +3110,7 @@ export function App() {
                                       key={cIdx}
                                       onClick={(e) => { e.stopPropagation(); setSelectedArticleCategory(cat); }}
                                       style={{ 
-                                        backgroundColor: '#80008C', 
+                                        backgroundColor: '#af1daa', 
                                         color: '#FFFFFF', 
                                         fontSize: '0.65rem', 
                                         fontWeight: '700', 
@@ -3141,7 +3141,7 @@ export function App() {
                               </div>
 
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', paddingTop: '0.65rem', borderTop: '1px solid #F8FAFC', fontSize: '0.78rem' }}>
-                                <span style={{ color: '#80008C', fontWeight: '600' }}>
+                                <span style={{ color: '#af1daa', fontWeight: '600' }}>
                                   Autor: {art.author}
                                 </span>
                                 <span style={{ color: '#94A3B8', fontWeight: '500' }}>
@@ -3165,7 +3165,7 @@ export function App() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            backgroundColor: articlePage === num ? '#80008C' : '#FFFFFF',
+                            backgroundColor: articlePage === num ? '#af1daa' : '#FFFFFF',
                             color: articlePage === num ? '#FFFFFF' : '#475569',
                             border: articlePage === num ? 'none' : '1px solid #E2E8F0',
                             borderRadius: '4px !important',
@@ -3211,7 +3211,7 @@ export function App() {
                         alignItems: 'center',
                         gap: '0.5rem'
                       }}>
-                        <span style={{ width: '4px', height: '18px', backgroundColor: '#80008C', borderRadius: '2px', display: 'inline-block' }}></span>
+                        <span style={{ width: '4px', height: '18px', backgroundColor: '#af1daa', borderRadius: '2px', display: 'inline-block' }}></span>
                         Áreas
                       </h3>
 
@@ -3237,7 +3237,7 @@ export function App() {
                               style={{ 
                                 padding: '0.65rem 0',
                                 borderBottom: '1px solid #F8FAFC',
-                                color: isSelected ? '#80008C' : '#475569',
+                                color: isSelected ? '#af1daa' : '#475569',
                                 fontSize: '0.85rem',
                                 fontWeight: isSelected ? '700' : '500',
                                 cursor: 'pointer',
@@ -3247,7 +3247,7 @@ export function App() {
                               }}
                             >
                               <span>{area}</span>
-                              {isSelected && <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#80008C' }}></span>}
+                              {isSelected && <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#af1daa' }}></span>}
                             </li>
                           );
                         })}
@@ -3265,7 +3265,7 @@ export function App() {
                         alignItems: 'center',
                         gap: '0.5rem'
                       }}>
-                        <span style={{ width: '4px', height: '18px', backgroundColor: '#80008C', borderRadius: '2px', display: 'inline-block' }}></span>
+                        <span style={{ width: '4px', height: '18px', backgroundColor: '#af1daa', borderRadius: '2px', display: 'inline-block' }}></span>
                         Artículos relacionados
                       </h3>
 
@@ -3323,10 +3323,10 @@ export function App() {
               </div>
 
               {/* FORMULARIO DE CONTACTO/PUBLICACIÓN */}
-              <div style={{ backgroundColor: '#FAF5FF', padding: '4rem 1.5rem', marginTop: '4rem', borderTop: '1px solid #F3E8FF' }}>
+              <div style={{ backgroundColor: '#FAF5FF', padding: '4rem 1.5rem', marginTop: '4rem', borderTop: '1px solid #f4f4f4' }}>
                 <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
                   <div>
-                    <span style={{ color: '#D91B5C', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
                       TUS PUBLICACIONES CON NOSOTROS
                     </span>
                     <h2 style={{ fontSize: '2.5rem', fontFamily: 'serif', fontWeight: '700', color: '#7B1FA2', lineHeight: '1.2' }}>
@@ -3334,10 +3334,10 @@ export function App() {
                     </h2>
                   </div>
 
-                  <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 8px 30px rgba(123,31,162,0.06)', border: '1px solid #F3E8FF' }}>
+                  <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 8px 30px rgba(123,31,162,0.06)', border: '1px solid #f4f4f4' }}>
                     {articleFormSubmitted ? (
                       <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
-                        <CheckCircle2 size={44} style={{ color: '#80008C', marginBottom: '0.75rem' }} />
+                        <CheckCircle2 size={44} style={{ color: '#af1daa', marginBottom: '0.75rem' }} />
                         <h3 style={{ fontSize: '1.2rem', color: '#1E1B4B', fontWeight: '700', marginBottom: '0.35rem' }}>
                           ¡Solicitud Enviada!
                         </h3>
@@ -3411,7 +3411,7 @@ export function App() {
                         <button 
                           type="submit"
                           style={{
-                            backgroundColor: '#80008C',
+                            backgroundColor: '#af1daa',
                             color: '#FFFFFF',
                             border: 'none',
                             padding: '0.9rem 1.5rem',
@@ -3421,7 +3421,7 @@ export function App() {
                             borderRadius: '9999px !important',
                             cursor: 'pointer',
                             marginTop: '0.5rem',
-                            boxShadow: '0 4px 15px rgba(128, 0, 140, 0.25)'
+                            boxShadow: '0 4px 15px rgba(175, 29, 170, 0.25)'
                           }}
                         >
                           ENVIAR SOLICITUD
@@ -3445,7 +3445,7 @@ export function App() {
               {/* SIDEBAR LATERAL (SEGÚN MAQUETAS) */}
               <aside style={{ 
                 width: '260px', 
-                backgroundColor: '#F6F2FF', 
+                backgroundColor: '#f4f4f4', 
                 borderRight: '1px solid #D6C0D2', 
                 padding: '1.5rem 1rem',
                 display: 'flex',
@@ -3460,11 +3460,11 @@ export function App() {
                       BIENVENIDO A TU
                     </span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                      <div style={{ backgroundColor: '#80008C', color: '#FFF', padding: '0.4rem', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ backgroundColor: '#af1daa', color: '#FFF', padding: '0.4rem', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Building2 size={18} />
                       </div>
                       <div>
-                        <span style={{ color: '#80008C', fontSize: '1.2rem', fontFamily: 'serif', fontWeight: '700', display: 'block', lineHeight: '1.1' }}>
+                        <span style={{ color: '#af1daa', fontSize: '1.2rem', fontFamily: 'serif', fontWeight: '700', display: 'block', lineHeight: '1.1' }}>
                           Admin Portal
                         </span>
                       </div>
@@ -3603,7 +3603,7 @@ export function App() {
                           setMemberPhoto(null);
                           setAdminSubTab('member-editor');
                         }}
-                        style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#AA26B3', fontWeight: '700', letterSpacing: '0.5px' }}
+                        style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px' }}
                       >
                         + NUEVO MIEMBRO
                       </button>
@@ -3613,7 +3613,7 @@ export function App() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#8F008D', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>124</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>124</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>PUBLICADOS</span>
@@ -3624,8 +3624,8 @@ export function App() {
                         <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>26</h2>
                       </div>
                       <div style={{ paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#8F008D', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#8F008D', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>12.5k</h2>
+                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>12.5k</h2>
                       </div>
                     </div>
 
@@ -3633,7 +3633,7 @@ export function App() {
                     <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E2E8F0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                          <tr style={{ backgroundColor: '#FAF8FF', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                          <tr style={{ backgroundColor: '#f4f4f4', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                             <th style={{ padding: '0.85rem 1.25rem' }}>MIEMBRO</th>
                             <th style={{ padding: '0.85rem' }}>ESTADO</th>
                             <th style={{ padding: '0.85rem' }}>FECHA</th>
@@ -3687,12 +3687,12 @@ export function App() {
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.25rem', borderTop: '1px solid #F1F5F9', color: '#94A3B8', fontSize: '0.75rem' }}>
                         <span>SHOWING 1-4 OF 124 ARTICLES</span>
-                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#8F008D', fontWeight: '700' }}>
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#af1daa', fontWeight: '700' }}>
                           <span style={{ color: '#94A3B8', cursor: 'pointer' }}>PREVIOUS</span>
-                          <span style={{ color: '#8F008D', textDecoration: 'underline' }}>01</span>
+                          <span style={{ color: '#af1daa', textDecoration: 'underline' }}>01</span>
                           <span style={{ color: '#94A3B8' }}>02</span>
                           <span style={{ color: '#94A3B8' }}>03</span>
-                          <span style={{ color: '#8F008D', cursor: 'pointer' }}>NEXT</span>
+                          <span style={{ color: '#af1daa', cursor: 'pointer' }}>NEXT</span>
                         </div>
                       </div>
                     </div>
@@ -3708,7 +3708,7 @@ export function App() {
                       style={{ 
                         background: 'none', 
                         border: 'none', 
-                        color: '#8F008D', 
+                        color: '#af1daa', 
                         fontSize: '0.9rem', 
                         fontWeight: '700', 
                         cursor: 'pointer', 
@@ -3724,9 +3724,9 @@ export function App() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                       <div>
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                          DIRECTORIO &gt; <span style={{ color: '#8F008D' }}>EDITAR PERFIL</span>
+                          DIRECTORIO &gt; <span style={{ color: '#af1daa' }}>EDITAR PERFIL</span>
                         </span>
-                        <h1 style={{ color: '#8F008D', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginTop: '0.2rem' }}>
+                        <h1 style={{ color: '#af1daa', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginTop: '0.2rem' }}>
                           Perfil del Miembro
                         </h1>
                       </div>
@@ -3736,8 +3736,8 @@ export function App() {
                           style={{ 
                             padding: '0.75rem 1.25rem', 
                             backgroundColor: '#FFFFFF', 
-                            color: '#D91B5C', 
-                            border: '1px solid #D91B5C', 
+                            color: '#af1daa', 
+                            border: '1px solid #af1daa', 
                             borderRadius: '4px', 
                             fontWeight: '700', 
                             fontSize: '0.8rem',
@@ -3789,7 +3789,7 @@ export function App() {
                           }}
                           style={{ 
                             padding: '0.75rem 1.5rem', 
-                            backgroundColor: '#80008C', 
+                            backgroundColor: '#af1daa', 
                             color: '#FFFFFF', 
                             border: 'none', 
                             borderRadius: '4px', 
@@ -3911,7 +3911,7 @@ export function App() {
                                 type="text" 
                                 placeholder="Ej. Directora de Cumplimiento Normativo"
                                 defaultValue={editingMember ? editingMember.role : ''}
-                                style={{ width: '100%', padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '1rem', color: '#8F008D', outline: 'none' }}
+                                style={{ width: '100%', padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '1rem', color: '#af1daa', outline: 'none' }}
                               />
                             </div>
                           </div>
@@ -3935,7 +3935,7 @@ export function App() {
                               borderRadius: '4px', 
                               fontSize: '0.95rem', 
                               color: '#334155', 
-                              backgroundColor: '#FAF8FF',
+                              backgroundColor: '#f4f4f4',
                               lineHeight: '1.6',
                               fontFamily: 'inherit'
                             }}
@@ -3949,15 +3949,15 @@ export function App() {
                           </label>
 
                           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                            <div style={{ backgroundColor: '#FDF2F8', color: '#AA26B3', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #FBCFE8' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
                               <span>Compliance Bancario</span>
                               <span style={{ cursor: 'pointer' }}>✕</span>
                             </div>
-                            <div style={{ backgroundColor: '#FDF2F8', color: '#AA26B3', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #FBCFE8' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
                               <span>Ley de Protección de Datos</span>
                               <span style={{ cursor: 'pointer' }}>✕</span>
                             </div>
-                            <div style={{ backgroundColor: '#FDF2F8', color: '#AA26B3', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #FBCFE8' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
                               <span>Fintech</span>
                               <span style={{ cursor: 'pointer' }}>✕</span>
                             </div>
@@ -3997,7 +3997,7 @@ export function App() {
                           </div>
 
                           <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <input type="checkbox" defaultChecked id="vis" style={{ accentColor: '#80008C', cursor: 'pointer', width: '18px', height: '18px' }} />
+                            <input type="checkbox" defaultChecked id="vis" style={{ accentColor: '#af1daa', cursor: 'pointer', width: '18px', height: '18px' }} />
                             <label htmlFor="vis" style={{ color: '#1E1B4B', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer' }}>
                               Visibilidad Pública
                             </label>
@@ -4015,7 +4015,7 @@ export function App() {
                               placeholder="ingresa tu enlace"
                               style={{ width: '100%', padding: '0.75rem 0.75rem 0.75rem 2.25rem', border: '1px solid #FAF5FF', backgroundColor: '#FAF5FF', borderRadius: '4px', fontSize: '0.85rem', color: '#1E1B4B', outline: 'none' }}
                             />
-                            <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#8F008D', display: 'flex', alignItems: 'center' }}>
+                            <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#af1daa', display: 'flex', alignItems: 'center' }}>
                               <LinkIcon size={16} />
                             </span>
                           </div>
@@ -4048,10 +4048,10 @@ export function App() {
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                           TOTAL DE MIEMBROS
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#8F008D', fontWeight: '700', margin: '0.5rem 0' }}>
+                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
                           12,482
                         </h2>
-                        <div style={{ color: '#8F008D', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <TrendingUp size={15} />
                           <span>+12% from last month</span>
                         </div>
@@ -4062,10 +4062,10 @@ export function App() {
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                           TOTAL DE ARTÍCULOS
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#8F008D', fontWeight: '700', margin: '0.5rem 0' }}>
+                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
                           342
                         </h2>
-                        <div style={{ color: '#8F008D', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <FileText size={15} />
                           <span>8 Pending Review</span>
                         </div>
@@ -4079,7 +4079,7 @@ export function App() {
                       {/* TARJETA 1: AGREGAR NUEVA SOCIA */}
                       <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
-                          <div style={{ width: '40px', height: '4px', backgroundColor: '#8F008D', marginBottom: '1.25rem' }} />
+                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
                           <h3 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
                             Agregar nueva socia
                           </h3>
@@ -4096,7 +4096,7 @@ export function App() {
                               setAdminSubTab('member-editor');
                             }}
                             style={{ 
-                              backgroundColor: '#80008C', 
+                              backgroundColor: '#af1daa', 
                               color: '#FFFFFF', 
                               border: 'none', 
                               padding: '0.75rem 1.75rem', 
@@ -4118,7 +4118,7 @@ export function App() {
                       {/* TARJETA 2: CREAR NUEVO CONTENIDO */}
                       <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
-                          <div style={{ width: '40px', height: '4px', backgroundColor: '#8F008D', marginBottom: '1.25rem' }} />
+                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
                           <h3 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
                             Crear nuevo contenido
                           </h3>
@@ -4134,7 +4134,7 @@ export function App() {
                               setAdminSubTab('blog-editor');
                             }}
                             style={{ 
-                              backgroundColor: '#80008C', 
+                              backgroundColor: '#af1daa', 
                               color: '#FFFFFF', 
                               border: 'none', 
                               padding: '0.75rem 1.75rem', 
@@ -4177,7 +4177,7 @@ export function App() {
                           setEditingArticle(null);
                           setAdminSubTab('blog-editor');
                         }}
-                        style={{ fontSize: '0.85rem', padding: '0.85rem 1.5rem', backgroundColor: '#AA26B3', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '4px' }}
+                        style={{ fontSize: '0.85rem', padding: '0.85rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '4px' }}
                       >
                         + NUEVO ARTÍCULO
                       </button>
@@ -4187,7 +4187,7 @@ export function App() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '4px', border: '1px solid #E2E8F0' }}>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#8F008D', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>124</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>124</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>PUBLICADOS</span>
@@ -4198,8 +4198,8 @@ export function App() {
                         <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>26</h2>
                       </div>
                       <div style={{ paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#8F008D', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#8F008D', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>12.5k</h2>
+                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>12.5k</h2>
                       </div>
                     </div>
 
@@ -4207,7 +4207,7 @@ export function App() {
                     <div style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '1px solid #E2E8F0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                          <tr style={{ backgroundColor: '#FAF8FF', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                          <tr style={{ backgroundColor: '#f4f4f4', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                             <th style={{ padding: '0.85rem 1.25rem' }}>CONTENIDO</th>
                             <th style={{ padding: '0.85rem' }}>ESTADO</th>
                             <th style={{ padding: '0.85rem' }}>AUTOR</th>
@@ -4286,12 +4286,12 @@ export function App() {
                       {/* PAGINACIÓN INFERIOR DE TABLA */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.25rem', borderTop: '1px solid #F1F5F9', color: '#94A3B8', fontSize: '0.75rem' }}>
                         <span>SHOWING 1-{articlesList.length} OF 124 ARTICLES</span>
-                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#8F008D', fontWeight: '700' }}>
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#af1daa', fontWeight: '700' }}>
                           <span style={{ color: '#94A3B8', cursor: 'pointer' }}>PREVIOUS</span>
-                          <span style={{ color: '#8F008D', textDecoration: 'underline' }}>01</span>
+                          <span style={{ color: '#af1daa', textDecoration: 'underline' }}>01</span>
                           <span style={{ color: '#94A3B8' }}>02</span>
                           <span style={{ color: '#94A3B8' }}>03</span>
-                          <span style={{ color: '#8F008D', cursor: 'pointer' }}>NEXT</span>
+                          <span style={{ color: '#af1daa', cursor: 'pointer' }}>NEXT</span>
                         </div>
                       </div>
                     </div>
@@ -4352,7 +4352,7 @@ export function App() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            border: '2px dashed #AA26B3',
+                            border: '2px dashed #af1daa',
                             position: 'relative',
                             cursor: 'pointer'
                           }}
@@ -4385,7 +4385,7 @@ export function App() {
                               style={{ width: '100%', height: '340px', objectFit: 'cover', display: 'block' }}
                             />
                           ) : (
-                            <div style={{ textAlign: 'center', color: '#8F008D', padding: '2rem' }}>
+                            <div style={{ textAlign: 'center', color: '#af1daa', padding: '2rem' }}>
                               <Camera size={36} style={{ margin: '0 auto 0.5rem' }} />
                               <p style={{ fontWeight: '700', margin: 0, fontSize: '0.95rem' }}>Subir Imagen de Portada</p>
                               <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>Haz clic o arrastra una imagen aquí (JPG, PNG)</span>
@@ -4519,7 +4519,7 @@ export function App() {
                           {/* CITA DESTACADA RECTANGULAR DE AUTOR CON MARCO MORADO Y COMI LLAS GIGANTES (VISTA FOTO 2) */}
                           <div style={{ 
                             backgroundColor: '#FDF4FF', 
-                            borderLeft: '4px solid #8F008D', 
+                            borderLeft: '4px solid #af1daa', 
                             borderRadius: '0 8px 8px 0', 
                             padding: '1.5rem 2rem', 
                             position: 'relative',
@@ -4536,7 +4536,7 @@ export function App() {
                                 backgroundColor: 'transparent',
                                 border: 'none',
                                 outline: 'none',
-                                color: '#8F008D', 
+                                color: '#af1daa', 
                                 fontSize: '1.15rem', 
                                 fontFamily: 'serif', 
                                 fontStyle: 'italic',
@@ -4579,7 +4579,7 @@ export function App() {
                           {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS (DISEÑO IDÉNTICO FOTO 2) */}
                           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', margin: '0.75rem 0' }}>
                             {/* TARJETA 1 */}
-                            <div style={{ backgroundColor: '#F5F3FF', borderLeft: '3px solid #8F008D', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
                               <input 
                                 type="text" 
                                 defaultValue="Integración Temprana"
@@ -4595,7 +4595,7 @@ export function App() {
                             </div>
 
                             {/* TARJETA 2 */}
-                            <div style={{ backgroundColor: '#F5F3FF', borderLeft: '3px solid #8F008D', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
+                            <div style={{ backgroundColor: '#f4f4f4', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
                               <input 
                                 type="text" 
                                 defaultValue="Ingresa título"
@@ -4653,7 +4653,7 @@ export function App() {
                           </select>
 
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem', color: '#334155', fontSize: '0.85rem', fontWeight: '600' }}>
-                            <Calendar size={16} style={{ color: '#8F008D' }} />
+                            <Calendar size={16} style={{ color: '#af1daa' }} />
                             <span>14 de Agosto, 2026</span>
                           </div>
                         </div>
@@ -4672,7 +4672,7 @@ export function App() {
                               type="text" 
                               placeholder="Ej. Sheila Silva Mayo" 
                               defaultValue={editingArticle ? editingArticle.author : ''}
-                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FAF8FF', color: '#1E1B4B', fontWeight: '600' }}
+                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#f4f4f4', color: '#1E1B4B', fontWeight: '600' }}
                             />
                           </div>
 
@@ -4684,7 +4684,7 @@ export function App() {
                               type="text" 
                               placeholder="Ej. Abogado de LG ABOGADOS" 
                               defaultValue={editingArticle ? editingArticle.role : ''}
-                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FAF8FF', color: '#1E1B4B', fontWeight: '600' }}
+                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#f4f4f4', color: '#1E1B4B', fontWeight: '600' }}
                             />
                           </div>
                         </div>
@@ -4755,7 +4755,7 @@ export function App() {
                             style={{ 
                               width: '100%', 
                               padding: '0.85rem', 
-                              backgroundColor: '#80008C', 
+                              backgroundColor: '#af1daa', 
                               color: '#FFFFFF', 
                               border: 'none', 
                               borderRadius: '6px', 
@@ -4801,8 +4801,8 @@ export function App() {
                               width: '100%', 
                               padding: '0.85rem', 
                               backgroundColor: 'transparent', 
-                              color: '#80008C', 
-                              border: '1px solid #80008C', 
+                              color: '#af1daa', 
+                              border: '1px solid #af1daa', 
                               borderRadius: '6px', 
                               fontWeight: '700', 
                               fontSize: '0.9rem',
@@ -4830,7 +4830,7 @@ export function App() {
                   {(adminSubTab === 'member-editor' || adminSubTab === 'blog-editor') && (
                     <button 
                       onClick={() => setAdminSubTab(adminSubTab === 'member-editor' ? 'members-list' : 'blog-list')}
-                      style={{ background: 'none', border: 'none', color: '#8F008D', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline' }}
+                      style={{ background: 'none', border: 'none', color: '#af1daa', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline' }}
                     >
                       ← Volver al Listado de {adminSubTab === 'member-editor' ? 'Miembros' : 'Blog'}
                     </button>
@@ -4867,7 +4867,7 @@ export function App() {
               position: 'relative'
             }}>
               {/* FRANJA DE CORONA SUPERIOR MORADA */}
-              <div style={{ height: '6px', backgroundColor: '#8F008D' }} />
+              <div style={{ height: '6px', backgroundColor: '#af1daa' }} />
 
               <div style={{ padding: '2.5rem 2rem 2.5rem 2rem' }}>
                 <h1 style={{ 
@@ -4906,7 +4906,7 @@ export function App() {
                     <button 
                       className="btn btn-fuchsia"
                       onClick={() => setIsLoggedIn(false)}
-                      style={{ width: '100%', backgroundColor: '#8F008D', padding: '0.75rem' }}
+                      style={{ width: '100%', backgroundColor: '#af1daa', padding: '0.75rem' }}
                     >
                       Cerrar Sesión
                     </button>
@@ -4965,7 +4965,7 @@ export function App() {
                         }}>
                           CONTRASEÑA
                         </label>
-                        <a href="#forgot" onClick={(e) => e.preventDefault()} style={{ color: '#8F008D', fontSize: '0.8rem', fontWeight: '600', textDecoration: 'none' }}>
+                        <a href="#forgot" onClick={(e) => e.preventDefault()} style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '600', textDecoration: 'none' }}>
                           ¿Olvidó su clave?
                         </a>
                       </div>
@@ -4993,7 +4993,7 @@ export function App() {
 
                     {/* CHECKBOX */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '2rem' }}>
-                      <input type="checkbox" id="remember" style={{ cursor: 'pointer', accentColor: '#8F008D' }} />
+                      <input type="checkbox" id="remember" style={{ cursor: 'pointer', accentColor: '#af1daa' }} />
                       <label htmlFor="remember" style={{ color: '#64748B', fontSize: '0.85rem', cursor: 'pointer' }}>
                         Mantener sesión activa por 8 horas
                       </label>
@@ -5005,7 +5005,7 @@ export function App() {
                       style={{ 
                         width: '100%', 
                         padding: '0.85rem', 
-                        backgroundColor: '#AA26B3', 
+                        backgroundColor: '#af1daa', 
                         color: '#FFFFFF', 
                         border: 'none', 
                         borderRadius: '4px', 
@@ -5168,11 +5168,11 @@ export function App() {
                 <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '1.25rem' }}>Contáctenos</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#94A3B8', fontSize: '0.95rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <Phone size={18} style={{ color: '#D91B5C' }} />
+                    <Phone size={18} style={{ color: '#af1daa' }} />
                     <span>Teléfono: <strong>3102173249</strong></span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <Mail size={18} style={{ color: '#D91B5C' }} />
+                    <Mail size={18} style={{ color: '#af1daa' }} />
                     <span>Correo: <strong>wiccolombia@outlook.com</strong></span>
                   </div>
                 </div>

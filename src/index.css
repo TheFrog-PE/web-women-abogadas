@@ -69,7 +69,7 @@ button, .btn {
   color: var(--white);
   background-color: var(--primary-fuchsia);
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(217, 27, 92, 0.35);
+  box-shadow: 0 4px 12px rgba(175, 29, 170, 0.35);
 }
 
 /* Members Grid: Exactly 4 columns per row on Desktop */
@@ -105,13 +105,13 @@ button, .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 14px rgba(217, 27, 92, 0.35);
+  box-shadow: 0 4px 14px rgba(175, 29, 170, 0.35);
 }
 
 .btn-fuchsia:hover {
   background-color: var(--primary-fuchsia-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(217, 27, 92, 0.45);
+  box-shadow: 0 6px 20px rgba(175, 29, 170, 0.45);
 }
 
 .btn-outline-white {
@@ -260,7 +260,7 @@ h3 {
 }
 .card-hover:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(107, 15, 140, 0.14);
+  box-shadow: 0 16px 40px rgba(175, 29, 170, 0.14);
 }
 
 /* Custom Scrollbar */

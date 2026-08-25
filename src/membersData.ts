@@ -72,105 +72,6 @@ export const MEMBERS_DATA: Member[] = [
     tags: ["Compliance Sector Público", "Gobierno Corporativo", "Derecho de Empresa", "Gestión de Riesgos"]
   },
   {
-    id: "sandra-meza",
-    name: "SANDRA MEZA CUERVO",
-    role: "SOCIA FUNDADORA",
-    sector: "SECTOR FINANCIERO",
-    currentCargo: "Compliance BBVA Colombia / Vicepresidente Ejecutiva Control Interno y Cumplimiento",
-    complianceExperience: "16 años de experiencia en asuntos legales, de Cumplimiento, riesgos no financieros y Control Interno en el sector bancario.",
-    profession: "ABOGADA",
-    academicBg: [
-      "Universidad Javeriana - Abogada",
-      "Universidad Javeriana - Especialización en Derecho Financiero y Mercado de Valores",
-      "Universidad de la Sabana - Program Business Administration",
-      "CESA - Diplomado AML/CFT",
-      "ACAMS - Certified Anti-Money Laundering Specialist",
-      "Institute for US Law - Compliance & Anti-Corruption"
-    ],
-    workBg: [
-      "Vicepresidente Ejecutiva Control Interno y Cumplimiento - Banco BBVA",
-      "Oficial de Cumplimiento País / Gerente SARLAFT - BBVA",
-      "Directora Ejecutiva Control Interno y Cumplimiento",
-      "Abogada Corporativa - Colfondos S.A."
-    ],
-    linkedin: "https://www.linkedin.com/in/sandra-meza-cuervo-0293a2150/",
-    photo: "/Fotos/Miembros/MIP_7039.jpg",
-    tags: ["Sector Financiero", "SAGRILAFT & PTEE", "AML/CFT", "Control Interno", "Gestión de Riesgos"]
-  },
-  {
-    id: "juliana-solano",
-    name: "JULIANA SOLANO CHAR",
-    role: "SOCIA FUNDADORA",
-    sector: "ENTIDADES TERRITORIALES",
-    currentCargo: "Secretaria General - Gobernación de Bolívar",
-    complianceExperience: "Experiencia sobresaliente en gestión pública, consultorías legales y liderazgo en estructuración de proyectos de alta dirección.",
-    profession: "ABOGADA",
-    academicBg: [
-      "Universidad de los Andes - Abogada",
-      "Universidad de los Andes - Especialista en Legislación Financiera",
-      "ISDE Law & Business School - Master of Laws (LLM) en Derecho Internacional y Comercio Exterior"
-    ],
-    workBg: [
-      "Secretaria General - Gobernación de Bolívar",
-      "Secretaria Privada y Asesora de Despacho - Alcaldía Distrital de Barranquilla",
-      "Asesora - Alcaldía de Cartagena",
-      "FINDETER - Analista Jurídica y Profesional de Estructuración de Proyectos"
-    ],
-    linkedin: "https://www.linkedin.com/in/juliana-solano-char-a1981329/",
-    photo: "/Fotos/Miembros/MIP_7042.jpg",
-    tags: ["Entidades Territoriales", "Gestión Pública", "Legislación Financiera", "Gobierno Corporativo"]
-  },
-  {
-    id: "maria-helena-padilla",
-    name: "MARÍA HELENA PADILLA",
-    role: "SOCIA FUNDADORA",
-    sector: "TAX COMPLIANCE",
-    currentCargo: "Tax Partner - Padilla Consultores",
-    complianceExperience: "Casi 20 años de experiencia en planeación fiscal, consultoría, litigio y cumplimiento tributario en multinacionales y firmas de primer nivel.",
-    profession: "ABOGADA",
-    academicBg: [
-      "Universidad del Rosario - Abogada y Especialista en Derecho Tributario",
-      "Universidad Externado de Colombia - Especialista en Derecho Financiero y Bursátil",
-      "CEF Centro de Estudios Financieros (Madrid) - Máster en Tributación y Asesoría Fiscal",
-      "CESA - Liderazgo de Mujeres en Juntas Directivas"
-    ],
-    workBg: [
-      "Tax Partner - Padilla Consultores",
-      "Partner Tax & Legal LATAM - Deloitte",
-      "Tax Partner - Pinilla, González & Prieto Abogados",
-      "Gerente de Impuestos - DIRECTV Latin America (Colombia, Ecuador, Venezuela)",
-      "Coordinadora Senior de Impuestos - Claro Colombia"
-    ],
-    linkedin: "https://www.linkedin.com/in/mar%C3%ADa-helena-padilla-88bb2430/",
-    photo: "/Fotos/Miembros/MIP_7332.jpg",
-    tags: ["Tax Compliance", "Derecho Tributario", "Gobierno Corporativo", "Planeación Fiscal"]
-  },
-  {
-    id: "ana-linda-solano",
-    name: "ANA LINDA SOLANO LÓPEZ",
-    role: "SOCIA FUNDADORA",
-    sector: "COMPLIANCE PENAL & ANTI-CORRUPCIÓN",
-    currentCargo: "Directora - CONTUGAS / Consultora Internacional",
-    complianceExperience: "Consultora experta en derecho penal corporativo, investigación criminal, prevención de lavado de activos y anticorrupción.",
-    profession: "ABOGADA",
-    academicBg: [
-      "Universidad de los Andes - Abogada",
-      "Pontificia Universidad Javeriana - Especialización en Derecho Administrativo",
-      "Universitat Pompeu Fabra (Barcelona) - Máster en Ciencias Jurídicas",
-      "LSE (London School of Economics) - Visiting Fellow",
-      "FLACSO Argentina - Maestría en Género, Sociedad y Políticas"
-    ],
-    workBg: [
-      "Directora - CONTUGAS (Gas Natural)",
-      "Directora de la Policía Económico Financiera - Fiscalía General de la Nación",
-      "Profesora Investigadora - Universidad Externado de Colombia",
-      "Experta Principal 'Mujer y Corrupción' - Programa EUROsociAL+ de la Unión Europea"
-    ],
-    linkedin: "https://www.linkedin.com/in/analindasolano/",
-    photo: "/Fotos/Miembros/MIP_7349.jpg",
-    tags: ["Compliance Penal", "Anti-Corrupción", "Investigación Criminal", "SAGRILAFT & PTEE"]
-  },
-  {
     id: "liz-marcela-bejarano",
     name: "LIZ MARCELA BEJARANO CASTILLO",
     role: "SOCIA FUNDADORA",
@@ -193,31 +94,6 @@ export const MEMBERS_DATA: Member[] = [
     linkedin: "https://www.linkedin.com/in/liz-marcela-bejarano-castillo-2089b624a/",
     photo: "/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.jpg",
     tags: ["Agremiaciones", "Sector Financiero", "Gestión de Riesgos", "LAFT/PADM"]
-  },
-  {
-    id: "paula-andrea-ramirez",
-    name: "PAULA ANDREA RAMÍREZ BARBOSA",
-    role: "SOCIA FUNDADORA",
-    sector: "COMPLIANCE & INTELIGENCIA ARTIFICIAL",
-    currentCargo: "PhD in Law / Consultora e Investigadora en Compliance e Inteligencia Artificial",
-    complianceExperience: "Doctora en Derecho Penal, ex Conjuez de la Corte Suprema de Justicia y destacada experta en compliance, liderazgo e IA.",
-    profession: "ABOGADA",
-    academicBg: [
-      "Universidad de Ibagué - Abogada",
-      "Universidad Católica de Colombia - Especialista en Derecho Penal y Ciencias Forenses",
-      "Universidad de Salamanca - Máster en Estudios Políticos",
-      "Universidad de Salamanca - Doctora en Derecho Penal (PhD)",
-      "Georgetown University - Innovation and Leadership in Government"
-    ],
-    workBg: [
-      "Conjuez Sala de Casación Penal - Corte Suprema de Justicia",
-      "Procuradora Delegada en Asuntos Penales - Procuraduría General de la Nación",
-      "Gerente General - CIDCE (Centro Internacional de Derecho Corporativo)",
-      "Profesora de Derecho Penal Económico y Corporativo - Universidad Externado"
-    ],
-    linkedin: "https://www.linkedin.com/in/paula-andrea-ramirez-barbosa-24172ab6/",
-    photo: "/Fotos/Miembros/MIP_7362.jpg",
-    tags: ["Compliance Penal", "Inteligencia Artificial", "Derecho Penal Económico", "Gestión de Riesgos"]
   },
   {
     id: "yolima-bautista",

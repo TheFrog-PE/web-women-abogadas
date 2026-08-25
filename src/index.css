@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-fuchsia: #D91B5C;
-  --primary-fuchsia-hover: #B8124A;
-  --primary-fuchsia-light: #FDF2F5;
+  --primary-fuchsia: #af1daa;
+  --primary-fuchsia-hover: #8e158a;
+  --primary-fuchsia-light: #fdf4f4;
+  --purple-bright: #cb54ff;
+  --purple-pastel: #e6a7fc;
+  --bg-pink-warm: #fdf4f4;
   --dark-navy: #0A1128;
   --slate-dark: #1E293B;
   --slate-body: #475569;

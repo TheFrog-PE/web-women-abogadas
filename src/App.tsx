@@ -33,6 +33,9 @@ import {
   PenTool,
   Lock as LockIcon,
   CheckCircle2,
+  Home,
+  AlertTriangle,
+  ShieldAlert,
   Filter,
   ChevronDown,
   Menu
@@ -291,101 +294,45 @@ export interface Article {
 
 const DEFAULT_ARTICLES: Article[] = [
   {
-    id: "art-1",
-    title: "¿Puede la IA ser la guardia contra el lavado de dinero?",
-    category: "ARTÍCULOS",
-    categories: ["ARTÍCULOS", "ÉTICA E INTEGRIDAD", "PREVENCIÓN DE LAVADO"],
-    author: "María Piñeiro - Chief Executive Officer",
-    role: "Chief Executive Officer",
-    date: "25, Mar 2026",
-    readTime: "5 min de lectura",
-    summary: "El crimen económico se reinventa a la velocidad de la tecnología. El lavado de dinero, que antes se escondía en operaciones tradicionales de efectivo o en sociedades pantalla, hoy encuentra nuevos vacíos...",
-    image: "/Fotos/Imagen para Inicio - Eventos 04.jpg",
-    status: "Publicado",
-    content: "El crimen económico se reinventa a la velocidad de la tecnología. El lavado de dinero, que antes se escondía en operaciones tradicionales..."
-  },
-  {
-    id: "art-2",
-    title: "Retos de SAGRILAFT y PADM para el Sector Real en 2026",
-    category: "TENDENCIAS REGULATORIAS",
-    categories: ["TENDENCIAS REGULATORIAS", "COMPLIANCE FINANCIERO", "DEBIDA DILIGENCIA"],
-    author: "Comisión Técnica WIC",
-    role: "Oficiales de Cumplimiento",
-    date: "18, Mar 2026",
-    readTime: "7 min de lectura",
-    summary: "Recomendaciones clave de nuestras Oficiales de Cumplimiento afiliadas para la debida diligencia de contrapartes y programas de transparencia e ética empresarial ante la UIAF y Supersociedades.",
+    id: "art-compliance-gobierno",
+    title: "Compliance y buen gobierno corporativo",
+    category: "Compliance",
+    categories: ["Compliance", "Buen Gobierno Corporativo", "Gestión de Riesgos", "Ética e Integridad"],
+    author: "Instituto Peruano de Compliance (IPC) & WIC Colombia",
+    authorPhoto: "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
+    role: "Alianza Estratégica & Aliado Institucional",
+    date: "15 de Diciembre, 2026",
+    readTime: "4 min de lectura",
+    summary: "Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores.",
     image: "/Fotos/Imagen para Inicio - 02.jpg",
     status: "Publicado",
-    content: "Las exigencias de la Superintendencia de Sociedades y la UIAF para el año 2026 imponen nuevos retos a los Oficiales de Cumplimiento..."
-  },
-  {
-    id: "art-3",
-    title: "Más allá del cumplimiento: una mirada práctica al rol estratégico del Oficial",
-    category: "GOBIERNO CORPORATIVO",
-    categories: ["GOBIERNO CORPORATIVO", "COMPLIANCE OFFICER", "GESTIÓN DE RIESGOS"],
-    author: "Adriana Patricia Gómez Barajas",
-    role: "Presidenta WIC Colombia",
-    date: "20, Ene 2026",
-    readTime: "6 min de lectura",
-    summary: "Análisis estratégico sobre la evolución del rol del Compliance Officer dentro del comité ejecutivo y su impacto en la toma de decisiones éticas a nivel de Junta Directiva.",
-    image: "/Fotos/Imagen para Inicio - 03.jpg",
-    status: "Publicado",
-    content: "El cumplimiento ya no es un centro de costos represivo sino un pilar estratégico de sostenibilidad y reputación corporativa..."
-  },
-  {
-    id: "art-4",
-    title: "Canal de Denuncias e Investigaciones Internas en Entidades Públicas",
-    category: "CANAL DE DENUNCIAS",
-    categories: ["CANAL DE DENUNCIAS", "ISO 37001", "INVESTIGACIONES INTERNAS"],
-    author: "María Paula Rueda Mantilla",
-    role: "Subsecretaria Jurídica Distrital",
-    date: "12, Ene 2026",
-    readTime: "8 min de lectura",
-    summary: "Mejores prácticas para la protección del denunciante (whistleblowing) y la gestión confidencial de investigaciones internas en el sector público y privado.",
-    image: "/Fotos/Imagen para Inicio - 01.jpg",
-    status: "Publicado",
-    content: "Un canal de denuncias efectivo requiere independencia, anonimato garantizado y protocolos rigurosos de protección contra represalias..."
-  },
-  {
-    id: "art-5",
-    title: "Debida Diligencia Intensificada en Criptoactivos y Plataformas Fintech",
-    category: "DEBIDA DILIGENCIA",
-    categories: ["DEBIDA DILIGENCIA", "SECTOR FINANCIERO", "PREVENCIÓN DEL FRAUDE"],
-    author: "Liz Marcela Bejarano Castillo",
-    role: "Especialista en Riesgos Financieros",
-    date: "05, Ene 2026",
-    readTime: "5 min de lectura",
-    summary: "Cómo abordar los nuevos esquemas de evaluación de riesgo tecnológico en transacciones digitales y activos virtuales sin frenar la innovación operativa.",
-    image: "/Fotos/Imagen para Inicio - Eventos 04.jpg",
-    status: "Publicado",
-    content: "La convergencia entre servicios financieros y activos digitales impone nuevos desafíos de trazabilidad y conocimiento del cliente..."
+    content: `Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.
+
+Al respecto, apreciamos la implementación de medidas destinadas a cumplir con la legalidad y disposiciones de nivel interno (políticas propias) y externo que en conjunto se conocen como "compliance o cumplimiento normativo", siendo relevante para el conocimiento de todas las clases de riesgos en la empresa, implementar mecanismos de prevención e identificación, así como acciones para mitigarlos en la medida de lo posible.
+
+Para poder conseguirlo, dentro del campo de acción de las empresas se han desplegado una gran diversidad de iniciativas de buenas prácticas corporativas, las cuales han podido dotar de cierta eficiencia operativa y con el tiempo ser internalizadas en la cultura organizacional; sin embargo, ante la existencia de nuevas normas, se acrecienta un complejo entorno legal que necesita ser adecuadamente cumplido.
+
+Garantizar la observancia de las normas por medio del compliance, evoluciona progresivamente pues es más que colocar en blanco y negro definiciones de determinados procedimientos generales; es ser y hacer una cultura de cumplimiento en la organización que promueva la ética, la integridad y las buenas prácticas del gobierno corporativo al interior de la empresa.
+
+Por ello, el Instituto Peruano de Compliance asume el compromiso en fomentar la mejora continua del papel del compliance en las organizaciones, así como la capacitación y especialización permanente de sus operadores.`
   }
 ];
 
 export function App() {
   // Estados reactivos dinámicos con persistencia en localStorage entre Intranet y Web Pública
   const [membersList, setMembersList] = useState<Member[]>(() => {
-    const saved = localStorage.getItem('wic_members_list');
-    const parsed: Member[] = saved ? JSON.parse(saved) : MEMBERS_DATA;
-    return parsed.map(m => {
-      const defaultData = MEMBERS_DATA.find(d => d.id === m.id);
-      return {
-        ...m,
-        tags: (m.tags && m.tags.length > 0) ? m.tags : (defaultData?.tags || ["Gobierno Corporativo", "Compliance Penal", "Gestión de Riesgos"])
-      };
-    });
+    // Forzar la lista limpia de las 4 fundadoras oficiales de MEMBERS_DATA
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('wic_members_list');
+    }
+    return MEMBERS_DATA;
   });
 
   const [articlesList, setArticlesList] = useState<Article[]>(() => {
-    const saved = localStorage.getItem('wic_articles_list');
-    const parsed: Article[] = saved ? JSON.parse(saved) : DEFAULT_ARTICLES;
-    return parsed.map(a => {
-      const def = DEFAULT_ARTICLES.find(d => d.id === a.id);
-      return {
-        ...a,
-        categories: (a.categories && a.categories.length > 0) ? a.categories : (def?.categories || [a.category || "COMPLIANCE"])
-      };
-    });
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('wic_articles_list');
+    }
+    return DEFAULT_ARTICLES;
   });
 
   // Guardar dinámicamente en localStorage cada cambio
@@ -397,7 +344,26 @@ export function App() {
     localStorage.setItem('wic_articles_list', JSON.stringify(articlesList));
   }, [articlesList]);
 
-  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'login'>('inicio');
+  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'login' | '404'>('inicio');
+  const [auditProgress, setAuditProgress] = useState<number | null>(null);
+  const [auditStatusText, setAuditStatusText] = useState<string>('');
+
+  const runAuditDemo = () => {
+    setAuditProgress(10);
+    setAuditStatusText('Iniciando rastreo de trazabilidad URL...');
+    setTimeout(() => {
+      setAuditProgress(45);
+      setAuditStatusText('Evaluando matriz de riesgos y cumplimiento normativo SAGRILAFT & PTEE...');
+    }, 700);
+    setTimeout(() => {
+      setAuditProgress(80);
+      setAuditStatusText('Consultando registros de gobernanza corporativa en WIC Colombia...');
+    }, 1400);
+    setTimeout(() => {
+      setAuditProgress(100);
+      setAuditStatusText('DICTAMEN FINAL: Infracción de Ruta Detectada (Código 404). El enlace solicitado se encuentra fuera del mapa normativo.');
+    }, 2200);
+  };
   const [currentSlide, setCurrentSlide] = useState(0);
   const [eventSlide, setEventSlide] = useState(0);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
@@ -509,6 +475,15 @@ export function App() {
     return () => clearInterval(timer);
   }, [eventSlides.length]);
 
+  // Autoplay para el Hero Carousel Principal de Inicio (cambio automático cada 5 segundos)
+  useEffect(() => {
+    if (activeTab !== 'inicio') return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 3); // 3 slides en el Hero principal
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [activeTab]);
+
   // Hero Slider Data based on docx instructions
   const slides = [
     {
@@ -619,13 +594,13 @@ export function App() {
               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }}
             >
               <img 
-                src="/Logo/Logo WIC COL  (2).png" 
+                src="/Logo/Logo WIC COL  (1).png" 
                 alt="Logo WIC Colombia" 
                 style={{ 
-                  height: '52px', 
+                  height: '46px', 
                   objectFit: 'contain',
                   filter: isScrolled ? 'none' : 'brightness(0) invert(1)',
-                  transition: 'filter 0.2s ease'
+                  transition: 'all 0.2s ease'
                 }} 
               />
             </div>
@@ -1589,118 +1564,159 @@ export function App() {
                   /* VISTA PRINCIPAL DE EVENTOS */
                   <div>
                     
-                    {/* 2. SECCIÓN PRÓXIMOS EVENTOS (SEGÚN MAQUETA SEGUNDA IMAGEN: 3 TARJETAS EN REJILLA) */}
-                    <div style={{ marginBottom: '4.5rem' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', borderLeft: '4px solid #8F008D', paddingLeft: '1rem' }}>
-                        <div>
-                          <h2 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
-                            Próximo Eventos
-                          </h2>
-                        </div>
-                        <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px' }}>
-                          MOSTRANDO 3 RESULTADOS
-                        </span>
+                    {/* 2. SECCIÓN PRÓXIMOS EVENTOS (MOSTRAR ÚNICAMENTE 'No hay próximos eventos') */}
+                    <div style={{ marginBottom: '4rem' }}>
+                      <div style={{ borderLeft: '4px solid #af1daa', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
+                        <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
+                          Próximos Eventos
+                        </h2>
                       </div>
 
-                      <div className="events-grid-3col">
-                        
-                        {/* TARJETA 1 */}
-                        <div className="reveal-scale delay-1 card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', cursor: 'pointer' }} onClick={() => openEventDetail('faoc-2026')}>
-                          <div style={{ height: '200px', backgroundColor: '#CBD5E1', position: 'relative' }}>
-                            <img src="/Fotos/Imagen para Inicio - Eventos 04.jpg" alt="Evento 1" style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }} />
-                            <span style={{ position: 'absolute', top: '1rem', left: '1rem', backgroundColor: '#AA26B3', color: '#FFF', padding: '0.25rem 0.75rem', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.5px' }}>
-                              DESTACADO
-                            </span>
-                          </div>
-                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <div>
-                              <h3 style={{ fontSize: '1.05rem', color: '#AA26B3', marginBottom: '1rem', lineHeight: '1.3', fontWeight: '700' }}>
-                                FAOC: Forum on Anti-Corruption Compliance Colombia
-                              </h3>
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', color: '#64748B', fontSize: '0.8rem', marginBottom: '1.5rem' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} /> Metropolitan Club - Bogotá</span>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={14} /> 24 de Noviembre, 2026</span>
-                              </div>
-                            </div>
-                            <button onClick={() => openEventDetail('faoc-2026')} style={{ width: '100%', backgroundColor: '#FDF2F8', color: '#AA26B3', border: 'none', padding: '0.6rem', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', borderRadius: '4px' }}>
-                              Ver Detalles
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* TARJETA 2 */}
-                        <div className="reveal-scale delay-2 card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', cursor: 'pointer' }} onClick={() => openEventDetail('summit-2026')}>
-                          <div style={{ height: '200px', backgroundColor: '#CBD5E1', position: 'relative' }}>
-                            <img src="/Fotos/Imagen para Inicio - 03.jpg" alt="Evento 2" style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }} />
-                          </div>
-                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <div>
-                              <h3 style={{ fontSize: '1.05rem', color: '#AA26B3', marginBottom: '1rem', lineHeight: '1.3', fontWeight: '700' }}>
-                                WOMEN IN COMPLIANCE COLOMBIA SUMMIT
-                              </h3>
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', color: '#64748B', fontSize: '0.8rem', marginBottom: '1.5rem' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} /> Centro de Convenciones - Bogotá</span>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={14} /> 15 de Diciembre, 2026</span>
-                              </div>
-                            </div>
-                            <button onClick={() => openEventDetail('summit-2026')} style={{ width: '100%', backgroundColor: '#FDF2F8', color: '#AA26B3', border: 'none', padding: '0.6rem', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', borderRadius: '4px' }}>
-                              Inscribirse
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* TARJETA 3 */}
-                        <div className="reveal-scale delay-3 card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', cursor: 'pointer' }} onClick={() => openEventDetail('congreso-2027')}>
-                          <div style={{ height: '200px', backgroundColor: '#CBD5E1', position: 'relative' }}>
-                            <img src="/Fotos/Imagen para Inicio - 01.jpg" alt="Evento 3" style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }} />
-                          </div>
-                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <div>
-                              <h3 style={{ fontSize: '1.05rem', color: '#AA26B3', marginBottom: '1rem', lineHeight: '1.3', fontWeight: '700' }}>
-                                V CONGRESO DE COMPLIANCE & SAGRILAFT
-                              </h3>
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', color: '#64748B', fontSize: '0.8rem', marginBottom: '1.5rem' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} /> Auditorio Principal - Medellín</span>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={14} /> 20 de Enero, 2027</span>
-                              </div>
-                            </div>
-                            <button onClick={() => openEventDetail('congreso-2027')} style={{ width: '100%', backgroundColor: '#FDF2F8', color: '#AA26B3', border: 'none', padding: '0.6rem', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', borderRadius: '4px' }}>
-                              Próximamente
-                            </button>
-                          </div>
-                        </div>
-
+                      <div style={{
+                        backgroundColor: '#fdf4f4',
+                        border: '1.5px solid #e6a7fc',
+                        borderRadius: '16px',
+                        padding: '3.5rem 2rem',
+                        textAlign: 'center',
+                        boxShadow: '0 4px 20px rgba(175, 29, 170, 0.05)'
+                      }}>
+                        <Calendar size={44} style={{ color: '#af1daa', marginBottom: '1rem' }} />
+                        <h3 style={{ fontSize: '1.6rem', fontWeight: '800', color: '#1E1B4B', marginBottom: '0.5rem' }}>
+                          No hay próximos eventos
+                        </h3>
+                        <p style={{ color: '#475569', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto', lineHeight: '1.6' }}>
+                          Próximamente estaremos anunciando nuestras nuevas conferencias, paneles y espacios de networking para 2026.
+                        </p>
                       </div>
                     </div>
 
-                    {/* 3. SECCIÓN EVENTOS PREVIOS (SEGÚN MAQUETA SEGUNDA IMAGEN) */}
-                    <div style={{ marginBottom: '4.5rem' }}>
-                      <div style={{ borderLeft: '4px solid #8F008D', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
-                        <h2 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
-                          Eventos Previos
-                        </h2>
-                        <p style={{ color: '#64748B', fontSize: '0.85rem', margin: '0.25rem 0 0 0' }}>
-                          Revive los momentos más importantes de nuestra red.
-                        </p>
-                      </div>
-
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    {/* 3. SECCIÓN EVENTO PREVIO (DESAYUNO WIC COLOMBIA) CON FONDO OFICIAL #fdf4f4 */}
+                    <div style={{ backgroundColor: '#fdf4f4', borderRadius: '24px', padding: '3.5rem 2rem', marginBottom: '4rem', border: '1.5px solid #e6a7fc' }}>
+                      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                         
-                        <div className="reveal-left card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', display: 'flex', cursor: 'pointer' }} onClick={() => openEventDetail('desayuno-1')}>
-                          <img src="/Fotos/Imagen para Miniatura de Evento - 05.jpg" alt="Evento Previo 1" style={{ width: '160px', height: '140px', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }} />
-                          <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                            <span style={{ color: '#AA26B3', fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase' }}>JUNIO 2026</span>
-                            <h4 style={{ fontSize: '1.05rem', fontFamily: 'serif', color: '#1E1B4B', margin: '0.25rem 0' }}>1er Desayuno Mujeres in Compliance</h4>
-                            <span style={{ color: '#64748B', fontSize: '0.8rem' }}>Metropolitan Club - 250 asistentes</span>
+                        {/* CABECERA Y BADGE DESTACADO */}
+                        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                          <span style={{ backgroundColor: '#af1daa', color: '#FFFFFF', padding: '0.4rem 1.25rem', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', borderRadius: '9999px', display: 'inline-block', marginBottom: '1rem' }}>
+                            EVENTO REALIZADO
+                          </span>
+                          <h2 style={{ fontSize: '2.4rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem' }}>
+                            Desayuno WIC Colombia
+                          </h2>
+                          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                            <span style={{ backgroundColor: '#cb54ff', color: '#FFFFFF', padding: '0.4rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '800', boxShadow: '0 2px 8px rgba(203,84,255,0.3)' }}>
+                              ✨ Más de 30 Asistentes
+                            </span>
+                            <span style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                              <MapPin size={16} style={{ color: '#af1daa' }} /> Bogotá, Colombia
+                            </span>
                           </div>
                         </div>
 
-                        <div className="reveal-right card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', display: 'flex', cursor: 'pointer' }} onClick={() => openEventDetail('seminario-sagrilaft')}>
-                          <img src="/Fotos/Fotos Desayuno 07/Foto 04.jpg" alt="Evento Previo 2" style={{ width: '160px', height: '140px', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }} />
-                          <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                            <span style={{ color: '#AA26B3', fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase' }}>MAYO 2026</span>
-                            <h4 style={{ fontSize: '1.05rem', fontFamily: 'serif', color: '#1E1B4B', margin: '0.25rem 0' }}>Seminario de Riesgos Penales & SAGRILAFT</h4>
-                            <span style={{ color: '#64748B', fontSize: '0.8rem' }}>Modalidad Híbrida - Bogotá</span>
+                        {/* DESCRIPCIÓN DEL EVENTO */}
+                        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem 2.5rem', marginBottom: '3rem', border: '1px solid #e6a7fc', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
+                          <h3 style={{ color: '#af1daa', fontSize: '1.2rem', fontWeight: '800', marginBottom: '0.75rem' }}>
+                            Descripción del Evento
+                          </h3>
+                          <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.8', margin: 0 }}>
+                            El Desayuno de Trabajo WIC Colombia reunió a destacadas especialistas, directoras legales y oficiales de cumplimiento para analizar las tendencias clave en Gobierno Corporativo, Gestión de Riesgos y Compliance. Un encuentro exclusivo de aprendizaje, intercambio de experiencias y networking estratégico entre líderes del sector público y privado.
+                          </p>
+                        </div>
+
+                        {/* AGENDA DEL EVENTO PREVIO */}
+                        <div style={{ marginBottom: '3rem' }}>
+                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '1.5rem' }}>
+                            Agenda del Evento
+                          </h3>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                            {[
+                              { time: '08:00 – 08:30', title: 'Registro & Desayuno de Networking', desc: 'Recepción de asistentes e integración estratégica.', sala: 'Salón Principal' },
+                              { time: '08:30 – 09:30', title: 'Ponencia Principal: Gobierno Corporativo y Compliance', desc: 'Conferencia sobre buenas prácticas de gobierno e integridad corporativa.', sala: 'Auditorio' },
+                              { time: '09:30 – 10:30', title: 'Mesa de Diálogo & Cierre', desc: 'Espacio de preguntas, conclusiones y compromisos de la red.', sala: 'Salón Principal' },
+                            ].map((item, i) => (
+                              <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.15rem 1.5rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.25rem', alignItems: 'center', border: '1px solid #e6a7fc' }}>
+                                <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '0.85rem' }}>{item.time}</span>
+                                <div>
+                                  <p style={{ color: '#1E1B4B', fontWeight: '700', fontSize: '0.95rem', margin: '0 0 0.2rem' }}>{item.title}</p>
+                                  <p style={{ color: '#64748B', fontSize: '0.82rem', margin: 0 }}>{item.desc}</p>
+                                </div>
+                                <span style={{ color: '#94A3B8', fontSize: '0.75rem', fontWeight: '600' }}>{item.sala}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* EXPOSITORA PRINCIPAL */}
+                        <div style={{ marginBottom: '3.5rem' }}>
+                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '1.5rem' }}>
+                            Expositora
+                          </h3>
+                          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem', border: '1px solid #e6a7fc', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', maxWidth: '720px', margin: '0 auto', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
+                            <img 
+                              src="/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg" 
+                              alt="Adriana Patricia Gómez Barajas" 
+                              style={{ width: '110px', height: '110px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top center', border: '3px solid #af1daa', flexShrink: 0 }}
+                            />
+                            <div>
+                              <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>PRESIDENTA WIC COLOMBIA</span>
+                              <h4 style={{ fontSize: '1.2rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.35rem' }}>ADRIANA PATRICIA GÓMEZ BARAJAS</h4>
+                              <p style={{ color: '#64748B', fontSize: '0.88rem', margin: 0, lineHeight: '1.5' }}>
+                                Directora de la línea de Gobierno Corporativo, Riesgos y Compliance / Socia Cremades & Calvo-Sotelo.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* GALERÍA OFICIAL DE FOTOS (8 FOTOS DEL DESAYUNO) */}
+                        <div style={{ marginBottom: '3.5rem' }}>
+                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '0.5rem' }}>
+                            Galería Fotografías del Desayuno
+                          </h3>
+                          <p style={{ color: '#64748B', fontSize: '0.88rem', textAlign: 'center', marginBottom: '1.75rem' }}>
+                            Registro fotográfico del encuentro presencial de WIC Colombia
+                          </p>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }} className="events-past-gallery-grid">
+                            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                              <div key={num} className="card-hover" style={{ borderRadius: '12px', overflow: 'hidden', height: '180px', backgroundColor: '#FFFFFF', border: '1px solid #e6a7fc', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                                <img 
+                                  src={`/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (${num}).jpg`} 
+                                  alt={`Desayuno WIC ${num}`}
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                  onError={(e) => { (e.target as HTMLImageElement).src = `/Fotos/Fotos Desayuno 07/Foto 0${num}.jpg`; }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* COLABORADORES OFICIALES */}
+                        <div>
+                          <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                              ALIANZAS ESTRATÉGICAS
+                            </span>
+                            <h3 style={{ fontSize: '1.6rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.25rem' }}>
+                              COLABORADORES OFICIALES
+                            </h3>
+                          </div>
+
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
+                            {/* COLABORADOR 1 */}
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                              <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
+                              <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
+                            </div>
+
+                            {/* COLABORADOR 2 */}
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                              <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
+                              <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Preciado Abogados</h4>
+                            </div>
+
+                            {/* COLABORADOR 3 */}
+                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6a7fc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                              <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ height: '44px', objectFit: 'contain', marginBottom: '0.4rem' }} />
+                              <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>WIC Colombia</h4>
+                            </div>
                           </div>
                         </div>
 
@@ -2771,24 +2787,24 @@ export function App() {
 
                 <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <span className="anim-fade-up anim-d1" style={{ 
-                    backgroundColor: 'rgba(217, 27, 92, 0.9)', 
+                    backgroundColor: 'rgba(175, 29, 170, 0.95)', 
                     color: '#FFFFFF', 
                     padding: '0.4rem 1.25rem', 
                     fontSize: '0.75rem', 
-                    fontWeight: '700', 
+                    fontWeight: '800', 
                     letterSpacing: '2px',
                     textTransform: 'uppercase',
                     display: 'inline-block',
                     marginBottom: '1.25rem',
                     borderRadius: '9999px'
                   }}>
-                    CONTENIDO COMPLIANCE
+                    COMPLIANCE Y BUEN GOBIERNO CORPORATIVO
                   </span>
-                  <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '850px', lineHeight: '1.15' }}>
-                    Nuestras últimas publicaciones
+                  <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
+                    Compliance y Buen Gobierno Corporativo
                   </h1>
-                  <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
-                    Artículos especializados, estudios de caso y reflexiones sobre gobierno corporativo y compliance
+                  <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '720px', lineHeight: '1.7', margin: '0 auto' }}>
+                    Artículos especializados, análisis normativos, gestión de riesgos y reflexiones sobre buen gobierno corporativo e integridad empresarial.
                   </p>
                 </div>
               </section>
@@ -2922,20 +2938,16 @@ export function App() {
                         }}>
                           {[
                             'Todas',
-                            'Auditoría Interna',
-                            'Canal de Denuncias',
-                            'Compliance Deportivo',
-                            'Compliance Financiero',
-                            'Compliance Laboral',
-                            'Compliance Officer',
-                            'Compliance Tributario',
-                            'Corporate Compliance',
-                            'Debida Diligencia',
+                            'Compliance',
+                            'Buen Gobierno Corporativo',
                             'Gestión de Riesgos',
-                            'Gobierno Corporativo',
-                            'ISO 37001',
-                            'Investigaciones Internas',
-                            'Protección de Datos Personales'
+                            'ESG',
+                            'Anti-Corrupción',
+                            'SAGRILAFT & PTEE',
+                            'Ética e Integridad',
+                            'Compliance Penal',
+                            'Tax Compliance',
+                            'Protección de Datos'
                           ].map((area) => {
                             const isSelected = selectedArticleCategory === area;
                             return (
@@ -2981,14 +2993,16 @@ export function App() {
                       }}>
                         {[
                           'Todas',
-                          'Auditoría Interna',
-                          'Canal de Denuncias',
-                          'Compliance Financiero',
-                          'Compliance Officer',
-                          'Debida Diligencia',
+                          'Compliance',
+                          'Buen Gobierno Corporativo',
                           'Gestión de Riesgos',
-                          'Gobierno Corporativo',
-                          'ISO 37001'
+                          'ESG',
+                          'Anti-Corrupción',
+                          'SAGRILAFT & PTEE',
+                          'Ética e Integridad',
+                          'Compliance Penal',
+                          'Tax Compliance',
+                          'Protección de Datos'
                         ].map((area) => {
                           const isAct = selectedArticleCategory === area;
                           return (
@@ -3204,20 +3218,16 @@ export function App() {
                       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                         {[
                           'Todas',
-                          'Auditoría Interna',
-                          'Canal de Denuncias',
-                          'Compliance Deportivo',
-                          'Compliance Financiero',
-                          'Compliance Laboral',
-                          'Compliance Officer',
-                          'Compliance Tributario',
-                          'Corporate Compliance',
-                          'Debida Diligencia',
+                          'Compliance',
+                          'Buen Gobierno Corporativo',
                           'Gestión de Riesgos',
-                          'Gobierno Corporativo',
-                          'ISO 37001',
-                          'Investigaciones Internas',
-                          'Protección de Datos Personales'
+                          'ESG',
+                          'Anti-Corrupción',
+                          'SAGRILAFT & PTEE',
+                          'Ética e Integridad',
+                          'Compliance Penal',
+                          'Tax Compliance',
+                          'Protección de Datos'
                         ].map((area) => {
                           const isSelected = selectedArticleCategory === area;
                           return (
@@ -5018,6 +5028,92 @@ export function App() {
             </div>
           </div>
           )
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* PÁGINA 5: ERROR 404 - INFRACCIÓN DE RUTA DETECTADA  */}
+        {/* ---------------------------------------------------- */}
+        {activeTab === '404' && (
+          <div className="fade-in" style={{ backgroundColor: '#0A1128', minHeight: 'calc(100vh - 75px)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+            {/* DECORACIÓN RADIAL EN EL FONDO */}
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(175, 29, 170, 0.25) 0%, rgba(203, 84, 255, 0.1) 45%, rgba(10, 17, 40, 0) 70%)', pointerEvents: 'none' }} />
+
+            <div style={{ maxWidth: '780px', width: '100%', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+              
+              {/* CÓDIGO 404 CON GLOW DE GRADIENTE */}
+              <div style={{ position: 'relative', display: 'inline-block', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '8rem', fontWeight: '900', background: 'linear-gradient(135deg, #af1daa, #cb54ff, #e6a7fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, letterSpacing: '-2px' }}>
+                  404
+                </span>
+                <span style={{ position: 'absolute', top: '-10px', right: '-25px', backgroundColor: '#af1daa', color: '#FFF', fontSize: '0.75rem', fontWeight: '800', padding: '0.35rem 0.75rem', borderRadius: '9999px', letterSpacing: '1px', textTransform: 'uppercase', boxShadow: '0 0 15px rgba(175,29,170,0.6)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <AlertTriangle size={13} /> REVISIÓN WIC
+                </span>
+              </div>
+
+              {/* TÍTULO Y DESCRIPCIÓN CON HUMOR DE COMPLIANCE */}
+              <h1 style={{ fontSize: '2.4rem', fontWeight: '800', color: '#FFFFFF', marginBottom: '1rem', lineHeight: '1.2', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
+                <ShieldAlert size={34} style={{ color: '#CB54FF' }} /> ¡Infracción de Ruta Detectada!
+              </h1>
+              <p style={{ color: '#94A3B8', fontSize: '1.1rem', maxWidth: '620px', margin: '0 auto 2.5rem', lineHeight: '1.7' }}>
+                La página que estás buscando ha incurrido en un desvío de cumplimiento normativo o no existe en los registros oficiales de gobernanza de WIC Colombia.
+              </p>
+
+              {/* WIDGET INTERACTIVO DE AUDITORÍA DE RUTA */}
+              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(230, 167, 252, 0.25)', borderRadius: '1.25rem', padding: '2rem', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E6A7FC', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                  <ShieldCheck size={22} style={{ color: '#CB54FF' }} /> Auditoría Automática de Enlace
+                </h3>
+                <p style={{ color: '#CBD5E1', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                  Presiona el botón para ejecutar una verificación en tiempo real de la trazabilidad del enlace solicitante:
+                </p>
+
+                {auditProgress === null ? (
+                  <button
+                    onClick={runAuditDemo}
+                    style={{ backgroundColor: '#af1daa', color: '#FFFFFF', border: 'none', padding: '0.85rem 2rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.9rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 4px 15px rgba(175,29,170,0.4)', transition: 'transform 0.2s ease' }}
+                    onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+                    onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <Search size={18} /> Ejecutar Auditoría de Ruta
+                  </button>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '540px', margin: '0 auto' }}>
+                    <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '12px', borderRadius: '9999px', overflow: 'hidden', border: '1px solid rgba(230,167,252,0.3)' }}>
+                      <div style={{ width: `${auditProgress}%`, height: '100%', background: 'linear-gradient(90deg, #af1daa, #cb54ff, #e6a7fc)', transition: 'width 0.4s ease' }} />
+                    </div>
+                    <p style={{ color: auditProgress === 100 ? '#FCA5A5' : '#E6A7FC', fontSize: '0.85rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+                      {auditProgress === 100 ? <AlertTriangle size={16} /> : <Search size={16} />}
+                      <span>{auditStatusText}</span>
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* BOTONES DE NAVEGACIÓN Y RETORNO */}
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => { setActiveTab('inicio'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="btn btn-fuchsia"
+                  style={{ padding: '0.85rem 2rem', fontSize: '0.95rem' }}
+                >
+                  <Home size={18} /> Volver al Inicio
+                </button>
+                <button
+                  onClick={() => { setActiveTab('miembros'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  style={{ backgroundColor: 'transparent', color: '#E6A7FC', border: '1px solid #CB54FF', padding: '0.85rem 1.8rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                >
+                  <Users size={18} /> Conocer Fundadoras
+                </button>
+                <button
+                  onClick={() => { setActiveTab('contenido'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  style={{ backgroundColor: 'transparent', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.3)', padding: '0.85rem 1.8rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                >
+                  <BookOpen size={18} /> Leer Blog
+                </button>
+              </div>
+
+            </div>
+          </div>
         )}
 
       </main>

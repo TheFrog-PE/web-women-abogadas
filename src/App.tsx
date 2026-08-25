@@ -5042,7 +5042,7 @@ export function App() {
               
               {/* CÓDIGO 404 CON GLOW DE GRADIENTE */}
               <div style={{ position: 'relative', display: 'inline-block', marginBottom: '1rem' }}>
-                <span style={{ fontSize: '8rem', fontWeight: '900', background: 'linear-gradient(135deg, #af1daa, #cb54ff, #e6a7fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, letterSpacing: '-2px' }}>
+                <span style={{ fontSize: '8rem', fontWeight: '900', background: 'linear-gradient(135deg, #af1daa, #eb54ff, #e6affc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, letterSpacing: '-2px' }}>
                   404
                 </span>
                 <span style={{ position: 'absolute', top: '-10px', right: '-25px', backgroundColor: '#af1daa', color: '#FFF', fontSize: '0.75rem', fontWeight: '800', padding: '0.35rem 0.75rem', borderRadius: '9999px', letterSpacing: '1px', textTransform: 'uppercase', boxShadow: '0 0 15px rgba(175,29,170,0.6)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
@@ -5052,16 +5052,16 @@ export function App() {
 
               {/* TÍTULO Y DESCRIPCIÓN CON HUMOR DE COMPLIANCE */}
               <h1 style={{ fontSize: '2.4rem', fontWeight: '800', color: '#FFFFFF', marginBottom: '1rem', lineHeight: '1.2', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
-                <ShieldAlert size={34} style={{ color: '#CB54FF' }} /> ¡Infracción de Ruta Detectada!
+                <ShieldAlert size={34} style={{ color: '#EB54FF' }} /> ¡Infracción de Ruta Detectada!
               </h1>
               <p style={{ color: '#94A3B8', fontSize: '1.1rem', maxWidth: '620px', margin: '0 auto 2.5rem', lineHeight: '1.7' }}>
                 La página que estás buscando ha incurrido en un desvío de cumplimiento normativo o no existe en los registros oficiales de gobernanza de WIC Colombia.
               </p>
 
               {/* WIDGET INTERACTIVO DE AUDITORÍA DE RUTA */}
-              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(230, 167, 252, 0.25)', borderRadius: '1.25rem', padding: '2rem', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E6A7FC', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                  <ShieldCheck size={22} style={{ color: '#CB54FF' }} /> Auditoría Automática de Enlace
+              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', border: '1px solid rgba(230, 175, 252, 0.25)', borderRadius: '1.25rem', padding: '2rem', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E6AFFC', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                  <ShieldCheck size={22} style={{ color: '#EB54FF' }} /> Auditoría Automática de Enlace
                 </h3>
                 <p style={{ color: '#CBD5E1', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
                   Presiona el botón para ejecutar una verificación en tiempo real de la trazabilidad del enlace solicitante:
@@ -5078,10 +5078,10 @@ export function App() {
                   </button>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '540px', margin: '0 auto' }}>
-                    <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '12px', borderRadius: '9999px', overflow: 'hidden', border: '1px solid rgba(230,167,252,0.3)' }}>
-                      <div style={{ width: `${auditProgress}%`, height: '100%', background: 'linear-gradient(90deg, #af1daa, #cb54ff, #e6a7fc)', transition: 'width 0.4s ease' }} />
+                    <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '12px', borderRadius: '9999px', overflow: 'hidden', border: '1px solid rgba(230,175,252,0.3)' }}>
+                      <div style={{ width: `${auditProgress}%`, height: '100%', background: 'linear-gradient(90deg, #af1daa, #eb54ff, #e6affc)', transition: 'width 0.4s ease' }} />
                     </div>
-                    <p style={{ color: auditProgress === 100 ? '#FCA5A5' : '#E6A7FC', fontSize: '0.85rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+                    <p style={{ color: auditProgress === 100 ? '#FCA5A5' : '#E6AFFC', fontSize: '0.85rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
                       {auditProgress === 100 ? <AlertTriangle size={16} /> : <Search size={16} />}
                       <span>{auditStatusText}</span>
                     </p>
@@ -5100,7 +5100,7 @@ export function App() {
                 </button>
                 <button
                   onClick={() => { setActiveTab('miembros'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  style={{ backgroundColor: 'transparent', color: '#E6A7FC', border: '1px solid #CB54FF', padding: '0.85rem 1.8rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                  style={{ backgroundColor: 'transparent', color: '#E6AFFC', border: '1px solid #EB54FF', padding: '0.85rem 1.8rem', borderRadius: '9999px', fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                 >
                   <Users size={18} /> Conocer Fundadoras
                 </button>

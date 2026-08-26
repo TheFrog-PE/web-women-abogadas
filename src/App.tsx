@@ -2561,37 +2561,58 @@ export function App() {
                     </div>
 
                     {/* BARRA DE NAVEGACIÓN ANTERIOR / SIGUIENTE ARTÍCULO */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #F1F5F9' }}>
-                      <div 
-                        onClick={() => {
-                          const prev = articlesList.find(a => a.id !== selectedArticle.id);
-                          if (prev) openArticleDetail(prev);
-                        }}
-                        style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #f4f4f4', cursor: 'pointer' }}
-                      >
-                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#af1daa', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
-                          ← ANTERIOR
-                        </span>
-                        <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#1E1B4B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          Cumplimiento en la economía real
-                        </span>
-                      </div>
+                    {(() => {
+                      const currentIdx = articlesList.findIndex(a => a.id === selectedArticle.id);
+                      const prevArt = currentIdx > 0 ? articlesList[currentIdx - 1] : null;
+                      const nextArt = currentIdx >= 0 && currentIdx < articlesList.length - 1 ? articlesList[currentIdx + 1] : null;
 
-                      <div 
-                        onClick={() => {
-                          const next = articlesList.find(a => a.id !== selectedArticle.id);
-                          if (next) openArticleDetail(next);
-                        }}
-                        style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #f4f4f4', cursor: 'pointer', textAlign: 'right' }}
-                      >
-                        <span style={{ fontSize: '0.68rem', fontWeight: '700', color: '#af1daa', letterSpacing: '0.5px', display: 'block', marginBottom: '0.2rem' }}>
-                          SIGUIENTE →
-                        </span>
-                        <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#1E1B4B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          Gestión ética en la era de la IA
-                        </span>
-                      </div>
-                    </div>
+                      return (
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #F1F5F9' }}>
+                          {/* BOTÓN ANTERIOR */}
+                          <div 
+                            onClick={() => { if (prevArt) openArticleDetail(prevArt); }}
+                            style={{ 
+                              backgroundColor: '#f4f4f4', 
+                              padding: '1rem 1.25rem', 
+                              borderRadius: '12px', 
+                              border: '1.5px solid #e6affc', 
+                              cursor: prevArt ? 'pointer' : 'not-allowed',
+                              opacity: prevArt ? 1 : 0.65,
+                              transition: 'all 0.2s ease'
+                            }}
+                          >
+                            <span style={{ fontSize: '0.68rem', fontWeight: '800', color: '#af1daa', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.25rem' }}>
+                              <ArrowLeft size={13} /> ANTERIOR
+                            </span>
+                            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: prevArt ? '#1E1B4B' : '#64748B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {prevArt ? prevArt.title : 'Próximamente más entradas'}
+                            </span>
+                          </div>
+
+                          {/* BOTÓN SIGUIENTE */}
+                          <div 
+                            onClick={() => { if (nextArt) openArticleDetail(nextArt); }}
+                            style={{ 
+                              backgroundColor: '#f4f4f4', 
+                              padding: '1rem 1.25rem', 
+                              borderRadius: '12px', 
+                              border: '1.5px solid #e6affc', 
+                              cursor: nextArt ? 'pointer' : 'not-allowed',
+                              opacity: nextArt ? 1 : 0.65,
+                              textAlign: 'right',
+                              transition: 'all 0.2s ease'
+                            }}
+                          >
+                            <span style={{ fontSize: '0.68rem', fontWeight: '800', color: '#af1daa', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.3rem', marginBottom: '0.25rem' }}>
+                              SIGUIENTE <ArrowRight size={13} />
+                            </span>
+                            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: nextArt ? '#1E1B4B' : '#64748B', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {nextArt ? nextArt.title : 'Próximamente más entradas'}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })()}
 
                   </div>
 
@@ -2619,49 +2640,36 @@ export function App() {
                         ARTÍCULOS RELACIONADOS
                       </h3>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                        {[
-                          {
-                            title: 'Compliance y buen gobierno corporativo',
-                            date: '15 de Diciembre, 2026',
-                            image: '/Fotos/Imagen para Inicio - 02.jpg'
-                          },
-                          {
-                            title: 'Teoría y práctica del compliance: breves apuntes',
-                            date: '18 de Noviembre, 2026',
-                            image: '/Fotos/Imagen para Inicio - 03.jpg'
-                          },
-                          {
-                            title: 'Nuevas regulaciones en la Unión Europea',
-                            date: '05 de Octubre, 2026',
-                            image: '/Fotos/Imagen para Inicio - Eventos 04.jpg'
-                          }
-                        ].map((rel, rIdx) => (
-                          <div 
-                            key={rIdx} 
-                            onClick={() => {
-                              const match = articlesList[rIdx % articlesList.length];
-                              if (match) openArticleDetail(match);
-                            }}
-                            style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', cursor: 'pointer' }}
-                          >
-                            <div style={{ width: '54px', height: '54px', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#CBD5E1', flexShrink: 0 }}>
-                              <img 
-                                src={rel.image} 
-                                alt={rel.title} 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }}
-                              />
+                      {articlesList.filter(a => a.id !== selectedArticle.id).length > 0 ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                          {articlesList.filter(a => a.id !== selectedArticle.id).map((rel, rIdx) => (
+                            <div 
+                              key={rIdx} 
+                              onClick={() => openArticleDetail(rel)}
+                              style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', cursor: 'pointer' }}
+                            >
+                              <div style={{ width: '54px', height: '54px', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#CBD5E1', flexShrink: 0 }}>
+                                <img 
+                                  src={rel.image} 
+                                  alt={rel.title} 
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                  onError={(e) => { (e.target as HTMLImageElement).style.backgroundColor='#CBD5E1'; }}
+                                />
+                              </div>
+                              <div>
+                                <h4 style={{ fontSize: '0.82rem', fontWeight: '700', color: '#1E1B4B', lineHeight: '1.3', marginBottom: '0.2rem' }}>
+                                  {rel.title}
+                                </h4>
+                                <span style={{ fontSize: '0.7rem', color: '#94A3B8' }}>{rel.date}</span>
+                              </div>
                             </div>
-                            <div>
-                              <h4 style={{ fontSize: '0.82rem', fontWeight: '700', color: '#1E1B4B', lineHeight: '1.3', marginBottom: '0.2rem' }}>
-                                {rel.title}
-                              </h4>
-                              <span style={{ fontSize: '0.7rem', color: '#94A3B8' }}>{rel.date}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p style={{ color: '#64748B', fontSize: '0.85rem', margin: 0, fontStyle: 'italic' }}>
+                          Próximamente más artículos en esta sección.
+                        </p>
+                      )}
                     </div>
 
                     {/* WIDGET 3: CATEGORÍAS (CAJA PÚRPURA OSCURA SEGÚN MAQUETA) */}

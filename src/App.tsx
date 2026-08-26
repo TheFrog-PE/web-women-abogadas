@@ -1494,19 +1494,58 @@ export function App() {
                             </h3>
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
-                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                                <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
-                                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
+                              {/* COLABORADOR 1: CREMADES & CALVO-SOTELO */}
+                              <div style={{ 
+                                backgroundColor: '#0A1128', 
+                                borderRadius: '16px', 
+                                padding: '1.75rem 1.25rem', 
+                                border: '1.5px solid #e6affc', 
+                                textAlign: 'center', 
+                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                justifyContent: 'center' 
+                              }}>
+                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>FIRMA INTERNACIONAL</span>
+                                <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', marginBottom: '0.5rem' }} />
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
                               </div>
 
-                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                                <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
-                                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Preciado Abogados</h4>
+                              {/* COLABORADOR 2: PRECIADO ABOGADOS */}
+                              <div style={{ 
+                                backgroundColor: '#0A1128', 
+                                borderRadius: '16px', 
+                                padding: '1.75rem 1.25rem', 
+                                border: '1.5px solid #e6affc', 
+                                textAlign: 'center', 
+                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                justifyContent: 'center' 
+                              }}>
+                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>FIRMA COLABORADORA</span>
+                                <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', marginBottom: '0.5rem' }} />
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Preciado Abogados</h4>
                               </div>
 
-                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                                <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ height: '44px', objectFit: 'contain', marginBottom: '0.4rem' }} />
-                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>WIC Colombia</h4>
+                              {/* COLABORADOR 3: WIC COLOMBIA */}
+                              <div style={{ 
+                                backgroundColor: '#0A1128', 
+                                borderRadius: '16px', 
+                                padding: '1.75rem 1.25rem', 
+                                border: '1.5px solid #e6affc', 
+                                textAlign: 'center', 
+                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                justifyContent: 'center' 
+                              }}>
+                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ORGANIZACIÓN</span>
+                                <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)', marginBottom: '0.5rem' }} />
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>WIC Colombia</h4>
                               </div>
                             </div>
                           </div>

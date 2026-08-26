@@ -178,35 +178,35 @@ const EVENTS_DATA: Record<string, EventDetailData> = {
   },
   'desayuno-1': {
     id: 'desayuno-1',
-    title: '1er Desayuno Mujeres in Compliance',
-    badge: 'EVENTO REALIZADO · RESEÑA OFICIAL',
-    subtitle: 'Conexión, Apoyo Mutuo y Liderazgo Estratégico',
-    location: 'Metropolitan Club, Bogotá',
-    dateStr: '25 de Junio, 2026',
+    title: 'Desayuno WIC Colombia',
+    badge: 'EVENTO REALIZADO',
+    subtitle: 'Conexión, Apoyo Mutuo y Liderazgo Estratégico en Compliance',
+    location: 'Bogotá, Colombia',
+    dateStr: 'Junio, 2026',
     isPast: true,
-    attendeesCount: '250+ Asistentes',
-    heroGradient: 'linear-gradient(105deg, #0F172A 0%, #334155 55%, #475569 100%)',
-    heroImage: '/Fotos/Imagen para Inicio - Eventos 04.jpg',
+    attendeesCount: 'Más de 30 Asistentes',
+    heroGradient: 'linear-gradient(105deg, #0F172A 0%, #af1daa 55%, #eb54ff 100%)',
+    heroImage: '/Fotos/Imagen portada Evento - Desayuno - 06.jpg',
     photos: [
-      '/Fotos/Imagen para Inicio - Eventos 04.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 01.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 02.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 04.jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (1).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (2).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (3).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (4).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (5).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (6).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (7).jpg',
+      '/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (8).jpg',
     ],
     description: [
-      'Revive nuestro exitoso primer encuentro presencial de la red WIC Colombia en el Metropolitan Club de Bogotá. Un evento hito que reunió a más de 250 líderes y especialistas en cumplimiento legal.',
-      'Durante la mañana compartimos experiencias sobre prevención de riesgos penales, fortalecimiento del networking profesional y consolidación de la red nacional de apoyo mutuo.'
+      'El Desayuno de Trabajo WIC Colombia reunió a destacadas especialistas, directoras legales y oficiales de cumplimiento para analizar las tendencias clave en Gobierno Corporativo, Gestión de Riesgos y Compliance. Un encuentro exclusivo de aprendizaje, intercambio de experiencias y networking estratégico entre líderes del sector público y privado.'
     ],
     agenda: [
-      { time: '08:00 – 08:45', title: 'Bienvenida & Desayuno de Networking', desc: 'Apertura por el Comité Fundador de WIC Colombia.', sala: 'Salón Metropolitan' },
-      { time: '08:45 – 09:45', title: 'Panel: Retos Actuales de las Oficiales de Cumplimiento', desc: 'Debate sobre responsabilidad penal corporativa y protección directiva.', sala: 'Salón Principal' },
-      { time: '10:00 – 11:00', title: 'Sesión de Trabajo: Construyendo Redes de Confianza', desc: 'Mesas de diálogo sobre mentoría y desarrollo profesional.', sala: 'Mesas Temáticas' },
+      { time: '08:00 – 08:30', title: 'Registro & Desayuno de Networking', desc: 'Recepción de asistentes e integración estratégica.', sala: 'Salón Principal' },
+      { time: '08:30 – 09:30', title: 'Ponencia Principal: Gobierno Corporativo y Compliance', desc: 'Conferencia sobre buenas prácticas de gobierno e integridad corporativa.', sala: 'Auditorio' },
+      { time: '09:30 – 10:30', title: 'Mesa de Diálogo & Cierre', desc: 'Espacio de preguntas, conclusiones y compromisos de la red.', sala: 'Salón Principal' },
     ],
     speakers: [
-      { name: 'ADRIANA PATRICIA GÓMEZ BARAJAS', role: 'Fundadora WIC & Socia Consultora', photo: '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg' },
-      { name: 'MARÍA ALEJANDRA TRUJILLO', role: 'Oficial de Cumplimiento Sector Financiero', photo: '/Fotos/Miembros/MIP_7039.jpg' },
-      { name: 'CLAUDIA MARCELA RINCÓN', role: 'Experta en Ética Corporativa', photo: '/Fotos/Miembros/MIP_7042.jpg' },
-      { name: 'JOHANA MILENA TORRES', role: 'Especialista en SAGRILAFT & Riesgos', photo: '/Fotos/Miembros/MIP_7332.jpg' }
+      { name: 'ADRIANA PATRICIA GÓMEZ BARAJAS', role: 'Presidenta WIC Colombia & Socia Cremades & Calvo-Sotelo', photo: '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg' }
     ]
   },
   'seminario-sagrilaft': {
@@ -1483,6 +1483,34 @@ export function App() {
                               </div>
                             ))}
                           </div>
+
+                          {/* ── COLABORADORES OFICIALES DEL EVENTO ── */}
+                          <div style={{ marginTop: '3.5rem', textAlign: 'center' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                              ALIANZAS ESTRATÉGICAS
+                            </span>
+                            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: '2rem' }}>
+                              COLABORADORES OFICIALES
+                            </h3>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
+                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
+                                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
+                              </div>
+
+                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
+                                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Preciado Abogados</h4>
+                              </div>
+
+                              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ height: '44px', objectFit: 'contain', marginBottom: '0.4rem' }} />
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>WIC Colombia</h4>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     )}
@@ -1618,136 +1646,108 @@ export function App() {
                       </div>
                     </div>
 
-                    {/* 3. SECCIÓN EVENTO PREVIO (DESAYUNO WIC COLOMBIA) CON FONDO OFICIAL #f4f4f4 */}
-                    <div style={{ backgroundColor: '#f4f4f4', borderRadius: '24px', padding: '3.5rem 2rem', marginBottom: '4rem', border: '1.5px solid #e6affc' }}>
-                      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                        
-                        {/* CABECERA Y BADGE DESTACADO */}
-                        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                          <span style={{ backgroundColor: '#af1daa', color: '#FFFFFF', padding: '0.4rem 1.25rem', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', borderRadius: '9999px', display: 'inline-block', marginBottom: '1rem' }}>
-                            EVENTO REALIZADO
-                          </span>
-                          <h2 style={{ fontSize: '2.4rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem' }}>
-                            Desayuno WIC Colombia
-                          </h2>
-                          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                            <span style={{ backgroundColor: '#eb54ff', color: '#FFFFFF', padding: '0.4rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '800', boxShadow: '0 2px 8px rgba(203,84,255,0.3)' }}>
+                    {/* 3. SECCIÓN EVENTOS PREVIOS / REALIZADOS (TARJETA COMPACTA CON BOTÓN PARA ABRIR INFORMACIÓN DETALLADA) */}
+                    <div style={{ marginBottom: '4rem' }}>
+                      <div style={{ borderLeft: '4px solid #af1daa', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
+                        <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
+                          Eventos Previos Realizados
+                        </h2>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
+                        {/* TARJETA EVENTO PREVIO: DESAYUNO WIC COLOMBIA */}
+                        <div 
+                          className="card-hover" 
+                          onClick={() => openEventDetail('desayuno-1')}
+                          style={{
+                            backgroundColor: '#FFFFFF',
+                            borderRadius: '20px',
+                            border: '1.5px solid #e6affc',
+                            overflow: 'hidden',
+                            boxShadow: '0 8px 24px rgba(175, 29, 170, 0.08)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          <div style={{ position: 'relative', height: '230px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
+                            <img 
+                              src="/Fotos/Imagen portada Evento - Desayuno - 06.jpg" 
+                              alt="Desayuno WIC Colombia" 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                              onError={(e) => { (e.target as HTMLImageElement).src = '/Fotos/Imagen para Inicio - Eventos 04.jpg'; }}
+                            />
+                            <span style={{ 
+                              position: 'absolute', 
+                              top: '1rem', 
+                              left: '1rem', 
+                              backgroundColor: '#af1daa', 
+                              color: '#FFFFFF', 
+                              padding: '0.35rem 0.9rem', 
+                              fontSize: '0.72rem', 
+                              fontWeight: '800', 
+                              letterSpacing: '1px', 
+                              borderRadius: '9999px',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
+                              EVENTO REALIZADO
+                            </span>
+                            <span style={{ 
+                              position: 'absolute', 
+                              bottom: '1rem', 
+                              right: '1rem', 
+                              backgroundColor: '#eb54ff', 
+                              color: '#FFFFFF', 
+                              padding: '0.35rem 0.85rem', 
+                              borderRadius: '9999px', 
+                              fontSize: '0.78rem', 
+                              fontWeight: '800',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
                               ✨ Más de 30 Asistentes
                             </span>
-                            <span style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                              <MapPin size={16} style={{ color: '#af1daa' }} /> Bogotá, Colombia
-                            </span>
                           </div>
-                        </div>
 
-                        {/* DESCRIPCIÓN DEL EVENTO */}
-                        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem 2.5rem', marginBottom: '3rem', border: '1px solid #e6affc', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
-                          <h3 style={{ color: '#af1daa', fontSize: '1.2rem', fontWeight: '800', marginBottom: '0.75rem' }}>
-                            Descripción del Evento
-                          </h3>
-                          <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.8', margin: 0 }}>
-                            El Desayuno de Trabajo WIC Colombia reunió a destacadas especialistas, directoras legales y oficiales de cumplimiento para analizar las tendencias clave en Gobierno Corporativo, Gestión de Riesgos y Compliance. Un encuentro exclusivo de aprendizaje, intercambio de experiencias y networking estratégico entre líderes del sector público y privado.
-                          </p>
-                        </div>
-
-                        {/* AGENDA DEL EVENTO PREVIO */}
-                        <div style={{ marginBottom: '3rem' }}>
-                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '1.5rem' }}>
-                            Agenda del Evento
-                          </h3>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                            {[
-                              { time: '08:00 – 08:30', title: 'Registro & Desayuno de Networking', desc: 'Recepción de asistentes e integración estratégica.', sala: 'Salón Principal' },
-                              { time: '08:30 – 09:30', title: 'Ponencia Principal: Gobierno Corporativo y Compliance', desc: 'Conferencia sobre buenas prácticas de gobierno e integridad corporativa.', sala: 'Auditorio' },
-                              { time: '09:30 – 10:30', title: 'Mesa de Diálogo & Cierre', desc: 'Espacio de preguntas, conclusiones y compromisos de la red.', sala: 'Salón Principal' },
-                            ].map((item, i) => (
-                              <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.15rem 1.5rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.25rem', alignItems: 'center', border: '1px solid #e6affc' }}>
-                                <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '0.85rem' }}>{item.time}</span>
-                                <div>
-                                  <p style={{ color: '#1E1B4B', fontWeight: '700', fontSize: '0.95rem', margin: '0 0 0.2rem' }}>{item.title}</p>
-                                  <p style={{ color: '#64748B', fontSize: '0.82rem', margin: 0 }}>{item.desc}</p>
-                                </div>
-                                <span style={{ color: '#94A3B8', fontSize: '0.75rem', fontWeight: '600' }}>{item.sala}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* EXPOSITORA PRINCIPAL */}
-                        <div style={{ marginBottom: '3.5rem' }}>
-                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '1.5rem' }}>
-                            Expositora
-                          </h3>
-                          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '2rem', border: '1px solid #e6affc', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', maxWidth: '720px', margin: '0 auto', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
-                            <img 
-                              src="/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg" 
-                              alt="Adriana Patricia Gómez Barajas" 
-                              style={{ width: '110px', height: '110px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top center', border: '3px solid #af1daa', flexShrink: 0 }}
-                            />
-                            <div>
-                              <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>PRESIDENTA WIC COLOMBIA</span>
-                              <h4 style={{ fontSize: '1.2rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.35rem' }}>ADRIANA PATRICIA GÓMEZ BARAJAS</h4>
-                              <p style={{ color: '#64748B', fontSize: '0.88rem', margin: 0, lineHeight: '1.5' }}>
-                                Directora de la línea de Gobierno Corporativo, Riesgos y Compliance / Socia Cremades & Calvo-Sotelo.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* GALERÍA OFICIAL DE FOTOS (8 FOTOS DEL DESAYUNO) */}
-                        <div style={{ marginBottom: '3.5rem' }}>
-                          <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: '0.5rem' }}>
-                            Galería Fotografías del Desayuno
-                          </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.88rem', textAlign: 'center', marginBottom: '1.75rem' }}>
-                            Registro fotográfico del encuentro presencial de WIC Colombia
-                          </p>
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }} className="events-past-gallery-grid">
-                            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                              <div key={num} className="card-hover" style={{ borderRadius: '12px', overflow: 'hidden', height: '180px', backgroundColor: '#FFFFFF', border: '1px solid #e6affc', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                                <img 
-                                  src={`/Fotos/Fotos Desayuno 07/Desayuno WIC COL 07 (${num}).jpg`} 
-                                  alt={`Desayuno WIC ${num}`}
-                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                  onError={(e) => { (e.target as HTMLImageElement).src = `/Fotos/Fotos Desayuno 07/Foto 0${num}.jpg`; }}
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* COLABORADORES OFICIALES */}
-                        <div>
-                          <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-                            <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                              ALIANZAS ESTRATÉGICAS
-                            </span>
-                            <h3 style={{ fontSize: '1.6rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.25rem' }}>
-                              COLABORADORES OFICIALES
+                          <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <h3 style={{ fontSize: '1.4rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem', lineHeight: '1.3' }}>
+                              Desayuno WIC Colombia
                             </h3>
-                          </div>
-
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
-                            {/* COLABORADOR 1 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                              <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
-                              <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
+                            
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.88rem', fontWeight: '600', marginBottom: '1rem' }}>
+                              <MapPin size={16} style={{ color: '#af1daa' }} /> Bogotá, Colombia
                             </div>
 
-                            {/* COLABORADOR 2 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                              <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
-                              <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>Preciado Abogados</h4>
-                            </div>
+                            <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.75rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                              El Desayuno de Trabajo WIC Colombia reunió a destacadas especialistas, directoras legales y oficiales de cumplimiento para analizar tendencias en Gobierno Corporativo y Compliance.
+                            </p>
 
-                            {/* COLABORADOR 3 */}
-                            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.75rem 1.25rem', border: '1.5px solid #e6affc', textAlign: 'center', boxShadow: '0 4px 14px rgba(175,29,170,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                              <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ height: '44px', objectFit: 'contain', marginBottom: '0.4rem' }} />
-                              <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1E1B4B', margin: 0 }}>WIC Colombia</h4>
-                            </div>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openEventDetail('desayuno-1');
+                              }}
+                              style={{ 
+                                width: '100%', 
+                                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
+                                color: '#FFFFFF', 
+                                border: 'none', 
+                                padding: '0.85rem 1.5rem', 
+                                borderRadius: '9999px', 
+                                fontWeight: '800', 
+                                fontSize: '0.9rem', 
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.5rem',
+                                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                              }}
+                            >
+                              Ver Información Completa <ChevronRight size={18} />
+                            </button>
                           </div>
                         </div>
-
                       </div>
                     </div>
 

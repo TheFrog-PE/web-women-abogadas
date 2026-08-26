@@ -1584,17 +1584,29 @@ export function App() {
                       </div>
                     )}
 
-                    {/* ── AUSPICIADORES ── */}
+                    {/* ── AUSPICIADORES / COLABORADORES OFICIALES ── */}
                     <div style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem' }}>
                       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-                        <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
+                        <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
                         <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem', marginBottom: '2.5rem' }}>Auspiciadores</h2>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
-                          {[1,2,3,4].map(i => (
-                            <div key={i} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', width: '160px', height: '80px', border: '1px solid #e6affc', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(175, 29, 170,0.06)' }}>
-                              <span style={{ color: '#CBD5E1', fontSize: '0.75rem', fontWeight: '600' }}>LOGO EMPRESA</span>
-                            </div>
-                          ))}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
+                          {/* LOGO 1: CREMADES & CALVO-SOTELO */}
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
+                            <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '48px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0)' }} />
+                          </div>
+
+                          {/* LOGO 2: PRECIADO ABOGADOS */}
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
+                            <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '48px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0)' }} />
+                          </div>
+
+                          {/* LOGO 3: WIC COLOMBIA */}
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>ORGANIZACIÓN</span>
+                            <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ maxHeight: '45px', maxWidth: '100%', objectFit: 'contain' }} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1685,7 +1697,7 @@ export function App() {
                       </div>
                     </div>
 
-                    {/* 3. SECCIÓN EVENTOS PREVIOS / REALIZADOS (TARJETA COMPACTA CON BOTÓN PARA ABRIR INFORMACIÓN DETALLADA) */}
+                    {/* 3. SECCIÓN EVENTOS PREVIOS / REALIZADOS (3 TARJETAS LADO A LADO EN GRILLA DE 3 COLUMNAS) */}
                     <div style={{ marginBottom: '4rem' }}>
                       <div style={{ borderLeft: '4px solid #af1daa', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
                         <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
@@ -1693,8 +1705,9 @@ export function App() {
                         </h2>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
-                        {/* TARJETA EVENTO PREVIO: DESAYUNO WIC COLOMBIA */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="events-grid-3col">
+                        
+                        {/* TARJETA 1: DESAYUNO WIC COLOMBIA */}
                         <div 
                           className="card-hover" 
                           onClick={() => openEventDetail('desayuno-1')}
@@ -1710,7 +1723,7 @@ export function App() {
                             transition: 'all 0.3s ease'
                           }}
                         >
-                          <div style={{ position: 'relative', height: '230px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
+                          <div style={{ position: 'relative', height: '190px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
                             <img 
                               src="/Fotos/Imagen portada Evento - Desayuno - 06.jpg" 
                               alt="Desayuno WIC Colombia" 
@@ -1719,12 +1732,12 @@ export function App() {
                             />
                             <span style={{ 
                               position: 'absolute', 
-                              top: '1rem', 
-                              left: '1rem', 
+                              top: '0.75rem', 
+                              left: '0.75rem', 
                               backgroundColor: '#af1daa', 
                               color: '#FFFFFF', 
-                              padding: '0.35rem 0.9rem', 
-                              fontSize: '0.72rem', 
+                              padding: '0.3rem 0.75rem', 
+                              fontSize: '0.65rem', 
                               fontWeight: '800', 
                               letterSpacing: '1px', 
                               borderRadius: '9999px',
@@ -1734,13 +1747,13 @@ export function App() {
                             </span>
                             <span style={{ 
                               position: 'absolute', 
-                              bottom: '1rem', 
-                              right: '1rem', 
+                              bottom: '0.75rem', 
+                              right: '0.75rem', 
                               backgroundColor: '#eb54ff', 
                               color: '#FFFFFF', 
-                              padding: '0.35rem 0.85rem', 
+                              padding: '0.3rem 0.75rem', 
                               borderRadius: '9999px', 
-                              fontSize: '0.78rem', 
+                              fontSize: '0.7rem', 
                               fontWeight: '800',
                               boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
                             }}>
@@ -1748,17 +1761,17 @@ export function App() {
                             </span>
                           </div>
 
-                          <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ fontSize: '1.4rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem', lineHeight: '1.3' }}>
+                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
                               Desayuno WIC Colombia
                             </h3>
                             
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.88rem', fontWeight: '600', marginBottom: '1rem' }}>
-                              <MapPin size={16} style={{ color: '#af1daa' }} /> Bogotá, Colombia
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
+                              <MapPin size={15} style={{ color: '#af1daa' }} /> Bogotá, Colombia
                             </div>
 
-                            <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.75rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                              El Desayuno de Trabajo WIC Colombia reunió a destacadas especialistas, directoras legales y oficiales de cumplimiento para analizar tendencias en Gobierno Corporativo y Compliance.
+                            <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                              Encuentro de alta dirección y liderazgo de mujeres líderes en Gobierno Corporativo, Riesgos y Compliance.
                             </p>
 
                             <button 
@@ -1771,22 +1784,209 @@ export function App() {
                                 background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
                                 color: '#FFFFFF', 
                                 border: 'none', 
-                                padding: '0.85rem 1.5rem', 
+                                padding: '0.75rem 1.25rem', 
                                 borderRadius: '9999px', 
                                 fontWeight: '800', 
-                                fontSize: '0.9rem', 
+                                fontSize: '0.85rem', 
                                 cursor: 'pointer',
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '0.5rem',
+                                gap: '0.4rem',
                                 boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
                               }}
                             >
-                              Ver Información Completa <ChevronRight size={18} />
+                              Ver Información Completa <ChevronRight size={16} />
                             </button>
                           </div>
                         </div>
+
+                        {/* TARJETA 2: 1ER ENCUENTRO MUJERES IN COMPLIANCE */}
+                        <div 
+                          className="card-hover" 
+                          onClick={() => openEventDetail('desayuno-1')}
+                          style={{
+                            backgroundColor: '#FFFFFF',
+                            borderRadius: '20px',
+                            border: '1.5px solid #e6affc',
+                            overflow: 'hidden',
+                            boxShadow: '0 8px 24px rgba(175, 29, 170, 0.08)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          <div style={{ position: 'relative', height: '190px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
+                            <img 
+                              src="/Fotos/Imagen para Inicio - Eventos 04.jpg" 
+                              alt="1er Encuentro Mujeres in Compliance" 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                            <span style={{ 
+                              position: 'absolute', 
+                              top: '0.75rem', 
+                              left: '0.75rem', 
+                              backgroundColor: '#af1daa', 
+                              color: '#FFFFFF', 
+                              padding: '0.3rem 0.75rem', 
+                              fontSize: '0.65rem', 
+                              fontWeight: '800', 
+                              letterSpacing: '1px', 
+                              borderRadius: '9999px',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
+                              EVENTO REALIZADO
+                            </span>
+                            <span style={{ 
+                              position: 'absolute', 
+                              bottom: '0.75rem', 
+                              right: '0.75rem', 
+                              backgroundColor: '#eb54ff', 
+                              color: '#FFFFFF', 
+                              padding: '0.3rem 0.75rem', 
+                              borderRadius: '9999px', 
+                              fontSize: '0.7rem', 
+                              fontWeight: '800',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
+                              ✨ 250+ Asistentes
+                            </span>
+                          </div>
+
+                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
+                              1er Encuentro Mujeres in Compliance
+                            </h3>
+                            
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
+                              <MapPin size={15} style={{ color: '#af1daa' }} /> Metropolitan Club · Bogotá
+                            </div>
+
+                            <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                              Encuentro hito que reunió a líderes y especialistas para dialogar sobre prevención de riesgos penales y redes de apoyo.
+                            </p>
+
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openEventDetail('desayuno-1');
+                              }}
+                              style={{ 
+                                width: '100%', 
+                                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
+                                color: '#FFFFFF', 
+                                border: 'none', 
+                                padding: '0.75rem 1.25rem', 
+                                borderRadius: '9999px', 
+                                fontWeight: '800', 
+                                fontSize: '0.85rem', 
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.4rem',
+                                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                              }}
+                            >
+                              Ver Información Completa <ChevronRight size={16} />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* TARJETA 3: SEMINARIO DE RIESGOS PENALES & SAGRILAFT */}
+                        <div 
+                          className="card-hover" 
+                          onClick={() => openEventDetail('seminario-sagrilaft')}
+                          style={{
+                            backgroundColor: '#FFFFFF',
+                            borderRadius: '20px',
+                            border: '1.5px solid #e6affc',
+                            overflow: 'hidden',
+                            boxShadow: '0 8px 24px rgba(175, 29, 170, 0.08)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          <div style={{ position: 'relative', height: '190px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
+                            <img 
+                              src="/Fotos/Fotos Desayuno 07/Foto 04.jpg" 
+                              alt="Seminario de Riesgos Penales & SAGRILAFT" 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                            <span style={{ 
+                              position: 'absolute', 
+                              top: '0.75rem', 
+                              left: '0.75rem', 
+                              backgroundColor: '#af1daa', 
+                              color: '#FFFFFF', 
+                              padding: '0.3rem 0.75rem', 
+                              fontSize: '0.65rem', 
+                              fontWeight: '800', 
+                              letterSpacing: '1px', 
+                              borderRadius: '9999px',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
+                              EVENTO REALIZADO
+                            </span>
+                            <span style={{ 
+                              position: 'absolute', 
+                              bottom: '0.75rem', 
+                              right: '0.75rem', 
+                              backgroundColor: '#eb54ff', 
+                              color: '#FFFFFF', 
+                              padding: '0.3rem 0.75rem', 
+                              borderRadius: '9999px', 
+                              fontSize: '0.7rem', 
+                              fontWeight: '800',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                            }}>
+                              ✨ 180+ Participantes
+                            </span>
+                          </div>
+
+                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
+                              Seminario Riesgos & SAGRILAFT
+                            </h3>
+                            
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
+                              <MapPin size={15} style={{ color: '#af1daa' }} /> Modalidad Híbrida · Bogotá
+                            </div>
+
+                            <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                              Seminario técnico sobre responsabilidad penal corporativa, gestión de riesgos LA/FT y programas PTEE.
+                            </p>
+
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openEventDetail('seminario-sagrilaft');
+                              }}
+                              style={{ 
+                                width: '100%', 
+                                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
+                                color: '#FFFFFF', 
+                                border: 'none', 
+                                padding: '0.75rem 1.25rem', 
+                                borderRadius: '9999px', 
+                                fontWeight: '800', 
+                                fontSize: '0.85rem', 
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.4rem',
+                                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                              }}
+                            >
+                              Ver Información Completa <ChevronRight size={16} />
+                            </button>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 

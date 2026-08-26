@@ -1207,26 +1207,20 @@ export function App() {
                   <div style={{ margin: '0 -1.5rem', backgroundColor: '#f4f4f4' }}>
 
                     {/* ── HERO MORADO SPLIT (MAQUETA) ── */}
-                    {/* ── HERO MORADO CON FOTO AMPLIA MIMETIZADA ── */}
+                    {/* ── HERO CON FOTO DE FONDO 100% COMPLETA Y GRADIENTE CORPORATIVO ── */}
                     <div style={{
                       position: 'relative',
                       borderRadius: '24px',
                       overflow: 'hidden',
-                      minHeight: '440px',
-                      background: 'linear-gradient(105deg, #0A1128 0%, #af1daa 45%, #eb54ff 100%)',
-                      boxShadow: '0 20px 40px rgba(175, 29, 170, 0.15)'
+                      minHeight: '460px',
+                      boxShadow: '0 20px 40px rgba(175, 29, 170, 0.18)',
+                      backgroundColor: '#0A1128'
                     }}>
-                      {/* Foto del evento ampliada en la derecha con desvanecimiento alfa impecable */}
+                      {/* 1. Foto a pantalla completa 100% de la tarjeta */}
                       <div style={{ 
                         position: 'absolute', 
-                        top: 0, 
-                        right: 0, 
-                        bottom: 0, 
-                        width: '62%', 
-                        zIndex: 1,
-                        overflow: 'hidden',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 25%, rgba(0,0,0,0.8) 60%, #000 85%)',
-                        maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 25%, rgba(0,0,0,0.8) 60%, #000 85%)'
+                        inset: 0, 
+                        zIndex: 1 
                       }}>
                         <img
                           src={currentEvent.heroImage}
@@ -1239,19 +1233,25 @@ export function App() {
                           }}
                           onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
                         />
+                        {/* 2. Gradiente morado corporativo superpuesto a lo largo de toda la foto */}
+                        <div style={{ 
+                          position: 'absolute', 
+                          inset: 0, 
+                          background: 'linear-gradient(90deg, rgba(10, 17, 40, 0.96) 0%, rgba(175, 29, 170, 0.90) 38%, rgba(235, 84, 255, 0.55) 70%, rgba(10, 17, 40, 0.25) 100%), linear-gradient(180deg, transparent 50%, rgba(10, 17, 40, 0.7) 100%)' 
+                        }} />
                       </div>
 
-                      {/* Columna izquierda de información sobre la foto */}
+                      {/* 3. Columna izquierda de información sobre la foto completa */}
                       <div style={{ 
                         position: 'relative', 
                         zIndex: 2, 
                         padding: '3.5rem 4rem', 
-                        maxWidth: '650px', 
+                        maxWidth: '680px', 
                         display: 'flex', 
                         flexDirection: 'column', 
                         justifyContent: 'center', 
                         color: '#FFFFFF',
-                        minHeight: '440px'
+                        minHeight: '460px'
                       }}>
                          <button
                           className="anim-fade-up anim-d1"

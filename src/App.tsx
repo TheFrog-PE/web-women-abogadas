@@ -1801,192 +1801,73 @@ export function App() {
                           </div>
                         </div>
 
-                        {/* TARJETA 2: 1ER ENCUENTRO MUJERES IN COMPLIANCE */}
+                        {/* TARJETA 2: PRÓXIMAMENTE - PRÓXIMO EVENTO */}
                         <div 
-                          className="card-hover" 
-                          onClick={() => openEventDetail('desayuno-1')}
                           style={{
                             backgroundColor: '#FFFFFF',
                             borderRadius: '20px',
-                            border: '1.5px solid #e6affc',
+                            border: '2px dashed #e6affc',
                             overflow: 'hidden',
-                            boxShadow: '0 8px 24px rgba(175, 29, 170, 0.08)',
-                            cursor: 'pointer',
+                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.04)',
                             display: 'flex',
                             flexDirection: 'column',
-                            transition: 'all 0.3s ease'
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '2.5rem 1.5rem',
+                            textAlign: 'center',
+                            minHeight: '380px'
                           }}
                         >
-                          <div style={{ position: 'relative', height: '190px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
-                            <img 
-                              src="/Fotos/Imagen para Inicio - Eventos 04.jpg" 
-                              alt="1er Encuentro Mujeres in Compliance" 
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                            <span style={{ 
-                              position: 'absolute', 
-                              top: '0.75rem', 
-                              left: '0.75rem', 
-                              backgroundColor: '#af1daa', 
-                              color: '#FFFFFF', 
-                              padding: '0.3rem 0.75rem', 
-                              fontSize: '0.65rem', 
-                              fontWeight: '800', 
-                              letterSpacing: '1px', 
-                              borderRadius: '9999px',
-                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-                            }}>
-                              EVENTO REALIZADO
-                            </span>
-                            <span style={{ 
-                              position: 'absolute', 
-                              bottom: '0.75rem', 
-                              right: '0.75rem', 
-                              backgroundColor: '#eb54ff', 
-                              color: '#FFFFFF', 
-                              padding: '0.3rem 0.75rem', 
-                              borderRadius: '9999px', 
-                              fontSize: '0.7rem', 
-                              fontWeight: '800',
-                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-                            }}>
-                              ✨ 250+ Asistentes
-                            </span>
+                          <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#f4f4f4', border: '1.5px solid #e6affc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                            <Calendar size={26} style={{ color: '#af1daa' }} />
                           </div>
-
-                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
-                              1er Encuentro Mujeres in Compliance
-                            </h3>
-                            
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
-                              <MapPin size={15} style={{ color: '#af1daa' }} /> Metropolitan Club · Bogotá
-                            </div>
-
-                            <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                              Encuentro hito que reunió a líderes y especialistas para dialogar sobre prevención de riesgos penales y redes de apoyo.
-                            </p>
-
-                            <button 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                openEventDetail('desayuno-1');
-                              }}
-                              style={{ 
-                                width: '100%', 
-                                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
-                                color: '#FFFFFF', 
-                                border: 'none', 
-                                padding: '0.75rem 1.25rem', 
-                                borderRadius: '9999px', 
-                                fontWeight: '800', 
-                                fontSize: '0.85rem', 
-                                cursor: 'pointer',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '0.4rem',
-                                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
-                              }}
-                            >
-                              Ver Información Completa <ChevronRight size={16} />
-                            </button>
-                          </div>
+                          <span style={{ backgroundColor: 'rgba(230, 175, 252, 0.25)', color: '#af1daa', padding: '0.35rem 0.9rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.85rem' }}>
+                            PRÓXIMAMENTE
+                          </span>
+                          <h3 style={{ fontSize: '1.3rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
+                            Muy pronto, otro evento
+                          </h3>
+                          <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
+                            Estamos preparando nuevos espacios de networking y conferencias técnicas para nuestra comunidad.
+                          </p>
+                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px' }}>
+                            ✨ Próxima fecha 2026
+                          </span>
                         </div>
 
-                        {/* TARJETA 3: SEMINARIO DE RIESGOS PENALES & SAGRILAFT */}
+                        {/* TARJETA 3: PRÓXIMAMENTE - PRÓXIMO EVENTO */}
                         <div 
-                          className="card-hover" 
-                          onClick={() => openEventDetail('seminario-sagrilaft')}
                           style={{
                             backgroundColor: '#FFFFFF',
                             borderRadius: '20px',
-                            border: '1.5px solid #e6affc',
+                            border: '2px dashed #e6affc',
                             overflow: 'hidden',
-                            boxShadow: '0 8px 24px rgba(175, 29, 170, 0.08)',
-                            cursor: 'pointer',
+                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.04)',
                             display: 'flex',
                             flexDirection: 'column',
-                            transition: 'all 0.3s ease'
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '2.5rem 1.5rem',
+                            textAlign: 'center',
+                            minHeight: '380px'
                           }}
                         >
-                          <div style={{ position: 'relative', height: '190px', backgroundColor: '#e6affc', overflow: 'hidden' }}>
-                            <img 
-                              src="/Fotos/Fotos Desayuno 07/Foto 04.jpg" 
-                              alt="Seminario de Riesgos Penales & SAGRILAFT" 
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                            <span style={{ 
-                              position: 'absolute', 
-                              top: '0.75rem', 
-                              left: '0.75rem', 
-                              backgroundColor: '#af1daa', 
-                              color: '#FFFFFF', 
-                              padding: '0.3rem 0.75rem', 
-                              fontSize: '0.65rem', 
-                              fontWeight: '800', 
-                              letterSpacing: '1px', 
-                              borderRadius: '9999px',
-                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-                            }}>
-                              EVENTO REALIZADO
-                            </span>
-                            <span style={{ 
-                              position: 'absolute', 
-                              bottom: '0.75rem', 
-                              right: '0.75rem', 
-                              backgroundColor: '#eb54ff', 
-                              color: '#FFFFFF', 
-                              padding: '0.3rem 0.75rem', 
-                              borderRadius: '9999px', 
-                              fontSize: '0.7rem', 
-                              fontWeight: '800',
-                              boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-                            }}>
-                              ✨ 180+ Participantes
-                            </span>
+                          <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#f4f4f4', border: '1.5px solid #e6affc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                            <Calendar size={26} style={{ color: '#af1daa' }} />
                           </div>
-
-                          <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
-                              Seminario Riesgos & SAGRILAFT
-                            </h3>
-                            
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
-                              <MapPin size={15} style={{ color: '#af1daa' }} /> Modalidad Híbrida · Bogotá
-                            </div>
-
-                            <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                              Seminario técnico sobre responsabilidad penal corporativa, gestión de riesgos LA/FT y programas PTEE.
-                            </p>
-
-                            <button 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                openEventDetail('seminario-sagrilaft');
-                              }}
-                              style={{ 
-                                width: '100%', 
-                                background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
-                                color: '#FFFFFF', 
-                                border: 'none', 
-                                padding: '0.75rem 1.25rem', 
-                                borderRadius: '9999px', 
-                                fontWeight: '800', 
-                                fontSize: '0.85rem', 
-                                cursor: 'pointer',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '0.4rem',
-                                boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
-                              }}
-                            >
-                              Ver Información Completa <ChevronRight size={16} />
-                            </button>
-                          </div>
+                          <span style={{ backgroundColor: 'rgba(230, 175, 252, 0.25)', color: '#af1daa', padding: '0.35rem 0.9rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.85rem' }}>
+                            PRÓXIMAMENTE
+                          </span>
+                          <h3 style={{ fontSize: '1.3rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
+                            Muy pronto, otro evento
+                          </h3>
+                          <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
+                            Un nuevo taller especializado en Gobierno Corporativo y Compliance se anunciará pronto.
+                          </p>
+                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px' }}>
+                            ✨ Próxima fecha 2026
+                          </span>
                         </div>
-
                       </div>
                     </div>
 

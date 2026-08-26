@@ -15,6 +15,8 @@ import {
   UserCheck,
   ShieldCheck,
   ArrowRight,
+  ArrowLeft,
+  Sparkles,
   Trash2,
   Save,
   Camera,
@@ -403,6 +405,8 @@ export function App() {
   }, [membersList]);
   const [viewingEventDetail, setViewingEventDetail] = useState(false);
   const [activeEventId, setActiveEventId] = useState<string>('faoc-2026');
+  const [showTerminosModal, setShowTerminosModal] = useState(false);
+  const [showPrivacidadModal, setShowPrivacidadModal] = useState(false);
 
   const openEventDetail = (eventId: string) => {
     setActiveEventId(eventId);
@@ -1214,7 +1218,7 @@ export function App() {
                           onClick={() => setViewingEventDetail(false)}
                           style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#FFF', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginBottom: '2rem', fontSize: '0.85rem', cursor: 'pointer', borderRadius: '9999px', padding: '0.4rem 1rem', width: 'fit-content' }}
                         >
-                          ← Volver a eventos
+                          <ArrowLeft size={16} /> Volver a eventos
                         </button>
 
                         <span className="anim-fade-up anim-d2" style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: '#FFF', padding: '0.3rem 0.9rem', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', borderRadius: '9999px', width: 'fit-content', marginBottom: '1rem', display: 'inline-block' }}>
@@ -1260,15 +1264,19 @@ export function App() {
                         )}
                       </div>
 
-                      {/* Columna derecha: foto recortada con gradiente */}
-                      <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#e6affc' }}>
+                      {/* Columna derecha: foto mimetizada sin cortes de borde */}
+                      <div style={{ position: 'relative', overflow: 'hidden', minHeight: '380px', backgroundColor: '#0F172A' }}>
                         <img
                           src={currentEvent.heroImage}
                           alt={currentEvent.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
                           onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
                         />
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #af1daa 0%, transparent 40%)' }} />
+                        <div style={{ 
+                          position: 'absolute', 
+                          inset: 0, 
+                          background: 'linear-gradient(90deg, #eb54ff 0%, rgba(235, 84, 255, 0.7) 20%, rgba(175, 29, 170, 0.25) 50%, transparent 80%), linear-gradient(180deg, transparent 65%, rgba(15, 23, 42, 0.6) 100%)' 
+                        }} />
                       </div>
                     </div>
 
@@ -1483,73 +1491,6 @@ export function App() {
                               </div>
                             ))}
                           </div>
-
-                          {/* ── COLABORADORES OFICIALES DEL EVENTO ── */}
-                          <div style={{ marginTop: '3.5rem', textAlign: 'center' }}>
-                            <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                              ALIANZAS ESTRATÉGICAS
-                            </span>
-                            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: '2rem' }}>
-                              COLABORADORES OFICIALES
-                            </h3>
-
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
-                              {/* COLABORADOR 1: CREMADES & CALVO-SOTELO */}
-                              <div style={{ 
-                                backgroundColor: '#0A1128', 
-                                borderRadius: '16px', 
-                                padding: '1.75rem 1.25rem', 
-                                border: '1.5px solid #e6affc', 
-                                textAlign: 'center', 
-                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
-                                display: 'flex', 
-                                flexDirection: 'column', 
-                                alignItems: 'center', 
-                                justifyContent: 'center' 
-                              }}>
-                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>FIRMA INTERNACIONAL</span>
-                                <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', marginBottom: '0.5rem' }} />
-                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Cremades & Calvo-Sotelo</h4>
-                              </div>
-
-                              {/* COLABORADOR 2: PRECIADO ABOGADOS */}
-                              <div style={{ 
-                                backgroundColor: '#0A1128', 
-                                borderRadius: '16px', 
-                                padding: '1.75rem 1.25rem', 
-                                border: '1.5px solid #e6affc', 
-                                textAlign: 'center', 
-                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
-                                display: 'flex', 
-                                flexDirection: 'column', 
-                                alignItems: 'center', 
-                                justifyContent: 'center' 
-                              }}>
-                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>FIRMA COLABORADORA</span>
-                                <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', marginBottom: '0.5rem' }} />
-                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Preciado Abogados</h4>
-                              </div>
-
-                              {/* COLABORADOR 3: WIC COLOMBIA */}
-                              <div style={{ 
-                                backgroundColor: '#0A1128', 
-                                borderRadius: '16px', 
-                                padding: '1.75rem 1.25rem', 
-                                border: '1.5px solid #e6affc', 
-                                textAlign: 'center', 
-                                boxShadow: '0 8px 20px rgba(10, 17, 40, 0.15)', 
-                                display: 'flex', 
-                                flexDirection: 'column', 
-                                alignItems: 'center', 
-                                justifyContent: 'center' 
-                              }}>
-                                <span style={{ color: '#e6affc', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ORGANIZACIÓN</span>
-                                <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ maxHeight: '55px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)', marginBottom: '0.5rem' }} />
-                                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>WIC Colombia</h4>
-                              </div>
-                            </div>
-                          </div>
-
                         </div>
                       </div>
                     )}
@@ -1757,7 +1698,9 @@ export function App() {
                               fontWeight: '800',
                               boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
                             }}>
-                              ✨ Más de 30 Asistentes
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                                <Sparkles size={13} style={{ fill: '#FFFFFF' }} /> Más de 30 Asistentes
+                              </span>
                             </span>
                           </div>
 
@@ -1830,8 +1773,8 @@ export function App() {
                           <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
                             Estamos preparando nuevos espacios de networking y conferencias técnicas para nuestra comunidad.
                           </p>
-                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px' }}>
-                            ✨ Próxima fecha 2026
+                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                            <Sparkles size={14} style={{ fill: '#eb54ff' }} /> Próxima fecha 2026
                           </span>
                         </div>
 
@@ -1864,8 +1807,8 @@ export function App() {
                           <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
                             Un nuevo taller especializado en Gobierno Corporativo y Compliance se anunciará pronto.
                           </p>
-                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px' }}>
-                            ✨ Próxima fecha 2026
+                          <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.5px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                            <Sparkles size={14} style={{ fill: '#eb54ff' }} /> Próxima fecha 2026
                           </span>
                         </div>
                       </div>
@@ -5336,11 +5279,319 @@ export function App() {
 
             </div>
 
-            <div style={{ borderTop: '1px solid #1E293B', paddingTop: '2rem', textAlign: 'center', color: '#64748B', fontSize: '0.85rem' }}>
-              © {new Date().getFullYear()} Women in Compliance Colombia (WIC COL). Todos los derechos reservados.
+            <div style={{ borderTop: '1px solid #1E293B', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', color: '#64748B', fontSize: '0.85rem' }}>
+              <div>
+                © {new Date().getFullYear()} Women in Compliance Colombia (WIC COL). Todos los derechos reservados.
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                <button 
+                  onClick={() => setShowTerminosModal(true)} 
+                  style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline' }}
+                >
+                  Términos y Condiciones
+                </button>
+                <button 
+                  onClick={() => setShowPrivacidadModal(true)} 
+                  style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline' }}
+                >
+                  Política de Privacidad
+                </button>
+              </div>
             </div>
           </div>
         </footer>
+      )}
+
+      {/* ── MODAL 1: TÉRMINOS Y CONDICIONES ── */}
+      {showTerminosModal && (
+        <div 
+          onClick={() => setShowTerminosModal(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(10, 17, 40, 0.75)',
+            backdropFilter: 'blur(6px)',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '24px',
+              maxWidth: '780px',
+              width: '100%',
+              maxHeight: '88vh',
+              overflowY: 'auto',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+              border: '1.5px solid #e6affc',
+              padding: '2.5rem',
+              position: 'relative'
+            }}
+          >
+            <button 
+              onClick={() => setShowTerminosModal(false)}
+              style={{
+                position: 'absolute',
+                top: '1.5rem',
+                right: '1.5rem',
+                background: '#f4f4f4',
+                border: '1px solid #e6affc',
+                color: '#1E1B4B',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={20} />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+              <FileText size={28} style={{ color: '#af1daa' }} />
+              <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
+                TÉRMINOS Y CONDICIONES
+              </h2>
+            </div>
+            <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '1.75rem' }}>
+              Última actualización: Agosto de 2026
+            </span>
+
+            <div style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.7', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  1. Objeto y Aceptación
+                </h3>
+                <p>
+                  Los presentes Términos y Condiciones regulan el acceso, uso y navegación del sitio web oficial de <strong>WIC Colombia</strong> (en adelante, la "Red"), así como los procesos de postulación, afiliación, participación en eventos, programas de mentoría e iniciativas de networking. Al navegar por este portal o solicitar la incorporación a la comunidad, el usuario o postulante acepta plenamente y sin reservas las disposiciones aquí contenidas.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>
+                  2. Proceso de Afiliación y Calidad de Asociada
+                </h3>
+                <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <li>
+                    <strong>Postulación y Evaluación:</strong> El ingreso a WIC Colombia está sujeto a un proceso de revisión por parte del Comité Evaluador. La Red se reserva el derecho de admitir o rechazar postulaciones con base en la alineación del perfil profesional con los objetivos institucionales de integridad, ética y gobierno corporativo.
+                  </li>
+                  <li>
+                    <strong>Compromiso Ético:</strong> Toda persona integrada a la Red se compromete a respetar los estatutos, el reglamento interno y el <em>Compromiso de Conducta Leal y Responsable</em>. El incumplimiento de dichos principios podrá dar lugar a la suspensión o retiro de la calidad de miembro.
+                  </li>
+                  <li>
+                    <strong>Membresías y Tarifas:</strong> Los beneficios, derechos de uso de imagen institucional, cuotas de inscripción o membresías anuales aplicables serán informados expresamente en el proceso de incorporación.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  3. Propiedad Intelectual
+                </h3>
+                <p>
+                  Todos los contenidos presentados en este portal web —incluyendo logotipos, marcas, textos, fotografías de eventos, marcas registradas, metodologías de mentoría y material gráfico— son propiedad exclusiva de WIC Colombia o cuentan con las debidas autorizaciones. Queda prohibida la reproducción, distribución o modificación total o parcial de dichos contenidos sin la autorización previa y por escrito de la Red.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  4. Uso de la Red y Espacios de Networking
+                </h3>
+                <p>
+                  WIC Colombia es una red profesional orientada a la colaboración, el apoyo mutuo y el crecimiento en temas de Compliance, Riesgos, Auditoría y Gobierno Corporativo. Queda estrictamente prohibido utilizar los canales oficiales, listados de miembros o espacios de networking para fines de prospección comercial no solicitada (spam), difusión de contenido difamatorio o cualquier actividad que contravenga la ética profesional.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  5. Exención de Responsabilidad
+                </h3>
+                <p>
+                  Los contenidos, artículos, ponencias e intervenciones académicas publicadas o impartidas en el marco de las actividades de WIC Colombia representan las opiniones de sus autores y tienen un propósito exclusivamente informativo o formativo. No constituyen asesoría jurídica, legal o financiera vinculante para la toma de decisiones corporativas específicas.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  6. Modificaciones
+                </h3>
+                <p>
+                  WIC Colombia se reserva la facultad de actualizar, modificar o complementar los presentes Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigencia desde su publicación en el sitio web.
+                </p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2.5rem', textAlign: 'right' }}>
+              <button
+                onClick={() => setShowTerminosModal(false)}
+                style={{
+                  backgroundColor: '#af1daa',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '9999px',
+                  fontWeight: '800',
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                }}
+              >
+                Entendido y Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL 2: POLÍTICA DE PRIVACIDAD ── */}
+      {showPrivacidadModal && (
+        <div 
+          onClick={() => setShowPrivacidadModal(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(10, 17, 40, 0.75)',
+            backdropFilter: 'blur(6px)',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '24px',
+              maxWidth: '780px',
+              width: '100%',
+              maxHeight: '88vh',
+              overflowY: 'auto',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+              border: '1.5px solid #e6affc',
+              padding: '2.5rem',
+              position: 'relative'
+            }}
+          >
+            <button 
+              onClick={() => setShowPrivacidadModal(false)}
+              style={{
+                position: 'absolute',
+                top: '1.5rem',
+                right: '1.5rem',
+                background: '#f4f4f4',
+                border: '1px solid #e6affc',
+                color: '#1E1B4B',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={20} />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+              <ShieldCheck size={28} style={{ color: '#af1daa' }} />
+              <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
+                POLÍTICA DE PRIVACIDAD
+              </h2>
+            </div>
+            <span style={{ color: '#eb54ff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '1.75rem' }}>
+              Última actualización: Agosto de 2026
+            </span>
+
+            <div style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.7', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <p>
+                En <strong>WIC Colombia</strong> respetamos el derecho a la privacidad de las personas y nos encontramos comprometidos con la protección de sus datos personales. Todos los procedimientos y operaciones se rigen en estricto cumplimiento de la <strong>Ley 1581 de 2012</strong> y el <strong>Decreto 1377 de 2013</strong> sobre Protección de Datos Personales. Por ello, ponemos a su disposición la presente Política de Privacidad aplicable al tratamiento de su información.
+              </p>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  1. Recolección y Procesamiento de los Datos Personales
+                </h3>
+                <p style={{ marginBottom: '0.6rem' }}>
+                  Al registrar sus datos en nuestra plataforma web, postularse como socia, afiliarse o participar en nuestros eventos y programas, usted consiente de manera libre, expresa e informada el suministro de sus datos personales (tales como nombres, correo electrónico, teléfonos, perfil profesional y cargos en el sector de Compliance, Ética y Gobierno Corporativo) a WIC Colombia.
+                </p>
+                <p>
+                  Asimismo, usted declara que este consentimiento autoriza el envío de comunicaciones institucionales, académicas y de networking. No obstante, usted siempre podrá revocar su consentimiento o ejercer sus derechos conforme a la sección 5 de esta política.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>
+                  2. Finalidad del Tratamiento
+                </h3>
+                <p style={{ marginBottom: '0.6rem' }}>
+                  Al proporcionar sus datos, usted autoriza a WIC Colombia para que realice el tratamiento de su información personal con las siguientes finalidades:
+                </p>
+                <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <li><strong>i)</strong> Evaluar, gestionar y formalizar los procesos de postulación, afiliación y membresía a la Red.</li>
+                  <li><strong>ii)</strong> Enviar información sobre eventos, desayunos ejecutivos, foros, mentorías e iniciativas de la comunidad (como <em>Open to Work</em>).</li>
+                  <li><strong>iii)</strong> Administrar nuestra base de datos de asociadas, aliadas y líderes del sector.</li>
+                  <li><strong>iv)</strong> Atender consultas, sugerencias, requerimientos y hacer seguimiento a los mismos.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  3. Tratamiento y Transferencia
+                </h3>
+                <p>
+                  El tratamiento de sus datos personales consistirá en la recolección, almacenamiento, uso, actualización o circulación de los mismos dentro de las bases de datos administradas por WIC Colombia. El tratamiento podrá realizarse directamente o a través de terceros aliados o agentes designados, garantizando en todo momento la seguridad, confidencialidad e integridad de la información.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  4. Medidas de Seguridad
+                </h3>
+                <p>
+                  WIC Colombia adopta todas las medidas técnicas, humanas y organizacionales razonables para garantizar la seguridad y confidencialidad de sus datos personales, protegiéndolos contra el acceso no autorizado, pérdida, alteración o divulgación indebida.
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
+                  5. Contacto y Ejercicio de Derechos de Titulares
+                </h3>
+                <p>
+                  Como titular de sus datos personales, usted tiene derecho a conocer, actualizar, rectificar y suprimir su información, así como a revocar la autorización otorgada. Si tuviera consultas, comentarios o desea ejercer sus derechos, por favor escríbanos al siguiente correo electrónico: <strong style={{ color: '#af1daa' }}>wiccolombia@outlook.com</strong>
+                </p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2.5rem', textAlign: 'right' }}>
+              <button
+                onClick={() => setShowPrivacidadModal(false)}
+                style={{
+                  backgroundColor: '#af1daa',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '9999px',
+                  fontWeight: '800',
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                }}
+              >
+                Entendido y Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>

@@ -107,77 +107,6 @@ const AVATAR_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 const PHOTO_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Crect width='24' height='24' fill='%23CBD5E1'/%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E";
 
 const EVENTS_DATA: Record<string, EventDetailData> = {
-  'faoc-2026': {
-    id: 'faoc-2026',
-    title: 'FAOC 2026',
-    badge: 'FORO REALIZADO · MEMORIAS',
-    subtitle: 'Forum on Anti-Corruption Compliance Colombia',
-    location: 'Metropolitan Club, Bogotá',
-    dateStr: '24 Nov 2026',
-    isPast: true,
-    attendeesCount: '300+ Asistentes',
-    heroGradient: 'linear-gradient(105deg, #0F172A 0%, #334155 55%, #475569 100%)',
-    heroImage: '/Fotos/Fotos Desayuno 07/Foto 01.jpg',
-    photos: [
-      '/Fotos/Fotos Desayuno 07/Foto 01.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 02.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 03.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 04.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 05.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 06.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 07.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 08.jpg',
-    ],
-    description: [
-      'El FAOC 2026 se llevó a cabo con total éxito en el Metropolitan Club de Bogotá, posicionándose como el encuentro cumbre del año en materia de anticorrupción, ética empresarial y gestión de riesgos en Colombia.',
-      'Reunió a más de 300 oficiales de cumplimiento, directoras jurídicas, reguladores y socias de firmas líderes en un espacio de diálogo técnico y networking de alto nivel. A continuación puedes revivir la galería fotográfica oficial completa del evento y descargar las memorias en PDF.'
-    ],
-    agenda: [
-      { time: '08:30 – 09:30', title: 'Apertura & Anti-Corruption Keynote', desc: 'Tendencias globales de cumplimiento y supervisión de la FCPA.', sala: 'Salón Principal' },
-      { time: '10:00 – 11:30', title: 'Panel: Supervisión SAGRILAFT & PTEE 2026', desc: 'Análisis de regulaciones con la Superintendencia de Sociedades.', sala: 'Auditorio A' },
-      { time: '12:00 – 13:30', title: 'Almuerzo Ejecutivo & Networking', desc: 'Conexión estratégica entre oficiales de cumplimiento y socias de firmas.', sala: 'Terrace Garden' },
-      { time: '14:00 – 15:30', title: 'Taller: Investigaciones Internas & IA en GRC', desc: 'Casos reales de canales de denuncia e inteligencia artificial.', sala: 'Sala Workshop' },
-    ],
-    speakers: [
-      { name: 'ADRIANA PATRICIA GÓMEZ BARAJAS', role: 'Directora de Cumplimiento & RCG', photo: '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg' },
-      { name: 'MARÍA ALEJANDRA TRUJILLO', role: 'Especialista en SAGRILAFT & PTEE', photo: '/Fotos/Miembros/MIP_7039.jpg' },
-      { name: 'CLAUDIA MARCELA RINCÓN', role: 'Consultora Senior Compliance', photo: '/Fotos/Miembros/MIP_7042.jpg' },
-      { name: 'JOHANA MILENA TORRES', role: 'Directora Legal & Ética Corporativa', photo: '/Fotos/Miembros/MIP_7332.jpg' }
-    ]
-  },
-  'summit-2026': {
-    id: 'summit-2026',
-    title: 'WOMEN IN COMPLIANCE SUMMIT',
-    badge: 'CUMBRE NACIONAL 2026',
-    subtitle: 'Cumbre de Liderazgo Femenino & Gobernanza Ética',
-    location: 'Centro de Convenciones, Bogotá',
-    dateStr: '15 Dic 2026',
-    isPast: false,
-    heroGradient: 'linear-gradient(105deg, #1E1B4B 0%, #4C1D95 55%, #8B5CF6 100%)',
-    heroImage: '/Fotos/Imagen para Inicio - 03.jpg',
-    photos: [
-      '/Fotos/Imagen para Inicio - 03.jpg',
-      '/Fotos/Imagen para Inicio - 02.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 07.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 08.jpg',
-    ],
-    description: [
-      'La Cumbre Anual Women in Compliance Colombia reúne a más de 300 ejecutivas y abogadas del país para potenciar la participación femenina en Juntas Directivas, Comités de Ética y decisiones de Alta Gerencia.',
-      'Un espacio de empoderamiento, capacitación avanzada e intercambio de mejores prácticas de buen gobierno corporativo y equidad de género empresarial.'
-    ],
-    agenda: [
-      { time: '09:00 – 10:15', title: 'Conferencia: Mujeres en Juntas Directivas', desc: 'Estrategias de visibilidad y posicionamiento en gobierno corporativo.', sala: 'Gran Auditorio' },
-      { time: '10:45 – 12:15', title: 'Mesa Técnica: ESG, Sostenibilidad & Compliance', desc: 'Integración de criterios ambientales, sociales y de gobernanza.', sala: 'Sala Ámbar' },
-      { time: '12:30 – 14:00', title: 'Almuerzo de Liderazgo & Mentoring', desc: 'Mesas de mentoría directa con fundadoras y directivas de WIC.', sala: 'Salón Real' },
-      { time: '14:30 – 16:00', title: 'Taller: Negociación Estratégica para Directoras', desc: 'Herramientas avanzadas de resolución de conflictos corporativos.', sala: 'Taller B' },
-    ],
-    speakers: [
-      { name: 'DIANA CAROLINA MANTILLA', role: 'Líder en Gobierno Corporativo', photo: '/Fotos/Miembros/MIP_7349.jpg' },
-      { name: 'BEATRIZ ELENA VILLEGAS', role: 'Consultora Senior ESG & Compliance', photo: '/Fotos/Miembros/MIP_7362.jpg' },
-      { name: 'CAROLINA SÁNCHEZ PÉREZ', role: 'Socia de Firma & Especialista Penal', photo: '/Fotos/Miembros/MARIA PAULA RUEDA.jpg' },
-      { name: 'NATALIA GÓMEZ RESTREPO', role: 'Directora de Cumplimiento Financiero', photo: '/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.jpg' }
-    ]
-  },
   'desayuno-1': {
     id: 'desayuno-1',
     title: 'Desayuno WIC Colombia',
@@ -209,71 +138,6 @@ const EVENTS_DATA: Record<string, EventDetailData> = {
     ],
     speakers: [
       { name: 'ADRIANA PATRICIA GÓMEZ BARAJAS', role: 'Presidenta WIC Colombia & Socia Cremades & Calvo-Sotelo', photo: '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg' }
-    ]
-  },
-  'seminario-sagrilaft': {
-    id: 'seminario-sagrilaft',
-    title: 'Seminario de Riesgos Penales & SAGRILAFT',
-    badge: 'EVENTO REALIZADO · MEMORIAS TÉCNICAS',
-    subtitle: 'Gestión Integral de Riesgos y Prevención del LA/FT',
-    location: 'Modalidad Híbrida, Bogotá',
-    dateStr: '18 de Mayo, 2026',
-    isPast: true,
-    attendeesCount: '180+ Participantes',
-    heroGradient: 'linear-gradient(105deg, #18181B 0%, #27272A 55%, #52525B 100%)',
-    heroImage: '/Fotos/Fotos Desayuno 07/Foto 04.jpg',
-    photos: [
-      '/Fotos/Fotos Desayuno 07/Foto 04.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 05.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 06.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 03.jpg',
-    ],
-    description: [
-      'Resumen técnico del Seminario de Actualización en SAGRILAFT, PTEE y Prevención del LA/FT impartido para oficiales de cumplimiento y auditores.',
-      'El seminario contó con la participación de conferencistas expertos en normatividad de la Superintendencia de Sociedades y análisis de casos de estudio sobre debida diligencia intensificada.'
-    ],
-    agenda: [
-      { time: '08:30 – 10:00', title: 'Módulo 1: Actualización Circulares SAGRILAFT', desc: 'Inspección de controles y evaluación del nivel de riesgo patrimonial.', sala: 'Auditorio Central' },
-      { time: '10:30 – 12:00', title: 'Módulo 2: Debida Diligencia de Contrapartes & PEPs', desc: 'Metodología práctica para verificación de beneficiarios finales.', sala: 'Sala Capacitación' },
-      { time: '14:00 – 15:30', title: 'Módulo 3: Canales de Denuncia & Transparencia', desc: 'Mecanismos efectivos de prevención del soborno transnacional.', sala: 'Taller Práctico' },
-    ],
-    speakers: [
-      { name: 'DIANA CAROLINA MANTILLA', role: 'Auditora Senior GRC', photo: '/Fotos/Miembros/MIP_7349.jpg' },
-      { name: 'BEATRIZ ELENA VILLEGAS', role: 'Especialista en Cumplimiento Normativo', photo: '/Fotos/Miembros/MIP_7362.jpg' },
-      { name: 'CAROLINA SÁNCHEZ PÉREZ', role: 'Consultora SAGRILAFT', photo: '/Fotos/Miembros/MARIA PAULA RUEDA.jpg' },
-      { name: 'NATALIA GÓMEZ RESTREPO', role: 'Abogada Penalista Corporativa', photo: '/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.jpg' }
-    ]
-  },
-  'congreso-2027': {
-    id: 'congreso-2027',
-    title: 'V CONGRESO DE COMPLIANCE & SAGRILAFT',
-    badge: 'CONGRESO NACIONAL 2027',
-    subtitle: 'Tendencias Regulatorias & Inteligencia Artificial en GRC',
-    location: 'Auditorio Principal, Medellín',
-    dateStr: '20 de Enero, 2027',
-    isPast: false,
-    heroGradient: 'linear-gradient(105deg, #4A0772 0%, #7E22CE 55%, #A855F7 100%)',
-    heroImage: '/Fotos/Imagen para Inicio - 01.jpg',
-    photos: [
-      '/Fotos/Imagen para Inicio - 01.jpg',
-      '/Fotos/Imagen para Inicio - 02.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 05.jpg',
-      '/Fotos/Fotos Desayuno 07/Foto 06.jpg',
-    ],
-    description: [
-      'El V Congreso de Compliance & SAGRILAFT reunirá a más de 400 oficiales de cumplimiento, directores legales y reguladores en la ciudad de Medellín para analizar las tendencias del año 2027.',
-      'Espacio de formación de alto nivel con talleres interactivos y análisis de casos de estudio sobre tecnología aplicada al control de riesgos.'
-    ],
-    agenda: [
-      { time: '08:30 – 10:00', title: 'Panel Inaugural: Regulaciones 2027', desc: 'Retos de supervisión en SAGRILAFT y PTEE.', sala: 'Auditorio Principal' },
-      { time: '10:30 – 12:00', title: 'Taller: Inteligencia Artificial en Monitoreo', desc: 'Sistemas automatizados de alertas tempranas.', sala: 'Sala de Tecnología' },
-      { time: '14:00 – 16:00', title: 'Mesas Redondas: Debida Diligencia Intensificada', desc: 'Casos reales de prevención del fraude corporativo.', sala: 'Salas B & C' },
-    ],
-    speakers: [
-      { name: 'ADRIANA PATRICIA GÓMEZ BARAJAS', role: 'Directora de Cumplimiento & RCG', photo: '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg' },
-      { name: 'MARÍA PAULA RUEDA MANTILLA', role: 'Abogada Corporativa', photo: '/Fotos/Miembros/MARIA PAULA RUEDA.jpg' },
-      { name: 'LIZ MARCELA BEJARANO CASTILLO', role: 'Especialista en Riesgos Financieros', photo: '/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.jpg' },
-      { name: 'YOLIMA ANGÉLICA BAUTISTA DÍAZ', role: 'Gerente de Cumplimiento', photo: '/Fotos/Miembros/YOLIMA ANGELICA BAUTISTA DIAZ.jpg' }
     ]
   }
 };
@@ -404,7 +268,7 @@ export function App() {
     return Array.from(tagSet).sort();
   }, [membersList]);
   const [viewingEventDetail, setViewingEventDetail] = useState(false);
-  const [activeEventId, setActiveEventId] = useState<string>('faoc-2026');
+  const [activeEventId, setActiveEventId] = useState<string>('desayuno-1');
   const [showTerminosModal, setShowTerminosModal] = useState(false);
   const [showPrivacidadModal, setShowPrivacidadModal] = useState(false);
 
@@ -414,7 +278,7 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const currentEvent = EVENTS_DATA[activeEventId] || EVENTS_DATA['faoc-2026'];
+  const currentEvent = EVENTS_DATA[activeEventId] || EVENTS_DATA['desayuno-1'];
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -1592,44 +1456,6 @@ export function App() {
                       >
                         CONTACTAR AL ORGANIZADOR
                       </button>
-                    </div>
-
-                    {/* ── EVENTOS PASADOS ── */}
-                    <div style={{ backgroundColor: '#FAFAFA', padding: '4rem 2rem' }}>
-                      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
-                          <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B' }}>OTROS EVENTOS REALIZADOS</h2>
-                          <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1px' }}>2 EVENTOS</span>
-                        </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
-                          {[
-                            {
-                              id: 'desayuno-1',
-                              src: '/Fotos/Imagen para Inicio - Eventos 04.jpg',
-                              label: '1er Desayuno Mujeres in Compliance',
-                              date: 'JUNIO 2026',
-                              lugar: 'Metropolitan Club · Bogotá'
-                            },
-                            {
-                              id: 'seminario-sagrilaft',
-                              src: '/Fotos/Fotos Desayuno 07/Foto 04.jpg',
-                              label: 'Seminario de Riesgos Penales & SAGRILAFT',
-                              date: 'MAYO 2026',
-                              lugar: 'Modalidad Híbrida · Bogotá'
-                            },
-                          ].map((ev, i) => (
-                            <div key={i} className={`reveal delay-${i + 1} card-hover`} style={{ borderRadius: '16px', overflow: 'hidden', position: 'relative', height: '260px', cursor: 'pointer', backgroundColor: '#E2E8F0' }} onClick={() => openEventDetail(ev.id)}>
-                              <img src={ev.src} alt={ev.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }} />
-                              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,0,30,0.82) 0%, rgba(10,0,30,0.2) 50%, transparent 100%)' }} />
-                              <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem', right: '1.25rem' }}>
-                                <span style={{ color: '#e6affc', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '2px', display: 'block', marginBottom: '0.35rem' }}>{ev.date}</span>
-                                <p style={{ color: '#FFFFFF', fontWeight: '800', fontSize: '1.05rem', margin: '0 0 0.35rem', lineHeight: '1.3' }}>{ev.label}</p>
-                                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem' }}>{ev.lugar}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
                     </div>
 
                   </div>

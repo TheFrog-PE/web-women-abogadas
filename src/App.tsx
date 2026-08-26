@@ -1216,15 +1216,17 @@ export function App() {
                       background: 'linear-gradient(105deg, #0A1128 0%, #af1daa 45%, #eb54ff 100%)',
                       boxShadow: '0 20px 40px rgba(175, 29, 170, 0.15)'
                     }}>
-                      {/* Foto del evento ampliada en la derecha con desvanecimiento fluido */}
+                      {/* Foto del evento ampliada en la derecha con desvanecimiento alfa impecable */}
                       <div style={{ 
                         position: 'absolute', 
                         top: 0, 
                         right: 0, 
                         bottom: 0, 
-                        width: '58%', 
+                        width: '62%', 
                         zIndex: 1,
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 25%, rgba(0,0,0,0.8) 60%, #000 85%)',
+                        maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.25) 25%, rgba(0,0,0,0.8) 60%, #000 85%)'
                       }}>
                         <img
                           src={currentEvent.heroImage}
@@ -1237,12 +1239,6 @@ export function App() {
                           }}
                           onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
                         />
-                        {/* Difuminado suave progresivo de izquierda a derecha sin líneas de corte */}
-                        <div style={{ 
-                          position: 'absolute', 
-                          inset: 0, 
-                          background: 'linear-gradient(90deg, #eb54ff 0%, rgba(235, 84, 255, 0.85) 15%, rgba(175, 29, 170, 0.45) 45%, transparent 80%), linear-gradient(180deg, transparent 65%, rgba(10, 17, 40, 0.6) 100%)' 
-                        }} />
                       </div>
 
                       {/* Columna izquierda de información sobre la foto */}

@@ -1207,12 +1207,56 @@ export function App() {
                   <div style={{ margin: '0 -1.5rem', backgroundColor: '#f4f4f4' }}>
 
                     {/* ── HERO MORADO SPLIT (MAQUETA) ── */}
-                    <div className="events-hero-split" style={{
-                      background: currentEvent.heroGradient,
-                      borderRadius: '24px'
+                    {/* ── HERO MORADO CON FOTO AMPLIA MIMETIZADA ── */}
+                    <div style={{
+                      position: 'relative',
+                      borderRadius: '24px',
+                      overflow: 'hidden',
+                      minHeight: '440px',
+                      background: 'linear-gradient(105deg, #0A1128 0%, #af1daa 45%, #eb54ff 100%)',
+                      boxShadow: '0 20px 40px rgba(175, 29, 170, 0.15)'
                     }}>
-                      {/* Columna izquierda */}
-                      <div style={{ padding: '3.5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#FFFFFF', zIndex: 2 }}>
+                      {/* Foto del evento ampliada en la derecha con desvanecimiento fluido */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: 0, 
+                        right: 0, 
+                        bottom: 0, 
+                        width: '58%', 
+                        zIndex: 1,
+                        overflow: 'hidden'
+                      }}>
+                        <img
+                          src={currentEvent.heroImage}
+                          alt={currentEvent.title}
+                          style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'cover', 
+                            objectPosition: 'center 35%' 
+                          }}
+                          onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
+                        />
+                        {/* Difuminado suave progresivo de izquierda a derecha sin líneas de corte */}
+                        <div style={{ 
+                          position: 'absolute', 
+                          inset: 0, 
+                          background: 'linear-gradient(90deg, #eb54ff 0%, rgba(235, 84, 255, 0.85) 15%, rgba(175, 29, 170, 0.45) 45%, transparent 80%), linear-gradient(180deg, transparent 65%, rgba(10, 17, 40, 0.6) 100%)' 
+                        }} />
+                      </div>
+
+                      {/* Columna izquierda de información sobre la foto */}
+                      <div style={{ 
+                        position: 'relative', 
+                        zIndex: 2, 
+                        padding: '3.5rem 4rem', 
+                        maxWidth: '650px', 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        justifyContent: 'center', 
+                        color: '#FFFFFF',
+                        minHeight: '440px'
+                      }}>
                          <button
                           className="anim-fade-up anim-d1"
                           onClick={() => setViewingEventDetail(false)}
@@ -1262,21 +1306,6 @@ export function App() {
                             )}
                           </div>
                         )}
-                      </div>
-
-                      {/* Columna derecha: foto mimetizada sin cortes de borde */}
-                      <div style={{ position: 'relative', overflow: 'hidden', minHeight: '380px', backgroundColor: '#0F172A' }}>
-                        <img
-                          src={currentEvent.heroImage}
-                          alt={currentEvent.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
-                          onError={(e) => { (e.target as HTMLImageElement).style.display='none'; }}
-                        />
-                        <div style={{ 
-                          position: 'absolute', 
-                          inset: 0, 
-                          background: 'linear-gradient(90deg, #eb54ff 0%, rgba(235, 84, 255, 0.7) 20%, rgba(175, 29, 170, 0.25) 50%, transparent 80%), linear-gradient(180deg, transparent 65%, rgba(15, 23, 42, 0.6) 100%)' 
-                        }} />
                       </div>
                     </div>
 

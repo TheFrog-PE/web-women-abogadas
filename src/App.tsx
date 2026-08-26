@@ -1170,16 +1170,19 @@ export function App() {
                 alignItems: 'center'
               }}>
                 <span className="anim-fade-up anim-d1" style={{ 
-                  backgroundColor: 'rgba(175, 29, 170, 0.9)', 
-                  color: '#FFFFFF', 
-                  padding: '0.4rem 1.25rem', 
-                  fontSize: '0.75rem', 
-                  fontWeight: '700', 
+                  backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+                  color: '#e6affc', 
+                  border: '1px solid rgba(230, 175, 252, 0.4)',
+                  backdropFilter: 'blur(6px)',
+                  padding: '0.45rem 1.4rem', 
+                  borderRadius: '9999px', 
+                  fontSize: '0.78rem', 
+                  fontWeight: '800', 
+                  marginBottom: '1.25rem',
                   letterSpacing: '2px',
                   textTransform: 'uppercase',
                   display: 'inline-block',
-                  marginBottom: '1.25rem',
-                  borderRadius: '9999px'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
                 }}>
                   AGENDA 2026
                 </span>
@@ -1815,16 +1818,19 @@ export function App() {
               />
               <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <span className="anim-fade-up anim-d1" style={{ 
-                  backgroundColor: 'rgba(175, 29, 170, 0.9)', 
-                  color: '#FFFFFF', 
-                  padding: '0.4rem 1.25rem', 
-                  fontSize: '0.75rem', 
-                  fontWeight: '700', 
+                  backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+                  color: '#e6affc', 
+                  border: '1px solid rgba(230, 175, 252, 0.4)',
+                  backdropFilter: 'blur(6px)',
+                  padding: '0.45rem 1.4rem', 
+                  borderRadius: '9999px', 
+                  fontSize: '0.78rem', 
+                  fontWeight: '800', 
+                  marginBottom: '1.25rem',
                   letterSpacing: '2px',
                   textTransform: 'uppercase',
                   display: 'inline-block',
-                  marginBottom: '1.25rem',
-                  borderRadius: '9999px'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
                 }}>
                   DIRECTORIO PROFESIONAL
                 </span>
@@ -2814,16 +2820,19 @@ export function App() {
 
                 <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <span className="anim-fade-up anim-d1" style={{ 
-                    backgroundColor: 'rgba(175, 29, 170, 0.95)', 
-                    color: '#FFFFFF', 
-                    padding: '0.4rem 1.25rem', 
-                    fontSize: '0.75rem', 
+                    backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+                    color: '#e6affc', 
+                    border: '1px solid rgba(230, 175, 252, 0.4)',
+                    backdropFilter: 'blur(6px)',
+                    padding: '0.45rem 1.4rem', 
+                    borderRadius: '9999px', 
+                    fontSize: '0.78rem', 
                     fontWeight: '800', 
+                    marginBottom: '1.25rem',
                     letterSpacing: '2px',
                     textTransform: 'uppercase',
                     display: 'inline-block',
-                    marginBottom: '1.25rem',
-                    borderRadius: '9999px'
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
                   }}>
                     COMPLIANCE Y BUEN GOBIERNO CORPORATIVO
                   </span>

@@ -361,25 +361,28 @@ export function App() {
     return () => clearInterval(timer);
   }, [activeTab]);
 
-  // Hero Slider Data con textos en sentence case y foto actualizada del Slide #3
+  // Hero Slider Data con saltos de línea exactos y textos en sentence case
   const slides = [
     {
       image: '/Fotos/Imagen para Inicio - 01.jpg',
-      title: 'Tu experiencia es poder. Es hora de que el mundo te conozca.',
+      titleText: 'Tu experiencia es poder. Es hora de que el mundo te conozca.',
+      title: <>Tu experiencia es poder.<br />Es hora de que el mundo te conozca.</>,
       subtitle: 'Lo que sabes hacer es valioso. Conecta con tomadores de decisiones, comparte tu visión, cierra alianzas estratégicas y pon tu consultoría en el centro del radar.',
       btnText: 'Ser parte de WIC',
       action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 02.jpg',
-      title: 'No camines sola. Encuentra tu equipo en el compliance.',
+      titleText: 'No camines sola. Encuentra tu equipo en el compliance.',
+      title: <>No camines sola. Encuentra<br />tu equipo en el compliance.</>,
       subtitle: 'Accede a mentorías de alto nivel, visibiliza tus servicios profesionales y abre las puertas directivas que tu carrera merece con el respaldo absoluto de la red.',
       btnText: 'Explorar el directorio de miembros',
       action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 03.jpg',
-      title: 'Conecta, aprende y comparte en nuestros espacios de encuentro.',
+      titleText: 'Conecta, aprende y comparte en nuestros espacios de encuentro.',
+      title: <>Conecta, aprende y comparte<br />en nuestros espacios de encuentro.</>,
       subtitle: 'Espacios de alta dirección, desayunos ejecutivos exclusivos y oportunidades reales de negocio diseñadas para las mujeres que están liderando el cumplimiento normativo en Colombia.',
       btnText: 'Próximos eventos',
       action: () => setActiveTab('eventos')
@@ -594,7 +597,7 @@ export function App() {
                 >
                   <img 
                     src={slide.image} 
-                    alt={slide.title} 
+                    alt={slide.titleText} 
                     style={{ 
                       width: '100%', 
                       height: '100%', 
@@ -1064,7 +1067,7 @@ export function App() {
                   AGENDA 2026
                 </span>
                 <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontFamily: 'sans-serif', fontWeight: '800', textTransform: 'none', letterSpacing: 'normal', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
-                  Experiencias de networking y alta dirección
+                  Experiencias de networking<br />y alta dirección
                 </h1>
                 <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '780px', lineHeight: '1.7', margin: '0 auto' }}>
                   Espacios exclusivos diseñados para conectar, generar alianzas estratégicas y hacer negocios. Menos teoría, más relaciones de valor.
@@ -1768,7 +1771,7 @@ export function App() {
                   DIRECTORIO PROFESIONAL
                 </span>
                 <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '850px', lineHeight: '1.15' }}>
-                  Nuestras afiliadas fundadoras
+                  Nuestras afiliadas<br />fundadoras
                 </h1>
                 <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
                   Líderes de Cumplimiento, Ética y Gobierno Corporativo en Colombia

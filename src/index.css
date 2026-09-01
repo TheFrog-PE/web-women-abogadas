@@ -585,3 +585,27 @@ h3 {
   flex-shrink: 0;
   display: block;
 }
+
+/* ── FOOTER SOCIAL ICONS HOVER GLOW ─────────────────── */
+.footer-social-icon {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: #94A3B8 !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.footer-social-icon:hover {
+  background: linear-gradient(135deg, #af1daa 0%, #eb54ff 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #eb54ff !important;
+  box-shadow: 0 0 16px rgba(235, 84, 255, 0.75), 0 0 4px rgba(175, 29, 170, 0.5) !important;
+  transform: translateY(-2px) scale(1.08) !important;
+}

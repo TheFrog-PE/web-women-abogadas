@@ -5229,18 +5229,7 @@ export function App() {
                     target="_blank" 
                     rel="noreferrer" 
                     title="LinkedIn WIC Colombia"
-                    style={{ 
-                      backgroundColor: '#1E293B', 
-                      color: '#FFFFFF', 
-                      width: '40px', 
-                      height: '40px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      border: '1.5px solid #af1daa',
-                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
-                    }}
+                    className="footer-social-icon"
                   >
                     <LinkedinIcon size={18} />
                   </a>
@@ -5249,18 +5238,7 @@ export function App() {
                     target="_blank" 
                     rel="noreferrer" 
                     title="Instagram WIC Colombia"
-                    style={{ 
-                      backgroundColor: '#1E293B', 
-                      color: '#FFFFFF', 
-                      width: '40px', 
-                      height: '40px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      border: '1.5px solid #af1daa',
-                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
-                    }}
+                    className="footer-social-icon"
                   >
                     <InstagramIcon size={18} />
                   </a>
@@ -5269,18 +5247,7 @@ export function App() {
                     target="_blank" 
                     rel="noreferrer" 
                     title="Facebook WIC Colombia"
-                    style={{ 
-                      backgroundColor: '#1E293B', 
-                      color: '#FFFFFF', 
-                      width: '40px', 
-                      height: '40px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      border: '1.5px solid #af1daa',
-                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
-                    }}
+                    className="footer-social-icon"
                   >
                     <FacebookIcon size={18} />
                   </a>

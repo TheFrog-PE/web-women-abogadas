@@ -40,7 +40,8 @@ import {
   ShieldAlert,
   Filter,
   ChevronDown,
-  Menu
+  Menu,
+  Briefcase
 } from 'lucide-react';
 
 const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
@@ -48,6 +49,14 @@ const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
     <rect x="2" y="9" width="4" height="12"></rect>
     <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
+
+const InstagramIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
   </svg>
 );
 
@@ -112,7 +121,7 @@ const EVENTS_DATA: Record<string, EventDetailData> = {
     title: 'Desayuno WIC Colombia',
     badge: 'EVENTO REALIZADO',
     subtitle: 'Conexión, Apoyo Mutuo y Liderazgo Estratégico en Compliance',
-    location: 'Bogotá, Colombia',
+    location: 'Metropolitan Club · Bogotá, Colombia',
     dateStr: 'Junio, 2026',
     isPast: true,
     attendeesCount: 'Más de 30 Asistentes',
@@ -343,37 +352,37 @@ export function App() {
     return () => clearInterval(timer);
   }, [eventSlides.length]);
 
-  // Autoplay para el Hero Carousel Principal de Inicio (cambio automático cada 5 segundos)
+  // Autoplay para el Hero Carousel Principal de Inicio (cambio automático cada 7.5 segundos según PDF)
   useEffect(() => {
     if (activeTab !== 'inicio') return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 3); // 3 slides en el Hero principal
-    }, 5000);
+    }, 7500);
     return () => clearInterval(timer);
   }, [activeTab]);
 
-  // Hero Slider Data based on docx instructions
+  // Hero Slider Data basado en observaciones de la página 1 del PDF
   const slides = [
     {
       image: '/Fotos/Imagen para Inicio - 01.jpg',
-      title: 'Women in Compliance Colombia',
-      subtitle: 'Comunidad de líderes y especialistas transformando el buen gobierno corporativo y la integridad en Colombia.',
-      btnText: 'Quiénes Somos',
-      action: () => setActiveTab('inicio')
+      title: 'Tu experiencia es poder. Es hora de que el mundo conozca lo que haces.',
+      subtitle: 'Lo que sabes hacer es valioso. Conecta con tomadores de decisiones, comparte tu visión, cierra alianzas estratégicas y pon tu consultoría en el centro del radar.',
+      btnText: 'Ser Parte de WIC',
+      action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 02.jpg',
-      title: 'Conferencias, Seminarios & Talleres',
-      subtitle: 'Espacios de alta dirección para potenciar el liderazgo femenino y la cultura ética empresarial.',
-      btnText: 'Ver Eventos',
-      action: () => setActiveTab('eventos')
+      title: 'No camines sola. Encuentra tu equipo en el compliance.',
+      subtitle: 'Accede a mentorías de alto nivel, visibiliza tus servicios profesionales y abre las puertas directivas que tu carrera merece con el respaldo absoluto de la red.',
+      btnText: 'Explorar el Directorio de Miembros',
+      action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 03.jpg',
-      title: 'Sé la próxima embajadora de la integridad empresarial',
-      subtitle: 'Conecta con nuestras afiliadas fundadoras y expertas en cumplimiento en diversos sectores del país.',
-      btnText: 'Conoce a las Miembros',
-      action: () => setActiveTab('miembros')
+      title: 'El círculo de influencia donde el liderazgo femenino transforma la integridad.',
+      subtitle: 'Espacios de alta dirección, desayunos ejecutivos exclusivos y oportunidades reales de negocio diseñadas para las mujeres que están liderando el cumplimiento normativo en Colombia.',
+      btnText: 'Próximos Eventos',
+      action: () => setActiveTab('eventos')
     }
   ];
 
@@ -486,7 +495,7 @@ export function App() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
-                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenido'}
+                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenidos'}
                 </button>
               ))}
             </nav>
@@ -541,7 +550,7 @@ export function App() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
-                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenido'}
+                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenidos'}
                 </button>
               ))}
               <button 
@@ -590,13 +599,13 @@ export function App() {
                       width: '100%', 
                       height: '100%', 
                       objectFit: 'cover',
-                      filter: 'brightness(0.55)'
+                      filter: 'brightness(0.68)'
                     }} 
                   />
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to right, rgba(10,17,40,0.85) 0%, rgba(10,17,40,0.3) 100%)'
+                    background: 'linear-gradient(to right, rgba(10,17,40,0.72) 0%, rgba(10,17,40,0.35) 60%, rgba(10,17,40,0.2) 100%), linear-gradient(to top, rgba(10,17,40,0.6) 0%, transparent 60%)'
                   }} />
 
                   <div style={{
@@ -1054,11 +1063,11 @@ export function App() {
                 }}>
                   AGENDA 2026
                 </span>
-                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontFamily: 'sans-serif', fontWeight: '800', textTransform: 'none', letterSpacing: 'normal', marginBottom: '1.25rem', maxWidth: '850px', lineHeight: '1.15' }}>
-                  Nuestros Eventos
+                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontFamily: 'sans-serif', fontWeight: '800', textTransform: 'none', letterSpacing: 'normal', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
+                  Experiencias de networking y alta dirección
                 </h1>
-                <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
-                  Descubre conferencias, seminarios y talleres de certificación diseñados para la vanguardia del cumplimiento legal y la ética corporativa en Colombia.
+                <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '780px', lineHeight: '1.7', margin: '0 auto' }}>
+                  Espacios exclusivos diseñados para conectar, generar alianzas estratégicas y hacer negocios. Menos teoría, más relaciones de valor.
                 </p>
               </div>
             </section>
@@ -1561,7 +1570,7 @@ export function App() {
                             </h3>
                             
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748B', fontSize: '0.82rem', fontWeight: '600', marginBottom: '0.85rem' }}>
-                              <MapPin size={15} style={{ color: '#af1daa' }} /> Bogotá, Colombia
+                              <MapPin size={15} style={{ color: '#af1daa' }} /> Metropolitan Club · Bogotá, Colombia
                             </div>
 
                             <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
@@ -1665,36 +1674,46 @@ export function App() {
                       </div>
                     </div>
 
-                    {/* 4. BLOQUE AUSPICIADOR EMPRESARIAL (SEGÚN MAQUETA SEGUNDA IMAGEN) */}
-                    <div className="reveal" style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '3rem', border: '1px solid #E2E8F0', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '3rem', alignItems: 'center' }}>
+                    {/* 4. BLOQUE AUSPICIADOR EMPRESARIAL (SEGÚN OBSERVACIONES DE PÁGINA 3 DEL PDF) */}
+                    <div className="reveal" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '3rem 2.5rem', border: '1.5px solid #e6affc', boxShadow: '0 10px 30px rgba(175, 29, 170, 0.08)', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '3rem', alignItems: 'center' }}>
                       <div>
-                        <h2 style={{ fontSize: '2.5rem', fontFamily: 'serif', color: '#1E1B4B', marginBottom: '1rem', lineHeight: '1.2' }}>
-                          ¿Quieres ser el próximo auspiciador empresarial?
+                        <h2 style={{ fontSize: '2.1rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.85rem', lineHeight: '1.25' }}>
+                          ¿Quieres posicionar tu empresa ante el círculo más influyente de la alta dirección y el compliance en Colombia?
                         </h2>
-                        <p style={{ color: '#64748B', fontSize: '1rem', marginBottom: '2rem' }}>
-                          Postula a la mejor membresía de Compliance y destaca por tu perfil.
+                        <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '2rem', lineHeight: '1.6' }}>
+                          Conecta tu marca directamente con quienes lideran la integridad corporativa en el país.
                         </p>
                         <button 
-                          className="btn btn-fuchsia" 
-                          onClick={() => setActiveTab('miembros')}
-                          style={{ padding: '0.85rem 2rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px' }}
+                          onClick={() => alert('¡Gracias por tu interés en ser Auspiciador de WIC Colombia! Nos pondremos en contacto contigo a la brevedad.')}
+                          style={{
+                            backgroundColor: '#af1daa',
+                            color: '#FFFFFF',
+                            border: 'none',
+                            padding: '0.85rem 2.25rem',
+                            borderRadius: '9999px',
+                            fontWeight: '800',
+                            fontSize: '0.9rem',
+                            letterSpacing: '0.5px',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                          }}
                         >
-                          ÚNETE (JOIN US)
+                          Sé auspiciador de WIC
                         </button>
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+75</span>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px' }}>MIEMBROS</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+75</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px' }}>MIEMBROS</span>
                         </div>
-                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+10</span>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px', textAlign: 'right' }}>BENEFICIOS EXCLUSIVOS</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+10</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px', textAlign: 'right' }}>BENEFICIOS EXCLUSIVOS</span>
                         </div>
-                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '8px', border: '1px solid #f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '1.8rem', fontFamily: 'serif', fontWeight: '700', color: '#af1daa' }}>+5</span>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '700', color: '#64748B', letterSpacing: '0.5px', textAlign: 'right' }}>EVENTOS AL AÑO</span>
+                        <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+5</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px', textAlign: 'right' }}>EVENTOS AL AÑO</span>
                         </div>
                       </div>
                     </div>
@@ -1997,16 +2016,20 @@ export function App() {
                             position: 'absolute', 
                             bottom: '1rem', 
                             left: '1rem', 
-                            backgroundColor: 'rgba(10, 17, 40, 0.85)', 
-                            color: '#FFF', 
-                            padding: '0.35rem 0.85rem', 
+                            right: '1rem',
+                            background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
+                            color: '#FFFFFF', 
+                            padding: '0.45rem 1rem', 
                             borderRadius: '9999px', 
-                            fontSize: '0.75rem', 
-                            fontWeight: '700',
-                            backdropFilter: 'blur(4px)',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                            fontSize: '0.72rem', 
+                            fontWeight: '800',
+                            letterSpacing: '0.5px',
+                            textAlign: 'center',
+                            textTransform: 'uppercase',
+                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.4)',
+                            border: '1px solid rgba(255,255,255,0.3)'
                           }}>
-                            {member.sector}
+                            {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
                         </div>
 
@@ -2014,34 +2037,39 @@ export function App() {
                           <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
                             {member.role}
                           </div>
-                          <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3' }}>
-                            {member.name}
+                          <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
+                            {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
                           <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, lineHeight: '1.5' }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* TAGS EN TARJETA DE MIEMBRO */}
+                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO */}
                           {member.tags && member.tags.length > 0 && (
-                            <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
-                              {member.tags.slice(0, 3).map((tag, tIdx) => (
-                                <span 
-                                  key={tIdx} 
-                                  onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
-                                  style={{ 
-                                    backgroundColor: '#f4f4f4', 
-                                    color: '#af1daa', 
-                                    border: '1px solid #e6affc', 
-                                    fontSize: '0.65rem', 
-                                    fontWeight: '700', 
-                                    padding: '0.2rem 0.55rem', 
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                  }}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+                            <div style={{ marginBottom: '1.25rem' }}>
+                              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.35rem' }}>
+                                ESPECIALIDADES & COMPETENCIAS:
+                              </span>
+                              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                                {member.tags.slice(0, 3).map((tag, tIdx) => (
+                                  <span 
+                                    key={tIdx} 
+                                    onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
+                                    style={{ 
+                                      backgroundColor: '#f4f4f4', 
+                                      color: '#af1daa', 
+                                      border: '1px solid #e6affc', 
+                                      fontSize: '0.65rem', 
+                                      fontWeight: '700', 
+                                      padding: '0.25rem 0.6rem', 
+                                      borderRadius: '4px',
+                                      cursor: 'pointer'
+                                    }}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           )}
 
@@ -2058,6 +2086,57 @@ export function App() {
                   </div>
                 );
               })()}
+
+              {/* ── BANNER CTA EN LA PARTE INFERIOR DE MIEMBROS (PÁGINA 2 DEL PDF) ── */}
+              <div className="reveal" style={{ marginTop: '4rem' }}>
+                <p style={{ color: '#64748B', fontSize: '0.95rem', fontWeight: '600', textAlign: 'center', marginBottom: '1.5rem', maxWidth: '750px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6' }}>
+                  Unirte a nuestra comunidad te brinda la oportunidad de seguir creciendo junto a la red más importante de <strong>Compliance</strong>.
+                </p>
+
+                <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '3rem 2.5rem', border: '1.5px solid #e6affc', boxShadow: '0 10px 30px rgba(175, 29, 170, 0.08)', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '3rem', alignItems: 'center' }}>
+                  <div>
+                    <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.85rem', lineHeight: '1.25' }}>
+                      ¿Quiéres ser el próximo embajador de la integridad empresarial?
+                    </h2>
+                    <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '2rem', lineHeight: '1.6' }}>
+                      Postula a la red líder de miembros en Compliance y destaca tu perfil.
+                    </p>
+                    <button 
+                      onClick={() => alert('¡Gracias por tu interés en unirte a WIC Colombia! Nos pondremos en contacto contigo pronto.')}
+                      style={{
+                        backgroundColor: '#af1daa',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        padding: '0.85rem 2.25rem',
+                        borderRadius: '9999px',
+                        fontWeight: '800',
+                        fontSize: '0.9rem',
+                        letterSpacing: '0.5px',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
+                      }}
+                    >
+                      ÚNETE A WIC
+                    </button>
+                  </div>
+
+                  {/* CAJAS DE ESTADÍSTICAS (NUMEROS CON FUENTE SANS-SERIF UNIFICADA) */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+91</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px' }}>MIEMBROS</span>
+                    </div>
+                    <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+10</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px', textAlign: 'right' }}>BENEFICIOS EXCLUSIVOS</span>
+                    </div>
+                    <div className="card-hover" style={{ backgroundColor: '#f4f4f4', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid #e6affc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '2rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: '800', color: '#af1daa' }}>+5</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#64748B', letterSpacing: '1px', textAlign: 'right' }}>EVENTOS AL AÑO</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -2153,18 +2232,21 @@ export function App() {
                           rel="noreferrer"
                           title="Perfil en LinkedIn"
                           style={{ 
-                            border: '1.5px solid #af1daa',
-                            color: '#af1daa', 
-                            padding: '0.35rem 0.6rem', 
-                            borderRadius: '4px', 
+                            backgroundColor: '#0077B5',
+                            color: '#FFFFFF', 
+                            padding: '0.35rem 0.75rem', 
+                            borderRadius: '6px', 
                             display: 'inline-flex', 
                             alignItems: 'center', 
+                            gap: '0.35rem',
                             justifyContent: 'center',
                             textDecoration: 'none',
-                            backgroundColor: '#f4f4f4'
+                            fontWeight: '800',
+                            fontSize: '0.78rem',
+                            boxShadow: '0 2px 8px rgba(0, 119, 181, 0.35)'
                           }}
                         >
-                          <LinkedinIcon size={16} />
+                          <LinkedinIcon size={16} /> in
                         </a>
                       )}
                     </div>
@@ -2224,7 +2306,7 @@ export function App() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #F1F5F9', paddingTop: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
                     <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                       <button 
-                        onClick={() => alert(`Iniciando contacto con ${selectedMember.name}`)}
+                        onClick={() => alert(`Iniciando contacto directo con ${selectedMember.name}`)}
                         style={{ 
                           backgroundColor: '#af1daa', 
                           color: '#FFFFFF', 
@@ -2233,28 +2315,31 @@ export function App() {
                           fontWeight: '700', 
                           fontSize: '0.8rem',
                           cursor: 'pointer',
-                          borderRadius: '4px'
+                          borderRadius: '6px',
+                          boxShadow: '0 4px 14px rgba(175, 29, 170, 0.3)'
                         }}
                       >
                         Contactar
                       </button>
                       <button 
                         onClick={() => {
-                          setSelectedMember(null);
-                          setActiveTab('contenido');
+                          alert(`Explorando servicios profesionales Open to Work de ${selectedMember.name}`);
                         }}
                         style={{ 
                           backgroundColor: '#FFFFFF', 
-                          color: '#1E1B4B', 
-                          border: '1px solid #1E1B4B', 
+                          color: '#af1daa', 
+                          border: '1.5px solid #af1daa', 
                           padding: '0.65rem 1.25rem', 
                           fontWeight: '700', 
                           fontSize: '0.8rem',
                           cursor: 'pointer',
-                          borderRadius: '4px'
+                          borderRadius: '6px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem'
                         }}
                       >
-                        Ver Publicaciones
+                        <Briefcase size={15} /> Open to Work (Servicios)
                       </button>
                     </div>
 
@@ -5115,16 +5200,16 @@ export function App() {
                   </li>
                   <li>
                     <button onClick={() => { setActiveTab('contenido'); window.scrollTo({top:0, behavior:'smooth'}); }} style={{ background:'none', border:'none', color:'#94A3B8', padding:0 }}>
-                      Contenido & Artículos
+                      Contenidos & Artículos
                     </button>
                   </li>
                 </ul>
               </div>
 
-              {/* COLUMNA 3: CONTÁCTENOS (VALORES EXACTOS DEL DOCUMENTO DE AJUSTES) */}
+              {/* COLUMNA 3: CONTÁCTENOS & REDES SOCIALES (PÁGINA 5 DEL PDF) */}
               <div>
                 <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '1.25rem' }}>Contáctenos</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#94A3B8', fontSize: '0.95rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#94A3B8', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <Phone size={18} style={{ color: '#af1daa' }} />
                     <span>Teléfono: <strong>3102173249</strong></span>
@@ -5133,6 +5218,72 @@ export function App() {
                     <Mail size={18} style={{ color: '#af1daa' }} />
                     <span>Correo: <strong>wiccolombia@outlook.com</strong></span>
                   </div>
+                </div>
+
+                <span style={{ color: '#FFFFFF', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
+                  REDES SOCIALES OFICIALES:
+                </span>
+                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                  <a 
+                    href="https://www.linkedin.com/company/wic-colombia" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    title="LinkedIn WIC Colombia"
+                    style={{ 
+                      backgroundColor: '#1E293B', 
+                      color: '#FFFFFF', 
+                      width: '40px', 
+                      height: '40px', 
+                      borderRadius: '50%', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      border: '1.5px solid #af1daa',
+                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
+                    }}
+                  >
+                    <LinkedinIcon size={18} />
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/wiccolombia/" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    title="Instagram WIC Colombia"
+                    style={{ 
+                      backgroundColor: '#1E293B', 
+                      color: '#FFFFFF', 
+                      width: '40px', 
+                      height: '40px', 
+                      borderRadius: '50%', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      border: '1.5px solid #af1daa',
+                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
+                    }}
+                  >
+                    <InstagramIcon size={18} />
+                  </a>
+                  <a 
+                    href="https://www.facebook.com/wiccolombia/" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    title="Facebook WIC Colombia"
+                    style={{ 
+                      backgroundColor: '#1E293B', 
+                      color: '#FFFFFF', 
+                      width: '40px', 
+                      height: '40px', 
+                      borderRadius: '50%', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      border: '1.5px solid #af1daa',
+                      boxShadow: '0 4px 12px rgba(175, 29, 170, 0.2)'
+                    }}
+                  >
+                    <FacebookIcon size={18} />
+                  </a>
                 </div>
               </div>
 

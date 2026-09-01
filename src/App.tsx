@@ -352,36 +352,36 @@ export function App() {
     return () => clearInterval(timer);
   }, [eventSlides.length]);
 
-  // Autoplay para el Hero Carousel Principal de Inicio (cambio automático cada 7.5 segundos según PDF)
+  // Autoplay para el Hero Carousel Principal de Inicio (cambio automático cada 10 segundos según indicación)
   useEffect(() => {
     if (activeTab !== 'inicio') return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 3); // 3 slides en el Hero principal
-    }, 7500);
+    }, 10000);
     return () => clearInterval(timer);
   }, [activeTab]);
 
-  // Hero Slider Data basado en observaciones de la página 1 del PDF
+  // Hero Slider Data con textos en sentence case y foto actualizada del Slide #3
   const slides = [
     {
       image: '/Fotos/Imagen para Inicio - 01.jpg',
-      title: 'Tu experiencia es poder. Es hora de que el mundo conozca lo que haces.',
+      title: 'Tu experiencia es poder. Es hora de que el mundo te conozca.',
       subtitle: 'Lo que sabes hacer es valioso. Conecta con tomadores de decisiones, comparte tu visión, cierra alianzas estratégicas y pon tu consultoría en el centro del radar.',
-      btnText: 'Ser Parte de WIC',
+      btnText: 'Ser parte de WIC',
       action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 02.jpg',
       title: 'No camines sola. Encuentra tu equipo en el compliance.',
       subtitle: 'Accede a mentorías de alto nivel, visibiliza tus servicios profesionales y abre las puertas directivas que tu carrera merece con el respaldo absoluto de la red.',
-      btnText: 'Explorar el Directorio de Miembros',
+      btnText: 'Explorar el directorio de miembros',
       action: () => setActiveTab('miembros')
     },
     {
       image: '/Fotos/Imagen para Inicio - 03.jpg',
-      title: 'El círculo de influencia donde el liderazgo femenino transforma la integridad.',
+      title: 'Conecta, aprende y comparte en nuestros espacios de encuentro.',
       subtitle: 'Espacios de alta dirección, desayunos ejecutivos exclusivos y oportunidades reales de negocio diseñadas para las mujeres que están liderando el cumplimiento normativo en Colombia.',
-      btnText: 'Próximos Eventos',
+      btnText: 'Próximos eventos',
       action: () => setActiveTab('eventos')
     }
   ];
@@ -1768,7 +1768,7 @@ export function App() {
                   DIRECTORIO PROFESIONAL
                 </span>
                 <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '850px', lineHeight: '1.15' }}>
-                  Nuestras Afiliadas Fundadoras
+                  Nuestras afiliadas fundadoras
                 </h1>
                 <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
                   Líderes de Cumplimiento, Ética y Gobierno Corporativo en Colombia
@@ -2844,7 +2844,7 @@ export function App() {
                     COMPLIANCE Y BUEN GOBIERNO CORPORATIVO
                   </span>
                   <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
-                    Compliance y Buen Gobierno Corporativo
+                    Compliance y buen gobierno corporativo
                   </h1>
                   <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '720px', lineHeight: '1.7', margin: '0 auto' }}>
                     Artículos especializados, análisis normativos, gestión de riesgos y reflexiones sobre buen gobierno corporativo e integridad empresarial.

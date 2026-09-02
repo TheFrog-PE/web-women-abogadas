@@ -643,9 +643,10 @@ export function App() {
                     </span>
                     <h1 className="anim-fade-up anim-d2" style={{ 
                       color: '#FFFFFF', 
-                      fontSize: '3.2rem', 
+                      fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', 
                       lineHeight: '1.2', 
-                      maxWidth: '850px', 
+                      maxWidth: '1100px', 
+                      width: '100%',
                       marginBottom: '1.25rem',
                       fontWeight: '700'
                     }}>
@@ -1066,7 +1067,7 @@ export function App() {
                 }}>
                   AGENDA 2026
                 </span>
-                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontFamily: 'sans-serif', fontWeight: '800', textTransform: 'none', letterSpacing: 'normal', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
+                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', fontFamily: 'sans-serif', fontWeight: '800', textTransform: 'none', letterSpacing: 'normal', marginBottom: '1.25rem', maxWidth: '1100px', width: '100%', lineHeight: '1.15' }}>
                   Experiencias de networking<br />y alta dirección
                 </h1>
                 <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '780px', lineHeight: '1.7', margin: '0 auto' }}>
@@ -1770,7 +1771,7 @@ export function App() {
                 }}>
                   DIRECTORIO PROFESIONAL
                 </span>
-                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '850px', lineHeight: '1.15' }}>
+                <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '1100px', width: '100%', lineHeight: '1.15' }}>
                   Nuestras afiliadas<br />fundadoras
                 </h1>
                 <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
@@ -2846,7 +2847,7 @@ export function App() {
                   }}>
                     COMPLIANCE Y BUEN GOBIERNO CORPORATIVO
                   </span>
-                  <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: '3.4rem', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '900px', lineHeight: '1.15' }}>
+                  <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '1100px', width: '100%', lineHeight: '1.15' }}>
                     Compliance y buen gobierno corporativo
                   </h1>
                   <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '720px', lineHeight: '1.7', margin: '0 auto' }}>

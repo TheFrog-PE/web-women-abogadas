@@ -219,7 +219,18 @@ export function App() {
     localStorage.setItem('wic_articles_list', JSON.stringify(articlesList));
   }, [articlesList]);
 
-  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404'>('inicio');
+  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404' | 'unete'>('inicio');
+  const [unetePlanSelected, setUnetePlanSelected] = useState<'estandar' | 'fundadora'>('estandar');
+  const [uneteFormData, setUneteFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    experience: '4 - 7 años',
+    plan: 'Membresía Anual Estándar ($0 COP)',
+    company: '',
+    linkedin: ''
+  });
+  const [uneteFormSubmitted, setUneteFormSubmitted] = useState(false);
   const [openToWorkCategory, setOpenToWorkCategory] = useState('Todas');
   const [showOpenToWorkModal, setShowOpenToWorkModal] = useState(false);
   const [openToWorkFormData, setOpenToWorkFormData] = useState({ name: '', email: '', role: '', details: '' });
@@ -391,7 +402,10 @@ export function App() {
       title: <>Tu experiencia es poder.<br />Es hora de que el mundo te conozca.</>,
       subtitle: 'Lo que sabes hacer es valioso. Conecta con tomadores de decisiones, comparte tu visión, cierra alianzas estratégicas y pon tu consultoría en el centro del radar.',
       btnText: 'Ser parte de WIC',
-      action: () => setActiveTab('miembros')
+      action: () => {
+        setActiveTab('unete');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     },
     {
       image: '/Fotos/Imagen para Inicio - 02.jpg',
@@ -416,6 +430,8 @@ export function App() {
     const handleHash = () => {
       if (window.location.hash === '#admin' || window.location.pathname.endsWith('/admin')) {
         setActiveTab('login');
+      } else if (window.location.hash === '#unete' || window.location.pathname.endsWith('/unete')) {
+        setActiveTab('unete');
       }
     };
     handleHash();
@@ -469,15 +485,15 @@ export function App() {
         <header 
           className={isScrolled ? 'scrolled' : ''}
           style={{ 
-            backgroundColor: activeTab === 'opentowork' ? (isScrolled ? 'rgba(7, 6, 10, 0.95)' : 'transparent') : (isScrolled ? '#FFFFFF' : 'transparent'), 
-            borderBottom: activeTab === 'opentowork' ? (isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : 'none') : (isScrolled ? '1px solid #E2E8F0' : 'none'), 
+            backgroundColor: activeTab === 'opentowork' ? (isScrolled ? 'rgba(7, 6, 10, 0.95)' : 'transparent') : ((isScrolled || activeTab === 'unete') ? '#FFFFFF' : 'transparent'), 
+            borderBottom: activeTab === 'opentowork' ? (isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : 'none') : ((isScrolled || activeTab === 'unete') ? '1px solid #E2E8F0' : 'none'), 
             position: 'fixed', 
             top: 0, 
             left: 0,
             right: 0,
             zIndex: 50,
             transition: 'all 0.2s ease',
-            boxShadow: activeTab === 'opentowork' ? (isScrolled ? '0 4px 25px rgba(0,0,0,0.5)' : 'none') : (isScrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none'),
+            boxShadow: activeTab === 'opentowork' ? (isScrolled ? '0 4px 25px rgba(0,0,0,0.5)' : 'none') : ((isScrolled || activeTab === 'unete') ? '0 4px 20px rgba(0,0,0,0.08)' : 'none'),
             backdropFilter: activeTab === 'opentowork' ? (isScrolled ? 'blur(12px)' : 'none') : 'none'
           }}
         >
@@ -501,7 +517,7 @@ export function App() {
                 style={{ 
                   height: '46px', 
                   objectFit: 'contain',
-                  filter: activeTab === 'opentowork' ? 'brightness(0) invert(1)' : (isScrolled ? 'none' : 'brightness(0) invert(1)'),
+                  filter: activeTab === 'opentowork' ? 'brightness(0) invert(1)' : ((isScrolled || activeTab === 'unete') ? 'none' : 'brightness(0) invert(1)'),
                   transition: 'all 0.2s ease'
                 }} 
               />
@@ -512,7 +528,7 @@ export function App() {
               {(['inicio', 'eventos', 'opentowork', 'contenido', 'miembros'] as const).map((tab) => (
                 <button
                   key={tab}
-                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled ? 'transparent-mode' : ''}`}
+                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled && activeTab !== 'unete' ? 'transparent-mode' : ''}`}
                   onClick={() => {
                     setActiveTab(tab);
                     setViewingEventDetail(false);
@@ -537,9 +553,10 @@ export function App() {
             <button 
               className="desktop-cta-btn"
               onClick={() => {
-                setActiveTab('miembros');
+                setActiveTab('unete');
                 setSelectedArticle(null);
                 setViewingEventDetail(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               style={{ 
                 fontSize: '0.85rem',
@@ -574,7 +591,7 @@ export function App() {
               {(['inicio', 'eventos', 'opentowork', 'contenido', 'miembros'] as const).map((tab) => (
                 <button
                   key={tab}
-                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled ? 'transparent-mode' : ''}`}
+                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled && activeTab !== 'unete' ? 'transparent-mode' : ''}`}
                   onClick={() => {
                     setActiveTab(tab);
                     setViewingEventDetail(false);
@@ -596,10 +613,11 @@ export function App() {
               <button 
                 className="btn btn-fuchsia"
                 onClick={() => {
-                  setActiveTab('miembros');
+                  setActiveTab('unete');
                   setViewingEventDetail(false);
                   setSelectedArticle(null);
                   setIsMobileMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 style={{ fontSize: '0.85rem', width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}
               >
@@ -4131,6 +4149,801 @@ export function App() {
                 </div>
               </div>
             )}
+
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* PÁGINA 6: ÚNETE A WIC (PÁGINA DE ADMISIÓN Y MEMBRESÍAS) */}
+        {/* ---------------------------------------------------- */}
+        {activeTab === 'unete' && (
+          <div style={{
+            backgroundColor: '#FAFAFC',
+            minHeight: '100vh',
+            paddingTop: '6.5rem',
+            paddingBottom: '5rem',
+            color: '#0A1128'
+          }}>
+
+            {/* SECCIÓN 1: HERO DE CONVOCATORIA */}
+            <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '1.5rem 1.5rem 2.5rem 1.5rem', textAlign: 'center' }}>
+              
+              {/* BADGE PILL */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.45rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1.5rem' }} className="reveal">
+                CONVOCATORIA DE ADMISIÓN ABIERTA 2024
+              </div>
+
+              {/* TÍTULO PRINCIPAL */}
+              <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: '800', lineHeight: '1.15', letterSpacing: '-1px', color: '#0A1128', marginBottom: '1.25rem' }} className="reveal">
+                Únete a la Red Líder de<br />
+                Mujeres <span style={{ color: '#af1daa' }}>en Compliance</span> en Colombia
+              </h1>
+
+              {/* SUBTÍTULO */}
+              <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: '1.65', maxWidth: '780px', margin: '0 auto 2rem auto' }} className="reveal">
+                Forma parte del ecosistema más influyente de abogadas, consultoras y líderes que están transformando la cultura del cumplimiento ético, la prevención de riesgos y el gobierno corporativo en Colombia.
+              </p>
+
+              {/* BOTONES DE ACCIÓN */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.75rem' }} className="reveal">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('postulacion-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{
+                    backgroundColor: '#af1daa',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    padding: '0.9rem 2rem',
+                    borderRadius: '9999px',
+                    fontWeight: '700',
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 18px rgba(175, 29, 170, 0.4)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.25s ease'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                >
+                  POSTULAR MI MEMBRESÍA <ArrowRight size={18} />
+                </button>
+
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('planes-membresia');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    color: '#0A1128',
+                    border: '1.5px solid #CBD5E1',
+                    padding: '0.9rem 2rem',
+                    borderRadius: '9999px',
+                    fontWeight: '700',
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.25s ease'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#af1daa'; e.currentTarget.style.color = '#af1daa'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#CBD5E1'; e.currentTarget.style.color = '#0A1128'; }}
+                >
+                  Ver Planes y Membresías
+                </button>
+              </div>
+
+              {/* INDICADORES DE CONFIANZA */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', color: '#64748B', fontSize: '0.82rem', fontWeight: '600' }} className="reveal">
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22C55E' }} /> Admisión por comité evaluador
+                </span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22C55E' }} /> Comunidad activa y networking real
+                </span>
+              </div>
+
+              {/* MEDIA BOX: CONTENEDOR DE VIDEO / PRESENTACIÓN */}
+              <div 
+                className="reveal"
+                style={{
+                  marginTop: '2.5rem',
+                  maxWidth: '920px',
+                  height: '420px',
+                  margin: '2.5rem auto 0 auto',
+                  backgroundColor: '#D9D9D9',
+                  borderRadius: '24px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)'
+                }}
+              >
+                {/* PÍLDORA FLOTANTE INFERIOR */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '1.5rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(8px)',
+                  padding: '0.65rem 1.4rem',
+                  borderRadius: '9999px',
+                  border: '1px solid rgba(175, 29, 170, 0.3)',
+                  boxShadow: '0 8px 25px rgba(0,0,0,0.12)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  fontSize: '0.82rem',
+                  fontWeight: '700',
+                  color: '#0A1128'
+                }}>
+                  <span style={{
+                    backgroundColor: '#af1daa',
+                    color: '#FFFFFF',
+                    padding: '0.25rem 0.65rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.7rem',
+                    fontWeight: '800',
+                    letterSpacing: '0.5px'
+                  }}>
+                    VIDEO DE PRESENTACIÓN
+                  </span>
+                  <span>Conoce el impacto de WIC en 2 minutos</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* SECCIÓN 2: FRANJA DE MÉTRICAS (COUNTERS) */}
+            <div style={{ maxWidth: '1080px', margin: '2.5rem auto 4.5rem auto', padding: '0 1.5rem' }}>
+              <div 
+                className="reveal"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '20px',
+                  border: '1px solid #E2E8F0',
+                  padding: '2rem 1rem',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                  gap: '1.5rem',
+                  textAlign: 'center',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
+                }}
+              >
+                <div style={{ borderRight: '1px solid #F1F5F9', padding: '0 0.5rem' }}>
+                  <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#af1daa', lineHeight: '1' }}>+50</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', color: '#64748B', marginTop: '0.5rem' }}>Líderes Afiliadas</div>
+                </div>
+
+                <div style={{ borderRight: '1px solid #F1F5F9', padding: '0 0.5rem' }}>
+                  <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#0A1128', lineHeight: '1' }}>+10</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', color: '#64748B', marginTop: '0.5rem' }}>Sectores & Firmas</div>
+                </div>
+
+                <div style={{ borderRight: '1px solid #F1F5F9', padding: '0 0.5rem' }}>
+                  <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#af1daa', lineHeight: '1' }}>+5</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', color: '#64748B', marginTop: '0.5rem' }}>Años de Trayectoria</div>
+                </div>
+
+                <div style={{ borderRight: '1px solid #F1F5F9', padding: '0 0.5rem' }}>
+                  <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#0A1128', lineHeight: '1' }}>CUPOS</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', color: '#64748B', marginTop: '0.5rem' }}>Limitados por Cohorte</div>
+                </div>
+
+                <div style={{ padding: '0 0.5rem' }}>
+                  <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#af1daa', lineHeight: '1' }}>ANUAL</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', color: '#64748B', marginTop: '0.5rem' }}>Acceso Total WIC</div>
+                </div>
+              </div>
+            </div>
+
+            {/* SECCIÓN 3: BENEFICIOS EXCLUSIVOS PARA MIEMBROS WIC (10 CARDS) */}
+            <div style={{ maxWidth: '1080px', margin: '0 auto 5rem auto', padding: '0 1.5rem' }}>
+              <div style={{ textAlign: 'center', marginBottom: '3rem' }} className="reveal">
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.4rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                  LO QUE OBTIENES AL SER PARTE
+                </div>
+                <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: '800', color: '#0A1128', marginBottom: '0.75rem' }}>
+                  Beneficios Exclusivos para Miembros WIC
+                </h2>
+                <p style={{ color: '#64748B', fontSize: '0.98rem', maxWidth: '680px', margin: '0 auto', lineHeight: '1.6' }}>
+                  Una membresía diseñada para acelerar tu desarrollo profesional, potenciar tu red de contactos de alta dirección y dar visibilidad a tu liderazgo ético.
+                </p>
+              </div>
+
+              {/* GRID 2 COLUMNAS DE 10 BENEFICIOS */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {[
+                  {
+                    icon: <Users size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Desayunos Privados & Networking VIP',
+                    desc: 'Espacios de alta dirección para intercambiar experiencias y generar alianzas estratégicas con socias y directoras jurídicas de primer nivel.'
+                  },
+                  {
+                    icon: <Briefcase size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Directorio Profesional Open to Work',
+                    desc: 'Posicionamiento y visibilidad de tus credenciales y áreas de especialidad ante juntas directivas y corporaciones aliadas.'
+                  },
+                  {
+                    icon: <Award size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Programa de Mentoría de Alto Nivel',
+                    desc: 'Conexión personalizada con líderes consolidadas para guiar tu crecimiento en gobierno corporativo y toma de decisiones.'
+                  },
+                  {
+                    icon: <FileText size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Visibilidad en Medios y Publicaciones',
+                    desc: 'Publicación y difusión de tus artículos técnicos y columnas de opinión a través de los canales institucionales de WIC y medios aliados.'
+                  },
+                  {
+                    icon: <Sparkles size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Participación en Eventos como Speaker',
+                    desc: 'Oportunidad prioritaria para ser panelista o conferencista en nuestros conversatorios, foros y congresos especializados.'
+                  },
+                  {
+                    icon: <TrendingUp size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Acceso a Bolsa de Empleo y Mandatos',
+                    desc: 'Convocatorias directas para ternas de juntas directivas, comités de ética, peritajes y asesorías corporativas de alta complejidad.'
+                  },
+                  {
+                    icon: <ShieldCheck size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Comunidad de Consulta & Apoyo Técnico',
+                    desc: 'Canal privado de consulta y debate entre afiliadas para resolver inquietudes doctrinales, SAGRILAFT y PTEE en tiempo real.'
+                  },
+                  {
+                    icon: <BookOpen size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Descuentos en Certificaciones y Posgrados',
+                    desc: 'Convenios con universidades y academias internacionales para acceder a tarifas preferenciales en formación continua.'
+                  },
+                  {
+                    icon: <UserCheck size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Sello Oficial de Acreditación WIC',
+                    desc: 'Distintivo digital que acredita tu pertenencia a la red femenina líder en integridad y cumplimiento normativo en Colombia.'
+                  },
+                  {
+                    icon: <Globe size={22} style={{ color: '#af1daa' }} />,
+                    title: 'Comités Técnicos Especializados',
+                    desc: 'Participación activa en mesas temáticas sobre compliance penal, fintech, debida diligencia y protección de datos.'
+                  }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="reveal"
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '16px',
+                      padding: '1.75rem',
+                      border: '1px solid #E2E8F0',
+                      display: 'flex',
+                      gap: '1.25rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+                      transition: 'all 0.25s ease'
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.borderColor = 'rgba(175, 29, 170, 0.3)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = '#E2E8F0'; }}
+                  >
+                    <div style={{
+                      backgroundColor: 'rgba(175, 29, 170, 0.08)',
+                      padding: '0.85rem',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0
+                    }}>
+                      {item.icon}
+                    </div>
+                    <div>
+                      <h3 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.4rem', lineHeight: '1.3' }}>
+                        {item.title}
+                      </h3>
+                      <p style={{ fontSize: '0.86rem', color: '#64748B', lineHeight: '1.55', margin: 0 }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SECCIÓN 4: PLANES DE MEMBRESÍA Y ACCESO INSTITUCIONAL (PRICING TABLE) */}
+            <div id="planes-membresia" style={{ maxWidth: '1000px', margin: '0 auto 5rem auto', padding: '0 1.5rem' }}>
+              <div style={{ textAlign: 'center', marginBottom: '3rem' }} className="reveal">
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.4rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                  INVERSIÓN EN TU DESARROLLO
+                </div>
+                <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: '800', color: '#0A1128', marginBottom: '0.75rem' }}>
+                  Planes de Membresía y Acceso Institucional
+                </h2>
+                <p style={{ color: '#64748B', fontSize: '0.98rem', maxWidth: '680px', margin: '0 auto', lineHeight: '1.6' }}>
+                  Selecciona el nivel que mejor represente tus metas profesionales o el posicionamiento de tu firma u organización.
+                </p>
+              </div>
+
+              {/* 2 TARJETAS DE PLANES */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+                gap: '2rem',
+                alignItems: 'stretch'
+              }}>
+                
+                {/* TARJETA 1: MEMBRESÍA ANUAL ESTÁNDAR */}
+                <div 
+                  className="reveal"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '24px',
+                    border: unetePlanSelected === 'estandar' ? '2px solid #af1daa' : '1px solid #E2E8F0',
+                    padding: '2.5rem 2.25rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: unetePlanSelected === 'estandar' ? '0 8px 30px rgba(175, 29, 170, 0.15)' : '0 4px 20px rgba(0,0,0,0.03)',
+                    position: 'relative'
+                  }}
+                >
+                  <div>
+                    <span style={{
+                      backgroundColor: '#F1F5F9',
+                      color: '#475569',
+                      padding: '0.35rem 0.85rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.75rem',
+                      fontWeight: '700',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
+                      display: 'inline-block',
+                      marginBottom: '1.25rem'
+                    }}>
+                      INDIVIDUAL
+                    </span>
+
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
+                      Membresía Anual Estándar
+                    </h3>
+                    <p style={{ color: '#64748B', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.5rem' }}>
+                      Para abogadas y profesionales del compliance que buscan visibilidad, comunidad y networking de alto nivel.
+                    </p>
+
+                    <div style={{ marginBottom: '1.75rem', paddingBottom: '1.5rem', borderBottom: '1px solid #F1F5F9' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '2.4rem', fontWeight: '900', color: '#0A1128' }}>$0</span>
+                        <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600' }}>COP / año</span>
+                      </div>
+                      <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>Pago anual único • Acceso a todos los beneficios</span>
+                    </div>
+
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                      {[
+                        'Perfil verificado en Directorio Oficial de Socias WIC',
+                        'Acceso a todos los desayunos y eventos presenciales',
+                        'Participación activa en el canal privado de consulta',
+                        'Descuentos exclusivos en formación académica aliada',
+                        'Acceso a bolsa de empleo y mandatos corporativos'
+                      ].map((feat, idx) => (
+                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.88rem', color: '#334155' }}>
+                          <CheckCircle2 size={16} style={{ color: '#22C55E', flexShrink: 0 }} />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setUnetePlanSelected('estandar');
+                      setUneteFormData(prev => ({ ...prev, plan: 'Membresía Anual Estándar ($0 COP)' }));
+                      const el = document.getElementById('postulacion-form');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      color: '#0A1128',
+                      border: '1.5px solid #CBD5E1',
+                      padding: '0.9rem 1.5rem',
+                      borderRadius: '9999px',
+                      fontWeight: '700',
+                      fontSize: '0.9rem',
+                      cursor: 'pointer',
+                      width: '100%',
+                      textAlign: 'center',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem',
+                      transition: 'all 0.25s ease'
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#af1daa'; e.currentTarget.style.color = '#af1daa'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#CBD5E1'; e.currentTarget.style.color = '#0A1128'; }}
+                  >
+                    POSTULAR A ESTE PLAN <ArrowRight size={16} />
+                  </button>
+                </div>
+
+                {/* TARJETA 2: MEMBRESÍA FUNDADORA / ALIADA (DESTACADA) */}
+                <div 
+                  className="reveal"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '24px',
+                    border: unetePlanSelected === 'fundadora' ? '2.5px solid #af1daa' : '1.5px solid rgba(175, 29, 170, 0.5)',
+                    padding: '2.5rem 2.25rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: unetePlanSelected === 'fundadora' ? '0 12px 40px rgba(175, 29, 170, 0.22)' : '0 6px 25px rgba(175, 29, 170, 0.1)',
+                    position: 'relative'
+                  }}
+                >
+                  {/* BADGE DESTACADO SUPERIOR */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '-13px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    backgroundColor: '#af1daa',
+                    color: '#FFFFFF',
+                    padding: '0.35rem 1.25rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.72rem',
+                    fontWeight: '800',
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    boxShadow: '0 4px 12px rgba(175, 29, 170, 0.4)'
+                  }}>
+                    DESTACADA
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', marginTop: '0.25rem' }}>
+                      <span style={{
+                        backgroundColor: 'rgba(175, 29, 170, 0.1)',
+                        color: '#af1daa',
+                        padding: '0.35rem 0.85rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.75rem',
+                        fontWeight: '700',
+                        letterSpacing: '0.5px',
+                        textTransform: 'uppercase'
+                      }}>
+                        LÍDERES & FIRMAS
+                      </span>
+                    </div>
+
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
+                      Membresía Fundadora / Aliada
+                    </h3>
+                    <p style={{ color: '#64748B', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.5rem' }}>
+                      Para socias consolidadas, firmas y organizaciones que desean respaldar el ecosistema y liderar comités.
+                    </p>
+
+                    <div style={{ marginBottom: '1.75rem', paddingBottom: '1.5rem', borderBottom: '1px solid #F1F5F9' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '2.4rem', fontWeight: '900', color: '#af1daa' }}>$0</span>
+                        <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600' }}>COP / año</span>
+                      </div>
+                      <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>Inversión anual institucional • Máxima representatividad</span>
+                    </div>
+
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                      {[
+                        'Todo lo incluido en la Membresía Estándar',
+                        'Sello distintivo de Socia Fundadora / Firma Aliada',
+                        'Prioridad absoluta como Speaker y moderadora en foros',
+                        'Publicación de hasta 4 artículos al año en el portal WIC',
+                        'Presencia del logo de tu firma en web oficial y eventos',
+                        'Participación directa en comités estratégicos de admisión'
+                      ].map((feat, idx) => (
+                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.88rem', color: '#1E293B', fontWeight: idx === 0 ? '700' : '500' }}>
+                          <CheckCircle2 size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setUnetePlanSelected('fundadora');
+                      setUneteFormData(prev => ({ ...prev, plan: 'Membresía Fundadora / Aliada ($0 COP)' }));
+                      const el = document.getElementById('postulacion-form');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    style={{
+                      background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      padding: '0.95rem 1.5rem',
+                      borderRadius: '9999px',
+                      fontWeight: '700',
+                      fontSize: '0.9rem',
+                      cursor: 'pointer',
+                      width: '100%',
+                      textAlign: 'center',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem',
+                      boxShadow: '0 6px 20px rgba(175, 29, 170, 0.4)',
+                      transition: 'all 0.25s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  >
+                    POSTULAR A PLAN FUNDADORA <ArrowRight size={16} />
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            {/* SECCIÓN 5: FORMULARIO DE POSTULACIÓN / ADMISIÓN */}
+            <div id="postulacion-form" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 1.5rem' }}>
+              <div 
+                className="reveal"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '24px',
+                  padding: '3rem 2.5rem',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 10px 40px rgba(0,0,0,0.05)'
+                }}
+              >
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.4rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                    ADMISIONES ABIERTAS WIC
+                  </div>
+                  <h3 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
+                    ¿Lista para transformar tu alcance profesional?
+                  </h3>
+                  <p style={{ color: '#64748B', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                    Diligencia tu información de postulación. Nuestro comité de admisiones evaluará tu perfil en menos de 48 horas hábiles.
+                  </p>
+                </div>
+
+                {uneteFormSubmitted ? (
+                  <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
+                    <div style={{ width: '64px', height: '64px', backgroundColor: '#DCFCE7', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem auto' }}>
+                      <CheckCircle2 size={36} style={{ color: '#166534' }} />
+                    </div>
+                    <h4 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
+                      ¡Postulación enviada exitosamente!
+                    </h4>
+                    <p style={{ color: '#64748B', fontSize: '0.92rem', lineHeight: '1.6', maxWidth: '480px', margin: '0 auto 1.5rem auto' }}>
+                      Hemos recibido tus datos con éxito. El comité directivo de Women in Compliance Colombia revisará tu postulación y te contactará a través de tu correo corporativo.
+                    </p>
+                    <button
+                      onClick={() => setUneteFormSubmitted(false)}
+                      style={{
+                        backgroundColor: '#af1daa',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        padding: '0.75rem 1.5rem',
+                        borderRadius: '9999px',
+                        fontWeight: '700',
+                        fontSize: '0.85rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Enviar otra postulación
+                    </button>
+                  </div>
+                ) : (
+                  <form 
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setUneteFormSubmitted(true);
+                    }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                        NOMBRE COMPLETO *
+                      </label>
+                      <input 
+                        type="text"
+                        required
+                        placeholder="Ej. Dra. Camila Restrepo"
+                        value={uneteFormData.name}
+                        onChange={(e) => setUneteFormData({ ...uneteFormData, name: e.target.value })}
+                        style={{
+                          width: '100%',
+                          padding: '0.85rem 1.25rem',
+                          backgroundColor: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                          borderRadius: '10px',
+                          color: '#0A1128',
+                          fontSize: '0.9rem',
+                          outline: 'none'
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                        CORREO ELECTRÓNICO CORPORATIVO *
+                      </label>
+                      <input 
+                        type="email"
+                        required
+                        placeholder="correo@empresa.com"
+                        value={uneteFormData.email}
+                        onChange={(e) => setUneteFormData({ ...uneteFormData, email: e.target.value })}
+                        style={{
+                          width: '100%',
+                          padding: '0.85rem 1.25rem',
+                          backgroundColor: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                          borderRadius: '10px',
+                          color: '#0A1128',
+                          fontSize: '0.9rem',
+                          outline: 'none'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                          TELÉFONO / WHATSAPP *
+                        </label>
+                        <input 
+                          type="tel"
+                          required
+                          placeholder="+57 300 123 4567"
+                          value={uneteFormData.phone}
+                          onChange={(e) => setUneteFormData({ ...uneteFormData, phone: e.target.value })}
+                          style={{
+                            width: '100%',
+                            padding: '0.85rem 1.25rem',
+                            backgroundColor: '#F8FAFC',
+                            border: '1px solid #E2E8F0',
+                            borderRadius: '10px',
+                            color: '#0A1128',
+                            fontSize: '0.9rem',
+                            outline: 'none'
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                          AÑOS DE EXPERIENCIA *
+                        </label>
+                        <select 
+                          value={uneteFormData.experience}
+                          onChange={(e) => setUneteFormData({ ...uneteFormData, experience: e.target.value })}
+                          style={{
+                            width: '100%',
+                            padding: '0.85rem 1.25rem',
+                            backgroundColor: '#F8FAFC',
+                            border: '1px solid #E2E8F0',
+                            borderRadius: '10px',
+                            color: '#0A1128',
+                            fontSize: '0.9rem',
+                            outline: 'none'
+                          }}
+                        >
+                          <option value="1 - 3 años">1 - 3 años</option>
+                          <option value="4 - 7 años">4 - 7 años</option>
+                          <option value="8 - 12 años">8 - 12 años</option>
+                          <option value="+12 años">+12 años (Liderazgo Sénior)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                        PLAN DE TU INTERÉS *
+                      </label>
+                      <select 
+                        value={uneteFormData.plan}
+                        onChange={(e) => setUneteFormData({ ...uneteFormData, plan: e.target.value })}
+                        style={{
+                          width: '100%',
+                          padding: '0.85rem 1.25rem',
+                          backgroundColor: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                          borderRadius: '10px',
+                          color: '#0A1128',
+                          fontSize: '0.9rem',
+                          outline: 'none'
+                        }}
+                      >
+                        <option value="Membresía Anual Estándar ($0 COP)">Membresía Anual Estándar ($0 COP)</option>
+                        <option value="Membresía Fundadora / Aliada ($0 COP)">Membresía Fundadora / Aliada ($0 COP)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                        EMPRESA / FIRMA ACTUAL & CARGO *
+                      </label>
+                      <input 
+                        type="text"
+                        required
+                        placeholder="Ej. Socia Directora en Firma Legal / Oficial de Cumplimiento"
+                        value={uneteFormData.company}
+                        onChange={(e) => setUneteFormData({ ...uneteFormData, company: e.target.value })}
+                        style={{
+                          width: '100%',
+                          padding: '0.85rem 1.25rem',
+                          backgroundColor: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                          borderRadius: '10px',
+                          color: '#0A1128',
+                          fontSize: '0.9rem',
+                          outline: 'none'
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.4rem' }}>
+                        ENLACE A TU PERFIL DE LINKEDIN *
+                      </label>
+                      <input 
+                        type="url"
+                        required
+                        placeholder="https://linkedin.com/in/tu-perfil"
+                        value={uneteFormData.linkedin}
+                        onChange={(e) => setUneteFormData({ ...uneteFormData, linkedin: e.target.value })}
+                        style={{
+                          width: '100%',
+                          padding: '0.85rem 1.25rem',
+                          backgroundColor: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                          borderRadius: '10px',
+                          color: '#0A1128',
+                          fontSize: '0.9rem',
+                          outline: 'none'
+                        }}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      style={{
+                        backgroundColor: '#af1daa',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        padding: '1rem 2rem',
+                        borderRadius: '9999px',
+                        fontWeight: '700',
+                        fontSize: '0.95rem',
+                        cursor: 'pointer',
+                        marginTop: '0.5rem',
+                        boxShadow: '0 4px 18px rgba(175, 29, 170, 0.4)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                      SOLICITAR MI INGRESO A WIC COLOMBIA <ArrowRight size={18} />
+                    </button>
+
+                    <div style={{ textAlign: 'center', color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+                      🔒 Tus datos están protegidos por nuestra estricta política de confidencialidad y privacidad WIC.
+                    </div>
+                  </form>
+                )}
+              </div>
+            </div>
 
           </div>
         )}

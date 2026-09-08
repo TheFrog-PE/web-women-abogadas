@@ -219,7 +219,11 @@ export function App() {
     localStorage.setItem('wic_articles_list', JSON.stringify(articlesList));
   }, [articlesList]);
 
-  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'login' | '404'>('inicio');
+  const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404'>('inicio');
+  const [openToWorkCategory, setOpenToWorkCategory] = useState('Todas');
+  const [showOpenToWorkModal, setShowOpenToWorkModal] = useState(false);
+  const [openToWorkFormData, setOpenToWorkFormData] = useState({ name: '', email: '', role: '', details: '' });
+  const [openToWorkFormSubmitted, setOpenToWorkFormSubmitted] = useState(false);
   const [auditProgress, setAuditProgress] = useState<number | null>(null);
   const [auditStatusText, setAuditStatusText] = useState<string>('');
 
@@ -336,6 +340,24 @@ export function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Tracking de posición del mouse para animación interactiva de orbes/círculos en el background de Open to Work
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (activeTab !== 'opentowork') return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const offX = (e.clientX - centerX) / centerX;
+      const offY = (e.clientY - centerY) / centerY;
+      setMouseOffset({ x: offX, y: offY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [activeTab]);
+
   // Event Hero Slides (Auto Carousel for Eventos)
   const eventSlides = [
     '/Fotos/Imagen portada Evento - Desayuno - 06.jpg',
@@ -447,16 +469,16 @@ export function App() {
         <header 
           className={isScrolled ? 'scrolled' : ''}
           style={{ 
-            backgroundColor: isScrolled ? '#FFFFFF' : 'transparent', 
-            borderBottom: isScrolled ? '1px solid #E2E8F0' : 'none', 
+            backgroundColor: activeTab === 'opentowork' ? (isScrolled ? 'rgba(7, 6, 10, 0.95)' : 'transparent') : (isScrolled ? '#FFFFFF' : 'transparent'), 
+            borderBottom: activeTab === 'opentowork' ? (isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : 'none') : (isScrolled ? '1px solid #E2E8F0' : 'none'), 
             position: 'fixed', 
             top: 0, 
             left: 0,
             right: 0,
             zIndex: 50,
             transition: 'all 0.2s ease',
-            boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
-            backdropFilter: 'none'
+            boxShadow: activeTab === 'opentowork' ? (isScrolled ? '0 4px 25px rgba(0,0,0,0.5)' : 'none') : (isScrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none'),
+            backdropFilter: activeTab === 'opentowork' ? (isScrolled ? 'blur(12px)' : 'none') : 'none'
           }}
         >
           <div style={{ 
@@ -479,7 +501,7 @@ export function App() {
                 style={{ 
                   height: '46px', 
                   objectFit: 'contain',
-                  filter: isScrolled ? 'none' : 'brightness(0) invert(1)',
+                  filter: activeTab === 'opentowork' ? 'brightness(0) invert(1)' : (isScrolled ? 'none' : 'brightness(0) invert(1)'),
                   transition: 'all 0.2s ease'
                 }} 
               />
@@ -487,18 +509,26 @@ export function App() {
 
             {/* NAVIGATION LINKS (DESKTOP) */}
             <nav className="desktop-nav-menu" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              {(['inicio', 'miembros', 'eventos', 'contenido'] as const).map((tab) => (
+              {(['inicio', 'eventos', 'opentowork', 'contenido', 'miembros'] as const).map((tab) => (
                 <button
                   key={tab}
-                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${!isScrolled ? 'transparent-mode' : ''}`}
+                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled ? 'transparent-mode' : ''}`}
                   onClick={() => {
                     setActiveTab(tab);
                     setViewingEventDetail(false);
                     setSelectedArticle(null);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
+                  style={activeTab === 'opentowork' ? {
+                    color: activeTab === tab ? '#FFFFFF' : '#94A3B8',
+                    backgroundColor: activeTab === tab ? '#af1daa' : 'transparent',
+                    borderRadius: '9999px',
+                    padding: '0.45rem 1.1rem',
+                    fontWeight: '700',
+                    boxShadow: activeTab === tab ? '0 4px 14px rgba(175, 29, 170, 0.4)' : 'none'
+                  } : undefined}
                 >
-                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenidos'}
+                  {tab === 'inicio' ? 'Inicio' : tab === 'eventos' ? 'Eventos' : tab === 'opentowork' ? 'Open to Work' : tab === 'contenido' ? 'Contenidos' : 'Miembros'}
                 </button>
               ))}
             </nav>
@@ -531,7 +561,7 @@ export function App() {
             <button 
               className="mobile-menu-toggle"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              style={{ color: isScrolled ? '#1E1B4B' : '#FFFFFF' }}
+              style={{ color: activeTab === 'opentowork' ? '#FFFFFF' : (isScrolled ? '#1E1B4B' : '#FFFFFF') }}
               aria-label="Abrir menú de navegación"
             >
               {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
@@ -540,11 +570,11 @@ export function App() {
 
           {/* MENÚ DESPLEGABLE DRAWER PARA PANTALLAS MÓVILES */}
           {isMobileMenuOpen && (
-            <div className={`mobile-drawer-menu ${isScrolled ? 'white-bg' : ''}`}>
-              {(['inicio', 'miembros', 'eventos', 'contenido'] as const).map((tab) => (
+            <div className={`mobile-drawer-menu ${activeTab === 'opentowork' ? 'dark-bg' : (isScrolled ? 'white-bg' : '')}`} style={activeTab === 'opentowork' ? { backgroundColor: '#07060A', borderBottom: '1px solid rgba(255,255,255,0.1)' } : undefined}>
+              {(['inicio', 'eventos', 'opentowork', 'contenido', 'miembros'] as const).map((tab) => (
                 <button
                   key={tab}
-                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${!isScrolled ? 'transparent-mode' : ''}`}
+                  className={`nav-link ${activeTab === tab ? 'active' : ''} ${activeTab !== 'opentowork' && !isScrolled ? 'transparent-mode' : ''}`}
                   onClick={() => {
                     setActiveTab(tab);
                     setViewingEventDetail(false);
@@ -552,8 +582,15 @@ export function App() {
                     setIsMobileMenuOpen(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
+                  style={activeTab === 'opentowork' ? {
+                    color: activeTab === tab ? '#FFFFFF' : '#94A3B8',
+                    backgroundColor: activeTab === tab ? '#af1daa' : 'transparent',
+                    borderRadius: '9999px',
+                    padding: '0.6rem 1.25rem',
+                    fontWeight: '700'
+                  } : undefined}
                 >
-                  {tab === 'inicio' ? 'Inicio' : tab === 'miembros' ? 'Miembros' : tab === 'eventos' ? 'Eventos' : 'Contenidos'}
+                  {tab === 'inicio' ? 'Inicio' : tab === 'eventos' ? 'Eventos' : tab === 'opentowork' ? 'Open to Work' : tab === 'contenido' ? 'Contenidos' : 'Miembros'}
                 </button>
               ))}
               <button 
@@ -1479,7 +1516,7 @@ export function App() {
                     {/* 2. SECCIÓN PRÓXIMOS EVENTOS (MOSTRAR ÚNICAMENTE 'No hay próximos eventos') */}
                     <div style={{ marginBottom: '4rem' }}>
                       <div style={{ borderLeft: '4px solid #af1daa', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
-                        <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
+                        <h2 style={{ fontSize: '1.8rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
                           Próximos Eventos
                         </h2>
                       </div>
@@ -1505,7 +1542,7 @@ export function App() {
                     {/* 3. SECCIÓN EVENTOS PREVIOS / REALIZADOS (3 TARJETAS LADO A LADO EN GRILLA DE 3 COLUMNAS) */}
                     <div style={{ marginBottom: '4rem' }}>
                       <div style={{ borderLeft: '4px solid #af1daa', paddingLeft: '1rem', marginBottom: '1.5rem' }}>
-                        <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
+                        <h2 style={{ fontSize: '1.8rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', textTransform: 'uppercase', margin: 0 }}>
                           Eventos Previos Realizados
                         </h2>
                       </div>
@@ -1569,7 +1606,7 @@ export function App() {
                           </div>
 
                           <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem', lineHeight: '1.3' }}>
                               Desayuno WIC Colombia
                             </h3>
                             
@@ -1631,7 +1668,7 @@ export function App() {
                           <span style={{ backgroundColor: 'rgba(230, 175, 252, 0.25)', color: '#af1daa', padding: '0.35rem 0.9rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.85rem' }}>
                             PRÓXIMAMENTE
                           </span>
-                          <h3 style={{ fontSize: '1.3rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
+                          <h3 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
                             Muy pronto, otro evento
                           </h3>
                           <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
@@ -1665,7 +1702,7 @@ export function App() {
                           <span style={{ backgroundColor: 'rgba(230, 175, 252, 0.25)', color: '#af1daa', padding: '0.35rem 0.9rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.85rem' }}>
                             PRÓXIMAMENTE
                           </span>
-                          <h3 style={{ fontSize: '1.3rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
+                          <h3 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', marginBottom: '0.5rem' }}>
                             Muy pronto, otro evento
                           </h3>
                           <p style={{ color: '#64748B', fontSize: '0.85rem', lineHeight: '1.6', maxWidth: '240px', margin: '0 auto 1.5rem' }}>
@@ -2210,7 +2247,7 @@ export function App() {
                 <div className="member-modal-info">
                   <div>
                     {/* NOMBRE DEL MIEMBRO */}
-                    <h2 style={{ fontSize: '2.1rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '700', marginBottom: '0.75rem', lineHeight: '1.2' }}>
+                    <h2 style={{ fontSize: '2.1rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '700', marginBottom: '0.75rem', lineHeight: '1.2' }}>
                       {selectedMember.name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}
                     </h2>
 
@@ -2408,7 +2445,7 @@ export function App() {
                   <h1 style={{ 
                     color: '#FFFFFF', 
                     fontSize: '2.8rem', 
-                    fontFamily: 'serif', 
+                    fontFamily: "'Montserrat', sans-serif", 
                     fontWeight: '700', 
                     lineHeight: '1.2', 
                     marginBottom: '2rem',
@@ -2485,7 +2522,7 @@ export function App() {
                           fontSize: '3.6rem', 
                           lineHeight: '0.8', 
                           fontWeight: '800', 
-                          fontFamily: 'serif', 
+                          fontFamily: "'Montserrat', sans-serif", 
                           color: '#1E1B4B', 
                           marginRight: '0.75rem',
                           paddingTop: '0.2rem'
@@ -2509,14 +2546,14 @@ export function App() {
                       marginBottom: '2rem',
                       position: 'relative'
                     }}>
-                      <p style={{ color: '#7B1FA2', fontFamily: 'serif', fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
+                      <p style={{ color: '#7B1FA2', fontFamily: "'Montserrat', sans-serif", fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
                         "El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones."
                       </p>
-                      <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: 'serif', lineHeight: 1, pointerEvents: 'none' }}>”</span>
+                      <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: "'Montserrat', sans-serif", lineHeight: 1, pointerEvents: 'none' }}>”</span>
                     </div>
 
                     {/* SUBTÍTULO 1 */}
-                    <h2 style={{ fontSize: '1.4rem', fontFamily: 'serif', fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
+                    <h2 style={{ fontSize: '1.4rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
                       Cuando la oportunidad marca la diferencia
                     </h2>
 
@@ -2541,7 +2578,7 @@ export function App() {
                     </div>
 
                     {/* SUBTÍTULO 2 */}
-                    <h2 style={{ fontSize: '1.4rem', fontFamily: 'serif', fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
+                    <h2 style={{ fontSize: '1.4rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
                       ¿Cómo avanzar hacia una participación más estratégica?
                     </h2>
 
@@ -2566,7 +2603,7 @@ export function App() {
                     </div>
 
                     {/* SUBTÍTULO Y REFLEXIÓN FINAL */}
-                    <h2 style={{ fontSize: '1.3rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.75rem' }}>
+                    <h2 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '0.75rem' }}>
                       Reflexión final
                     </h2>
                     <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '2.5rem' }}>
@@ -2710,7 +2747,7 @@ export function App() {
                     
                     {/* WIDGET 1: BUSCAR ARTÍCULO */}
                     <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #F1F5F9' }}>
-                      <h3 style={{ fontSize: '1rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <h3 style={{ fontSize: '1rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                         BUSCAR ARTÍCULO
                       </h3>
                       <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f4f4f4', border: '1px solid #e6affc', borderRadius: '6px', padding: '0.5rem 0.85rem' }}>
@@ -2725,7 +2762,7 @@ export function App() {
 
                     {/* WIDGET 2: ARTÍCULOS RELACIONADOS */}
                     <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #F1F5F9' }}>
-                      <h3 style={{ fontSize: '1rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      <h3 style={{ fontSize: '1rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                         ARTÍCULOS RELACIONADOS
                       </h3>
 
@@ -2763,7 +2800,7 @@ export function App() {
 
                     {/* WIDGET 3: CATEGORÍAS (CAJA PÚRPURA OSCURA SEGÚN MAQUETA) */}
                     <div style={{ backgroundColor: '#af1daa', color: '#FFFFFF', padding: '1.75rem', borderRadius: '12px', boxShadow: '0 8px 20px rgba(175,29,170,0.15)' }}>
-                      <h3 style={{ fontSize: '1rem', fontFamily: 'serif', fontWeight: '700', color: '#FFFFFF', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                      <h3 style={{ fontSize: '1rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#FFFFFF', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                         CATEGORÍAS
                       </h3>
 
@@ -3173,7 +3210,7 @@ export function App() {
 
                                 <h3 style={{ 
                                   fontSize: '1.25rem', 
-                                  fontFamily: 'serif', 
+                                  fontFamily: "'Montserrat', sans-serif", 
                                   fontWeight: '700', 
                                   color: '#7B1FA2', 
                                   marginBottom: '0.6rem', 
@@ -3250,7 +3287,7 @@ export function App() {
                     <div className="desktop-areas-widget" style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #F1F5F9' }}>
                       <h3 style={{ 
                         fontSize: '1.1rem', 
-                        fontFamily: 'serif', 
+                        fontFamily: "'Montserrat', sans-serif", 
                         fontWeight: '700', 
                         color: '#1E1B4B', 
                         marginBottom: '1.25rem',
@@ -3304,7 +3341,7 @@ export function App() {
                     <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #F1F5F9' }}>
                       <h3 style={{ 
                         fontSize: '1.1rem', 
-                        fontFamily: 'serif', 
+                        fontFamily: "'Montserrat', sans-serif", 
                         fontWeight: '700', 
                         color: '#1E1B4B', 
                         marginBottom: '1.25rem',
@@ -3351,7 +3388,7 @@ export function App() {
                               />
                             </div>
                             <div>
-                              <h4 style={{ fontSize: '0.82rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', lineHeight: '1.35', marginBottom: '0.25rem' }}>
+                              <h4 style={{ fontSize: '0.82rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', lineHeight: '1.35', marginBottom: '0.25rem' }}>
                                 {item.title}
                               </h4>
                               <span style={{ fontSize: '0.68rem', color: '#94A3B8', fontWeight: '600' }}>
@@ -3376,7 +3413,7 @@ export function App() {
                     <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
                       TUS PUBLICACIONES CON NOSOTROS
                     </span>
-                    <h2 style={{ fontSize: '2.5rem', fontFamily: 'serif', fontWeight: '700', color: '#7B1FA2', lineHeight: '1.2' }}>
+                    <h2 style={{ fontSize: '2.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#7B1FA2', lineHeight: '1.2' }}>
                       Si quieres publicar con nosotros, escríbenos.
                     </h2>
                   </div>
@@ -3484,6 +3521,621 @@ export function App() {
         )}
 
         {/* ---------------------------------------------------- */}
+        {/* PÁGINA 5: OPEN TO WORK (DIRECTORIO DE SERVICIOS)     */}
+        {/* ---------------------------------------------------- */}
+        {activeTab === 'opentowork' && (
+          <div style={{ 
+            backgroundColor: '#07060A', 
+            color: '#FFFFFF', 
+            minHeight: '100vh', 
+            paddingTop: '6rem', 
+            paddingBottom: '5rem',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            
+            {/* CÍRCULOS DESENFOCADOS INTERACTIVOS (GLOWING BLURRED ORBS CON MOVIMIENTO INTERACTIVO DE EMPUJE DE MOUSE) */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              overflow: 'hidden',
+              zIndex: 0
+            }}>
+              {/* Círculo 1: Fucsia brillante (Superior Izquierda) */}
+              <div style={{
+                position: 'absolute',
+                top: '-5%',
+                left: '8%',
+                width: '650px',
+                height: '650px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(175, 29, 170, 0.42) 0%, rgba(175, 29, 170, 0) 70%)',
+                filter: 'blur(90px)',
+                transform: `translate(${-mouseOffset.x * 45}px, ${-mouseOffset.y * 45}px)`,
+                transition: 'transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)',
+                willChange: 'transform'
+              }} />
+
+              {/* Círculo 2: Magenta / Púrpura Neón (Medio Derecha) */}
+              <div style={{
+                position: 'absolute',
+                top: '20%',
+                right: '-6%',
+                width: '750px',
+                height: '750px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(235, 84, 255, 0.35) 0%, rgba(235, 84, 255, 0) 70%)',
+                filter: 'blur(110px)',
+                transform: `translate(${-mouseOffset.x * -35}px, ${-mouseOffset.y * -35}px)`,
+                transition: 'transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)',
+                willChange: 'transform'
+              }} />
+
+              {/* Círculo 3: Violeta Profundo (Inferior Izquierda) */}
+              <div style={{
+                position: 'absolute',
+                top: '55%',
+                left: '-5%',
+                width: '700px',
+                height: '700px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(130, 20, 160, 0.38) 0%, rgba(130, 20, 160, 0) 70%)',
+                filter: 'blur(100px)',
+                transform: `translate(${-mouseOffset.x * 55}px, ${-mouseOffset.y * 55}px)`,
+                transition: 'transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)',
+                willChange: 'transform'
+              }} />
+
+              {/* Círculo 4: Rosa / Púrpura Pastel (Inferior Derecha) */}
+              <div style={{
+                position: 'absolute',
+                bottom: '10%',
+                right: '20%',
+                width: '600px',
+                height: '600px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(230, 175, 252, 0.28) 0%, rgba(230, 175, 252, 0) 70%)',
+                filter: 'blur(95px)',
+                transform: `translate(${-mouseOffset.x * -50}px, ${-mouseOffset.y * 50}px)`,
+                transition: 'transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)',
+                willChange: 'transform'
+              }} />
+            </div>
+
+            {/* HERO CONTAINER CON GLOW PURPURA COMPLETO */}
+            <div style={{
+              position: 'relative',
+              zIndex: 1,
+              maxWidth: '1280px',
+              margin: '0 auto',
+              padding: '2rem 1.5rem 3rem 1.5rem'
+            }}>
+              
+              {/* BADGE SUPERIOR PILL */}
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.75rem' }} className="reveal">
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(235, 84, 255, 0.3)',
+                  padding: '0.45rem 1.25rem',
+                  borderRadius: '9999px',
+                  boxShadow: '0 4px 20px rgba(175, 29, 170, 0.2)'
+                }}>
+                  <span style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: '#34D399',
+                    boxShadow: '0 0 10px #34D399',
+                    display: 'inline-block'
+                  }}></span>
+                  <span style={{
+                    fontSize: '0.72rem',
+                    fontWeight: '700',
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                    color: '#E6AFFC'
+                  }}>
+                    NETWORK EXCLUSIVO WIC <span style={{ opacity: 0.5, margin: '0 0.3rem' }}>|</span> Directorio Certificado 100%
+                  </span>
+                </div>
+              </div>
+
+              {/* TÍTULO PRINCIPAL HERO EXACTO SEGÚN IMAGEN CON ITALICA EN INTEGRIDAD LEGAL */}
+              <div style={{ textAlign: 'center', maxWidth: '980px', margin: '0 auto', marginBottom: '1.75rem' }} className="reveal">
+                <h1 style={{
+                  fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: '800',
+                  lineHeight: '1.15',
+                  letterSpacing: '-1px',
+                  color: '#FFFFFF',
+                  marginBottom: '1.25rem'
+                }}>
+                  El Directorio Directivo de la<br />
+                  <span style={{ fontStyle: 'italic', fontFamily: "'Montserrat', sans-serif", color: '#eb54ff', fontWeight: '400', marginRight: '0.3rem' }}>Integridad Legal</span> & Compliance.
+                </h1>
+                <p style={{
+                  fontSize: '1.05rem',
+                  color: '#CBD5E1',
+                  lineHeight: '1.7',
+                  maxWidth: '780px',
+                  margin: '0 auto'
+                }}>
+                  Descubre el ecosistema más influyente de abogadas socias, consultoras de ética y expertas SAGRILAFT preparadas para transformar juntas directivas y blindar corporaciones en Colombia y LATAM.
+                </p>
+              </div>
+
+              {/* BOTONES PRINCIPALES HERO */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3.5rem' }} className="reveal">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('anuncios-grid');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    color: '#05040A',
+                    border: 'none',
+                    padding: '0.85rem 1.75rem',
+                    borderRadius: '9999px',
+                    fontWeight: '700',
+                    fontSize: '0.88rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    boxShadow: '0 4px 20px rgba(255, 255, 255, 0.25)',
+                    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px) scale(1.03)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0) scale(1)'}
+                >
+                  Explorar Anuncios Destacados <ArrowRight size={16} />
+                </button>
+                
+                <button
+                  onClick={() => setShowOpenToWorkModal(true)}
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    color: '#FFFFFF',
+                    border: '1px solid rgba(235, 84, 255, 0.4)',
+                    padding: '0.85rem 1.75rem',
+                    borderRadius: '9999px',
+                    fontWeight: '700',
+                    fontSize: '0.88rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px) scale(1.03)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0) scale(1)'}
+                >
+                  <Briefcase size={16} style={{ color: '#eb54ff' }} /> Publicar Perfil Profesional
+                </button>
+              </div>
+
+              {/* TARJETA DE ESTADÍSTICAS HERO (METRICS COUNTER BAR EXACTA) */}
+              <div style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(16px)',
+                borderRadius: '20px',
+                padding: '1.75rem 2rem',
+                maxWidth: '960px',
+                margin: '0 auto',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: '1.5rem',
+                textAlign: 'center',
+                transition: 'all 0.35s ease'
+              }} 
+              className="reveal"
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.3)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; }}
+              >
+                
+                <div style={{ borderRight: '1px solid rgba(255, 255, 255, 0.08)', paddingRight: '1rem' }}>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', fontFamily: "'Montserrat', sans-serif", color: '#FFFFFF', lineHeight: '1' }}>+100</div>
+                  <div style={{ fontSize: '0.68rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: '#94A3B8', marginTop: '0.4rem' }}>LÍDERES CERTIFICADAS</div>
+                </div>
+
+                <div style={{ borderRight: '1px solid rgba(255, 255, 255, 0.08)', paddingRight: '1rem' }}>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', fontFamily: "'Montserrat', sans-serif", color: '#FFFFFF', lineHeight: '1' }}>100%</div>
+                  <div style={{ fontSize: '0.68rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: '#94A3B8', marginTop: '0.4rem' }}>VALIDACIÓN DE RIGOR</div>
+                </div>
+
+                <div style={{ borderRight: '1px solid rgba(255, 255, 255, 0.08)', paddingRight: '1rem' }}>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', fontFamily: "'Montserrat', sans-serif", color: '#FFFFFF', lineHeight: '1' }}>8+</div>
+                  <div style={{ fontSize: '0.68rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: '#94A3B8', marginTop: '0.4rem' }}>ÁREAS DE ESPECIALIDAD</div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', fontFamily: "'Montserrat', sans-serif", color: '#FFFFFF', lineHeight: '1' }}>0%</div>
+                  <div style={{ fontSize: '0.68rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: '#94A3B8', marginTop: '0.4rem' }}>RIESGOS DE CUMPLIMIENTO</div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* SECCIÓN PRINCIPAL: FILTROS Y GRILLA DE ANUNCIOS */}
+            <div id="anuncios-grid" style={{ maxWidth: '1280px', margin: '3rem auto 0 auto', padding: '0 1.5rem' }}>
+              
+              {/* BARRA DE FILTROS EN CAPSULA OSCURA (EXACTA SEGÚN MOCKUP) */}
+              <div style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '9999px',
+                padding: '0.4rem 0.6rem',
+                marginBottom: '2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.5rem'
+              }} className="reveal">
+                
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                  {[
+                    `Todos los Anuncios (${membersList.length})`,
+                    'Líderes de Confianza',
+                    'Conferencistas Magistrales',
+                    'SAGRILAFT & PTEE',
+                    'Investigaciones & Peritaje'
+                  ].map((tab, idx) => {
+                    const isSelected = (idx === 0 && openToWorkCategory === 'Todas') || (openToWorkCategory !== 'Todas' && tab.toLowerCase().includes(openToWorkCategory.toLowerCase()));
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          if (idx === 0) setOpenToWorkCategory('Todas');
+                          else if (idx === 1) setOpenToWorkCategory('Gobierno Corporativo');
+                          else if (idx === 2) setOpenToWorkCategory('Juntas Directivas');
+                          else if (idx === 3) setOpenToWorkCategory('SAGRILAFT & PTEE');
+                          else setOpenToWorkCategory('Compliance Penal');
+                        }}
+                        style={{
+                          backgroundColor: isSelected ? '#af1daa' : 'transparent',
+                          color: isSelected ? '#FFFFFF' : '#94A3B8',
+                          border: 'none',
+                          padding: '0.55rem 1.25rem',
+                          borderRadius: '9999px',
+                          fontSize: '0.8rem',
+                          fontWeight: '700',
+                          cursor: 'pointer',
+                          transition: 'all 0.25s ease',
+                          boxShadow: isSelected ? '0 4px 14px rgba(175, 29, 170, 0.4)' : 'none'
+                        }}
+                      >
+                        {tab}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingRight: '1rem', color: '#94A3B8', fontSize: '0.8rem', fontWeight: '600' }}>
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#34D399', display: 'inline-block' }}></span>
+                  {membersList.length} Anuncios Disponibles
+                </div>
+
+              </div>
+
+              {/* GRILLA DE TARJETAS ANUNCIOS GRISES (RESERVADAS PARA ANUNCIOS DISEÑADOS + EFECTO DE MOVIMIENTO HOVER) */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                gap: '1.75rem',
+                marginBottom: '4rem'
+              }}>
+                {membersList.map((m, idx) => (
+                  <div 
+                    key={m.id}
+                    className="reveal"
+                    style={{
+                      backgroundColor: '#D9D9D9',
+                      borderRadius: '24px',
+                      padding: '2rem 1.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      minHeight: idx === 0 ? '580px' : '280px',
+                      gridRow: idx === 0 ? 'span 2' : 'span 1',
+                      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
+                      transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, filter 0.35s ease',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                      e.currentTarget.style.boxShadow = '0 20px 45px rgba(235, 84, 255, 0.35)';
+                      e.currentTarget.style.filter = 'brightness(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.3)';
+                      e.currentTarget.style.filter = 'brightness(1)';
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* BANNER NEWSLETTER / CONVOCATORIAS DIRECTIVAS (EXACTO SEGÚN MOCKUP FIGMA) */}
+              <div 
+                className="reveal"
+                style={{
+                  backgroundColor: '#0E0C16',
+                  border: '1px solid rgba(235, 84, 255, 0.3)',
+                  borderRadius: '24px',
+                  padding: '3rem 2.5rem',
+                  backgroundImage: 'radial-gradient(circle at 90% 50%, rgba(175, 29, 170, 0.3) 0%, transparent 60%)',
+                  boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5)',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gap: '2.5rem',
+                  alignItems: 'center',
+                  transition: 'all 0.35s ease'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.6)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.3)'; }}
+              >
+                <div>
+                  <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    backgroundColor: 'rgba(175, 29, 170, 0.18)',
+                    color: '#EB54FF',
+                    border: '1px solid rgba(235, 84, 255, 0.3)',
+                    padding: '0.35rem 0.85rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.72rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    marginBottom: '1.25rem'
+                  }}>
+                    BOLETÍN SEMANAL DE CONVOCATORIAS
+                  </div>
+
+                  <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#FFFFFF', marginBottom: '1rem', lineHeight: '1.2' }}>
+                    Recibe convocatorias directivas y solicitudes de dictamen jurídico.
+                  </h2>
+                  <p style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: '1.6', margin: 0 }}>
+                    Acceso exclusivo a ternas para juntas directivas, requerimientos corporativos de peritajes y alianzas intersectoriales reservadas para miembros de WIC Colombia.
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <form onSubmit={(e) => { e.preventDefault(); alert('¡Gracias por suscribirte al boletín de convocatorias directivas!'); }} style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                    <input 
+                      type="email"
+                      required
+                      placeholder="correo@corporativo.com"
+                      style={{
+                        flex: 1,
+                        minWidth: '220px',
+                        padding: '0.85rem 1.25rem',
+                        backgroundColor: '#05040A',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        borderRadius: '9999px',
+                        color: '#FFFFFF',
+                        fontSize: '0.88rem',
+                        outline: 'none'
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        backgroundColor: '#af1daa',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        padding: '0.85rem 1.5rem',
+                        borderRadius: '9999px',
+                        fontWeight: '700',
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(175, 29, 170, 0.4)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                      SUSCRIBIRME <ArrowRight size={16} />
+                    </button>
+                  </form>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748B', fontSize: '0.75rem', padding: '0 0.5rem' }}>
+                    <span>● OK Correo Spam</span>
+                    <span>Estrictamente confidencial</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* MODAL PARA SOLICITUD DE PUBLICACIÓN EN OPEN TO WORK */}
+            {showOpenToWorkModal && (
+              <div 
+                onClick={() => setShowOpenToWorkModal(false)}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  backgroundColor: 'rgba(5, 4, 10, 0.85)',
+                  backdropFilter: 'blur(8px)',
+                  zIndex: 1000,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '1.5rem'
+                }}
+              >
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    backgroundColor: '#0E0C16',
+                    border: '1.5px solid rgba(235, 84, 255, 0.4)',
+                    borderRadius: '24px',
+                    maxWidth: '560px',
+                    width: '100%',
+                    padding: '2.5rem',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+                    position: 'relative',
+                    color: '#FFFFFF'
+                  }}
+                >
+                  <button 
+                    onClick={() => setShowOpenToWorkModal(false)}
+                    style={{
+                      position: 'absolute',
+                      top: '1.25rem',
+                      right: '1.25rem',
+                      background: 'rgba(255,255,255,0.08)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      color: '#FFFFFF',
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <X size={20} />
+                  </button>
+
+                  <h3 style={{ fontSize: '1.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#FFFFFF', marginBottom: '0.5rem' }}>
+                    Solicitud de inclusión Open to Work
+                  </h3>
+                  <p style={{ color: '#94A3B8', fontSize: '0.88rem', marginBottom: '1.75rem', lineHeight: '1.5' }}>
+                    Ingresa tus datos de afiliada para activar tu sello Open to Work en el directorio oficial.
+                  </p>
+
+                  {openToWorkFormSubmitted ? (
+                    <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                      <CheckCircle2 size={48} style={{ color: '#34D399', marginBottom: '1rem' }} />
+                      <h4 style={{ fontSize: '1.2rem', color: '#FFFFFF', fontWeight: '700', marginBottom: '0.4rem' }}>
+                        ¡Solicitud recibida con éxito!
+                      </h4>
+                      <p style={{ color: '#94A3B8', fontSize: '0.88rem' }}>
+                        Validaremos tu estado de afiliación WIC y activaremos tu perfil en menos de 24 horas hábiles.
+                      </p>
+                    </div>
+                  ) : (
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setOpenToWorkFormSubmitted(true);
+                      }}
+                      style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                    >
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#E6AFFC', fontWeight: '700', marginBottom: '0.4rem' }}>
+                          Nombre Completo
+                        </label>
+                        <input 
+                          type="text"
+                          required
+                          placeholder="Tu nombre completo"
+                          value={openToWorkFormData.name}
+                          onChange={(e) => setOpenToWorkFormData({ ...openToWorkFormData, name: e.target.value })}
+                          style={{
+                            width: '100%',
+                            padding: '0.8rem 1rem',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '8px',
+                            color: '#FFFFFF',
+                            fontSize: '0.9rem',
+                            outline: 'none'
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#E6AFFC', fontWeight: '700', marginBottom: '0.4rem' }}>
+                          Correo Corporativo
+                        </label>
+                        <input 
+                          type="email"
+                          required
+                          placeholder="correo@ejemplo.com"
+                          value={openToWorkFormData.email}
+                          onChange={(e) => setOpenToWorkFormData({ ...openToWorkFormData, email: e.target.value })}
+                          style={{
+                            width: '100%',
+                            padding: '0.8rem 1rem',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '8px',
+                            color: '#FFFFFF',
+                            fontSize: '0.9rem',
+                            outline: 'none'
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#E6AFFC', fontWeight: '700', marginBottom: '0.4rem' }}>
+                          Especialidad Principal / Servicios
+                        </label>
+                        <input 
+                          type="text"
+                          required
+                          placeholder="Ej: Asesoría SAGRILAFT, Junta Directiva, Compliance Penal"
+                          value={openToWorkFormData.role}
+                          onChange={(e) => setOpenToWorkFormData({ ...openToWorkFormData, role: e.target.value })}
+                          style={{
+                            width: '100%',
+                            padding: '0.8rem 1rem',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '8px',
+                            color: '#FFFFFF',
+                            fontSize: '0.9rem',
+                            outline: 'none'
+                          }}
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        style={{
+                          backgroundColor: '#af1daa',
+                          color: '#FFFFFF',
+                          border: 'none',
+                          padding: '0.9rem 1.5rem',
+                          borderRadius: '8px',
+                          fontWeight: '700',
+                          fontSize: '0.9rem',
+                          cursor: 'pointer',
+                          marginTop: '0.5rem',
+                          boxShadow: '0 4px 15px rgba(175, 29, 170, 0.4)'
+                        }}
+                      >
+                        Enviar solicitud a WIC Colombia
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
         {/* PANEL ADMINISTRATIVO WIC (MAQUETAS 08, 09 Y 10)       */}
         {/* ---------------------------------------------------- */}
         {activeTab === 'login' && (
@@ -3511,7 +4163,7 @@ export function App() {
                         <Building2 size={18} />
                       </div>
                       <div>
-                        <span style={{ color: '#af1daa', fontSize: '1.2rem', fontFamily: 'serif', fontWeight: '700', display: 'block', lineHeight: '1.1' }}>
+                        <span style={{ color: '#af1daa', fontSize: '1.2rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', display: 'block', lineHeight: '1.1' }}>
                           Admin Portal
                         </span>
                       </div>
@@ -3636,7 +4288,7 @@ export function App() {
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                       <div>
-                        <h1 style={{ color: '#1E1B4B', fontSize: '2.5rem', fontFamily: 'serif', fontWeight: '700', marginBottom: '0.25rem' }}>
+                        <h1 style={{ color: '#1E1B4B', fontSize: '2.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.25rem' }}>
                           Miembros
                         </h1>
                         <p style={{ color: '#64748B', fontSize: '0.95rem' }}>
@@ -3773,7 +4425,7 @@ export function App() {
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                           DIRECTORIO &gt; <span style={{ color: '#af1daa' }}>EDITAR PERFIL</span>
                         </span>
-                        <h1 style={{ color: '#af1daa', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginTop: '0.2rem' }}>
+                        <h1 style={{ color: '#af1daa', fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginTop: '0.2rem' }}>
                           Perfil del Miembro
                         </h1>
                       </div>
@@ -3943,7 +4595,7 @@ export function App() {
                                 type="text" 
                                 placeholder="Ej. Dra. Elena Valenzuela"
                                 defaultValue={editingMember ? editingMember.name : ''}
-                                style={{ width: '100%', padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '1.3rem', fontFamily: 'serif', fontWeight: '700', color: '#1E1B4B', outline: 'none' }}
+                                style={{ width: '100%', padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', outline: 'none' }}
                               />
                             </div>
 
@@ -4022,7 +4674,7 @@ export function App() {
                         
                         {/* TARJETA ESTADO DE LA CUENTA */}
                         <div style={{ backgroundColor: '#FAF5FF', borderRadius: '8px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                          <h3 style={{ color: '#1E1B4B', fontSize: '1.3rem', fontFamily: 'serif', marginBottom: '1.25rem' }}>
+                          <h3 style={{ color: '#1E1B4B', fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", marginBottom: '1.25rem' }}>
                             Estado de la Cuenta
                           </h3>
 
@@ -4053,7 +4705,7 @@ export function App() {
 
                         {/* TARJETA LINKEDIN */}
                         <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                          <h3 style={{ color: '#1E1B4B', fontSize: '1.3rem', fontFamily: 'serif', marginBottom: '1rem' }}>
+                          <h3 style={{ color: '#1E1B4B', fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", marginBottom: '1rem' }}>
                             Linkedin
                           </h3>
                           <div style={{ position: 'relative' }}>
@@ -4079,7 +4731,7 @@ export function App() {
                   <div>
                     {/* TÍTULO & DESCRIPCIÓN */}
                     <div style={{ marginBottom: '2.5rem' }}>
-                      <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginBottom: '0.5rem' }}>
+                      <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.5rem' }}>
                         Dashboard
                       </h1>
                       <p style={{ color: '#64748B', fontSize: '1.05rem' }}>
@@ -4095,7 +4747,7 @@ export function App() {
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                           TOTAL DE MIEMBROS
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
+                        <h2 style={{ fontSize: '3rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
                           12,482
                         </h2>
                         <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -4109,7 +4761,7 @@ export function App() {
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                           TOTAL DE ARTÍCULOS
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
+                        <h2 style={{ fontSize: '3rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
                           342
                         </h2>
                         <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -4127,7 +4779,7 @@ export function App() {
                       <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
                           <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
-                          <h3 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
+                          <h3 style={{ fontSize: '2rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
                             Agregar nueva socia
                           </h3>
                           <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
@@ -4166,7 +4818,7 @@ export function App() {
                       <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
                           <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
-                          <h3 style={{ fontSize: '2rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
+                          <h3 style={{ fontSize: '2rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
                             Crear nuevo contenido
                           </h3>
                           <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
@@ -4211,7 +4863,7 @@ export function App() {
                     {/* ENCABEZADO CON TÍTULO EN SERIF & BOTÓN NUEVO ARTÍCULO */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                       <div>
-                        <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginBottom: '0.25rem' }}>
+                        <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.25rem' }}>
                           Blogs
                         </h1>
                         <p style={{ color: '#64748B', fontSize: '0.95rem' }}>
@@ -4234,19 +4886,19 @@ export function App() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '4px', border: '1px solid #E2E8F0' }}>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>124</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>124</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>PUBLICADOS</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>98</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>98</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>EN BORRADOR</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>26</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>26</h2>
                       </div>
                       <div style={{ paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: 'serif' }}>12.5k</h2>
+                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>12.5k</h2>
                       </div>
                     </div>
 
@@ -4359,7 +5011,7 @@ export function App() {
                           ← Volver al listado de entradas
                         </button>
                         
-                        <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: 'serif', fontWeight: '700', marginBottom: '0.25rem' }}>
+                        <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.25rem' }}>
                           {editingArticle ? 'Editar Entrada' : 'Nueva Entrada'}
                         </h1>
                         <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
@@ -4377,7 +5029,7 @@ export function App() {
                             style={{ 
                               width: '100%', 
                               fontSize: '2.2rem', 
-                              fontFamily: 'serif', 
+                              fontFamily: "'Montserrat', sans-serif", 
                               color: '#1E1B4B', 
                               border: 'none', 
                               outline: 'none', 
@@ -4556,7 +5208,7 @@ export function App() {
                               backgroundColor: 'transparent', 
                               fontSize: '1.05rem', 
                               lineHeight: '1.8', 
-                              fontFamily: 'serif',
+                              fontFamily: "'Montserrat', sans-serif",
                               color: '#1E1B4B',
                               outline: 'none',
                               resize: 'none'
@@ -4585,7 +5237,7 @@ export function App() {
                                 outline: 'none',
                                 color: '#af1daa', 
                                 fontSize: '1.15rem', 
-                                fontFamily: 'serif', 
+                                fontFamily: "'Montserrat', sans-serif", 
                                 fontStyle: 'italic',
                                 fontWeight: '500'
                               }}
@@ -4596,7 +5248,7 @@ export function App() {
                               bottom: '0.5rem', 
                               fontSize: '3.5rem', 
                               color: 'rgba(143, 0, 141, 0.25)', 
-                              fontFamily: 'serif',
+                              fontFamily: "'Montserrat', sans-serif",
                               lineHeight: 1,
                               pointerEvents: 'none'
                             }}>
@@ -4616,7 +5268,7 @@ export function App() {
                               backgroundColor: 'transparent', 
                               fontSize: '1.05rem', 
                               lineHeight: '1.8', 
-                              fontFamily: 'serif',
+                              fontFamily: "'Montserrat', sans-serif",
                               color: '#1E1B4B',
                               outline: 'none',
                               resize: 'none'
@@ -4669,7 +5321,7 @@ export function App() {
                               backgroundColor: 'transparent', 
                               fontSize: '1.05rem', 
                               lineHeight: '1.8', 
-                              fontFamily: 'serif',
+                              fontFamily: "'Montserrat', sans-serif",
                               color: '#1E1B4B',
                               outline: 'none',
                               resize: 'vertical'
@@ -4920,7 +5572,7 @@ export function App() {
                 <h1 style={{ 
                   color: '#1E1B4B', 
                   fontSize: '2.2rem', 
-                  fontFamily: 'serif', 
+                  fontFamily: "'Montserrat', sans-serif", 
                   fontWeight: '600', 
                   marginBottom: '0.4rem' 
                 }}>
@@ -5074,8 +5726,8 @@ export function App() {
               </div>
             </div>
           </div>
-          )
-        )}
+        )
+      )}
 
         {/* ---------------------------------------------------- */}
         {/* PÁGINA 5: ERROR 404 - INFRACCIÓN DE RUTA DETECTADA  */}
@@ -5167,7 +5819,13 @@ export function App() {
 
       {/* FOOTER (OCULTO EN VISTA LOGIN/ADMIN SEGÚN MAQUETA 07-LOGIN) */}
       {activeTab !== 'login' && (
-        <footer style={{ backgroundColor: '#0A1128', color: '#FFFFFF', borderTop: '1px solid #1E293B', padding: '4rem 1.5rem 2rem 1.5rem' }}>
+        <footer style={{ 
+          backgroundColor: activeTab === 'opentowork' ? '#07060A' : '#0A1128', 
+          color: '#FFFFFF', 
+          borderTop: activeTab === 'opentowork' ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #1E293B', 
+          padding: '4rem 1.5rem 2rem 1.5rem',
+          transition: 'background-color 0.25s ease'
+        }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
               
@@ -5337,7 +5995,7 @@ export function App() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
               <FileText size={28} style={{ color: '#af1daa' }} />
-              <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
+              <h2 style={{ fontSize: '1.8rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
                 TÉRMINOS Y CONDICIONES
               </h2>
             </div>
@@ -5485,7 +6143,7 @@ export function App() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
               <ShieldCheck size={28} style={{ color: '#af1daa' }} />
-              <h2 style={{ fontSize: '1.8rem', fontFamily: 'serif', color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
+              <h2 style={{ fontSize: '1.8rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', margin: 0 }}>
                 POLÍTICA DE PRIVACIDAD
               </h2>
             </div>

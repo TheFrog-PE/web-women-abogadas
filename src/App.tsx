@@ -4235,76 +4235,100 @@ export function App() {
                 );
               })()}
 
-              {/* BANNER IMPULSA TU VISIBILIDAD / PUBLICAR EN OPEN TO WORK (EXACTO SEGÚN MOCKUP FIGMA) */}
+              {/* BANNER NEWSLETTER / CONVOCATORIAS DIRECTIVAS (EXACTO SEGÚN MOCKUP FIGMA) */}
               <div 
                 className="reveal"
                 style={{
-                  backgroundColor: '#8B0D86',
-                  backgroundImage: 'linear-gradient(135deg, #AF1DAA 0%, #750972 100%)',
+                  backgroundColor: '#0E0C16',
+                  border: '1px solid rgba(235, 84, 255, 0.3)',
                   borderRadius: '24px',
-                  padding: '3rem 3rem',
-                  boxShadow: '0 16px 45px rgba(175, 29, 170, 0.35)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  padding: '3rem 2.5rem',
+                  backgroundImage: 'radial-gradient(circle at 90% 50%, rgba(175, 29, 170, 0.3) 0%, transparent 60%)',
+                  boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5)',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
                   gap: '2.5rem',
-                  flexWrap: 'wrap',
+                  alignItems: 'center',
                   transition: 'all 0.35s ease'
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 22px 55px rgba(175, 29, 170, 0.45)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 16px 45px rgba(175, 29, 170, 0.35)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.6)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.3)'; }}
               >
-                <div style={{ flex: 1, minWidth: '280px', maxWidth: '640px' }}>
+                <div>
                   <div style={{
-                    color: 'rgba(255, 255, 255, 0.85)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    backgroundColor: 'rgba(175, 29, 170, 0.18)',
+                    color: '#EB54FF',
+                    border: '1px solid rgba(235, 84, 255, 0.3)',
+                    padding: '0.35rem 0.85rem',
+                    borderRadius: '9999px',
                     fontSize: '0.72rem',
-                    fontWeight: '800',
-                    letterSpacing: '1.5px',
+                    fontWeight: '700',
+                    letterSpacing: '0.5px',
                     textTransform: 'uppercase',
-                    marginBottom: '0.85rem'
+                    marginBottom: '1.25rem'
                   }}>
-                    IMPULSA TU VISIBILIDAD
+                    BOLETÍN SEMANAL DE CONVOCATORIAS
                   </div>
 
-                  <h2 style={{ 
-                    fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)', 
-                    fontFamily: "'Montserrat', sans-serif", 
-                    fontWeight: '800', 
-                    color: '#FFFFFF', 
-                    marginBottom: '0.75rem', 
-                    lineHeight: '1.25' 
-                  }}>
+                  <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#FFFFFF', marginBottom: '1rem', lineHeight: '1.2' }}>
                     ¿Deseas publicar tu práctica legal o bufete en WIC Colombia?
                   </h2>
-                  <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.92rem', lineHeight: '1.55', margin: 0 }}>
+                  <p style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: '1.6', margin: 0 }}>
                     Forma parte de una comunidad de alto impacto diseñada por y para mujeres líderes que transforman la cultura ética empresarial.
                   </p>
                 </div>
 
-                <div style={{ flexShrink: 0 }}>
-                  <button
-                    onClick={() => setShowOpenToWorkModal(true)}
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      color: '#af1daa',
-                      border: 'none',
-                      padding: '0.95rem 2.2rem',
-                      borderRadius: '9999px',
-                      fontWeight: '800',
-                      fontSize: '0.9rem',
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      transition: 'all 0.25s ease'
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 6px 25px rgba(0, 0, 0, 0.3)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)'; }}
-                  >
-                    Publicar Anuncio Ahora
-                  </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <form onSubmit={(e) => { e.preventDefault(); alert('¡Gracias por tu interés! Nos contactaremos contigo a la brevedad.'); }} style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                    <input 
+                      type="email"
+                      required
+                      placeholder="correo@corporativo.com"
+                      style={{
+                        flex: 1,
+                        minWidth: '220px',
+                        padding: '0.85rem 1.25rem',
+                        backgroundColor: '#05040A',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        borderRadius: '9999px',
+                        color: '#FFFFFF',
+                        fontSize: '0.88rem',
+                        outline: 'none'
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        backgroundColor: '#af1daa',
+                        color: '#FFFFFF',
+                        border: 'none',
+                        padding: '0.85rem 1.5rem',
+                        borderRadius: '9999px',
+                        fontWeight: '700',
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(175, 29, 170, 0.4)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                      SUSCRIBIRME <ArrowRight size={16} />
+                    </button>
+                  </form>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748B', fontSize: '0.75rem', padding: '0 0.5rem' }}>
+                    <span>● OK Correo Spam</span>
+                    <span>Estrictamente confidencial</span>
+                  </div>
                 </div>
+
               </div>
 
             </div>

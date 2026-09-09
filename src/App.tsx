@@ -337,15 +337,20 @@ export function App() {
     return null;
   };
 
+  const getAnuncioForMember = (member: Member | null): AnuncioItem | null => {
+    if (!member) return null;
+    const foundByMemberId = ANUNCIOS_DATA.find(a => a.memberId === member.id);
+    if (foundByMemberId) return foundByMemberId;
+    const n = member.name.toLowerCase();
+    if (n.includes('adriana')) return ANUNCIOS_DATA.find(a => a.id === 'anuncio-4') || null;
+    if (n.includes('rueda') || n.includes('paula')) return ANUNCIOS_DATA.find(a => a.id === 'anuncio-1') || null;
+    if (n.includes('yolima') || n.includes('bautista')) return ANUNCIOS_DATA.find(a => a.id === 'anuncio-2') || null;
+    if (n.includes('liz') || n.includes('bejarano')) return ANUNCIOS_DATA.find(a => a.id === 'anuncio-3') || null;
+    return ANUNCIOS_DATA[0];
+  };
+
   const handleAnuncioClick = (anuncio: AnuncioItem) => {
-    const targetMember = getTargetMember(anuncio);
-    if (targetMember) {
-      setActiveTab('miembros');
-      setSelectedMember(targetMember);
-      window.scrollTo({ top: 400, behavior: 'smooth' });
-    } else {
-      setSelectedAnuncio(anuncio);
-    }
+    setSelectedAnuncio(anuncio);
   };
 
   const [searchArticle, setSearchArticle] = useState('');
@@ -2469,7 +2474,16 @@ export function App() {
                       </button>
                       <button 
                         onClick={() => {
-                          alert(`Explorando servicios profesionales Open to Work de ${selectedMember.name}`);
+                          const targetAnuncio = getAnuncioForMember(selectedMember);
+                          setSelectedMember(null);
+                          setActiveTab('opentowork');
+                          if (targetAnuncio) {
+                            setSelectedAnuncio(targetAnuncio);
+                          }
+                          setTimeout(() => {
+                            const el = document.getElementById('anuncios-grid');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          }, 100);
                         }}
                         style={{ 
                           backgroundColor: '#FFFFFF', 
@@ -2482,8 +2496,13 @@ export function App() {
                           borderRadius: '6px',
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '0.4rem'
+                          gap: '0.4rem',
+                          boxShadow: '0 2px 8px rgba(175, 29, 170, 0.15)',
+                          transition: 'all 0.2s ease'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.08)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
+                        title="Ver anuncio en Open to Work"
                       >
                         <Briefcase size={15} /> Open to Work (Servicios)
                       </button>
@@ -4431,7 +4450,7 @@ export function App() {
                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d927d2'}
                             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#af1daa'}
                           >
-                            Ver Perfil Profesional <ArrowRight size={15} />
+                            Ver Perfil <ArrowRight size={15} />
                           </button>
                         );
                       }

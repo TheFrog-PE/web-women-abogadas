@@ -4111,11 +4111,23 @@ export function App() {
                             e.currentTarget.style.transform = 'translateY(-5px) scale(1.01)';
                             e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.85)';
                             e.currentTarget.style.boxShadow = '0 22px 55px rgba(235, 84, 255, 0.35), 0 10px 25px rgba(0,0,0,0.8)';
+                            const arrow = e.currentTarget.querySelector('.cta-large-arrow') as HTMLElement;
+                            if (arrow) {
+                              arrow.style.transform = 'translateX(6px) scale(1.1)';
+                              arrow.style.backgroundColor = '#af1daa';
+                              arrow.style.borderColor = 'rgba(235, 84, 255, 0.9)';
+                            }
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'translateY(0) scale(1)';
                             e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.45)';
                             e.currentTarget.style.boxShadow = '0 16px 45px rgba(0, 0, 0, 0.6)';
+                            const arrow = e.currentTarget.querySelector('.cta-large-arrow') as HTMLElement;
+                            if (arrow) {
+                              arrow.style.transform = 'translateX(0) scale(1)';
+                              arrow.style.backgroundColor = 'rgba(175, 29, 170, 0.25)';
+                              arrow.style.borderColor = 'rgba(235, 84, 255, 0.5)';
+                            }
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem' }}>
@@ -4169,22 +4181,26 @@ export function App() {
                             </div>
                           </div>
 
-                          {/* BOTÓN DE ACCIÓN */}
-                          <div style={{
-                            backgroundColor: '#af1daa',
-                            color: '#FFFFFF',
-                            padding: '0.8rem 1.6rem',
-                            borderRadius: '9999px',
-                            fontSize: '0.86rem',
-                            fontWeight: '700',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            boxShadow: '0 4px 20px rgba(175, 29, 170, 0.45)',
-                            flexShrink: 0,
-                            transition: 'all 0.25s ease'
-                          }}>
-                            Únete a WIC <ArrowRight size={15} />
+                          {/* FLECHA GRANDE INDICADORA DE CLIC */}
+                          <div 
+                            className="cta-large-arrow"
+                            style={{
+                              width: '56px',
+                              height: '56px',
+                              borderRadius: '50%',
+                              backgroundColor: 'rgba(175, 29, 170, 0.25)',
+                              border: '1.5px solid rgba(235, 84, 255, 0.5)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: '#FFFFFF',
+                              boxShadow: '0 4px 20px rgba(175, 29, 170, 0.35)',
+                              flexShrink: 0,
+                              transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                            }}
+                            title="Ir a Únete a WIC"
+                          >
+                            <ArrowRight size={28} strokeWidth={2.5} style={{ color: '#FFFFFF' }} />
                           </div>
                         </div>
                       </div>

@@ -3749,7 +3749,7 @@ export function App() {
                 </div>
               </div>
 
-              {/* TÍTULO PRINCIPAL HERO EXACTO SEGÚN IMAGEN CON ITALICA EN INTEGRIDAD LEGAL */}
+              {/* TÍTULO PRINCIPAL HERO OPEN TO WORK */}
               <div style={{ textAlign: 'center', maxWidth: '980px', margin: '0 auto', marginBottom: '1.75rem' }} className="reveal">
                 <h1 style={{
                   fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
@@ -3760,17 +3760,24 @@ export function App() {
                   color: '#FFFFFF',
                   marginBottom: '1.25rem'
                 }}>
-                  El Directorio Directivo de la<br />
-                  <span style={{ fontStyle: 'italic', fontFamily: "'Montserrat', sans-serif", color: '#eb54ff', fontWeight: '400', marginRight: '0.3rem' }}>Integridad Legal</span> & Compliance.
+                  Visibiliza tu talento,<br />
+                  <span style={{ 
+                    fontWeight: '300', 
+                    fontStyle: 'italic',
+                    color: '#EB54FF',
+                    fontFamily: "'Montserrat', sans-serif"
+                  }}>
+                    Hazte notar
+                  </span>
                 </h1>
                 <p style={{
                   fontSize: '1.05rem',
                   color: '#CBD5E1',
                   lineHeight: '1.7',
-                  maxWidth: '780px',
+                  maxWidth: '820px',
                   margin: '0 auto'
                 }}>
-                  Descubre el ecosistema más influyente de abogadas socias, consultoras de ética y expertas SAGRILAFT preparadas para transformar juntas directivas y blindar corporaciones en Colombia y LATAM.
+                  Tu experiencia merece un escenario, no solo una oficina. Este es el espacio exclusivo para que compartas tus servicios de consultoría, e impulses tu marca personal y conectes directamente con quienes buscan tu experiencia.
                 </p>
               </div>
 

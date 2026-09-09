@@ -4199,10 +4199,10 @@ export function App() {
                                 fontSize: '0.86rem',
                                 fontWeight: '500',
                                 marginTop: '0.35rem',
-                                maxWidth: '420px',
+                                maxWidth: '460px',
                                 lineHeight: '1.4'
                               }}>
-                                Forma parte de la red de abogadas y líderes de cumplimiento ético más influyente de Colombia.
+                                Forma parte de una comunidad de alto impacto diseñada por y para mujeres líderes que transforman la cultura ética empresarial.
                               </div>
                             </div>
                           </div>
@@ -4684,7 +4684,7 @@ export function App() {
 
               {/* SUBTÍTULO */}
               <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: '1.65', maxWidth: '780px', margin: '0 auto 2rem auto' }} className="reveal">
-                Forma parte del ecosistema más influyente de abogadas, consultoras y líderes que están transformando la cultura del cumplimiento ético, la prevención de riesgos y el gobierno corporativo en Colombia.
+                Forma parte de una comunidad de alto impacto diseñada por y para mujeres líderes que transforman la cultura ética empresarial.
               </p>
 
               {/* BOTONES DE ACCIÓN */}

@@ -128,7 +128,7 @@ export interface AnuncioItem {
 const ANUNCIOS_DATA: AnuncioItem[] = [
   {
     id: 'anuncio-1',
-    image: '/Anuncios/anuncio-1.png',
+    image: '/Anuncios/anuncio-1.webp',
     title: 'Rueda Abogados - María Paula Rueda',
     category: 'Gobierno Corporativo',
     subtitle: 'Asesoría Jurídica y Compliance Estratégico',
@@ -136,7 +136,7 @@ const ANUNCIOS_DATA: AnuncioItem[] = [
   },
   {
     id: 'anuncio-2',
-    image: '/Anuncios/anuncio-2.png',
+    image: '/Anuncios/anuncio-2.webp',
     title: 'Yolima Bautista - Contadora Pública',
     category: 'Juntas Directivas',
     subtitle: 'Cumplimiento Estratégico y SAGRILAFT',
@@ -144,7 +144,7 @@ const ANUNCIOS_DATA: AnuncioItem[] = [
   },
   {
     id: 'anuncio-3',
-    image: '/Anuncios/anuncio-3.png',
+    image: '/Anuncios/anuncio-3.webp',
     title: 'Liz Marcela Bejarano - Economista',
     category: 'SAGRILAFT & PTEE',
     subtitle: 'Gestión Integral de Riesgos y Regulación',
@@ -152,7 +152,7 @@ const ANUNCIOS_DATA: AnuncioItem[] = [
   },
   {
     id: 'anuncio-4',
-    image: '/Anuncios/anuncio-4.png',
+    image: '/Anuncios/anuncio-4.webp',
     title: 'Masterclass en Vivo - Adriana Gómez',
     category: 'Masterclass',
     subtitle: 'Adriana Gómez Presidente WIC Colombia',
@@ -4416,7 +4416,7 @@ export function App() {
                     })()}
                     <a 
                       href={selectedAnuncio.image} 
-                      download="Anuncio-WIC.png"
+                      download={selectedAnuncio.image.split('/').pop() || "Anuncio-WIC.webp"}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{

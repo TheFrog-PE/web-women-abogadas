@@ -41,7 +41,7 @@ export const MEMBERS_DATA: Member[] = [
       "Docente del Instituto Nacional de Contadores Públicos (INCP)"
     ],
     linkedin: "https://www.linkedin.com/in/adriana-g%C3%B3mez-barajas/",
-    photo: "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
+    photo: "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.webp",
     tags: ["Gobierno Corporativo", "Compliance Penal", "ISO 37001", "Ética Corporativa", "Gestión de Riesgos"]
   },
   {
@@ -68,7 +68,7 @@ export const MEMBERS_DATA: Member[] = [
       "Profesora Titular de Derecho De Empresa - Universidad del Rosario"
     ],
     linkedin: "https://www.linkedin.com/in/maria-paula-rueda-mantilla-6a218059/",
-    photo: "/Fotos/Miembros/MARIA PAULA RUEDA.jpg",
+    photo: "/Fotos/Miembros/MARIA PAULA RUEDA.webp",
     tags: ["Compliance Sector Público", "Gobierno Corporativo", "Derecho de Empresa", "Gestión de Riesgos"]
   },
   {
@@ -92,7 +92,7 @@ export const MEMBERS_DATA: Member[] = [
       "Profesional de Riesgo - Banco Davivienda / Red Bancafé"
     ],
     linkedin: "https://www.linkedin.com/in/liz-marcela-bejarano-castillo-2089b624a/",
-    photo: "/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.jpg",
+    photo: "/Fotos/Miembros/LIZ MARCELA BEJARANO CASTILLO.webp",
     tags: ["Agremiaciones", "Sector Financiero", "Gestión de Riesgos", "LAFT/PADM"]
   },
   {
@@ -115,7 +115,7 @@ export const MEMBERS_DATA: Member[] = [
       "Auditor Senior - Coca-Cola FEMSA y KPMG"
     ],
     linkedin: "http://linkedin.com/in/ybautista-riesgos-compliance-laft/",
-    photo: "/Fotos/Miembros/YOLIMA ANGELICA BAUTISTA DIAZ.jpg",
+    photo: "/Fotos/Miembros/YOLIMA ANGELICA BAUTISTA DIAZ.webp",
     tags: ["Sector Seguridad", "SAGRILAFT & PTEE", "Anti-Corrupción", "Protección de Datos", "Ética Corporativa"]
   }
 ];

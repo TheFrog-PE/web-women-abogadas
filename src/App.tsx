@@ -41,7 +41,8 @@ import {
   Filter,
   ChevronDown,
   Menu,
-  Briefcase
+  Briefcase,
+  Megaphone
 } from 'lucide-react';
 
 const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
@@ -114,6 +115,50 @@ export interface EventDetailData {
 const AVATAR_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Crect width='24' height='24' fill='%23CBD5E1'/%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
 
 const PHOTO_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Crect width='24' height='24' fill='%23CBD5E1'/%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E";
+
+export interface AnuncioItem {
+  id: string;
+  image: string;
+  title: string;
+  category: string;
+  subtitle: string;
+  memberId?: string;
+}
+
+const ANUNCIOS_DATA: AnuncioItem[] = [
+  {
+    id: 'anuncio-1',
+    image: '/Anuncios/anuncio-1.png',
+    title: 'Rueda Abogados - María Paula Rueda',
+    category: 'Gobierno Corporativo',
+    subtitle: 'Asesoría Jurídica y Compliance Estratégico',
+    memberId: 'maria-paula-rueda'
+  },
+  {
+    id: 'anuncio-2',
+    image: '/Anuncios/anuncio-2.png',
+    title: 'Yolima Bautista - Contadora Pública',
+    category: 'Juntas Directivas',
+    subtitle: 'Cumplimiento Estratégico y SAGRILAFT',
+    memberId: 'yolima-bautista'
+  },
+  {
+    id: 'anuncio-3',
+    image: '/Anuncios/anuncio-3.png',
+    title: 'Liz Marcela Bejarano - Economista',
+    category: 'SAGRILAFT & PTEE',
+    subtitle: 'Gestión Integral de Riesgos y Regulación',
+    memberId: 'liz-marcela-bejarano'
+  },
+  {
+    id: 'anuncio-4',
+    image: '/Anuncios/anuncio-4.png',
+    title: 'Masterclass en Vivo - Adriana Gómez',
+    category: 'Masterclass',
+    subtitle: 'Adriana Gómez Presidente WIC Colombia',
+    memberId: 'adriana-gomez'
+  }
+];
 
 const EVENTS_DATA: Record<string, EventDetailData> = {
   'desayuno-1': {
@@ -232,6 +277,16 @@ export function App() {
   });
   const [uneteFormSubmitted, setUneteFormSubmitted] = useState(false);
   const [openToWorkCategory, setOpenToWorkCategory] = useState('Todas');
+  const [selectedAnuncio, setSelectedAnuncio] = useState<AnuncioItem | null>(null);
+
+  const filteredAnuncios = useMemo(() => {
+    if (openToWorkCategory === 'Todas') return ANUNCIOS_DATA;
+    const matches = ANUNCIOS_DATA.filter(a => 
+      a.category.toLowerCase().includes(openToWorkCategory.toLowerCase()) || 
+      openToWorkCategory.toLowerCase().includes(a.category.toLowerCase())
+    );
+    return matches.length > 0 ? matches : ANUNCIOS_DATA;
+  }, [openToWorkCategory]);
   const [showOpenToWorkModal, setShowOpenToWorkModal] = useState(false);
   const [openToWorkFormData, setOpenToWorkFormData] = useState({ name: '', email: '', role: '', details: '' });
   const [openToWorkFormSubmitted, setOpenToWorkFormSubmitted] = useState(false);
@@ -260,6 +315,38 @@ export function App() {
   const [searchMember, setSearchMember] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('Todos');
   const [isTagDropdownOpen, setIsTagDropdownOpen] = useState<boolean>(false);
+
+  const getTargetMember = (anuncio: AnuncioItem | null): Member | null => {
+    if (!anuncio) return null;
+    if (anuncio.memberId) {
+      const found = membersList.find(m => m.id === anuncio.memberId);
+      if (found) return found;
+    }
+    if (anuncio.id === 'anuncio-1') {
+      return membersList.find(m => m.id === 'maria-paula-rueda' || m.name.toLowerCase().includes('rueda') || m.name.toLowerCase().includes('paula')) || null;
+    }
+    if (anuncio.id === 'anuncio-2') {
+      return membersList.find(m => m.id === 'yolima-bautista' || m.name.toLowerCase().includes('yolima') || m.name.toLowerCase().includes('bautista')) || null;
+    }
+    if (anuncio.id === 'anuncio-3') {
+      return membersList.find(m => m.id === 'liz-marcela-bejarano' || m.name.toLowerCase().includes('liz') || m.name.toLowerCase().includes('bejarano')) || null;
+    }
+    if (anuncio.id === 'anuncio-4') {
+      return membersList.find(m => m.id === 'adriana-gomez' || m.name.toLowerCase().includes('adriana')) || null;
+    }
+    return null;
+  };
+
+  const handleAnuncioClick = (anuncio: AnuncioItem) => {
+    const targetMember = getTargetMember(anuncio);
+    if (targetMember) {
+      setActiveTab('miembros');
+      setSelectedMember(targetMember);
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    } else {
+      setSelectedAnuncio(anuncio);
+    }
+  };
 
   const [searchArticle, setSearchArticle] = useState('');
   const [selectedArticleCategory, setSelectedArticleCategory] = useState('Todas');
@@ -2305,7 +2392,7 @@ export function App() {
                             boxShadow: '0 2px 8px rgba(0, 119, 181, 0.35)'
                           }}
                         >
-                          <LinkedinIcon size={16} /> in
+                          in
                         </a>
                       )}
                     </div>
@@ -3801,7 +3888,7 @@ export function App() {
                 
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
                   {[
-                    `Todos los Anuncios (${membersList.length})`,
+                    `Todos los Anuncios (${ANUNCIOS_DATA.length})`,
                     'Líderes de Confianza',
                     'Conferencistas Magistrales',
                     'SAGRILAFT & PTEE',
@@ -3839,50 +3926,272 @@ export function App() {
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingRight: '1rem', color: '#94A3B8', fontSize: '0.8rem', fontWeight: '600' }}>
                   <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#34D399', display: 'inline-block' }}></span>
-                  {membersList.length} Anuncios Disponibles
+                  {filteredAnuncios.length} Anuncios Disponibles
                 </div>
 
               </div>
 
-              {/* GRILLA DE TARJETAS ANUNCIOS GRISES (RESERVADAS PARA ANUNCIOS DISEÑADOS + EFECTO DE MOVIMIENTO HOVER) */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-                gap: '1.75rem',
-                marginBottom: '4rem'
-              }}>
-                {membersList.map((m, idx) => (
-                  <div 
-                    key={m.id}
-                    className="reveal"
-                    style={{
-                      backgroundColor: '#D9D9D9',
-                      borderRadius: '24px',
-                      padding: '2rem 1.75rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      minHeight: idx === 0 ? '580px' : '280px',
-                      gridRow: idx === 0 ? 'span 2' : 'span 1',
-                      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
-                      transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, filter 0.35s ease',
-                      cursor: 'pointer',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
-                      e.currentTarget.style.boxShadow = '0 20px 45px rgba(235, 84, 255, 0.35)';
-                      e.currentTarget.style.filter = 'brightness(1.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.3)';
-                      e.currentTarget.style.filter = 'brightness(1)';
-                    }}
-                  />
-                ))}
-              </div>
+              {/* ESTRUCTURA EDITORIAL: ANUNCIO PRINCIPAL GRANDE, 3 VOLANTES AL COSTADO Y TARJETA 'ÚNETE A WIC' ABAJO */}
+              {(() => {
+                const masterclassAnuncio = filteredAnuncios.find(a => a.id === 'anuncio-4') || filteredAnuncios[0];
+                const otherAnuncios = filteredAnuncios.filter(a => a.id !== masterclassAnuncio?.id);
+
+                return (
+                  <div style={{ marginBottom: '4rem' }}>
+                    <style>{`
+                      .anuncios-layout-container {
+                        display: grid;
+                        grid-template-columns: 1.15fr 1.85fr;
+                        gap: 1.75rem;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        align-items: stretch;
+                      }
+                      .anuncio-large-col {
+                        width: 100%;
+                        aspect-ratio: 4 / 5;
+                      }
+                      .anuncio-right-col {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.5rem;
+                        justify-content: space-between;
+                        height: 100%;
+                      }
+                      .anuncio-right-top-row {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 1.25rem;
+                      }
+                      .anuncio-side-item {
+                        width: 100%;
+                        aspect-ratio: 4 / 5;
+                      }
+                      .anuncio-cta-card {
+                        flex: 1;
+                        min-height: 200px;
+                      }
+                      @media (max-width: 1024px) {
+                        .anuncios-layout-container {
+                          grid-template-columns: 1fr;
+                          max-width: 680px;
+                        }
+                        .anuncio-large-col {
+                          max-width: 520px;
+                          margin: 0 auto;
+                        }
+                        .anuncio-right-top-row {
+                          grid-template-columns: repeat(3, 1fr);
+                        }
+                      }
+                      @media (max-width: 600px) {
+                        .anuncio-right-top-row {
+                          grid-template-columns: 1fr;
+                        }
+                        .anuncio-cta-card {
+                          flex-direction: column;
+                          text-align: center;
+                        }
+                      }
+                    `}</style>
+
+                    <div className="anuncios-layout-container">
+                      {/* 1. ANUNCIO GRANDE PRINCIPAL (IZQUIERDA) -> LLEVA AL PERFIL DE ADRIANA */}
+                      {masterclassAnuncio && (
+                        <div 
+                          className="anuncio-large-col reveal"
+                          style={{
+                            backgroundColor: '#0E0C16',
+                            borderRadius: '26px',
+                            overflow: 'hidden',
+                            border: '1.5px solid rgba(235, 84, 255, 0.45)',
+                            boxShadow: '0 20px 60px rgba(235, 84, 255, 0.25), 0 10px 30px rgba(0, 0, 0, 0.7)',
+                            transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease',
+                            cursor: 'pointer',
+                            position: 'relative'
+                          }}
+                          onClick={() => handleAnuncioClick(masterclassAnuncio)}
+                          title={(() => {
+                            const target = getTargetMember(masterclassAnuncio);
+                            return target ? `Ver perfil profesional de ${target.name}` : `Ver anuncio`;
+                          })()}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-6px) scale(1.015)';
+                            e.currentTarget.style.boxShadow = '0 28px 80px rgba(235, 84, 255, 0.5), 0 12px 35px rgba(0, 0, 0, 0.85)';
+                            e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.85)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                            e.currentTarget.style.boxShadow = '0 20px 60px rgba(235, 84, 255, 0.25), 0 10px 30px rgba(0, 0, 0, 0.7)';
+                            e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.45)';
+                          }}
+                        >
+                          <img 
+                            src={masterclassAnuncio.image} 
+                            alt={masterclassAnuncio.title}
+                            style={{ 
+                              width: '100%', 
+                              height: '100%', 
+                              objectFit: 'contain', 
+                              display: 'block'
+                            }}
+                          />
+                        </div>
+                      )}
+
+                      {/* 2. COLUMNA DERECHA: 3 ANUNCIOS ARRIBA + TARJETA 'ÚNETE A WIC' ABAJO */}
+                      <div className="anuncio-right-col">
+                        {/* FILA SUPERIOR: 3 ANUNCIOS PEQUEÑOS AL COSTADO */}
+                        <div className="anuncio-right-top-row">
+                          {otherAnuncios.map((anuncio) => {
+                            const targetMember = getTargetMember(anuncio);
+                            return (
+                              <div 
+                                key={anuncio.id}
+                                className="anuncio-side-item reveal"
+                                style={{
+                                  backgroundColor: '#0E0C16',
+                                  borderRadius: '20px',
+                                  overflow: 'hidden',
+                                  border: '1.5px solid rgba(255, 255, 255, 0.08)',
+                                  boxShadow: '0 12px 35px rgba(0, 0, 0, 0.5)',
+                                  transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease',
+                                  cursor: 'pointer',
+                                  position: 'relative'
+                                }}
+                                onClick={() => handleAnuncioClick(anuncio)}
+                                title={targetMember ? `Ver perfil profesional de ${targetMember.name}` : `Ver anuncio`}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
+                                  e.currentTarget.style.boxShadow = '0 18px 40px rgba(235, 84, 255, 0.35)';
+                                  e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.5)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                                  e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.5)';
+                                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                                }}
+                              >
+                                <img 
+                                  src={anuncio.image} 
+                                  alt={anuncio.title}
+                                  style={{ 
+                                    width: '100%', 
+                                    height: '100%', 
+                                    objectFit: 'contain', 
+                                    display: 'block'
+                                  }}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* FILA INFERIOR: TARJETA 'ÚNETE A WIC' */}
+                        <div 
+                          className="anuncio-cta-card reveal"
+                          style={{
+                            backgroundColor: '#0E0C16',
+                            borderRadius: '24px',
+                            border: '1.5px dashed rgba(235, 84, 255, 0.45)',
+                            background: 'radial-gradient(circle at 85% 30%, rgba(235, 84, 255, 0.18) 0%, rgba(14, 12, 22, 0.95) 75%)',
+                            boxShadow: '0 16px 45px rgba(0, 0, 0, 0.6)',
+                            padding: '1.75rem 2.25rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '1.5rem',
+                            cursor: 'pointer',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            transition: 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                          }}
+                          onClick={() => setActiveTab('unete')}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-5px) scale(1.01)';
+                            e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.85)';
+                            e.currentTarget.style.boxShadow = '0 22px 55px rgba(235, 84, 255, 0.35), 0 10px 25px rgba(0,0,0,0.8)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                            e.currentTarget.style.borderColor = 'rgba(235, 84, 255, 0.45)';
+                            e.currentTarget.style.boxShadow = '0 16px 45px rgba(0, 0, 0, 0.6)';
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem' }}>
+                            {/* ÍCONO MEGÁFONO EN CÁPSULA RESPLANDECIENTE */}
+                            <div style={{
+                              width: '64px',
+                              height: '64px',
+                              borderRadius: '20px',
+                              backgroundColor: 'rgba(235, 84, 255, 0.12)',
+                              border: '1.5px solid rgba(235, 84, 255, 0.45)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              flexShrink: 0,
+                              boxShadow: '0 0 25px rgba(235, 84, 255, 0.25)'
+                            }}>
+                              <Megaphone size={30} style={{ color: '#eb54ff' }} />
+                            </div>
+
+                            {/* TEXTOS */}
+                            <div>
+                              <div style={{
+                                color: '#eb54ff',
+                                fontSize: '0.72rem',
+                                fontWeight: '800',
+                                letterSpacing: '1.5px',
+                                textTransform: 'uppercase',
+                                marginBottom: '0.3rem'
+                              }}>
+                                Convocatoria Abierta
+                              </div>
+                              <div style={{
+                                color: '#FFFFFF',
+                                fontSize: '1.6rem',
+                                fontWeight: '800',
+                                fontFamily: "'Montserrat', sans-serif",
+                                lineHeight: '1.2'
+                              }}>
+                                Únete a WIC
+                              </div>
+                              <div style={{
+                                color: '#94A3B8',
+                                fontSize: '0.86rem',
+                                fontWeight: '500',
+                                marginTop: '0.35rem',
+                                maxWidth: '420px',
+                                lineHeight: '1.4'
+                              }}>
+                                Forma parte de la red de abogadas y líderes de cumplimiento ético más influyente de Colombia.
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* BOTÓN DE ACCIÓN */}
+                          <div style={{
+                            backgroundColor: '#af1daa',
+                            color: '#FFFFFF',
+                            padding: '0.8rem 1.6rem',
+                            borderRadius: '9999px',
+                            fontSize: '0.86rem',
+                            fontWeight: '700',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            boxShadow: '0 4px 20px rgba(175, 29, 170, 0.45)',
+                            flexShrink: 0,
+                            transition: 'all 0.25s ease'
+                          }}>
+                            Únete a WIC <ArrowRight size={15} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* BANNER NEWSLETTER / CONVOCATORIAS DIRECTIVAS (EXACTO SEGÚN MOCKUP FIGMA) */}
               <div 
@@ -3981,6 +4290,158 @@ export function App() {
               </div>
 
             </div>
+
+            {/* MODAL LIGHTBOX PARA VISUALIZAR EL ANUNCIO EN ALTA RESOLUCIÓN */}
+            {selectedAnuncio && (
+              <div 
+                onClick={() => setSelectedAnuncio(null)}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  backgroundColor: 'rgba(5, 4, 10, 0.92)',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 1000,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '1.5rem'
+                }}
+              >
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    backgroundColor: '#0E0C16',
+                    border: '1.5px solid rgba(235, 84, 255, 0.4)',
+                    borderRadius: '24px',
+                    maxWidth: '640px',
+                    width: '100%',
+                    maxHeight: '92vh',
+                    overflowY: 'auto',
+                    boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+                    position: 'relative',
+                    color: '#FFFFFF',
+                    padding: '1.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                  }}
+                >
+                  <button 
+                    onClick={() => setSelectedAnuncio(null)}
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      right: '1rem',
+                      background: 'rgba(255,255,255,0.1)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      color: '#FFFFFF',
+                      width: '38px',
+                      height: '38px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 10,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(235, 84, 255, 0.4)'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+                  >
+                    <X size={20} />
+                  </button>
+
+                  <div 
+                    style={{ 
+                      width: '100%', 
+                      borderRadius: '16px', 
+                      overflow: 'hidden', 
+                      marginBottom: '1rem', 
+                      backgroundColor: '#07060A',
+                      cursor: getTargetMember(selectedAnuncio) ? 'pointer' : 'default'
+                    }}
+                    onClick={() => {
+                      const target = getTargetMember(selectedAnuncio);
+                      if (target) {
+                        setSelectedAnuncio(null);
+                        setActiveTab('miembros');
+                        setSelectedMember(target);
+                        window.scrollTo({ top: 400, behavior: 'smooth' });
+                      }
+                    }}
+                    title={getTargetMember(selectedAnuncio) ? `Ver perfil profesional de ${getTargetMember(selectedAnuncio)?.name}` : 'Anuncio'}
+                  >
+                    <img 
+                      src={selectedAnuncio.image} 
+                      alt={selectedAnuncio.title}
+                      style={{ width: '100%', height: 'auto', maxHeight: '78vh', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+                    />
+                  </div>
+
+                  <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.85rem', paddingTop: '0.25rem', flexWrap: 'wrap' }}>
+                    {(() => {
+                      const target = getTargetMember(selectedAnuncio);
+                      if (target) {
+                        return (
+                          <button
+                            onClick={() => {
+                              setSelectedAnuncio(null);
+                              setActiveTab('miembros');
+                              setSelectedMember(target);
+                              window.scrollTo({ top: 400, behavior: 'smooth' });
+                            }}
+                            style={{
+                              backgroundColor: '#af1daa',
+                              color: '#FFFFFF',
+                              border: 'none',
+                              padding: '0.7rem 1.6rem',
+                              borderRadius: '9999px',
+                              fontSize: '0.85rem',
+                              fontWeight: '700',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.5rem',
+                              cursor: 'pointer',
+                              boxShadow: '0 4px 18px rgba(175, 29, 170, 0.45)',
+                              transition: 'all 0.25s ease'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d927d2'}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#af1daa'}
+                          >
+                            Ver Perfil Profesional <ArrowRight size={15} />
+                          </button>
+                        );
+                      }
+                      return null;
+                    })()}
+                    <a 
+                      href={selectedAnuncio.image} 
+                      download="Anuncio-WIC.png"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        color: '#FFFFFF',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        textDecoration: 'none',
+                        padding: '0.7rem 1.5rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.85rem',
+                        fontWeight: '700',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
+                    >
+                      Descargar Anuncio <ArrowRight size={15} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* MODAL PARA SOLICITUD DE PUBLICACIÓN EN OPEN TO WORK */}
             {showOpenToWorkModal && (
@@ -4248,54 +4709,35 @@ export function App() {
                 </span>
               </div>
 
-              {/* MEDIA BOX: CONTENEDOR DE VIDEO / PRESENTACIÓN */}
+              {/* MEDIA BOX: CONTENEDOR DE VIDEO DE PRESENTACIÓN WIC */}
               <div 
                 className="reveal"
                 style={{
                   marginTop: '2.5rem',
                   maxWidth: '920px',
-                  height: '420px',
                   margin: '2.5rem auto 0 auto',
-                  backgroundColor: '#D9D9D9',
                   borderRadius: '24px',
                   position: 'relative',
                   overflow: 'hidden',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)'
+                  boxShadow: '0 20px 45px rgba(0, 0, 0, 0.12)',
+                  aspectRatio: '16 / 9',
+                  backgroundColor: '#000000'
                 }}
               >
-                {/* PÍLDORA FLOTANTE INFERIOR */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '1.5rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(8px)',
-                  padding: '0.65rem 1.4rem',
-                  borderRadius: '9999px',
-                  border: '1px solid rgba(175, 29, 170, 0.3)',
-                  boxShadow: '0 8px 25px rgba(0,0,0,0.12)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  fontSize: '0.82rem',
-                  fontWeight: '700',
-                  color: '#0A1128'
-                }}>
-                  <span style={{
-                    backgroundColor: '#af1daa',
-                    color: '#FFFFFF',
-                    padding: '0.25rem 0.65rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.7rem',
-                    fontWeight: '800',
-                    letterSpacing: '0.5px'
-                  }}>
-                    VIDEO DE PRESENTACIÓN
-                  </span>
-                  <span>Conoce el impacto de WIC en 2 minutos</span>
-                </div>
+                <video 
+                  src="/intro-wic.mp4"
+                  controls
+                  playsInline
+                  autoPlay
+                  muted
+                  loop
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
               </div>
 
             </div>

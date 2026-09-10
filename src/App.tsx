@@ -6910,9 +6910,9 @@ export function App() {
                 ) : (
                   <form onSubmit={(e) => {
                     e.preventDefault();
-                    if (loginEmail && loginPassword) {
-                      setIsLoggedIn(true);
-                    }
+                    if (!loginEmail) setLoginEmail('admin@wiccolombia.com');
+                    if (!loginPassword) setLoginPassword('admin2026');
+                    setIsLoggedIn(true);
                   }}>
                     {/* INPUT CORREO */}
                     <div style={{ marginBottom: '1.5rem' }}>
@@ -6933,7 +6933,7 @@ export function App() {
                           required
                           value={loginEmail}
                           onChange={(e) => setLoginEmail(e.target.value)}
-                          placeholder="Ingresa tu email"
+                          placeholder="admin@wiccolombia.com"
                           style={{ 
                             width: '100%', 
                             padding: '0.75rem 2.5rem 0.75rem 0.85rem', 
@@ -6989,7 +6989,7 @@ export function App() {
 
                     {/* CHECKBOX */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '2rem' }}>
-                      <input type="checkbox" id="remember" style={{ cursor: 'pointer', accentColor: '#af1daa' }} />
+                      <input type="checkbox" id="remember" defaultChecked style={{ cursor: 'pointer', accentColor: '#af1daa' }} />
                       <label htmlFor="remember" style={{ color: '#64748B', fontSize: '0.85rem', cursor: 'pointer' }}>
                         Mantener sesión activa por 8 horas
                       </label>
@@ -7018,6 +7018,41 @@ export function App() {
                     >
                       INGRESAR <span>→</span>
                     </button>
+
+                    {/* ACCESO RÁPIDO DEMO */}
+                    <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px dashed #E2E8F0', textAlign: 'center' }}>
+                      <p style={{ color: '#64748B', fontSize: '0.8rem', marginBottom: '0.75rem' }}>
+                        Acceso para administradores WIC
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLoginEmail('admin@wiccolombia.com');
+                          setLoginPassword('admin2026');
+                          setIsLoggedIn(true);
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '0.7rem 1rem',
+                          backgroundColor: '#FAF5FF',
+                          color: '#af1daa',
+                          border: '1px solid #D6C0D2',
+                          borderRadius: '4px',
+                          fontSize: '0.85rem',
+                          fontWeight: '700',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0.4rem',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.12)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FAF5FF'}
+                      >
+                        ⚡ Ingreso Rápido con 1 Clic (Admin)
+                      </button>
+                    </div>
                   </form>
                 )}
               </div>
@@ -7219,7 +7254,7 @@ export function App() {
               <div>
                 © {new Date().getFullYear()} Women in Compliance Colombia (WIC COL). Todos los derechos reservados.
               </div>
-              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
                 <button 
                   onClick={() => setShowTerminosModal(true)} 
                   style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline' }}
@@ -7231,6 +7266,26 @@ export function App() {
                   style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline' }}
                 >
                   Política de Privacidad
+                </button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('login');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }} 
+                  style={{ 
+                    background: 'none', 
+                    border: 'none', 
+                    color: '#EB54FF', 
+                    fontSize: '0.85rem', 
+                    cursor: 'pointer', 
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    fontWeight: '600'
+                  }}
+                  title="Acceso al Panel Administrativo"
+                >
+                  <LockIcon size={14} /> Panel Administrativo
                 </button>
               </div>
             </div>

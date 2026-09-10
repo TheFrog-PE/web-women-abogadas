@@ -4270,7 +4270,7 @@ export function App() {
                     textTransform: 'uppercase',
                     marginBottom: '1.25rem'
                   }}>
-                    PUBLICAR ANUNCIO AHORA
+                    Impulsa tu visibilidad
                   </div>
 
                   <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#FFFFFF', marginBottom: '1rem', lineHeight: '1.2' }}>
@@ -4319,7 +4319,7 @@ export function App() {
                       onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                       onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
-                      ENVIAR <ArrowRight size={16} />
+                      PUBLICAR AHORA <ArrowRight size={16} />
                     </button>
                   </form>
 

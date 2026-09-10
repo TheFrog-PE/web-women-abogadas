@@ -210,6 +210,14 @@ export interface Article {
   image: string;
   status: string;
   content: string;
+  quote?: string;
+  paragraph2?: string;
+  card1Title?: string;
+  card1Text?: string;
+  card2Title?: string;
+  card2Text?: string;
+  paragraph3?: string;
+  videoUrl?: string;
 }
 
 const DEFAULT_ARTICLES: Article[] = [
@@ -226,15 +234,14 @@ const DEFAULT_ARTICLES: Article[] = [
     summary: "Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores.",
     image: "/Fotos/Imagen para Inicio - 02.jpg",
     status: "Publicado",
-    content: `Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.
-
-Al respecto, apreciamos la implementación de medidas destinadas a cumplir con la legalidad y disposiciones de nivel interno (políticas propias) y externo que en conjunto se conocen como "compliance o cumplimiento normativo", siendo relevante para el conocimiento de todas las clases de riesgos en la empresa, implementar mecanismos de prevención e identificación, así como acciones para mitigarlos en la medida de lo posible.
-
-Para poder conseguirlo, dentro del campo de acción de las empresas se han desplegado una gran diversidad de iniciativas de buenas prácticas corporativas, las cuales han podido dotar de cierta eficiencia operativa y con el tiempo ser internalizadas en la cultura organizacional; sin embargo, ante la existencia de nuevas normas, se acrecienta un complejo entorno legal que necesita ser adecuadamente cumplido.
-
-Garantizar la observancia de las normas por medio del compliance, evoluciona progresivamente pues es más que colocar en blanco y negro definiciones de determinados procedimientos generales; es ser y hacer una cultura de cumplimiento en la organización que promueva la ética, la integridad y las buenas prácticas del gobierno corporativo al interior de la empresa.
-
-Por ello, el Instituto Peruano de Compliance asume el compromiso en fomentar la mejora continua del papel del compliance en las organizaciones, así como la capacitación y especialización permanente de sus operadores.`
+    content: "Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.",
+    quote: "El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.",
+    paragraph2: "Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.",
+    card1Title: "Integración Temprana",
+    card1Text: "Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.",
+    card2Title: "Intervención Continua",
+    card2Text: "Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.",
+    paragraph3: "El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio."
   }
 ];
 
@@ -433,6 +440,7 @@ export function App() {
   
   // Estado para edición o creación de artículo
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
+  const [articleCover, setArticleCover] = useState<string | null>(null);
 
   // ── CUENTA REGRESIVA REAL hacia el evento (24 Nov 2026) ──
   const eventDate = new Date('2026-11-24T08:00:00');
@@ -2660,107 +2668,96 @@ export function App() {
                   <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem', borderRadius: '16px', border: '1px solid #F1F5F9', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                     
                     {/* PRIMER PÁRRAFO CON LETRA CAPITULAR (DROP CAP) */}
-                    <div style={{ marginBottom: '1.75rem' }}>
-                      <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
-                        <span style={{ 
-                          float: 'left', 
-                          fontSize: '3.6rem', 
-                          lineHeight: '0.8', 
-                          fontWeight: '800', 
-                          fontFamily: "'Montserrat', sans-serif", 
-                          color: '#1E1B4B', 
-                          marginRight: '0.75rem',
-                          paddingTop: '0.2rem'
-                        }}>
-                          E
+                    {selectedArticle.content && (
+                      <div style={{ marginBottom: '1.75rem' }}>
+                        <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
+                          <span style={{ 
+                            float: 'left', 
+                            fontSize: '3.6rem', 
+                            lineHeight: '0.8', 
+                            fontWeight: '800', 
+                            fontFamily: "'Montserrat', sans-serif", 
+                            color: '#1E1B4B', 
+                            marginRight: '0.75rem',
+                            paddingTop: '0.2rem'
+                          }}>
+                            {selectedArticle.content.trim().charAt(0)}
+                          </span>
+                          {selectedArticle.content.trim().slice(1)}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* CITA DESTACADA DEL AUTOR (PULL-QUOTE BOX) */}
+                    {selectedArticle.quote && (
+                      <div style={{ 
+                        backgroundColor: '#FDF4FF', 
+                        borderLeft: '4px solid #af1daa', 
+                        borderRadius: '0 12px 12px 0', 
+                        padding: '1.75rem 2rem', 
+                        marginBottom: '2rem',
+                        position: 'relative'
+                      }}>
+                        <p style={{ color: '#7B1FA2', fontFamily: "'Montserrat', sans-serif", fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
+                          "{selectedArticle.quote}"
+                        </p>
+                        <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: "'Montserrat', sans-serif", lineHeight: 1, pointerEvents: 'none' }}>
+                          ”
                         </span>
-                        n muchas organizaciones, las funciones de Compliance y Gestión de Riesgos suelen incorporarse cuando una decisión ya fue tomada, un producto ya fue diseñado o un proyecto se encuentra próximo a implementarse. En ese escenario, su participación termina enfocándose en validar, observar o corregir, más que en contribuir estratégicamente a la decisión.
+                      </div>
+                    )}
+
+                    {/* SEGUNDO PÁRRAFO */}
+                    {selectedArticle.paragraph2 && (
+                      <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '2rem', textAlign: 'justify' }}>
+                        {selectedArticle.paragraph2}
                       </p>
-                    </div>
+                    )}
 
-                    <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '2rem', textAlign: 'justify' }}>
-                      Esta dinámica no responde necesariamente a una falta de interés, sino a una visión históricamente asociada a estas funciones: áreas orientadas principalmente al cumplimiento regulatorio, la mitigación de riesgos y la prevención de incumplimientos. Bajo este enfoque, su involucramiento suele activarse cuando existe una exigencia normativa específica, una observación pendiente o la necesidad de revisar impactos antes de una implementación.
-                    </p>
-
-                    {/* CITA DESTACADA (PULL-QUOTE BOX) */}
-                    <div style={{ 
-                      backgroundColor: '#FDF4FF', 
-                      borderLeft: '4px solid #af1daa', 
-                      borderRadius: '0 12px 12px 0', 
-                      padding: '1.75rem 2rem', 
-                      marginBottom: '2rem',
-                      position: 'relative'
-                    }}>
-                      <p style={{ color: '#7B1FA2', fontFamily: "'Montserrat', sans-serif", fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
-                        "El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones."
-                      </p>
-                      <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: "'Montserrat', sans-serif", lineHeight: 1, pointerEvents: 'none' }}>”</span>
-                    </div>
-
-                    {/* SUBTÍTULO 1 */}
-                    <h2 style={{ fontSize: '1.4rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
-                      Cuando la oportunidad marca la diferencia
-                    </h2>
-
-                    <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '1.5rem', textAlign: 'justify' }}>
-                      Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.
-                    </p>
-
-                    {/* LISTA CON ICONOS DE ESCUDO/CHECK */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem', paddingLeft: '0.5rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
-                        <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Identificación temprana de riesgos regulatorios en nuevos mercados.</span>
+                    {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS */}
+                    {(selectedArticle.card1Title || selectedArticle.card2Title) && (
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                        {selectedArticle.card1Title && (
+                          <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
+                            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
+                              {selectedArticle.card1Title}
+                            </h4>
+                            <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
+                              {selectedArticle.card1Text || ''}
+                            </p>
+                          </div>
+                        )}
+                        {selectedArticle.card2Title && (
+                          <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
+                            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
+                              {selectedArticle.card2Title}
+                            </h4>
+                            <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
+                              {selectedArticle.card2Text || ''}
+                            </p>
+                          </div>
+                        )}
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
-                        <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Reducción de costos por reprocesos en el diseño de productos.</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <ShieldCheck size={20} style={{ color: '#af1daa', flexShrink: 0 }} />
-                        <span style={{ color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>Fortalecimiento de la cultura ética desde la base de la operación.</span>
-                      </div>
-                    </div>
-
-                    {/* SUBTÍTULO 2 */}
-                    <h2 style={{ fontSize: '1.4rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#7B1FA2', marginBottom: '1rem', marginTop: '2rem' }}>
-                      ¿Cómo avanzar hacia una participación más estratégica?
-                    </h2>
-
-                    <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '1.5rem', textAlign: 'justify' }}>
-                      Reconocer la importancia de una intervención temprana es solo el primer paso. El reto organizacional consiste en generar condiciones para que Compliance y Gestión de Riesgos participen oportunamente, aportando valor no solo desde el cumplimiento, sino también desde una mejor comprensión de los riesgos y sus impactos.
-                    </p>
-
-                    {/* TARJETAS DE DESTACADO EN GRID DE 2 COLUMNAS */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2.5rem' }}>
-                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
-                        <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>Integración Temprana</h4>
-                        <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
-                          Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.
-                        </p>
-                      </div>
-                      <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
-                        <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>Intervención Continua</h4>
-                        <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
-                          Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.
-                        </p>
-                      </div>
-                    </div>
+                    )}
 
                     {/* SUBTÍTULO Y REFLEXIÓN FINAL */}
-                    <h2 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '0.75rem' }}>
-                      Reflexión final
-                    </h2>
-                    <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '2.5rem' }}>
-                      El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.
-                    </p>
+                    {selectedArticle.paragraph3 && (
+                      <div style={{ marginBottom: '2.5rem' }}>
+                        <h2 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '0.75rem' }}>
+                          Reflexión final
+                        </h2>
+                        <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
+                          {selectedArticle.paragraph3}
+                        </p>
+                      </div>
+                    )}
 
-                    {/* TAGS DEL ARTÍCULO Y BOTONES DE COMPARTIR */}
+                    {/* TAGS DINÁMICOS DEL ARTÍCULO */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #F1F5F9', marginBottom: '2rem' }}>
                       <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                        {['CORPORATE COMPLIANCE', 'ÉTICA E INTEGRIDAD', 'GESTIÓN DE RIESGOS'].map((tag, tIdx) => (
+                        {(selectedArticle.categories && selectedArticle.categories.length > 0 ? selectedArticle.categories : [selectedArticle.category]).map((tag, tIdx) => (
                           <span key={tIdx} style={{ backgroundColor: '#f4f4f4', color: '#af1daa', fontSize: '0.68rem', fontWeight: '700', padding: '0.3rem 0.65rem', borderRadius: '4px' }}>
-                            # {tag}
+                            # {tag.toUpperCase()}
                           </span>
                         ))}
                       </div>
@@ -6333,6 +6330,7 @@ export function App() {
                           <button 
                             onClick={() => {
                               setEditingArticle(null);
+                              setArticleCover(null);
                               setAdminSubTab('blog-editor');
                             }}
                             style={{ 
@@ -6378,6 +6376,7 @@ export function App() {
                         className="btn btn-fuchsia"
                         onClick={() => {
                           setEditingArticle(null);
+                          setArticleCover(null);
                           setAdminSubTab('blog-editor');
                         }}
                         style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '8px' }}
@@ -6468,10 +6467,13 @@ export function App() {
                                 <div style={{ display: 'inline-flex', gap: '0.75rem', color: '#64748B', cursor: 'pointer' }}>
                                   <span onClick={() => {
                                     setEditingArticle(art);
+                                    setArticleCover(art.image || null);
                                     setAdminSubTab('blog-editor');
                                   }} title="Editar"><Edit2 size={16} /></span>
                                   <span onClick={() => {
+                                    setSelectedArticle(art);
                                     setActiveTab('contenido');
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
                                   }} title="Ver en Web"><Eye size={16} /></span>
                                   <span onClick={() => {
                                     if (confirm(`¿Eliminar el artículo "${art.title}"?`)) {
@@ -6510,7 +6512,7 @@ export function App() {
                       <div>
                         <button 
                           onClick={() => setAdminSubTab('blog-list')} 
-                          style={{ background: 'none', border: 'none', color: '#64748B', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                          style={{ background: 'none', border: 'none', color: '#64748B', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: '600' }}
                         >
                           ← Volver al listado de entradas
                         </button>
@@ -6526,7 +6528,7 @@ export function App() {
                         <div style={{ marginBottom: '1.5rem', borderBottom: '1px solid #E2E8F0', paddingBottom: '0.5rem' }}>
                           <input 
                             id="input-article-title"
-                            key={editingArticle ? editingArticle.title : 'new-article-title'}
+                            key={editingArticle ? (editingArticle.id || editingArticle.title) : 'new-article-title'}
                             type="text" 
                             placeholder="Escribe aquí el Título del Artículo..."
                             defaultValue={editingArticle ? editingArticle.title : ''}
@@ -6544,20 +6546,24 @@ export function App() {
 
                         {/* SUBIDA DE IMAGEN DESTACADA INTERACTIVA */}
                         <div 
-                          onClick={() => document.getElementById('input-article-file')?.click()}
                           style={{ 
                             borderRadius: '8px', 
                             overflow: 'hidden', 
                             marginBottom: '1.5rem', 
                             boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
-                            backgroundColor: '#F8F5FF',
-                            minHeight: '220px',
+                            backgroundColor: '#FAF5FF',
+                            minHeight: '200px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             border: '2px dashed #af1daa',
                             position: 'relative',
                             cursor: 'pointer'
+                          }}
+                          onClick={() => {
+                            if (!articleCover && !editingArticle?.image) {
+                              document.getElementById('input-article-file')?.click();
+                            }
                           }}
                         >
                           <input 
@@ -6571,32 +6577,76 @@ export function App() {
                                 const reader = new FileReader();
                                 reader.onload = (event) => {
                                   const imgUrl = event.target?.result as string;
-                                  if (editingArticle) {
-                                    setEditingArticle({ ...editingArticle, image: imgUrl });
-                                  } else {
-                                    setEditingArticle({ id: '', title: '', category: 'ACTUALIDAD REGULATORIA', author: '', role: '', date: 'Hoy', readTime: '4 min', summary: '', image: imgUrl, status: 'Publicado', content: '' });
-                                  }
+                                  setArticleCover(imgUrl);
                                 };
                                 reader.readAsDataURL(file);
                               }
                             }}
                           />
-                          {editingArticle?.image ? (
-                            <img 
-                              src={editingArticle.image} 
-                              alt="Portada Entrada" 
-                              style={{ width: '100%', height: '340px', objectFit: 'cover', display: 'block' }}
-                            />
+                          {(articleCover || editingArticle?.image) ? (
+                            <div style={{ width: '100%', position: 'relative' }}>
+                              <img 
+                                src={articleCover || editingArticle?.image} 
+                                alt="Portada Entrada" 
+                                style={{ width: '100%', height: '340px', objectFit: 'cover', display: 'block' }} 
+                              />
+                              <div style={{ 
+                                position: 'absolute', 
+                                top: '12px', 
+                                right: '12px', 
+                                display: 'flex', 
+                                gap: '8px', 
+                                backgroundColor: 'rgba(0,0,0,0.5)', 
+                                backdropFilter: 'blur(4px)', 
+                                padding: '6px 10px', 
+                                borderRadius: '20px' 
+                              }}>
+                                <label 
+                                  title="Cambiar Imagen" 
+                                  onClick={(e) => e.stopPropagation()} 
+                                  style={{ color: '#FFFFFF', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                                >
+                                  <Camera size={18} />
+                                  <input 
+                                    type="file" 
+                                    accept="image/*" 
+                                    style={{ display: 'none' }} 
+                                    onChange={(e) => {
+                                      const file = e.target.files?.[0];
+                                      if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = (ev) => setArticleCover(ev.target?.result as string);
+                                        reader.readAsDataURL(file);
+                                      }
+                                    }} 
+                                  />
+                                </label>
+                                <button 
+                                  type="button" 
+                                  title="Quitar Imagen" 
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setArticleCover(null);
+                                    if (editingArticle) {
+                                      setEditingArticle({ ...editingArticle, image: '' });
+                                    }
+                                  }} 
+                                  style={{ background: 'none', border: 'none', color: '#FF6B6B', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
+                                >
+                                  <Trash2 size={18} />
+                                </button>
+                              </div>
+                            </div>
                           ) : (
-                            <div style={{ textAlign: 'center', color: '#af1daa', padding: '2rem' }}>
-                              <Camera size={36} style={{ margin: '0 auto 0.5rem' }} />
-                              <p style={{ fontWeight: '700', margin: 0, fontSize: '0.95rem' }}>Subir Imagen de Portada</p>
-                              <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>Haz clic o arrastra una imagen aquí (JPG, PNG)</span>
+                            <div style={{ textAlign: 'center', color: '#af1daa', padding: '2.5rem' }}>
+                              <Camera size={40} style={{ margin: '0 auto 0.6rem' }} />
+                              <p style={{ fontWeight: '700', margin: '0 0 0.35rem', fontSize: '1rem' }}>Subir Imagen de Portada</p>
+                              <span style={{ color: '#94A3B8', fontSize: '0.85rem' }}>Haz clic o arrastra una imagen aquí (JPG, PNG)</span>
                             </div>
                           )}
                         </div>
 
-                        {/* BARRA DE HERRAMIENTAS EDITOR EN TEXTO (WYSIWYG INTERACTIVO FOTO 2) */}
+                        {/* BARRA DE HERRAMIENTAS EDITOR EN TEXTO (WYSIWYG INTERACTIVO FOTO 1) */}
                         <div style={{ 
                           display: 'flex', 
                           alignItems: 'center', 
@@ -6604,71 +6654,95 @@ export function App() {
                           backgroundColor: '#FFFFFF', 
                           border: '1px solid #E2E8F0', 
                           borderRadius: '6px', 
-                          padding: '0.5rem 1rem', 
-                          marginBottom: '1.5rem' 
+                          padding: '0.6rem 1rem', 
+                          marginBottom: '1.5rem',
+                          flexWrap: 'wrap',
+                          gap: '0.75rem'
                         }}>
                           <div style={{ display: 'flex', gap: '1.25rem', color: '#1E1B4B', fontWeight: '700', fontSize: '0.95rem', alignItems: 'center' }}>
-                            <span style={{ cursor: 'pointer' }} title="Negrita" onClick={() => {
-                              const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                              if (ta) ta.value += ' **Negrita** ';
-                            }}>B</span>
-                            <span style={{ cursor: 'pointer', fontStyle: 'italic' }} title="Cursiva" onClick={() => {
-                              const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                              if (ta) ta.value += ' *Cursiva* ';
-                            }}>I</span>
-                            <span style={{ cursor: 'pointer' }} title="Lista de viñetas" onClick={() => {
-                              const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                              if (ta) ta.value += '\n• ';
-                            }}>≡</span>
+                            <span 
+                              style={{ cursor: 'pointer', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
+                              title="Negrita" 
+                              onClick={() => {
+                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
+                                if (ta) {
+                                  const start = ta.selectionStart;
+                                  const end = ta.selectionEnd;
+                                  const sel = ta.value.substring(start, end) || 'texto en negrita';
+                                  ta.value = ta.value.substring(0, start) + `**${sel}**` + ta.value.substring(end);
+                                  ta.focus();
+                                }
+                              }}
+                            >
+                              B
+                            </span>
+                            <span 
+                              style={{ cursor: 'pointer', fontStyle: 'italic', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
+                              title="Cursiva" 
+                              onClick={() => {
+                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
+                                if (ta) {
+                                  const start = ta.selectionStart;
+                                  const end = ta.selectionEnd;
+                                  const sel = ta.value.substring(start, end) || 'texto en cursiva';
+                                  ta.value = ta.value.substring(0, start) + `*${sel}*` + ta.value.substring(end);
+                                  ta.focus();
+                                }
+                              }}
+                            >
+                              I
+                            </span>
+                            <span 
+                              style={{ cursor: 'pointer', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
+                              title="Lista de viñetas" 
+                              onClick={() => {
+                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
+                                if (ta) {
+                                  const start = ta.selectionStart;
+                                  ta.value = ta.value.substring(0, start) + '\n• Viñeta informativa' + ta.value.substring(start);
+                                  ta.focus();
+                                }
+                              }}
+                            >
+                              =
+                            </span>
                             
-                            {/* BOTÓN "" DE CITA DE AUTOR (INSERTA CITA DESTACADA EN LA POSICIÓN DEL CURSOR) */}
+                            {/* BOTÓN "" DE CITA DE AUTOR (ENFOCA EL BLOQUE DE CITA) */}
                             <span 
                               style={{ 
                                 cursor: 'pointer', 
                                 fontSize: '1.1rem', 
                                 padding: '0.2rem 0.5rem',
                                 borderRadius: '4px',
-                                transition: 'all 0.2s ease',
-                                color: '#1E1B4B'
+                                color: '#af1daa'
                               }} 
-                              title="Insertar Cita de Autor exactamente donde estás escribiendo" 
+                              title="Ir a la Cita Estratégica del Autor" 
                               onClick={() => {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) {
-                                  const startPos = ta.selectionStart;
-                                  const endPos = ta.selectionEnd;
-                                  const quoteText = '\n\n> "inserta aquí una cita estratégica que resalte la visión del autor"\n\n';
-                                  ta.value = ta.value.substring(0, startPos) + quoteText + ta.value.substring(endPos, ta.value.length);
-                                  ta.focus();
-                                  ta.selectionStart = startPos + quoteText.length;
-                                  ta.selectionEnd = startPos + quoteText.length;
+                                const el = document.getElementById('input-article-quote');
+                                if (el) {
+                                  el.focus();
+                                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                 }
                               }}
                             >
                               “”
                             </span>
 
-                            {/* BOTÓN ⊞ DE TARJETAS PARALELAS (INSERTA PAR DE TARJETAS EN LA POSICIÓN DEL CURSOR) */}
+                            {/* BOTÓN ⊞ DE TARJETAS PARALELAS (ENFOCA EL BLOQUE DE TARJETAS) */}
                             <span 
                               style={{ 
                                 cursor: 'pointer', 
                                 fontSize: '1.1rem',
                                 padding: '0.2rem 0.5rem',
                                 borderRadius: '4px',
-                                transition: 'all 0.2s ease',
-                                color: '#1E1B4B'
+                                color: '#af1daa'
                               }} 
-                              title="Insertar Par de Tarjetas Dinámicas (2 columnas) donde estás escribiendo" 
+                              title="Ir a las Tarjetas Dinámicas en Paralelo (2 columnas)" 
                               onClick={() => {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) {
-                                  const startPos = ta.selectionStart;
-                                  const endPos = ta.selectionEnd;
-                                  const cardsText = '\n\n[TARJETA 1: Integración Temprana | Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.]\n[TARJETA 2: Ingresa título | Ingresa aquí el texto]\n\n';
-                                  ta.value = ta.value.substring(0, startPos) + cardsText + ta.value.substring(endPos, ta.value.length);
-                                  ta.focus();
-                                  ta.selectionStart = startPos + cardsText.length;
-                                  ta.selectionEnd = startPos + cardsText.length;
+                                const el = document.getElementById('input-card1-title');
+                                if (el) {
+                                  el.focus();
+                                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                 }
                               }}
                             >
@@ -6677,168 +6751,222 @@ export function App() {
                           </div>
 
                           <div style={{ display: 'flex', gap: '1.25rem', color: '#64748B', fontSize: '0.85rem' }}>
-                            <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} onClick={() => document.getElementById('input-article-file')?.click()}>📷 Imagen</span>
-                            <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} onClick={() => {
-                              const url = prompt('Ingrese URL del Video YouTube / Vimeo:');
-                              if (url) {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) ta.value += `\n[Video: ${url}]`;
-                              }
-                            }}>▶ Video URL</span>
-                            <span style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} onClick={() => {
-                              const link = prompt('Ingrese URL del enlace:');
-                              if (link) {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) ta.value += ` [${link}](${link}) `;
-                              }
-                            }}>🔗 Enlace</span>
+                            <span 
+                              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
+                              onClick={() => document.getElementById('input-article-file')?.click()}
+                            >
+                              📷 Imagen
+                            </span>
+                            <span 
+                              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
+                              onClick={() => {
+                                const url = prompt('Ingresa URL del video de YouTube o Vimeo:');
+                                if (url) {
+                                  const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
+                                  if (ta) ta.value += `\n\n[Video: ${url}]\n`;
+                                }
+                              }}
+                            >
+                              ▶ Video URL
+                            </span>
+                            <span 
+                              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
+                              onClick={() => {
+                                const link = prompt('Ingresa la URL del enlace:');
+                                if (link) {
+                                  const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
+                                  if (ta) ta.value += ` [${link}](${link}) `;
+                                }
+                              }}
+                            >
+                              🔗 Enlace
+                            </span>
                           </div>
                         </div>
 
-                        {/* COMPONENTE INTERACTIVO DE REDACCIÓN Y MAQUETACIÓN VISUAL (DISEÑO IDÉNTICO FOTO 2) */}
-                        <div style={{ marginBottom: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                        {/* COMPONENTE INTERACTIVO DE REDACCIÓN Y MAQUETACIÓN VISUAL (DISEÑO IDÉNTICO FOTO 1) */}
+                        <div style={{ marginBottom: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                           
                           {/* PÁRRAFO SUPERIOR DE TEXTO */}
-                          <textarea 
-                            id="input-article-content"
-                            key={editingArticle ? editingArticle.content : 'new-article-content'}
-                            rows={5}
-                            placeholder="Escribe aquí el cuerpo del artículo o publicación..."
-                            defaultValue={editingArticle ? editingArticle.content : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta.'}
-                            style={{ 
-                              width: '100%', 
-                              padding: '0', 
-                              border: 'none', 
-                              backgroundColor: 'transparent', 
-                              fontSize: '1.05rem', 
-                              lineHeight: '1.8', 
-                              fontFamily: "'Montserrat', sans-serif",
-                              color: '#1E1B4B',
-                              outline: 'none',
-                              resize: 'none'
-                            }}
-                          />
-
-                          {/* CITA DESTACADA RECTANGULAR DE AUTOR CON MARCO MORADO Y COMI LLAS GIGANTES (VISTA FOTO 2) */}
-                          <div style={{ 
-                            backgroundColor: '#FDF4FF', 
-                            borderLeft: '4px solid #af1daa', 
-                            borderRadius: '0 8px 8px 0', 
-                            padding: '1.5rem 2rem', 
-                            position: 'relative',
-                            marginTop: '0.5rem',
-                            marginBottom: '0.5rem'
-                          }}>
-                            <input 
-                              id="input-article-quote"
-                              type="text"
-                              placeholder="inserta aquí una cita estratégica que resalte la visión del autor"
-                              defaultValue="inserta aquí una cita estratégica que resalte la visión del autor"
+                          <div>
+                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                              Párrafo de Introducción
+                            </label>
+                            <textarea 
+                              id="input-article-content"
+                              key={editingArticle ? (editingArticle.id + '-c1') : 'new-c1'}
+                              rows={5}
+                              placeholder="Escribe aquí el cuerpo inicial del artículo o publicación..."
+                              defaultValue={editingArticle ? editingArticle.content : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta.'}
                               style={{ 
-                                width: '90%',
-                                backgroundColor: 'transparent',
-                                border: 'none',
+                                width: '100%', 
+                                padding: '1rem', 
+                                border: '1px solid #E2E8F0', 
+                                borderRadius: '6px',
+                                backgroundColor: '#FFFFFF', 
+                                fontSize: '1rem', 
+                                lineHeight: '1.8', 
+                                fontFamily: "'Montserrat', sans-serif",
+                                color: '#1E1B4B',
                                 outline: 'none',
-                                color: '#af1daa', 
-                                fontSize: '1.15rem', 
-                                fontFamily: "'Montserrat', sans-serif", 
-                                fontStyle: 'italic',
-                                fontWeight: '500'
+                                boxSizing: 'border-box'
                               }}
                             />
-                            <span style={{ 
-                              position: 'absolute', 
-                              right: '1.5rem', 
-                              bottom: '0.5rem', 
-                              fontSize: '3.5rem', 
-                              color: 'rgba(143, 0, 141, 0.25)', 
-                              fontFamily: "'Montserrat', sans-serif",
-                              lineHeight: 1,
-                              pointerEvents: 'none'
+                          </div>
+
+                          {/* CITA DESTACADA RECTANGULAR DE AUTOR CON MARCO MORADO Y COMILLAS GIGANTES (VISTA FOTO 1) */}
+                          <div>
+                            <label style={{ display: 'block', color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                              Cita Estratégica del Autor
+                            </label>
+                            <div style={{ 
+                              backgroundColor: '#FDF4FF', 
+                              borderLeft: '4px solid #af1daa', 
+                              borderRadius: '0 8px 8px 0', 
+                              padding: '1.5rem 2rem', 
+                              position: 'relative'
                             }}>
-                              ””
-                            </span>
+                              <input 
+                                id="input-article-quote"
+                                key={editingArticle ? (editingArticle.id + '-quote') : 'new-quote'}
+                                type="text"
+                                placeholder="inserta aquí una cita estratégica que resalte la visión del autor"
+                                defaultValue={editingArticle ? (editingArticle.quote || '') : 'inserta aquí una cita estratégica que resalte la visión del autor'}
+                                style={{ 
+                                  width: '90%',
+                                  backgroundColor: 'transparent',
+                                  border: 'none',
+                                  outline: 'none',
+                                  color: '#af1daa', 
+                                  fontSize: '1.15rem', 
+                                  fontFamily: "'Montserrat', sans-serif", 
+                                  fontStyle: 'italic',
+                                  fontWeight: '600'
+                                }}
+                              />
+                              <span style={{ 
+                                position: 'absolute', 
+                                right: '1.5rem', 
+                                bottom: '0.5rem', 
+                                fontSize: '3.5rem', 
+                                color: 'rgba(143, 0, 141, 0.25)', 
+                                fontFamily: "'Montserrat', sans-serif",
+                                lineHeight: 1,
+                                pointerEvents: 'none'
+                              }}>
+                                ””
+                              </span>
+                            </div>
                           </div>
 
                           {/* SEGUNDO PÁRRAFO INTERMEDIO */}
-                          <textarea 
-                            rows={4}
-                            placeholder="Escribe el siguiente párrafo de tu artículo..."
-                            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta"
-                            style={{ 
-                              width: '100%', 
-                              padding: '0', 
-                              border: 'none', 
-                              backgroundColor: 'transparent', 
-                              fontSize: '1.05rem', 
-                              lineHeight: '1.8', 
-                              fontFamily: "'Montserrat', sans-serif",
-                              color: '#1E1B4B',
-                              outline: 'none',
-                              resize: 'none'
-                            }}
-                          />
+                          <div>
+                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                              Párrafo de Desarrollo
+                            </label>
+                            <textarea 
+                              id="input-article-paragraph2"
+                              key={editingArticle ? (editingArticle.id + '-c2') : 'new-c2'}
+                              rows={4}
+                              placeholder="Escribe el siguiente párrafo de tu artículo..."
+                              defaultValue={editingArticle ? (editingArticle.paragraph2 || '') : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta.'}
+                              style={{ 
+                                width: '100%', 
+                                padding: '1rem', 
+                                border: '1px solid #E2E8F0', 
+                                borderRadius: '6px',
+                                backgroundColor: '#FFFFFF', 
+                                fontSize: '1rem', 
+                                lineHeight: '1.8', 
+                                fontFamily: "'Montserrat', sans-serif",
+                                color: '#1E1B4B',
+                                outline: 'none',
+                                boxSizing: 'border-box'
+                              }}
+                            />
+                          </div>
 
-                          {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS (DISEÑO IDÉNTICO FOTO 2) */}
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', margin: '0.75rem 0' }}>
-                            {/* TARJETA 1 */}
-                            <div style={{ backgroundColor: '#f4f4f4', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
-                              <input 
-                                type="text" 
-                                defaultValue="Integración Temprana"
-                                placeholder="Integración Temprana"
-                                style={{ width: '100%', color: '#1E1B4B', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
-                              />
-                              <textarea 
-                                rows={3}
-                                defaultValue="Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva."
-                                placeholder="Involucrar tempranamente a estas funciones..."
-                                style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
-                              />
-                            </div>
+                          {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS (DISEÑO IDÉNTICO FOTO 1) */}
+                          <div>
+                            <label style={{ display: 'block', color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                              Tarjetas Destacadas en Paralelo (2 Columnas)
+                            </label>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                              {/* TARJETA 1 */}
+                              <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                <input 
+                                  id="input-card1-title"
+                                  key={editingArticle ? (editingArticle.id + '-c1t') : 'new-c1t'}
+                                  type="text" 
+                                  defaultValue={editingArticle ? (editingArticle.card1Title || '') : 'Integración Temprana'}
+                                  placeholder="Integración Temprana"
+                                  style={{ width: '100%', color: '#1E1B4B', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
+                                />
+                                <textarea 
+                                  id="input-card1-text"
+                                  key={editingArticle ? (editingArticle.id + '-c1x') : 'new-c1x'}
+                                  rows={3}
+                                  defaultValue={editingArticle ? (editingArticle.card1Text || '') : 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.'}
+                                  placeholder="Involucrar tempranamente a estas funciones..."
+                                  style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
+                                />
+                              </div>
 
-                            {/* TARJETA 2 */}
-                            <div style={{ backgroundColor: '#f4f4f4', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px' }}>
-                              <input 
-                                type="text" 
-                                defaultValue="Ingresa título"
-                                placeholder="Ingresa título"
-                                style={{ width: '100%', color: '#94A3B8', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
-                              />
-                              <textarea 
-                                rows={3}
-                                defaultValue="Ingresa aquí el texto"
-                                placeholder="Ingresa aquí el texto"
-                                style={{ width: '100%', color: '#94A3B8', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
-                              />
+                              {/* TARJETA 2 */}
+                              <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                <input 
+                                  id="input-card2-title"
+                                  key={editingArticle ? (editingArticle.id + '-c2t') : 'new-c2t'}
+                                  type="text" 
+                                  defaultValue={editingArticle ? (editingArticle.card2Title || '') : 'Intervención Continua'}
+                                  placeholder="Ingresa título"
+                                  style={{ width: '100%', color: '#1E1B4B', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
+                                />
+                                <textarea 
+                                  id="input-card2-text"
+                                  key={editingArticle ? (editingArticle.id + '-c2x') : 'new-c2x'}
+                                  rows={3}
+                                  defaultValue={editingArticle ? (editingArticle.card2Text || '') : 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'}
+                                  placeholder="Ingresa aquí el texto"
+                                  style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
+                                />
+                              </div>
                             </div>
                           </div>
 
-                          {/* PÁRRAFO FINAL LIBRE DE CONTINUACIÓN */}
-                          <textarea 
-                            rows={5}
-                            placeholder="Continúa escribiendo el final de tu artículo aquí..."
-                            style={{ 
-                              width: '100%', 
-                              padding: '0', 
-                              border: 'none', 
-                              backgroundColor: 'transparent', 
-                              fontSize: '1.05rem', 
-                              lineHeight: '1.8', 
-                              fontFamily: "'Montserrat', sans-serif",
-                              color: '#1E1B4B',
-                              outline: 'none',
-                              resize: 'vertical'
-                            }}
-                          />
+                          {/* PÁRRAFO FINAL / CONCLUSIÓN */}
+                          <div>
+                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                              Reflexión Final / Conclusión
+                            </label>
+                            <textarea 
+                              id="input-article-paragraph3"
+                              key={editingArticle ? (editingArticle.id + '-c3') : 'new-c3'}
+                              rows={4}
+                              placeholder="Continúa escribiendo la reflexión o conclusión final de tu artículo aquí..."
+                              defaultValue={editingArticle ? (editingArticle.paragraph3 || '') : 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'}
+                              style={{ 
+                                width: '100%', 
+                                padding: '1rem', 
+                                border: '1px solid #E2E8F0', 
+                                borderRadius: '6px',
+                                backgroundColor: '#FFFFFF', 
+                                fontSize: '1rem', 
+                                lineHeight: '1.8', 
+                                fontFamily: "'Montserrat', sans-serif",
+                                color: '#1E1B4B',
+                                outline: 'none',
+                                boxSizing: 'border-box'
+                              }}
+                            />
+                          </div>
 
                         </div>
 
                       </div>
 
-
-                      {/* COLUMNA DERECHA: CONFIGURACIÓN, AUTOR & BOTONES DE PUBLICACIÓN */}
-                      <div style={{ backgroundColor: '#F8F5FF', padding: '1.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                      {/* COLUMNA DERECHA: CONFIGURACIÓN, AUTOR & BOTONES DE PUBLICACIÓN (IDÉNTICO FOTO 1) */}
+                      <div style={{ backgroundColor: '#FAF5FF', padding: '1.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                         
                         {/* ESTADO DE PUBLICACIÓN */}
                         <div style={{ marginBottom: '1.75rem' }}>
@@ -6847,6 +6975,7 @@ export function App() {
                           </label>
                           <select 
                             id="select-article-status"
+                            key={editingArticle ? editingArticle.status : 'status-sel'}
                             defaultValue={editingArticle?.status || "Publicado"}
                             style={{ width: '100%', padding: '0.65rem 0.85rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.9rem', backgroundColor: '#FFFFFF', color: '#1E1B4B', outline: 'none' }}
                           >
@@ -6857,7 +6986,7 @@ export function App() {
 
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem', color: '#334155', fontSize: '0.85rem', fontWeight: '600' }}>
                             <Calendar size={16} style={{ color: '#af1daa' }} />
-                            <span>14 de Agosto, 2026</span>
+                            <span>{editingArticle?.date || '14 de Agosto, 2026'}</span>
                           </div>
                         </div>
 
@@ -6875,7 +7004,7 @@ export function App() {
                               type="text" 
                               placeholder="Ej. Sheila Silva Mayo" 
                               defaultValue={editingArticle ? editingArticle.author : ''}
-                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#f4f4f4', color: '#1E1B4B', fontWeight: '600' }}
+                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FFFFFF', color: '#1E1B4B', fontWeight: '600', boxSizing: 'border-box' }}
                             />
                           </div>
 
@@ -6887,22 +7016,33 @@ export function App() {
                               type="text" 
                               placeholder="Ej. Abogado de LG ABOGADOS" 
                               defaultValue={editingArticle ? editingArticle.role : ''}
-                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#f4f4f4', color: '#1E1B4B', fontWeight: '600' }}
+                              style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FFFFFF', color: '#1E1B4B', fontWeight: '600', boxSizing: 'border-box' }}
                             />
                           </div>
                         </div>
 
-                        {/* ETIQUETAS */}
+                        {/* ETIQUETAS / CATEGORÍA CONECTADAS AL CATÁLOGO PÚBLICO */}
                         <div style={{ marginBottom: '2rem', borderTop: '1px solid #E2E8F0', paddingTop: '1.25rem' }}>
                           <label style={{ display: 'block', color: '#1E1B4B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.75rem' }}>
                             ETIQUETAS / CATEGORÍA
                           </label>
 
-                          <select id="select-article-category" style={{ width: '100%', padding: '0.65rem 0.85rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FFFFFF', color: '#1E1B4B', marginBottom: '1rem' }}>
-                            <option value="GESTIÓN DE RIESGOS">Gestión de Riesgos</option>
-                            <option value="GOBIERNO CORPORATIVO">Gobierno Corporativo</option>
-                            <option value="COMPLIANCE">Compliance</option>
-                            <option value="TENDENCIAS REGULATORIAS">Tendencias Regulatorias</option>
+                          <select 
+                            id="select-article-category" 
+                            key={editingArticle ? editingArticle.category : 'cat-sel'}
+                            defaultValue={editingArticle?.category || "Gestión de Riesgos"}
+                            style={{ width: '100%', padding: '0.65rem 0.85rem', border: '1px solid #CBD5E1', borderRadius: '6px', fontSize: '0.85rem', backgroundColor: '#FFFFFF', color: '#1E1B4B', marginBottom: '1rem', outline: 'none' }}
+                          >
+                            <option value="Gestión de Riesgos">Gestión de Riesgos</option>
+                            <option value="Compliance">Compliance</option>
+                            <option value="Buen Gobierno Corporativo">Buen Gobierno Corporativo</option>
+                            <option value="ESG">ESG</option>
+                            <option value="Anti-Corrupción">Anti-Corrupción</option>
+                            <option value="SAGRILAFT & PTEE">SAGRILAFT & PTEE</option>
+                            <option value="Ética e Integridad">Ética e Integridad</option>
+                            <option value="Compliance Penal">Compliance Penal</option>
+                            <option value="Tax Compliance">Tax Compliance</option>
+                            <option value="Protección de Datos">Protección de Datos</option>
                           </select>
                         </div>
 
@@ -6911,47 +7051,56 @@ export function App() {
                           <button 
                             type="button"
                             onClick={() => {
-                              const titleVal = (document.getElementById('input-article-title') as HTMLInputElement)?.value;
-                              const authorVal = (document.getElementById('input-article-author') as HTMLInputElement)?.value;
-                              const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value;
-                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value;
-                              const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value;
+                              const titleVal = (document.getElementById('input-article-title') as HTMLInputElement)?.value?.trim();
+                              const authorVal = (document.getElementById('input-article-author') as HTMLInputElement)?.value?.trim();
+                              const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value?.trim();
+                              const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || 'Gestión de Riesgos';
                               const statusVal = (document.getElementById('select-article-status') as HTMLSelectElement)?.value || 'Publicado';
-                              
+
+                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || '';
+                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || '';
+                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || '';
+                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || '';
+
                               const newTitle = titleVal || (editingArticle ? editingArticle.title : "NUEVA PUBLICACIÓN");
                               const newAuthor = authorVal || (editingArticle ? editingArticle.author : "WIC COLOMBIA");
-                              const newRole = roleVal || (editingArticle ? editingArticle.role : "ESPECIALISTA COMPLIANCE");
-                              const newContent = contentVal || (editingArticle ? editingArticle.content : "Contenido de la publicación...");
-                              const newImg = editingArticle?.image || "/Fotos/Imagen para Inicio - Eventos 04.jpg";
+                              const newRole = roleVal || (editingArticle ? editingArticle.role : "ESPECIALISTA EN COMPLIANCE");
+                              const newImg = articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg";
+                              const summaryVal = contentVal.length > 0 ? (contentVal.slice(0, 180) + "...") : "Publicación sobre ética y cumplimiento normativo.";
+
+                              const articlePayload: Article = {
+                                id: editingArticle?.id || `art-${Date.now()}`,
+                                title: newTitle,
+                                category: catVal,
+                                categories: [catVal],
+                                author: newAuthor,
+                                authorPhoto: editingArticle?.authorPhoto || "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
+                                role: newRole,
+                                date: editingArticle?.date || "14 de Agosto, 2026",
+                                readTime: "4 min de lectura",
+                                summary: summaryVal,
+                                image: newImg,
+                                status: statusVal,
+                                content: contentVal,
+                                quote: quoteVal,
+                                paragraph2: p2Val,
+                                card1Title: card1TitleVal,
+                                card1Text: card1TextVal,
+                                card2Title: card2TitleVal,
+                                card2Text: card2TextVal,
+                                paragraph3: p3Val
+                              };
 
                               if (editingArticle && editingArticle.id) {
-                                setArticlesList(prev => prev.map(a => a.id === editingArticle.id ? {
-                                  ...a,
-                                  title: newTitle,
-                                  author: newAuthor,
-                                  role: newRole,
-                                  content: newContent,
-                                  category: catVal || a.category,
-                                  status: statusVal,
-                                  image: newImg,
-                                  summary: newContent.slice(0, 140) + "..."
-                                } : a));
+                                setArticlesList(prev => prev.map(a => a.id === editingArticle.id ? articlePayload : a));
                               } else {
-                                const newArt: Article = {
-                                  id: `art-${Date.now()}`,
-                                  title: newTitle,
-                                  category: catVal || "ACTUALIDAD REGULATORIA",
-                                  author: newAuthor,
-                                  role: newRole,
-                                  date: "Hoy",
-                                  readTime: "4 min de lectura",
-                                  summary: newContent.slice(0, 140) + "...",
-                                  image: newImg,
-                                  status: statusVal,
-                                  content: newContent
-                                };
-                                setArticlesList(prev => [newArt, ...prev]);
+                                setArticlesList(prev => [articlePayload, ...prev]);
                               }
+
                               alert(`¡Artículo ${statusVal === 'Borrador' ? 'guardado como Borrador' : 'publicado con éxito en la Web Pública de WIC'}!`);
                               setAdminSubTab('blog-list');
                             }}
@@ -6965,7 +7114,8 @@ export function App() {
                               fontWeight: '700', 
                               fontSize: '0.9rem',
                               letterSpacing: '1px',
-                              cursor: 'pointer' 
+                              cursor: 'pointer',
+                              boxShadow: '0 4px 12px rgba(175, 29, 170, 0.3)'
                             }}
                           >
                             PUBLICAR
@@ -6974,30 +7124,56 @@ export function App() {
                           <button 
                             type="button"
                             onClick={() => {
-                              const titleVal = (document.getElementById('input-article-title') as HTMLInputElement)?.value;
-                              const authorVal = (document.getElementById('input-article-author') as HTMLInputElement)?.value;
-                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value;
-                              const newTitle = titleVal || "BORRADOR DE ARTÍCULO";
-                              const newAuthor = authorVal || "WIC COLOMBIA";
-                              const newContent = contentVal || "Borrador en desarrollo...";
-                              const newImg = editingArticle?.image || "/Fotos/Imagen para Inicio - Eventos 04.jpg";
+                              const titleVal = (document.getElementById('input-article-title') as HTMLInputElement)?.value?.trim();
+                              const authorVal = (document.getElementById('input-article-author') as HTMLInputElement)?.value?.trim();
+                              const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value?.trim();
+                              const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || 'Gestión de Riesgos';
 
-                              const draftArt: Article = {
+                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || '';
+                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || '';
+                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || '';
+                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || '';
+                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || '';
+
+                              const newTitle = titleVal || (editingArticle ? editingArticle.title : "BORRADOR DE PUBLICACIÓN");
+                              const newAuthor = authorVal || (editingArticle ? editingArticle.author : "WIC COLOMBIA");
+                              const newRole = roleVal || (editingArticle ? editingArticle.role : "ESPECIALISTA EN COMPLIANCE");
+                              const newImg = articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg";
+                              const summaryVal = contentVal.length > 0 ? (contentVal.slice(0, 180) + "...") : "Borrador en desarrollo...";
+
+                              const draftPayload: Article = {
                                 id: editingArticle?.id || `art-${Date.now()}`,
                                 title: newTitle,
-                                category: "BORRADOR",
+                                category: catVal,
+                                categories: [catVal],
                                 author: newAuthor,
-                                role: "Autor WIC",
-                                date: "Hoy",
-                                readTime: "3 min de lectura",
-                                summary: newContent.slice(0, 100) + "...",
+                                authorPhoto: editingArticle?.authorPhoto || "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
+                                role: newRole,
+                                date: editingArticle?.date || "Hoy",
+                                readTime: "4 min de lectura",
+                                summary: summaryVal,
                                 image: newImg,
                                 status: "Borrador",
-                                content: newContent
+                                content: contentVal,
+                                quote: quoteVal,
+                                paragraph2: p2Val,
+                                card1Title: card1TitleVal,
+                                card1Text: card1TextVal,
+                                card2Title: card2TitleVal,
+                                card2Text: card2TextVal,
+                                paragraph3: p3Val
                               };
 
-                              setArticlesList(prev => [draftArt, ...prev.filter(a => a.id !== draftArt.id)]);
-                              alert('Borrador guardado en la Intranet.');
+                              if (editingArticle && editingArticle.id) {
+                                setArticlesList(prev => prev.map(a => a.id === editingArticle.id ? draftPayload : a));
+                              } else {
+                                setArticlesList(prev => [draftPayload, ...prev]);
+                              }
+
+                              alert('Borrador guardado con éxito.');
                               setAdminSubTab('blog-list');
                             }}
                             style={{ 
@@ -7005,7 +7181,7 @@ export function App() {
                               padding: '0.85rem', 
                               backgroundColor: 'transparent', 
                               color: '#af1daa', 
-                              border: '1px solid #af1daa', 
+                              border: '1.5px solid #af1daa', 
                               borderRadius: '6px', 
                               fontWeight: '700', 
                               fontSize: '0.9rem',
@@ -7018,7 +7194,53 @@ export function App() {
                         </div>
 
                         <div style={{ textAlign: 'center' }}>
-                          <a href="#preview" onClick={(e) => { e.preventDefault(); setActiveTab('contenido'); }} style={{ color: '#64748B', fontSize: '0.8rem', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                          <a 
+                            href="#preview" 
+                            onClick={(e) => { 
+                              e.preventDefault(); 
+                              const titleVal = (document.getElementById('input-article-title') as HTMLInputElement)?.value?.trim() || editingArticle?.title || "Vista Previa de Entrada";
+                              const authorVal = (document.getElementById('input-article-author') as HTMLInputElement)?.value?.trim() || editingArticle?.author || "WIC COLOMBIA";
+                              const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value?.trim() || editingArticle?.role || "Líder de Cumplimiento";
+                              const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || editingArticle?.category || "Gestión de Riesgos";
+
+                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.content || "";
+                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || editingArticle?.quote || "";
+                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.paragraph2 || "";
+                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || editingArticle?.card1Title || "";
+                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.card1Text || "";
+                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || editingArticle?.card2Title || "";
+                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.card2Text || "";
+                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.paragraph3 || "";
+
+                              const previewArt: Article = {
+                                id: editingArticle?.id || 'preview-current',
+                                title: titleVal,
+                                category: catVal,
+                                categories: [catVal],
+                                author: authorVal,
+                                authorPhoto: editingArticle?.authorPhoto || "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
+                                role: roleVal,
+                                date: editingArticle?.date || "Hoy",
+                                readTime: "4 min de lectura",
+                                summary: contentVal.slice(0, 180) + "...",
+                                image: articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg",
+                                status: "Publicado",
+                                content: contentVal,
+                                quote: quoteVal,
+                                paragraph2: p2Val,
+                                card1Title: card1TitleVal,
+                                card1Text: card1TextVal,
+                                card2Title: card2TitleVal,
+                                card2Text: card2TextVal,
+                                paragraph3: p3Val
+                              };
+
+                              setSelectedArticle(previewArt);
+                              setActiveTab('contenido');
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }} 
+                            style={{ color: '#64748B', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}
+                          >
                             Ver vista previa pública <ExternalLink size={14} />
                           </a>
                         </div>

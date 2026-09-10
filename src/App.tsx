@@ -220,7 +220,7 @@ export interface ArticleBlock {
   imageCaption?: string;
 }
 
-export function getArticleBlocks(art?: Partial<Article> | null): ArticleBlock[] {
+function getArticleBlocks(art?: Partial<Article> | null): ArticleBlock[] {
   if (!art) {
     return [
       {

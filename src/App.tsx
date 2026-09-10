@@ -5437,30 +5437,31 @@ export function App() {
         {/* ---------------------------------------------------- */}
         {activeTab === 'login' && (
           isLoggedIn ? (
-            <div style={{ backgroundColor: '#FCF8FF', minHeight: '100vh', display: 'flex' }}>
-              {/* SIDEBAR LATERAL (SEGÚN MAQUETAS) */}
+            <div style={{ backgroundColor: '#FAF8FC', minHeight: '100vh', display: 'flex' }}>
+              {/* SIDEBAR LATERAL (ALINEADO CON PALETA Y ESTÉTICA WIC) */}
               <aside style={{ 
-                width: '260px', 
-                backgroundColor: '#f4f4f4', 
-                borderRight: '1px solid #D6C0D2', 
-                padding: '1.5rem 1rem',
+                width: '270px', 
+                backgroundColor: '#FFFFFF', 
+                borderRight: '1px solid rgba(175, 29, 170, 0.12)', 
+                padding: '1.75rem 1.25rem',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                flexShrink: 0
+                flexShrink: 0,
+                boxShadow: '4px 0 24px rgba(10, 17, 40, 0.03)'
               }}>
                 <div>
                   {/* LOGO E INDICADOR BIENVENIDO A TU ADMIN PORTAL */}
-                  <div style={{ marginBottom: '2.5rem', paddingLeft: '0.5rem' }}>
-                    <span style={{ color: '#64748B', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>
-                      BIENVENIDO A TU
+                  <div style={{ marginBottom: '2.5rem', padding: '0.25rem 0.5rem' }}>
+                    <span style={{ color: '#af1daa', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>
+                      WIC COLOMBIA
                     </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                      <div style={{ backgroundColor: '#af1daa', color: '#FFF', padding: '0.4rem', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                      <div style={{ backgroundColor: '#af1daa', color: '#FFF', padding: '0.45rem', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(175, 29, 170, 0.3)' }}>
                         <Building2 size={18} />
                       </div>
                       <div>
-                        <span style={{ color: '#af1daa', fontSize: '1.2rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', display: 'block', lineHeight: '1.1' }}>
+                        <span style={{ color: '#1E1B4B', fontSize: '1.25rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', display: 'block', lineHeight: '1.1' }}>
                           Admin Portal
                         </span>
                       </div>
@@ -5477,15 +5478,19 @@ export function App() {
                         gap: '0.75rem', 
                         width: '100%', 
                         padding: '0.75rem 1rem', 
-                        backgroundColor: adminSubTab === 'dashboard' ? '#A21CAF' : 'transparent', 
-                        color: adminSubTab === 'dashboard' ? '#FFFFFF' : '#524250', 
+                        backgroundColor: adminSubTab === 'dashboard' ? '#af1daa' : 'transparent', 
+                        color: adminSubTab === 'dashboard' ? '#FFFFFF' : '#475569', 
                         border: 'none', 
-                        borderRadius: '4px', 
+                        borderRadius: '8px', 
                         fontWeight: '700',
                         fontSize: '0.85rem',
                         textAlign: 'left',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        boxShadow: adminSubTab === 'dashboard' ? '0 4px 14px rgba(175, 29, 170, 0.3)' : 'none',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={(e) => { if (adminSubTab !== 'dashboard') { e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.08)'; e.currentTarget.style.color = '#af1daa'; } }}
+                      onMouseLeave={(e) => { if (adminSubTab !== 'dashboard') { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#475569'; } }}
                     >
                       <LayoutDashboard size={18} /> Dashboard
                     </button>
@@ -5499,15 +5504,19 @@ export function App() {
                         gap: '0.75rem', 
                         width: '100%', 
                         padding: '0.75rem 1rem', 
-                        backgroundColor: adminSubTab === 'members-list' || adminSubTab === 'member-editor' ? '#A21CAF' : 'transparent', 
-                        color: adminSubTab === 'members-list' || adminSubTab === 'member-editor' ? '#FFFFFF' : '#524250', 
+                        backgroundColor: adminSubTab === 'members-list' || adminSubTab === 'member-editor' ? '#af1daa' : 'transparent', 
+                        color: adminSubTab === 'members-list' || adminSubTab === 'member-editor' ? '#FFFFFF' : '#475569', 
                         border: 'none', 
-                        borderRadius: '4px', 
+                        borderRadius: '8px', 
                         fontWeight: '700',
                         fontSize: '0.85rem',
                         textAlign: 'left',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        boxShadow: adminSubTab === 'members-list' || adminSubTab === 'member-editor' ? '0 4px 14px rgba(175, 29, 170, 0.3)' : 'none',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={(e) => { if (adminSubTab !== 'members-list' && adminSubTab !== 'member-editor') { e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.08)'; e.currentTarget.style.color = '#af1daa'; } }}
+                      onMouseLeave={(e) => { if (adminSubTab !== 'members-list' && adminSubTab !== 'member-editor') { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#475569'; } }}
                     >
                       <Users size={18} /> Miembros
                     </button>
@@ -5521,39 +5530,73 @@ export function App() {
                         gap: '0.75rem', 
                         width: '100%', 
                         padding: '0.75rem 1rem', 
-                        backgroundColor: adminSubTab === 'blog-list' || adminSubTab === 'blog-editor' ? '#A21CAF' : 'transparent', 
-                        color: adminSubTab === 'blog-list' || adminSubTab === 'blog-editor' ? '#FFFFFF' : '#524250', 
+                        backgroundColor: adminSubTab === 'blog-list' || adminSubTab === 'blog-editor' ? '#af1daa' : 'transparent', 
+                        color: adminSubTab === 'blog-list' || adminSubTab === 'blog-editor' ? '#FFFFFF' : '#475569', 
                         border: 'none', 
-                        borderRadius: '4px', 
+                        borderRadius: '8px', 
                         fontWeight: '700',
                         fontSize: '0.85rem',
                         textAlign: 'left',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        boxShadow: adminSubTab === 'blog-list' || adminSubTab === 'blog-editor' ? '0 4px 14px rgba(175, 29, 170, 0.3)' : 'none',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={(e) => { if (adminSubTab !== 'blog-list' && adminSubTab !== 'blog-editor') { e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.08)'; e.currentTarget.style.color = '#af1daa'; } }}
+                      onMouseLeave={(e) => { if (adminSubTab !== 'blog-list' && adminSubTab !== 'blog-editor') { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#475569'; } }}
                     >
                       <BookOpen size={18} /> Blog
                     </button>
                   </nav>
                 </div>
 
-                <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ borderTop: '1px solid rgba(175, 29, 170, 0.12)', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                   <button 
-                    onClick={() => alert('Soporte técnico disponible 24/7 para WIC Colombia')}
+                    onClick={() => {
+                      setActiveTab('inicio');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                     style={{ 
                       display: 'flex', 
                       alignItems: 'center', 
                       gap: '0.75rem', 
                       width: '100%', 
-                      padding: '0.5rem 0.5rem', 
-                      backgroundColor: 'transparent', 
-                      color: '#475569', 
-                      border: 'none', 
-                      fontWeight: '600',
-                      fontSize: '0.85rem',
-                      cursor: 'pointer'
+                      padding: '0.65rem 0.85rem', 
+                      backgroundColor: 'rgba(175, 29, 170, 0.06)', 
+                      color: '#af1daa', 
+                      border: '1px solid rgba(175, 29, 170, 0.2)', 
+                      borderRadius: '8px',
+                      fontWeight: '700',
+                      fontSize: '0.82rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.12)'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.06)'}
                   >
-                    <HelpCircle size={16} /> Soporte
+                    <Globe size={16} /> Ver Web Pública
+                  </button>
+
+                  <button 
+                    onClick={() => alert('Soporte técnico disponible 24/7 para WIC Colombia (contacto: wiccolombia@outlook.com)')}
+                    style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '0.75rem', 
+                      width: '100%', 
+                      padding: '0.55rem 0.85rem', 
+                      backgroundColor: 'transparent', 
+                      color: '#64748B', 
+                      border: 'none', 
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      fontSize: '0.82rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#af1daa'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}
+                  >
+                    <HelpCircle size={16} /> Soporte Técnico
                   </button>
 
                   <button 
@@ -5563,14 +5606,18 @@ export function App() {
                       alignItems: 'center', 
                       gap: '0.75rem', 
                       width: '100%', 
-                      padding: '0.5rem 0.5rem', 
+                      padding: '0.55rem 0.85rem', 
                       backgroundColor: 'transparent', 
-                      color: '#475569', 
+                      color: '#EF4444', 
                       border: 'none', 
-                      fontWeight: '600',
-                      fontSize: '0.85rem',
-                      cursor: 'pointer'
+                      borderRadius: '8px',
+                      fontWeight: '700',
+                      fontSize: '0.82rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FEE2E2'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
                     <LogOut size={16} /> Cerrar Sesión
                   </button>
@@ -5580,16 +5627,16 @@ export function App() {
               {/* CONTENIDO PRINCIPAL SEGÚN SUBTAB */}
               <main style={{ flex: 1, padding: '2.5rem 3rem', overflowY: 'auto' }}>
                 
-                {/* VISTA 4: LISTADO DE MIEMBROS (SEGÚN MAQUETA IMAGEN USUARIO: MIEMBROS) */}
+                {/* VISTA 4: LISTADO DE MIEMBROS (ADMIN PORTAL WIC) */}
                 {adminSubTab === 'members-list' && (
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                       <div>
-                        <h1 style={{ color: '#1E1B4B', fontSize: '2.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.25rem' }}>
+                        <h1 style={{ color: '#1E1B4B', fontSize: '2.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', marginBottom: '0.25rem' }}>
                           Miembros
                         </h1>
                         <p style={{ color: '#64748B', fontSize: '0.95rem' }}>
-                          Gestión editorial y análisis del rendimiento del contenido a nivel de sistema para las publicaciones de WIC Colombia.
+                          Directorio de abogadas y líderes de cumplimiento en WIC Colombia.
                         </p>
                       </div>
                       <button 
@@ -5599,64 +5646,64 @@ export function App() {
                           setMemberPhoto(null);
                           setAdminSubTab('member-editor');
                         }}
-                        style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px' }}
+                        style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '8px' }}
                       >
                         + NUEVO MIEMBRO
                       </button>
                     </div>
 
                     {/* TARJETAS DE MÉTRICAS COMPONENTES MIEMBROS */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.5rem 1.75rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>124</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>TOTAL MIEMBROS</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>{membersList.length}</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>PUBLICADOS</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>98</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>FUNDADORAS ACTIVAS</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>4</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>EN BORRADOR</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>26</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>ESTADO DE PERFILES</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#15803D', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>100%</h2>
                       </div>
                       <div style={{ paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700' }}>12.5k</h2>
+                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>CONSULTAS DE PERFIL</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>1.8k</h2>
                       </div>
                     </div>
 
                     {/* TABLA DE MIEMBROS */}
-                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E2E8F0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', overflow: 'hidden', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                          <tr style={{ backgroundColor: '#f4f4f4', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                            <th style={{ padding: '0.85rem 1.25rem' }}>MIEMBRO</th>
-                            <th style={{ padding: '0.85rem' }}>ESTADO</th>
-                            <th style={{ padding: '0.85rem' }}>FECHA</th>
-                            <th style={{ padding: '0.85rem 1.25rem', textAlign: 'right' }}>ACCIONES</th>
+                          <tr style={{ backgroundColor: '#FAF5FF', borderBottom: '1px solid rgba(175, 29, 170, 0.12)', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            <th style={{ padding: '1rem 1.25rem' }}>MIEMBRO</th>
+                            <th style={{ padding: '1rem 0.85rem' }}>ESTADO</th>
+                            <th style={{ padding: '1rem 0.85rem' }}>FECHA</th>
+                            <th style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>ACCIONES</th>
                           </tr>
                         </thead>
                         <tbody>
                           {membersList.map((member, index) => (
-                            <tr key={member.id || index} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                            <tr key={member.id || index} style={{ borderBottom: '1px solid #F1F5F9', transition: 'background-color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.02)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                               <td style={{ padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <img src={member.photo} alt={member.name} style={{ width: '48px', height: '48px', borderRadius: '4px', objectFit: 'cover' }} />
+                                <img src={member.photo} alt={member.name} style={{ width: '46px', height: '46px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #E2E8F0' }} />
                                 <div>
                                   <div style={{ fontWeight: '700', color: '#1E1B4B', fontSize: '0.95rem' }}>{member.name}</div>
-                                  <div style={{ color: '#94A3B8', fontSize: '0.75rem', textTransform: 'uppercase' }}>{member.role}</div>
+                                  <div style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase' }}>{member.role}</div>
                                 </div>
                               </td>
                               <td style={{ padding: '1rem 0.85rem' }}>
-                                <span style={{ color: '#166534', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                                <span style={{ color: '#166534', backgroundColor: 'rgba(34, 197, 94, 0.1)', padding: '0.25rem 0.65rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.5px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
                                   <span style={{ width: '6px', height: '6px', backgroundColor: '#22C55E', borderRadius: '50%' }} />
-                                  PUBLISHED
+                                  PUBLICADO
                                 </span>
                               </td>
                               <td style={{ padding: '1rem 0.85rem', color: '#64748B' }}>
-                                Oct 12, 2023
+                                Activo
                               </td>
                               <td style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>
-                                <div style={{ display: 'inline-flex', gap: '0.75rem', color: '#64748B', cursor: 'pointer' }}>
+                                <div style={{ display: 'inline-flex', gap: '0.85rem', color: '#64748B' }}>
                                   <span onClick={() => {
                                     setEditingMember({
                                       id: member.id,
@@ -5667,13 +5714,13 @@ export function App() {
                                     });
                                     setMemberPhoto(member.photo);
                                     setAdminSubTab('member-editor');
-                                  }} title="Editar"><Edit2 size={16} /></span>
-                                  <span onClick={() => setSelectedMember(member)} title="Ver Perfil"><Eye size={16} /></span>
+                                  }} title="Editar" style={{ cursor: 'pointer', transition: 'color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#af1daa'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}><Edit2 size={16} /></span>
+                                  <span onClick={() => setSelectedMember(member)} title="Ver Perfil" style={{ cursor: 'pointer', transition: 'color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#af1daa'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}><Eye size={16} /></span>
                                   <span onClick={() => {
                                     if (confirm(`¿Seguro que deseas eliminar a ${member.name}?`)) {
                                       setMembersList(prev => prev.filter(m => m.id !== member.id));
                                     }
-                                  }} title="Eliminar"><Trash2 size={16} /></span>
+                                  }} title="Eliminar" style={{ cursor: 'pointer', transition: 'color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#EF4444'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}><Trash2 size={16} /></span>
                                 </div>
                               </td>
                             </tr>
@@ -5682,13 +5729,9 @@ export function App() {
                       </table>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.25rem', borderTop: '1px solid #F1F5F9', color: '#94A3B8', fontSize: '0.75rem' }}>
-                        <span>SHOWING 1-4 OF 124 ARTICLES</span>
+                        <span>MOSTRANDO {membersList.length} DE {membersList.length} MIEMBROS</span>
                         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#af1daa', fontWeight: '700' }}>
-                          <span style={{ color: '#94A3B8', cursor: 'pointer' }}>PREVIOUS</span>
                           <span style={{ color: '#af1daa', textDecoration: 'underline' }}>01</span>
-                          <span style={{ color: '#94A3B8' }}>02</span>
-                          <span style={{ color: '#94A3B8' }}>03</span>
-                          <span style={{ color: '#af1daa', cursor: 'pointer' }}>NEXT</span>
                         </div>
                       </div>
                     </div>
@@ -6037,50 +6080,50 @@ export function App() {
                     </div>
 
                     {/* MÉTRICAS SUPERIORES (TOTAL DE MIEMBROS & TOTAL DE ARTÍCULOS) */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
                       
                       {/* MÉTRICA 1: TOTAL DE MIEMBROS */}
-                      <div style={{ backgroundColor: '#FFFFFF', padding: '2rem', borderRadius: '4px', border: '1px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                          TOTAL DE MIEMBROS
+                      <div style={{ backgroundColor: '#FFFFFF', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
+                        <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                          TOTAL DE MIEMBROS ACTIVOS
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
-                          12,482
+                        <h2 style={{ fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '800', margin: '0.5rem 0' }}>
+                          {membersList.length}
                         </h2>
-                        <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <div style={{ color: '#15803D', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <TrendingUp size={15} />
-                          <span>+12% from last month</span>
+                          <span>100% de perfiles validados</span>
                         </div>
                       </div>
 
                       {/* MÉTRICA 2: TOTAL DE ARTÍCULOS */}
-                      <div style={{ backgroundColor: '#FFFFFF', padding: '2rem', borderRadius: '4px', border: '1px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                          TOTAL DE ARTÍCULOS
+                      <div style={{ backgroundColor: '#FFFFFF', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
+                        <span style={{ color: '#64748B', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                          TOTAL DE PUBLICACIONES
                         </span>
-                        <h2 style={{ fontSize: '3rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '700', margin: '0.5rem 0' }}>
-                          342
+                        <h2 style={{ fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", color: '#af1daa', fontWeight: '800', margin: '0.5rem 0' }}>
+                          {articlesList.length}
                         </h2>
                         <div style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <FileText size={15} />
-                          <span>8 Pending Review</span>
+                          <span>Artículos y análisis técnicos</span>
                         </div>
                       </div>
 
                     </div>
 
                     {/* TARJETAS DE ACCIONES RÁPIDAS (AGREGAR NUEVA SOCIA & CREAR NUEVO CONTENIDO) */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
                       
                       {/* TARJETA 1: AGREGAR NUEVA SOCIA */}
-                      <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
+                      <div style={{ backgroundColor: '#FFFFFF', padding: '2.2rem 2rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
-                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
-                          <h3 style={{ fontSize: '2rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
+                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', borderRadius: '2px', marginBottom: '1.25rem' }} />
+                          <h3 style={{ fontSize: '1.6rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem' }}>
                             Agregar nueva socia
                           </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
-                            Supervisar las inscripciones institucionales, los y las trayectorias de certificación para todos los miembros registrados.
+                          <p style={{ color: '#64748B', fontSize: '0.92rem', lineHeight: '1.6', margin: 0 }}>
+                            Gestionar nuevas integrantes, subir fotografías institucionales y actualizar credenciales en el directorio oficial.
                           </p>
                         </div>
 
@@ -6097,29 +6140,30 @@ export function App() {
                               border: 'none', 
                               padding: '0.75rem 1.75rem', 
                               fontWeight: '700', 
-                              fontSize: '0.8rem', 
+                              fontSize: '0.85rem', 
                               cursor: 'pointer', 
-                              borderRadius: '2px',
+                              borderRadius: '8px',
                               letterSpacing: '0.5px',
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '0.5rem'
+                              gap: '0.5rem',
+                              boxShadow: '0 4px 12px rgba(175, 29, 170, 0.25)'
                             }}
                           >
-                            AGREGAR <ArrowRight size={14} />
+                            AGREGAR <ArrowRight size={15} />
                           </button>
                         </div>
                       </div>
 
                       {/* TARJETA 2: CREAR NUEVO CONTENIDO */}
-                      <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem 2rem', borderRadius: '4px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
+                      <div style={{ backgroundColor: '#FFFFFF', padding: '2.2rem 2rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '260px' }}>
                         <div>
-                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', marginBottom: '1.25rem' }} />
-                          <h3 style={{ fontSize: '2rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '700', marginBottom: '1rem' }}>
+                          <div style={{ width: '40px', height: '4px', backgroundColor: '#af1daa', borderRadius: '2px', marginBottom: '1.25rem' }} />
+                          <h3 style={{ fontSize: '1.6rem', fontFamily: "'Montserrat', sans-serif", color: '#1E1B4B', fontWeight: '800', marginBottom: '0.75rem' }}>
                             Crear nuevo contenido
                           </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
-                            Publique análisis jurídicos, actualizaciones sobre cumplimiento normativo e informes técnicos académicos en el centro de conocimiento global.
+                          <p style={{ color: '#64748B', fontSize: '0.92rem', lineHeight: '1.6', margin: 0 }}>
+                            Publicar análisis jurídicos, novedades normativas sobre SAGRILAFT, PTEE y artículos de opinión en la web pública.
                           </p>
                         </div>
 
@@ -6135,16 +6179,17 @@ export function App() {
                               border: 'none', 
                               padding: '0.75rem 1.75rem', 
                               fontWeight: '700', 
-                              fontSize: '0.8rem', 
+                              fontSize: '0.85rem', 
                               cursor: 'pointer', 
-                              borderRadius: '2px',
+                              borderRadius: '8px',
                               letterSpacing: '0.5px',
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '0.5rem'
+                              gap: '0.5rem',
+                              boxShadow: '0 4px 12px rgba(175, 29, 170, 0.25)'
                             }}
                           >
-                            CREAR <PenTool size={14} />
+                            CREAR <PenTool size={15} />
                           </button>
                         </div>
                       </div>
@@ -6158,13 +6203,13 @@ export function App() {
                 {adminSubTab === 'blog-list' && (
                   <div>
                     {/* ENCABEZADO CON TÍTULO EN SERIF & BOTÓN NUEVO ARTÍCULO */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                       <div>
-                        <h1 style={{ color: '#1E1B4B', fontSize: '2.8rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', marginBottom: '0.25rem' }}>
-                          Blogs
+                        <h1 style={{ color: '#1E1B4B', fontSize: '2.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', marginBottom: '0.25rem' }}>
+                          Blogs & Contenidos
                         </h1>
                         <p style={{ color: '#64748B', fontSize: '0.95rem' }}>
-                          Gestión editorial y análisis del rendimiento del contenido a nivel de sistema para las publicaciones de WIC Colombia.
+                          Gestión editorial y análisis de publicaciones especializadas de WIC Colombia.
                         </p>
                       </div>
                       <button 
@@ -6173,42 +6218,42 @@ export function App() {
                           setEditingArticle(null);
                           setAdminSubTab('blog-editor');
                         }}
-                        style={{ fontSize: '0.85rem', padding: '0.85rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '4px' }}
+                        style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '8px' }}
                       >
                         + NUEVO ARTÍCULO
                       </button>
                     </div>
 
                     {/* TARJETAS DE MÉTRICAS SUPERIORES DE BLOG */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '4px', border: '1px solid #E2E8F0' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem', backgroundColor: '#FFFFFF', padding: '1.5rem 1.75rem', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>124</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>ARTÍCULOS TOTALES</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>{articlesList.length}</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>PUBLICADOS</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>98</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>PUBLICADOS</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>{articlesList.filter(a => a.status !== 'Borrador').length}</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>EN BORRADOR</span>
-                        <h2 style={{ fontSize: '2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>26</h2>
+                        <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>EN BORRADOR</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>{articlesList.filter(a => a.status === 'Borrador').length}</h2>
                       </div>
                       <div style={{ paddingLeft: '0.5rem' }}>
-                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px' }}>VISTAS MENSUALES</span>
-                        <h2 style={{ fontSize: '2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '700', fontFamily: "'Montserrat', sans-serif" }}>12.5k</h2>
+                        <span style={{ color: '#af1daa', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>LECTURAS TOTALES</span>
+                        <h2 style={{ fontSize: '2.2rem', color: '#af1daa', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>12.5k</h2>
                       </div>
                     </div>
 
                     {/* TABLA DE PUBLICACIONES CON MINIATURA DE IMAGEN */}
-                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: '4px', border: '1px solid #E2E8F0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', border: '1px solid rgba(175, 29, 170, 0.12)', overflow: 'hidden', boxShadow: '0 4px 16px rgba(175, 29, 170, 0.04)' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                          <tr style={{ backgroundColor: '#f4f4f4', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                            <th style={{ padding: '0.85rem 1.25rem' }}>CONTENIDO</th>
-                            <th style={{ padding: '0.85rem' }}>ESTADO</th>
-                            <th style={{ padding: '0.85rem' }}>AUTOR</th>
-                            <th style={{ padding: '0.85rem' }}>FECHA</th>
-                            <th style={{ padding: '0.85rem 1.25rem', textAlign: 'right' }}>ACCIONES</th>
+                          <tr style={{ backgroundColor: '#FAF5FF', borderBottom: '1px solid rgba(175, 29, 170, 0.12)', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            <th style={{ padding: '1rem 1.25rem' }}>CONTENIDO</th>
+                            <th style={{ padding: '1rem 0.85rem' }}>ESTADO</th>
+                            <th style={{ padding: '1rem 0.85rem' }}>AUTOR</th>
+                            <th style={{ padding: '1rem 0.85rem' }}>FECHA</th>
+                            <th style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>ACCIONES</th>
                           </tr>
                         </thead>
                         <tbody>

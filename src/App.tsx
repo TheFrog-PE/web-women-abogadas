@@ -42,7 +42,15 @@ import {
   ChevronDown,
   Menu,
   Briefcase,
-  Megaphone
+  Megaphone,
+  ArrowUp,
+  ArrowDown,
+  Plus,
+  List,
+  Heading2,
+  Columns2,
+  Quote,
+  Type
 } from 'lucide-react';
 
 const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
@@ -196,6 +204,91 @@ const EVENTS_DATA: Record<string, EventDetailData> = {
   }
 };
 
+export type ArticleBlockType = 'paragraph' | 'quote' | 'cards' | 'heading' | 'list' | 'image';
+
+export interface ArticleBlock {
+  id: string;
+  type: ArticleBlockType;
+  text?: string;
+  headingLevel?: 'h2' | 'h3';
+  card1Title?: string;
+  card1Text?: string;
+  card2Title?: string;
+  card2Text?: string;
+  items?: string[];
+  imageUrl?: string;
+  imageCaption?: string;
+}
+
+export function getArticleBlocks(art?: Partial<Article> | null): ArticleBlock[] {
+  if (!art) {
+    return [
+      {
+        id: 'blk-init-1',
+        type: 'paragraph',
+        text: 'Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores.'
+      },
+      {
+        id: 'blk-init-2',
+        type: 'quote',
+        text: 'El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.'
+      },
+      {
+        id: 'blk-init-3',
+        type: 'paragraph',
+        text: 'Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.'
+      },
+      {
+        id: 'blk-init-4',
+        type: 'cards',
+        card1Title: 'Integración Temprana',
+        card1Text: 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
+        card2Title: 'Intervención Continua',
+        card2Text: 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
+      },
+      {
+        id: 'blk-init-5',
+        type: 'paragraph',
+        text: 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'
+      }
+    ];
+  }
+  if (art.blocks && Array.isArray(art.blocks) && art.blocks.length > 0) {
+    return art.blocks;
+  }
+  const res: ArticleBlock[] = [];
+  if (art.content) {
+    res.push({ id: 'blk-c1', type: 'paragraph', text: art.content });
+  }
+  if (art.quote) {
+    res.push({ id: 'blk-q', type: 'quote', text: art.quote });
+  }
+  if (art.paragraph2) {
+    res.push({ id: 'blk-c2', type: 'paragraph', text: art.paragraph2 });
+  }
+  if (art.card1Title || art.card2Title) {
+    res.push({
+      id: 'blk-cards',
+      type: 'cards',
+      card1Title: art.card1Title || 'Integración Temprana',
+      card1Text: art.card1Text || 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
+      card2Title: art.card2Title || 'Intervención Continua',
+      card2Text: art.card2Text || 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
+    });
+  }
+  if (art.paragraph3) {
+    res.push({ id: 'blk-c3', type: 'paragraph', text: art.paragraph3 });
+  }
+  if (res.length === 0) {
+    res.push({
+      id: 'blk-default-p',
+      type: 'paragraph',
+      text: 'Escribe aquí el contenido de tu publicación...'
+    });
+  }
+  return res;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -209,6 +302,7 @@ export interface Article {
   summary: string;
   image: string;
   status: string;
+  blocks?: ArticleBlock[];
   content: string;
   quote?: string;
   paragraph2?: string;
@@ -241,7 +335,37 @@ const DEFAULT_ARTICLES: Article[] = [
     card1Text: "Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.",
     card2Title: "Intervención Continua",
     card2Text: "Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.",
-    paragraph3: "El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio."
+    paragraph3: "El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.",
+    blocks: [
+      {
+        id: 'b-init-1',
+        type: 'paragraph',
+        text: 'Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.'
+      },
+      {
+        id: 'b-init-2',
+        type: 'quote',
+        text: 'El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.'
+      },
+      {
+        id: 'b-init-3',
+        type: 'paragraph',
+        text: 'Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.'
+      },
+      {
+        id: 'b-init-4',
+        type: 'cards',
+        card1Title: 'Integración Temprana',
+        card1Text: 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
+        card2Title: 'Intervención Continua',
+        card2Text: 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
+      },
+      {
+        id: 'b-init-5',
+        type: 'paragraph',
+        text: 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'
+      }
+    ]
   }
 ];
 
@@ -441,6 +565,7 @@ export function App() {
   // Estado para edición o creación de artículo
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
   const [articleCover, setArticleCover] = useState<string | null>(null);
+  const [editorBlocks, setEditorBlocks] = useState<ArticleBlock[]>(() => getArticleBlocks(null));
 
   // ── CUENTA REGRESIVA REAL hacia el evento (24 Nov 2026) ──
   const eventDate = new Date('2026-11-24T08:00:00');
@@ -2667,90 +2792,144 @@ export function App() {
                   {/* COLUMNA IZQUIERDA: CONTENIDO COMPLETO DEL ARTÍCULO */}
                   <div style={{ backgroundColor: '#FFFFFF', padding: '2.5rem', borderRadius: '16px', border: '1px solid #F1F5F9', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                     
-                    {/* PRIMER PÁRRAFO CON LETRA CAPITULAR (DROP CAP) */}
-                    {selectedArticle.content && (
-                      <div style={{ marginBottom: '1.75rem' }}>
-                        <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
-                          <span style={{ 
-                            float: 'left', 
-                            fontSize: '3.6rem', 
-                            lineHeight: '0.8', 
-                            fontWeight: '800', 
-                            fontFamily: "'Montserrat', sans-serif", 
-                            color: '#1E1B4B', 
-                            marginRight: '0.75rem',
-                            paddingTop: '0.2rem'
-                          }}>
-                            {selectedArticle.content.trim().charAt(0)}
-                          </span>
-                          {selectedArticle.content.trim().slice(1)}
-                        </p>
-                      </div>
-                    )}
+                    {/* RENDERIZADOR DINÁMICO DE BLOQUES MODULARES EN SU ORDEN EXACTO */}
+                    {(() => {
+                      const blocks = getArticleBlocks(selectedArticle);
+                      let firstParagraphRendered = false;
 
-                    {/* CITA DESTACADA DEL AUTOR (PULL-QUOTE BOX) */}
-                    {selectedArticle.quote && (
-                      <div style={{ 
-                        backgroundColor: '#FDF4FF', 
-                        borderLeft: '4px solid #af1daa', 
-                        borderRadius: '0 12px 12px 0', 
-                        padding: '1.75rem 2rem', 
-                        marginBottom: '2rem',
-                        position: 'relative'
-                      }}>
-                        <p style={{ color: '#7B1FA2', fontFamily: "'Montserrat', sans-serif", fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.6', margin: 0 }}>
-                          "{selectedArticle.quote}"
-                        </p>
-                        <span style={{ position: 'absolute', right: '1.25rem', top: '0.5rem', fontSize: '3rem', color: '#e6affc', fontFamily: "'Montserrat', sans-serif", lineHeight: 1, pointerEvents: 'none' }}>
-                          ”
-                        </span>
-                      </div>
-                    )}
+                      return (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '2.5rem' }}>
+                          {blocks.map((block, bIdx) => {
+                            if (block.type === 'paragraph') {
+                              const text = block.text || '';
+                              if (!text.trim()) return null;
+                              
+                              const isFirstP = !firstParagraphRendered;
+                              if (isFirstP) firstParagraphRendered = true;
 
-                    {/* SEGUNDO PÁRRAFO */}
-                    {selectedArticle.paragraph2 && (
-                      <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', marginBottom: '2rem', textAlign: 'justify' }}>
-                        {selectedArticle.paragraph2}
-                      </p>
-                    )}
+                              if (isFirstP) {
+                                return (
+                                  <div key={block.id || bIdx}>
+                                    <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
+                                      <span style={{ 
+                                        float: 'left', 
+                                        fontSize: '3.6rem', 
+                                        lineHeight: '0.8', 
+                                        fontWeight: '800', 
+                                        fontFamily: "'Montserrat', sans-serif", 
+                                        color: '#1E1B4B', 
+                                        marginRight: '0.75rem',
+                                        paddingTop: '0.2rem'
+                                      }}>
+                                        {text.trim().charAt(0)}
+                                      </span>
+                                      {text.trim().slice(1)}
+                                    </p>
+                                  </div>
+                                );
+                              }
 
-                    {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS */}
-                    {(selectedArticle.card1Title || selectedArticle.card2Title) && (
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
-                        {selectedArticle.card1Title && (
-                          <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
-                            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
-                              {selectedArticle.card1Title}
-                            </h4>
-                            <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
-                              {selectedArticle.card1Text || ''}
-                            </p>
-                          </div>
-                        )}
-                        {selectedArticle.card2Title && (
-                          <div style={{ backgroundColor: '#FAF5FF', borderTop: '3px solid #af1daa', padding: '1.25rem', borderRadius: '8px' }}>
-                            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
-                              {selectedArticle.card2Title}
-                            </h4>
-                            <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: '1.5', margin: 0 }}>
-                              {selectedArticle.card2Text || ''}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    )}
+                              return (
+                                <p key={block.id || bIdx} style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
+                                  {text}
+                                </p>
+                              );
+                            }
 
-                    {/* SUBTÍTULO Y REFLEXIÓN FINAL */}
-                    {selectedArticle.paragraph3 && (
-                      <div style={{ marginBottom: '2.5rem' }}>
-                        <h2 style={{ fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '700', color: '#1E1B4B', marginBottom: '0.75rem' }}>
-                          Reflexión final
-                        </h2>
-                        <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', margin: 0, textAlign: 'justify' }}>
-                          {selectedArticle.paragraph3}
-                        </p>
-                      </div>
-                    )}
+                            if (block.type === 'quote') {
+                              const qText = block.text || '';
+                              if (!qText.trim()) return null;
+                              return (
+                                <div key={block.id || bIdx} style={{ 
+                                  backgroundColor: '#FDF4FF', 
+                                  borderLeft: '4px solid #af1daa', 
+                                  borderRadius: '0 12px 12px 0', 
+                                  padding: '1.75rem 2rem', 
+                                  position: 'relative'
+                                }}>
+                                  <p style={{ color: '#7B1FA2', fontFamily: "'Montserrat', sans-serif", fontStyle: 'italic', fontSize: '1.15rem', lineHeight: '1.6', margin: 0, fontWeight: '600' }}>
+                                    "{qText}"
+                                  </p>
+                                  <span style={{ position: 'absolute', right: '1.25rem', bottom: '0.5rem', fontSize: '3.5rem', color: 'rgba(175, 29, 170, 0.25)', fontFamily: "'Montserrat', sans-serif", lineHeight: 1, pointerEvents: 'none' }}>
+                                    ””
+                                  </span>
+                                </div>
+                              );
+                            }
+
+                            if (block.type === 'cards') {
+                              return (
+                                <div key={block.id || bIdx} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+                                  {(block.card1Title || block.card1Text) && (
+                                    <div style={{ backgroundColor: '#FAF5FF', borderLeft: '4px solid #af1daa', padding: '1.5rem', borderRadius: '6px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                      <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
+                                        {block.card1Title}
+                                      </h4>
+                                      <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: '1.6', margin: 0 }}>
+                                        {block.card1Text || ''}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {(block.card2Title || block.card2Text) && (
+                                    <div style={{ backgroundColor: '#FAF5FF', borderLeft: '4px solid #af1daa', padding: '1.5rem', borderRadius: '6px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                      <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#1E1B4B', marginBottom: '0.5rem' }}>
+                                        {block.card2Title}
+                                      </h4>
+                                      <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: '1.6', margin: 0 }}>
+                                        {block.card2Text || ''}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            }
+
+                            if (block.type === 'heading') {
+                              return (
+                                <div key={block.id || bIdx}>
+                                  <h2 style={{ fontSize: '1.45rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#1E1B4B', margin: '0 0 0.5rem 0' }}>
+                                    {block.text}
+                                  </h2>
+                                </div>
+                              );
+                            }
+
+                            if (block.type === 'list') {
+                              return (
+                                <div key={block.id || bIdx} style={{ backgroundColor: '#FAF8FC', padding: '1.5rem 2rem', borderRadius: '8px', borderLeft: '3px solid #af1daa' }}>
+                                  <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    {(block.items || []).map((it, itIdx) => (
+                                      <li key={itIdx} style={{ color: '#334155', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                                        {it}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              );
+                            }
+
+                            if (block.type === 'image') {
+                              return (
+                                <div key={block.id || bIdx} style={{ margin: '0.5rem 0' }}>
+                                  <img 
+                                    src={block.imageUrl} 
+                                    alt={block.imageCaption || "Imagen del artículo"} 
+                                    style={{ width: '100%', maxHeight: '420px', objectFit: 'cover', borderRadius: '8px' }} 
+                                  />
+                                  {block.imageCaption && (
+                                    <p style={{ color: '#64748B', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.5rem', fontStyle: 'italic' }}>
+                                      {block.imageCaption}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            }
+
+                            return null;
+                          })}
+                        </div>
+                      );
+                    })()}
 
                     {/* TAGS DINÁMICOS DEL ARTÍCULO */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #F1F5F9', marginBottom: '2rem' }}>
@@ -6331,6 +6510,7 @@ export function App() {
                             onClick={() => {
                               setEditingArticle(null);
                               setArticleCover(null);
+                              setEditorBlocks(getArticleBlocks(null));
                               setAdminSubTab('blog-editor');
                             }}
                             style={{ 
@@ -6377,6 +6557,7 @@ export function App() {
                         onClick={() => {
                           setEditingArticle(null);
                           setArticleCover(null);
+                          setEditorBlocks(getArticleBlocks(null));
                           setAdminSubTab('blog-editor');
                         }}
                         style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '8px' }}
@@ -6468,6 +6649,7 @@ export function App() {
                                   <span onClick={() => {
                                     setEditingArticle(art);
                                     setArticleCover(art.image || null);
+                                    setEditorBlocks(getArticleBlocks(art));
                                     setAdminSubTab('blog-editor');
                                   }} title="Editar"><Edit2 size={16} /></span>
                                   <span onClick={() => {
@@ -6662,52 +6844,36 @@ export function App() {
                           <div style={{ display: 'flex', gap: '1.25rem', color: '#1E1B4B', fontWeight: '700', fontSize: '0.95rem', alignItems: 'center' }}>
                             <span 
                               style={{ cursor: 'pointer', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
-                              title="Negrita" 
+                              title="Agregar Párrafo de texto" 
                               onClick={() => {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) {
-                                  const start = ta.selectionStart;
-                                  const end = ta.selectionEnd;
-                                  const sel = ta.value.substring(start, end) || 'texto en negrita';
-                                  ta.value = ta.value.substring(0, start) + `**${sel}**` + ta.value.substring(end);
-                                  ta.focus();
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'paragraph', text: '' }]);
                               }}
                             >
                               B
                             </span>
                             <span 
                               style={{ cursor: 'pointer', fontStyle: 'italic', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
-                              title="Cursiva" 
+                              title="Cursiva / Cita" 
                               onClick={() => {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) {
-                                  const start = ta.selectionStart;
-                                  const end = ta.selectionEnd;
-                                  const sel = ta.value.substring(start, end) || 'texto en cursiva';
-                                  ta.value = ta.value.substring(0, start) + `*${sel}*` + ta.value.substring(end);
-                                  ta.focus();
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'quote', text: '' }]);
                               }}
                             >
                               I
                             </span>
                             <span 
                               style={{ cursor: 'pointer', padding: '0.2rem 0.4rem', borderRadius: '4px' }} 
-                              title="Lista de viñetas" 
+                              title="Agregar Subtítulo o Lista" 
                               onClick={() => {
-                                const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                if (ta) {
-                                  const start = ta.selectionStart;
-                                  ta.value = ta.value.substring(0, start) + '\n• Viñeta informativa' + ta.value.substring(start);
-                                  ta.focus();
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'heading', text: 'Nuevo Subtítulo' }]);
                               }}
                             >
                               =
                             </span>
                             
-                            {/* BOTÓN "" DE CITA DE AUTOR (ENFOCA EL BLOQUE DE CITA) */}
+                            {/* BOTÓN "" DE CITA DE AUTOR (AGREGA O DESPLAZA A CITA) */}
                             <span 
                               style={{ 
                                 cursor: 'pointer', 
@@ -6716,19 +6882,16 @@ export function App() {
                                 borderRadius: '4px',
                                 color: '#af1daa'
                               }} 
-                              title="Ir a la Cita Estratégica del Autor" 
+                              title="+ Agregar Cita Estratégica del Autor" 
                               onClick={() => {
-                                const el = document.getElementById('input-article-quote');
-                                if (el) {
-                                  el.focus();
-                                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'quote', text: 'inserta aquí una cita estratégica que resalte la visión del autor' }]);
                               }}
                             >
                               “”
                             </span>
 
-                            {/* BOTÓN ⊞ DE TARJETAS PARALELAS (ENFOCA EL BLOQUE DE TARJETAS) */}
+                            {/* BOTÓN ⊞ DE TARJETAS PARALELAS */}
                             <span 
                               style={{ 
                                 cursor: 'pointer', 
@@ -6737,13 +6900,17 @@ export function App() {
                                 borderRadius: '4px',
                                 color: '#af1daa'
                               }} 
-                              title="Ir a las Tarjetas Dinámicas en Paralelo (2 columnas)" 
+                              title="+ Agregar Tarjetas Dinámicas en Paralelo (2 columnas)" 
                               onClick={() => {
-                                const el = document.getElementById('input-card1-title');
-                                if (el) {
-                                  el.focus();
-                                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { 
+                                  id: newId, 
+                                  type: 'cards', 
+                                  card1Title: 'Nuevo Pilar Estratégico 1', 
+                                  card1Text: 'Descripción del punto de vista o directriz...',
+                                  card2Title: 'Nuevo Pilar Estratégico 2', 
+                                  card2Text: 'Descripción del punto de vista o directriz...'
+                                }]);
                               }}
                             >
                               ⊞
@@ -6753,29 +6920,29 @@ export function App() {
                           <div style={{ display: 'flex', gap: '1.25rem', color: '#64748B', fontSize: '0.85rem' }}>
                             <span 
                               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
-                              onClick={() => document.getElementById('input-article-file')?.click()}
+                              onClick={() => {
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'image', imageUrl: '/Fotos/Imagen para Inicio - 02.jpg', imageCaption: 'Pie de foto descriptivo' }]);
+                              }}
                             >
                               📷 Imagen
                             </span>
                             <span 
                               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
                               onClick={() => {
-                                const url = prompt('Ingresa URL del video de YouTube o Vimeo:');
-                                if (url) {
-                                  const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                  if (ta) ta.value += `\n\n[Video: ${url}]\n`;
-                                }
+                                const newId = `blk-${Date.now()}`;
+                                setEditorBlocks(prev => [...prev, { id: newId, type: 'list', items: ['Punto o lineamiento clave 1', 'Punto o lineamiento clave 2'] }]);
                               }}
                             >
-                              ▶ Video URL
+                              <List size={15} /> + Lista
                             </span>
                             <span 
                               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
                               onClick={() => {
                                 const link = prompt('Ingresa la URL del enlace:');
                                 if (link) {
-                                  const ta = document.getElementById('input-article-content') as HTMLTextAreaElement;
-                                  if (ta) ta.value += ` [${link}](${link}) `;
+                                  const newId = `blk-${Date.now()}`;
+                                  setEditorBlocks(prev => [...prev, { id: newId, type: 'paragraph', text: `Enlace de referencia: [${link}](${link})` }]);
                                 }
                               }}
                             >
@@ -6784,181 +6951,565 @@ export function App() {
                           </div>
                         </div>
 
-                        {/* COMPONENTE INTERACTIVO DE REDACCIÓN Y MAQUETACIÓN VISUAL (DISEÑO IDÉNTICO FOTO 1) */}
-                        <div style={{ marginBottom: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                          
-                          {/* PÁRRAFO SUPERIOR DE TEXTO */}
-                          <div>
-                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
-                              Párrafo de Introducción
-                            </label>
-                            <textarea 
-                              id="input-article-content"
-                              key={editingArticle ? (editingArticle.id + '-c1') : 'new-c1'}
-                              rows={5}
-                              placeholder="Escribe aquí el cuerpo inicial del artículo o publicación..."
-                              defaultValue={editingArticle ? editingArticle.content : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta.'}
-                              style={{ 
-                                width: '100%', 
-                                padding: '1rem', 
-                                border: '1px solid #E2E8F0', 
-                                borderRadius: '6px',
-                                backgroundColor: '#FFFFFF', 
-                                fontSize: '1rem', 
-                                lineHeight: '1.8', 
-                                fontFamily: "'Montserrat', sans-serif",
-                                color: '#1E1B4B',
-                                outline: 'none',
-                                boxSizing: 'border-box'
-                              }}
-                            />
-                          </div>
+                        {/* LIENZO DE BLOQUES DINÁMICOS MODULARES (REORDENAR, AGREGAR Y ELIMINAR LIBREMENTE) */}
+                        <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                          {editorBlocks.map((block, index) => {
+                            const isFirst = index === 0;
+                            const isLast = index === editorBlocks.length - 1;
 
-                          {/* CITA DESTACADA RECTANGULAR DE AUTOR CON MARCO MORADO Y COMILLAS GIGANTES (VISTA FOTO 1) */}
-                          <div>
-                            <label style={{ display: 'block', color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
-                              Cita Estratégica del Autor
-                            </label>
-                            <div style={{ 
-                              backgroundColor: '#FDF4FF', 
-                              borderLeft: '4px solid #af1daa', 
-                              borderRadius: '0 8px 8px 0', 
-                              padding: '1.5rem 2rem', 
-                              position: 'relative'
-                            }}>
-                              <input 
-                                id="input-article-quote"
-                                key={editingArticle ? (editingArticle.id + '-quote') : 'new-quote'}
-                                type="text"
-                                placeholder="inserta aquí una cita estratégica que resalte la visión del autor"
-                                defaultValue={editingArticle ? (editingArticle.quote || '') : 'inserta aquí una cita estratégica que resalte la visión del autor'}
+                            return (
+                              <div 
+                                key={block.id || `blk-${index}`}
                                 style={{ 
-                                  width: '90%',
-                                  backgroundColor: 'transparent',
-                                  border: 'none',
-                                  outline: 'none',
-                                  color: '#af1daa', 
-                                  fontSize: '1.15rem', 
-                                  fontFamily: "'Montserrat', sans-serif", 
-                                  fontStyle: 'italic',
-                                  fontWeight: '600'
+                                  backgroundColor: '#FFFFFF', 
+                                  border: '1px solid #E2E8F0', 
+                                  borderRadius: '8px', 
+                                  padding: '1.25rem 1.5rem',
+                                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                                  transition: 'border-color 0.2s ease',
+                                  position: 'relative'
                                 }}
-                              />
-                              <span style={{ 
-                                position: 'absolute', 
-                                right: '1.5rem', 
-                                bottom: '0.5rem', 
-                                fontSize: '3.5rem', 
-                                color: 'rgba(143, 0, 141, 0.25)', 
-                                fontFamily: "'Montserrat', sans-serif",
-                                lineHeight: 1,
-                                pointerEvents: 'none'
-                              }}>
-                                ””
-                              </span>
-                            </div>
-                          </div>
+                              >
+                                {/* BARRA SUPERIOR DE CONTROL DEL BLOQUE: TÍTULO, SUBIR, BAJAR, ELIMINAR */}
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #F1F5F9', paddingBottom: '0.65rem' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <span style={{ 
+                                      backgroundColor: block.type === 'quote' ? '#FDF4FF' : block.type === 'cards' ? '#FAF5FF' : block.type === 'heading' ? '#F0FDF4' : block.type === 'list' ? '#FFFBEB' : '#F8FAFC', 
+                                      color: block.type === 'quote' || block.type === 'cards' ? '#af1daa' : '#1E1B4B', 
+                                      fontSize: '0.72rem', 
+                                      fontWeight: '800', 
+                                      letterSpacing: '0.5px', 
+                                      textTransform: 'uppercase',
+                                      padding: '0.3rem 0.65rem',
+                                      borderRadius: '4px',
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      gap: '0.35rem'
+                                    }}>
+                                      {block.type === 'paragraph' && <><Type size={13} /> Bloque {index + 1}: Párrafo</>}
+                                      {block.type === 'quote' && <><Quote size={13} /> Bloque {index + 1}: Cita Estratégica</>}
+                                      {block.type === 'cards' && <><Columns2 size={13} /> Bloque {index + 1}: Tarjetas 2 Columnas</>}
+                                      {block.type === 'heading' && <><Heading2 size={13} /> Bloque {index + 1}: Subtítulo</>}
+                                      {block.type === 'list' && <><List size={13} /> Bloque {index + 1}: Lista</>}
+                                      {block.type === 'image' && <><Camera size={13} /> Bloque {index + 1}: Imagen</>}
+                                    </span>
+                                  </div>
 
-                          {/* SEGUNDO PÁRRAFO INTERMEDIO */}
-                          <div>
-                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
-                              Párrafo de Desarrollo
-                            </label>
-                            <textarea 
-                              id="input-article-paragraph2"
-                              key={editingArticle ? (editingArticle.id + '-c2') : 'new-c2'}
-                              rows={4}
-                              placeholder="Escribe el siguiente párrafo de tu artículo..."
-                              defaultValue={editingArticle ? (editingArticle.paragraph2 || '') : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque felis eget enim venenatis, eget ultrices felis consectetur. Suspendisse sed turpis volutpat ante dictum venenatis eget non nulla. Etiam non varius nibh. Sed vel nisl sapien. Fusce elit purus, consectetur sed neque a, sagittis eleifend tellus. Nunc bibendum orci porta.'}
-                              style={{ 
-                                width: '100%', 
-                                padding: '1rem', 
-                                border: '1px solid #E2E8F0', 
-                                borderRadius: '6px',
-                                backgroundColor: '#FFFFFF', 
-                                fontSize: '1rem', 
-                                lineHeight: '1.8', 
-                                fontFamily: "'Montserrat', sans-serif",
-                                color: '#1E1B4B',
-                                outline: 'none',
-                                boxSizing: 'border-box'
-                              }}
-                            />
-                          </div>
+                                  {/* BOTONES DE REORDENAMIENTO Y GESTIÓN */}
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                                    <button 
+                                      type="button"
+                                      disabled={isFirst}
+                                      onClick={() => {
+                                        setEditorBlocks(prev => {
+                                          if (index <= 0) return prev;
+                                          const copy = [...prev];
+                                          const temp = copy[index];
+                                          copy[index] = copy[index - 1];
+                                          copy[index - 1] = temp;
+                                          return copy;
+                                        });
+                                      }}
+                                      title="Mover hacia arriba"
+                                      style={{ 
+                                        backgroundColor: isFirst ? '#F1F5F9' : '#FAF5FF', 
+                                        color: isFirst ? '#94A3B8' : '#af1daa', 
+                                        border: '1px solid',
+                                        borderColor: isFirst ? '#E2E8F0' : '#E9D5FF',
+                                        padding: '0.35rem 0.6rem', 
+                                        borderRadius: '4px', 
+                                        cursor: isFirst ? 'not-allowed' : 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.25rem',
+                                        fontSize: '0.75rem',
+                                        fontWeight: '700'
+                                      }}
+                                    >
+                                      <ArrowUp size={14} /> Subir
+                                    </button>
 
-                          {/* TARJETAS DINÁMICAS EN PARALELO DE 2 COLUMNAS (DISEÑO IDÉNTICO FOTO 1) */}
-                          <div>
-                            <label style={{ display: 'block', color: '#af1daa', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
-                              Tarjetas Destacadas en Paralelo (2 Columnas)
-                            </label>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                              {/* TARJETA 1 */}
-                              <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
-                                <input 
-                                  id="input-card1-title"
-                                  key={editingArticle ? (editingArticle.id + '-c1t') : 'new-c1t'}
-                                  type="text" 
-                                  defaultValue={editingArticle ? (editingArticle.card1Title || '') : 'Integración Temprana'}
-                                  placeholder="Integración Temprana"
-                                  style={{ width: '100%', color: '#1E1B4B', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
-                                />
-                                <textarea 
-                                  id="input-card1-text"
-                                  key={editingArticle ? (editingArticle.id + '-c1x') : 'new-c1x'}
-                                  rows={3}
-                                  defaultValue={editingArticle ? (editingArticle.card1Text || '') : 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.'}
-                                  placeholder="Involucrar tempranamente a estas funciones..."
-                                  style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
-                                />
+                                    <button 
+                                      type="button"
+                                      disabled={isLast}
+                                      onClick={() => {
+                                        setEditorBlocks(prev => {
+                                          if (index >= prev.length - 1) return prev;
+                                          const copy = [...prev];
+                                          const temp = copy[index];
+                                          copy[index] = copy[index + 1];
+                                          copy[index + 1] = temp;
+                                          return copy;
+                                        });
+                                      }}
+                                      title="Mover hacia abajo"
+                                      style={{ 
+                                        backgroundColor: isLast ? '#F1F5F9' : '#FAF5FF', 
+                                        color: isLast ? '#94A3B8' : '#af1daa', 
+                                        border: '1px solid',
+                                        borderColor: isLast ? '#E2E8F0' : '#E9D5FF',
+                                        padding: '0.35rem 0.6rem', 
+                                        borderRadius: '4px', 
+                                        cursor: isLast ? 'not-allowed' : 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.25rem',
+                                        fontSize: '0.75rem',
+                                        fontWeight: '700'
+                                      }}
+                                    >
+                                      <ArrowDown size={14} /> Bajar
+                                    </button>
+
+                                    <button 
+                                      type="button"
+                                      onClick={() => {
+                                        if (editorBlocks.length <= 1) {
+                                          alert('El artículo debe tener al menos un bloque de contenido.');
+                                          return;
+                                        }
+                                        setEditorBlocks(prev => prev.filter((_, i) => i !== index));
+                                      }}
+                                      title="Eliminar este bloque"
+                                      style={{ 
+                                        backgroundColor: '#FFF1F2', 
+                                        color: '#E11D48', 
+                                        border: '1px solid #FECDD3', 
+                                        padding: '0.35rem 0.6rem', 
+                                        borderRadius: '4px', 
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.25rem',
+                                        fontSize: '0.75rem',
+                                        fontWeight: '700'
+                                      }}
+                                    >
+                                      <Trash2 size={14} /> Eliminar
+                                    </button>
+                                  </div>
+                                </div>
+
+                                {/* CUERPO ESPECÍFICO SEGÚN EL TIPO DE BLOQUE */}
+                                <div>
+                                  {/* 1. BLOQUE DE PÁRRAFO */}
+                                  {block.type === 'paragraph' && (
+                                    <div>
+                                      <textarea 
+                                        rows={4}
+                                        value={block.text || ''}
+                                        onChange={(e) => {
+                                          const val = e.target.value;
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            copy[index] = { ...copy[index], text: val };
+                                            return copy;
+                                          });
+                                        }}
+                                        placeholder="Escribe el texto de este párrafo aquí..."
+                                        style={{ 
+                                          width: '100%', 
+                                          padding: '0.85rem 1rem', 
+                                          border: '1px solid #E2E8F0', 
+                                          borderRadius: '6px',
+                                          backgroundColor: '#FFFFFF', 
+                                          fontSize: '0.98rem', 
+                                          lineHeight: '1.7', 
+                                          fontFamily: "'Montserrat', sans-serif",
+                                          color: '#1E1B4B',
+                                          outline: 'none',
+                                          boxSizing: 'border-box'
+                                        }}
+                                      />
+                                    </div>
+                                  )}
+
+                                  {/* 2. BLOQUE DE CITA ESTRATÉGICA (DISEÑO IDÉNTICO FOTO 1) */}
+                                  {block.type === 'quote' && (
+                                    <div style={{ 
+                                      backgroundColor: '#FDF4FF', 
+                                      borderLeft: '4px solid #af1daa', 
+                                      borderRadius: '0 8px 8px 0', 
+                                      padding: '1.25rem 1.75rem', 
+                                      position: 'relative'
+                                    }}>
+                                      <input 
+                                        type="text"
+                                        value={block.text || ''}
+                                        onChange={(e) => {
+                                          const val = e.target.value;
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            copy[index] = { ...copy[index], text: val };
+                                            return copy;
+                                          });
+                                        }}
+                                        placeholder="inserta aquí una cita estratégica que resalte la visión del autor"
+                                        style={{ 
+                                          width: '90%',
+                                          backgroundColor: 'transparent',
+                                          border: 'none',
+                                          outline: 'none',
+                                          color: '#af1daa', 
+                                          fontSize: '1.15rem', 
+                                          fontFamily: "'Montserrat', sans-serif", 
+                                          fontStyle: 'italic',
+                                          fontWeight: '600'
+                                        }}
+                                      />
+                                      <span style={{ 
+                                        position: 'absolute', 
+                                        right: '1.5rem', 
+                                        bottom: '0.5rem', 
+                                        fontSize: '3.5rem', 
+                                        color: 'rgba(143, 0, 141, 0.25)', 
+                                        fontFamily: "'Montserrat', sans-serif",
+                                        lineHeight: 1,
+                                        pointerEvents: 'none'
+                                      }}>
+                                        ””
+                                      </span>
+                                    </div>
+                                  )}
+
+                                  {/* 3. BLOQUE DE TARJETAS PARALELAS (2 COLUMNAS) */}
+                                  {block.type === 'cards' && (
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                                      {/* TARJETA 1 */}
+                                      <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1rem 1.25rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                        <input 
+                                          type="text" 
+                                          value={block.card1Title || ''}
+                                          onChange={(e) => {
+                                            const val = e.target.value;
+                                            setEditorBlocks(prev => {
+                                              const copy = [...prev];
+                                              copy[index] = { ...copy[index], card1Title: val };
+                                              return copy;
+                                            });
+                                          }}
+                                          placeholder="Título Tarjeta 1"
+                                          style={{ width: '100%', color: '#1E1B4B', fontSize: '0.95rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
+                                        />
+                                        <textarea 
+                                          rows={3}
+                                          value={block.card1Text || ''}
+                                          onChange={(e) => {
+                                            const val = e.target.value;
+                                            setEditorBlocks(prev => {
+                                              const copy = [...prev];
+                                              copy[index] = { ...copy[index], card1Text: val };
+                                              return copy;
+                                            });
+                                          }}
+                                          placeholder="Texto explicativo..."
+                                          style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
+                                        />
+                                      </div>
+
+                                      {/* TARJETA 2 */}
+                                      <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1rem 1.25rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+                                        <input 
+                                          type="text" 
+                                          value={block.card2Title || ''}
+                                          onChange={(e) => {
+                                            const val = e.target.value;
+                                            setEditorBlocks(prev => {
+                                              const copy = [...prev];
+                                              copy[index] = { ...copy[index], card2Title: val };
+                                              return copy;
+                                            });
+                                          }}
+                                          placeholder="Título Tarjeta 2"
+                                          style={{ width: '100%', color: '#1E1B4B', fontSize: '0.95rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
+                                        />
+                                        <textarea 
+                                          rows={3}
+                                          value={block.card2Text || ''}
+                                          onChange={(e) => {
+                                            const val = e.target.value;
+                                            setEditorBlocks(prev => {
+                                              const copy = [...prev];
+                                              copy[index] = { ...copy[index], card2Text: val };
+                                              return copy;
+                                            });
+                                          }}
+                                          placeholder="Texto explicativo..."
+                                          style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* 4. BLOQUE DE SUBTÍTULO / HEADING */}
+                                  {block.type === 'heading' && (
+                                    <div>
+                                      <input 
+                                        type="text"
+                                        value={block.text || ''}
+                                        onChange={(e) => {
+                                          const val = e.target.value;
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            copy[index] = { ...copy[index], text: val };
+                                            return copy;
+                                          });
+                                        }}
+                                        placeholder="Escribe el subtítulo de la sección..."
+                                        style={{ 
+                                          width: '100%', 
+                                          padding: '0.5rem 0', 
+                                          border: 'none', 
+                                          borderBottom: '2px solid #E2E8F0', 
+                                          fontSize: '1.3rem', 
+                                          fontWeight: '800', 
+                                          color: '#1E1B4B', 
+                                          fontFamily: "'Montserrat', sans-serif",
+                                          outline: 'none',
+                                          backgroundColor: 'transparent'
+                                        }}
+                                      />
+                                    </div>
+                                  )}
+
+                                  {/* 5. BLOQUE DE LISTA / VIÑETAS */}
+                                  {block.type === 'list' && (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                      {(block.items || []).map((item, itemIdx) => (
+                                        <div key={itemIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                          <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '1.1rem' }}>•</span>
+                                          <input 
+                                            type="text"
+                                            value={item}
+                                            onChange={(e) => {
+                                              const val = e.target.value;
+                                              setEditorBlocks(prev => {
+                                                const copy = [...prev];
+                                                const items = [...(copy[index].items || [])];
+                                                items[itemIdx] = val;
+                                                copy[index] = { ...copy[index], items };
+                                                return copy;
+                                              });
+                                            }}
+                                            placeholder={`Elemento ${itemIdx + 1}...`}
+                                            style={{ flex: 1, padding: '0.45rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '0.9rem', color: '#1E1B4B' }}
+                                          />
+                                          <button 
+                                            type="button"
+                                            onClick={() => {
+                                              setEditorBlocks(prev => {
+                                                const copy = [...prev];
+                                                const items = (copy[index].items || []).filter((_, i) => i !== itemIdx);
+                                                copy[index] = { ...copy[index], items };
+                                                return copy;
+                                              });
+                                            }}
+                                            style={{ border: 'none', background: 'none', color: '#94A3B8', cursor: 'pointer', padding: '0.2rem' }}
+                                            title="Quitar elemento"
+                                          >
+                                            <X size={16} />
+                                          </button>
+                                        </div>
+                                      ))}
+                                      <button 
+                                        type="button"
+                                        onClick={() => {
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            const items = [...(copy[index].items || []), 'Nuevo punto o recomendación'];
+                                            copy[index] = { ...copy[index], items };
+                                            return copy;
+                                          });
+                                        }}
+                                        style={{ 
+                                          alignSelf: 'flex-start', 
+                                          background: 'none', 
+                                          border: '1px dashed #af1daa', 
+                                          color: '#af1daa', 
+                                          borderRadius: '4px', 
+                                          padding: '0.35rem 0.75rem', 
+                                          fontSize: '0.8rem', 
+                                          fontWeight: '700', 
+                                          cursor: 'pointer', 
+                                          display: 'flex', 
+                                          alignItems: 'center', 
+                                          gap: '0.3rem', 
+                                          marginTop: '0.25rem' 
+                                        }}
+                                      >
+                                        <Plus size={14} /> + Agregar elemento a la lista
+                                      </button>
+                                    </div>
+                                  )}
+
+                                  {/* 6. BLOQUE DE IMAGEN */}
+                                  {block.type === 'image' && (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <input 
+                                          type="text"
+                                          value={block.imageUrl || ''}
+                                          onChange={(e) => {
+                                            const val = e.target.value;
+                                            setEditorBlocks(prev => {
+                                              const copy = [...prev];
+                                              copy[index] = { ...copy[index], imageUrl: val };
+                                              return copy;
+                                            });
+                                          }}
+                                          placeholder="URL de la imagen (o presiona Subir)..."
+                                          style={{ flex: 1, padding: '0.6rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '6px', fontSize: '0.85rem' }}
+                                        />
+                                        <label style={{ backgroundColor: '#FAF5FF', border: '1px solid #af1daa', color: '#af1daa', padding: '0.6rem 1rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                          <Camera size={16} /> Subir Foto
+                                          <input 
+                                            type="file" 
+                                            accept="image/*" 
+                                            style={{ display: 'none' }}
+                                            onChange={(e) => {
+                                              const file = e.target.files?.[0];
+                                              if (file) {
+                                                const reader = new FileReader();
+                                                reader.onload = (ev) => {
+                                                  const val = ev.target?.result as string;
+                                                  setEditorBlocks(prev => {
+                                                    const copy = [...prev];
+                                                    copy[index] = { ...copy[index], imageUrl: val };
+                                                    return copy;
+                                                  });
+                                                };
+                                                reader.readAsDataURL(file);
+                                              }
+                                            }}
+                                          />
+                                        </label>
+                                      </div>
+                                      {block.imageUrl && (
+                                        <img src={block.imageUrl} alt="Vista previa" style={{ width: '100%', maxHeight: '240px', objectFit: 'cover', borderRadius: '6px' }} />
+                                      )}
+                                      <input 
+                                        type="text"
+                                        value={block.imageCaption || ''}
+                                        onChange={(e) => {
+                                          const val = e.target.value;
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            copy[index] = { ...copy[index], imageCaption: val };
+                                            return copy;
+                                          });
+                                        }}
+                                        placeholder="Pie de foto explicativo (opcional)..."
+                                        style={{ padding: '0.5rem 0.75rem', border: '1px solid #E2E8F0', borderRadius: '4px', fontSize: '0.85rem', color: '#64748B', fontStyle: 'italic' }}
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* BARRA DE ACCIÓN PARA INSERTAR BLOQUE INMEDIATAMENTE DEBAJO */}
+                                <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px dashed #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                  <span style={{ fontSize: '0.73rem', color: '#94A3B8', fontWeight: '700' }}>
+                                    + Insertar bloque debajo:
+                                  </span>
+                                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                                    {[
+                                      { label: 'Párrafo', type: 'paragraph' as ArticleBlockType, icon: <Type size={12} /> },
+                                      { label: 'Cita', type: 'quote' as ArticleBlockType, icon: <Quote size={12} /> },
+                                      { label: 'Tarjetas 2 Col', type: 'cards' as ArticleBlockType, icon: <Columns2 size={12} /> },
+                                      { label: 'Subtítulo', type: 'heading' as ArticleBlockType, icon: <Heading2 size={12} /> },
+                                      { label: 'Lista', type: 'list' as ArticleBlockType, icon: <List size={12} /> },
+                                      { label: 'Imagen', type: 'image' as ArticleBlockType, icon: <Camera size={12} /> },
+                                    ].map((btnItem, bI) => (
+                                      <button 
+                                        key={bI}
+                                        type="button"
+                                        onClick={() => {
+                                          const newId = `blk-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+                                          let newBlock: ArticleBlock;
+                                          if (btnItem.type === 'paragraph') newBlock = { id: newId, type: 'paragraph', text: '' };
+                                          else if (btnItem.type === 'quote') newBlock = { id: newId, type: 'quote', text: '' };
+                                          else if (btnItem.type === 'cards') newBlock = { id: newId, type: 'cards', card1Title: 'Título Tarjeta 1', card1Text: '', card2Title: 'Título Tarjeta 2', card2Text: '' };
+                                          else if (btnItem.type === 'heading') newBlock = { id: newId, type: 'heading', text: 'Nuevo Subtítulo' };
+                                          else if (btnItem.type === 'list') newBlock = { id: newId, type: 'list', items: ['Punto 1', 'Punto 2'] };
+                                          else newBlock = { id: newId, type: 'image', imageUrl: '/Fotos/Imagen para Inicio - 02.jpg', imageCaption: '' };
+
+                                          setEditorBlocks(prev => {
+                                            const copy = [...prev];
+                                            copy.splice(index + 1, 0, newBlock);
+                                            return copy;
+                                          });
+                                        }}
+                                        style={{ 
+                                          backgroundColor: '#F8FAFC', 
+                                          color: '#475569', 
+                                          border: '1px solid #CBD5E1', 
+                                          padding: '0.25rem 0.55rem', 
+                                          borderRadius: '4px', 
+                                          fontSize: '0.72rem', 
+                                          fontWeight: '600', 
+                                          cursor: 'pointer',
+                                          display: 'inline-flex',
+                                          alignItems: 'center',
+                                          gap: '0.25rem'
+                                        }}
+                                      >
+                                        {btnItem.icon} {btnItem.label}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+
                               </div>
+                            );
+                          })}
 
-                              {/* TARJETA 2 */}
-                              <div style={{ backgroundColor: '#FAF5FF', borderLeft: '3px solid #af1daa', padding: '1.25rem 1.5rem', borderRadius: '4px', borderTop: '1px solid #E2E8F0', borderRight: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
-                                <input 
-                                  id="input-card2-title"
-                                  key={editingArticle ? (editingArticle.id + '-c2t') : 'new-c2t'}
-                                  type="text" 
-                                  defaultValue={editingArticle ? (editingArticle.card2Title || '') : 'Intervención Continua'}
-                                  placeholder="Ingresa título"
-                                  style={{ width: '100%', color: '#1E1B4B', fontSize: '1rem', marginBottom: '0.4rem', fontWeight: '700', border: 'none', outline: 'none', backgroundColor: 'transparent' }}
-                                />
-                                <textarea 
-                                  id="input-card2-text"
-                                  key={editingArticle ? (editingArticle.id + '-c2x') : 'new-c2x'}
-                                  rows={3}
-                                  defaultValue={editingArticle ? (editingArticle.card2Text || '') : 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'}
-                                  placeholder="Ingresa aquí el texto"
-                                  style={{ width: '100%', color: '#64748B', fontSize: '0.85rem', lineHeight: '1.5', border: 'none', outline: 'none', backgroundColor: 'transparent', resize: 'none', fontFamily: 'inherit' }}
-                                />
-                              </div>
+                          {/* CAJA PRINCIPAL PARA AGREGAR NUEVO BLOQUE AL FINAL DEL ARTÍCULO */}
+                          <div style={{ border: '2px dashed #CBD5E1', borderRadius: '8px', padding: '1.5rem', textAlign: 'center', backgroundColor: '#FAF5FF' }}>
+                            <span style={{ display: 'block', fontSize: '0.85rem', fontWeight: '800', color: '#1E1B4B', marginBottom: '0.75rem', letterSpacing: '0.5px' }}>
+                              + AGREGAR NUEVO BLOQUE AL ARTÍCULO
+                            </span>
+                            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
+                              {[
+                                { label: '+ Párrafo', type: 'paragraph' as ArticleBlockType, icon: <Type size={14} /> },
+                                { label: '+ Cita Estratégica', type: 'quote' as ArticleBlockType, icon: <Quote size={14} /> },
+                                { label: '+ Tarjetas (2 Col)', type: 'cards' as ArticleBlockType, icon: <Columns2 size={14} /> },
+                                { label: '+ Subtítulo', type: 'heading' as ArticleBlockType, icon: <Heading2 size={14} /> },
+                                { label: '+ Lista de Puntos', type: 'list' as ArticleBlockType, icon: <List size={14} /> },
+                                { label: '+ Imagen', type: 'image' as ArticleBlockType, icon: <Camera size={14} /> },
+                              ].map((addBtn, aI) => (
+                                <button 
+                                  key={aI}
+                                  type="button"
+                                  onClick={() => {
+                                    const newId = `blk-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+                                    let newBlock: ArticleBlock;
+                                    if (addBtn.type === 'paragraph') newBlock = { id: newId, type: 'paragraph', text: '' };
+                                    else if (addBtn.type === 'quote') newBlock = { id: newId, type: 'quote', text: 'inserta aquí una cita estratégica que resalte la visión del autor' };
+                                    else if (addBtn.type === 'cards') newBlock = { id: newId, type: 'cards', card1Title: 'Nuevo Pilar 1', card1Text: '', card2Title: 'Nuevo Pilar 2', card2Text: '' };
+                                    else if (addBtn.type === 'heading') newBlock = { id: newId, type: 'heading', text: 'Nuevo Subtítulo' };
+                                    else if (addBtn.type === 'list') newBlock = { id: newId, type: 'list', items: ['Punto o lineamiento clave 1', 'Punto o lineamiento clave 2'] };
+                                    else newBlock = { id: newId, type: 'image', imageUrl: '/Fotos/Imagen para Inicio - 02.jpg', imageCaption: 'Pie de foto descriptivo' };
+
+                                    setEditorBlocks(prev => [...prev, newBlock]);
+                                  }}
+                                  style={{ 
+                                    backgroundColor: '#FFFFFF', 
+                                    color: '#af1daa', 
+                                    border: '1px solid #af1daa', 
+                                    padding: '0.5rem 0.95rem', 
+                                    borderRadius: '6px', 
+                                    fontSize: '0.82rem', 
+                                    fontWeight: '700', 
+                                    cursor: 'pointer',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.4rem',
+                                    boxShadow: '0 2px 6px rgba(175, 29, 170, 0.08)'
+                                  }}
+                                >
+                                  {addBtn.icon} {addBtn.label}
+                                </button>
+                              ))}
                             </div>
-                          </div>
-
-                          {/* PÁRRAFO FINAL / CONCLUSIÓN */}
-                          <div>
-                            <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
-                              Reflexión Final / Conclusión
-                            </label>
-                            <textarea 
-                              id="input-article-paragraph3"
-                              key={editingArticle ? (editingArticle.id + '-c3') : 'new-c3'}
-                              rows={4}
-                              placeholder="Continúa escribiendo la reflexión o conclusión final de tu artículo aquí..."
-                              defaultValue={editingArticle ? (editingArticle.paragraph3 || '') : 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'}
-                              style={{ 
-                                width: '100%', 
-                                padding: '1rem', 
-                                border: '1px solid #E2E8F0', 
-                                borderRadius: '6px',
-                                backgroundColor: '#FFFFFF', 
-                                fontSize: '1rem', 
-                                lineHeight: '1.8', 
-                                fontFamily: "'Montserrat', sans-serif",
-                                color: '#1E1B4B',
-                                outline: 'none',
-                                boxSizing: 'border-box'
-                              }}
-                            />
                           </div>
 
                         </div>
@@ -7057,20 +7608,18 @@ export function App() {
                               const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || 'Gestión de Riesgos';
                               const statusVal = (document.getElementById('select-article-status') as HTMLSelectElement)?.value || 'Publicado';
 
-                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || '';
-                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || '';
-                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || '';
-                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || '';
-
                               const newTitle = titleVal || (editingArticle ? editingArticle.title : "NUEVA PUBLICACIÓN");
                               const newAuthor = authorVal || (editingArticle ? editingArticle.author : "WIC COLOMBIA");
                               const newRole = roleVal || (editingArticle ? editingArticle.role : "ESPECIALISTA EN COMPLIANCE");
                               const newImg = articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg";
-                              const summaryVal = contentVal.length > 0 ? (contentVal.slice(0, 180) + "...") : "Publicación sobre ética y cumplimiento normativo.";
+
+                              const firstP = editorBlocks.find(b => b.type === 'paragraph')?.text || '';
+                              const firstQuote = editorBlocks.find(b => b.type === 'quote')?.text || '';
+                              const secondP = editorBlocks.filter(b => b.type === 'paragraph')[1]?.text || '';
+                              const firstCards = editorBlocks.find(b => b.type === 'cards');
+                              const thirdP = editorBlocks.filter(b => b.type === 'paragraph')[2]?.text || '';
+
+                              const summaryVal = firstP.length > 0 ? (firstP.slice(0, 180) + "...") : "Publicación sobre ética y cumplimiento normativo.";
 
                               const articlePayload: Article = {
                                 id: editingArticle?.id || `art-${Date.now()}`,
@@ -7085,14 +7634,15 @@ export function App() {
                                 summary: summaryVal,
                                 image: newImg,
                                 status: statusVal,
-                                content: contentVal,
-                                quote: quoteVal,
-                                paragraph2: p2Val,
-                                card1Title: card1TitleVal,
-                                card1Text: card1TextVal,
-                                card2Title: card2TitleVal,
-                                card2Text: card2TextVal,
-                                paragraph3: p3Val
+                                blocks: editorBlocks,
+                                content: firstP,
+                                quote: firstQuote,
+                                paragraph2: secondP,
+                                card1Title: firstCards?.card1Title,
+                                card1Text: firstCards?.card1Text,
+                                card2Title: firstCards?.card2Title,
+                                card2Text: firstCards?.card2Text,
+                                paragraph3: thirdP
                               };
 
                               if (editingArticle && editingArticle.id) {
@@ -7129,20 +7679,18 @@ export function App() {
                               const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value?.trim();
                               const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || 'Gestión de Riesgos';
 
-                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || '';
-                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || '';
-                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || '';
-                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || '';
-                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || '';
-
                               const newTitle = titleVal || (editingArticle ? editingArticle.title : "BORRADOR DE PUBLICACIÓN");
                               const newAuthor = authorVal || (editingArticle ? editingArticle.author : "WIC COLOMBIA");
                               const newRole = roleVal || (editingArticle ? editingArticle.role : "ESPECIALISTA EN COMPLIANCE");
                               const newImg = articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg";
-                              const summaryVal = contentVal.length > 0 ? (contentVal.slice(0, 180) + "...") : "Borrador en desarrollo...";
+
+                              const firstP = editorBlocks.find(b => b.type === 'paragraph')?.text || '';
+                              const firstQuote = editorBlocks.find(b => b.type === 'quote')?.text || '';
+                              const secondP = editorBlocks.filter(b => b.type === 'paragraph')[1]?.text || '';
+                              const firstCards = editorBlocks.find(b => b.type === 'cards');
+                              const thirdP = editorBlocks.filter(b => b.type === 'paragraph')[2]?.text || '';
+
+                              const summaryVal = firstP.length > 0 ? (firstP.slice(0, 180) + "...") : "Borrador en desarrollo...";
 
                               const draftPayload: Article = {
                                 id: editingArticle?.id || `art-${Date.now()}`,
@@ -7157,14 +7705,15 @@ export function App() {
                                 summary: summaryVal,
                                 image: newImg,
                                 status: "Borrador",
-                                content: contentVal,
-                                quote: quoteVal,
-                                paragraph2: p2Val,
-                                card1Title: card1TitleVal,
-                                card1Text: card1TextVal,
-                                card2Title: card2TitleVal,
-                                card2Text: card2TextVal,
-                                paragraph3: p3Val
+                                blocks: editorBlocks,
+                                content: firstP,
+                                quote: firstQuote,
+                                paragraph2: secondP,
+                                card1Title: firstCards?.card1Title,
+                                card1Text: firstCards?.card1Text,
+                                card2Title: firstCards?.card2Title,
+                                card2Text: firstCards?.card2Text,
+                                paragraph3: thirdP
                               };
 
                               if (editingArticle && editingArticle.id) {
@@ -7203,14 +7752,11 @@ export function App() {
                               const roleVal = (document.getElementById('input-article-role') as HTMLInputElement)?.value?.trim() || editingArticle?.role || "Líder de Cumplimiento";
                               const catVal = (document.getElementById('select-article-category') as HTMLSelectElement)?.value || editingArticle?.category || "Gestión de Riesgos";
 
-                              const contentVal = (document.getElementById('input-article-content') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.content || "";
-                              const quoteVal = (document.getElementById('input-article-quote') as HTMLInputElement)?.value?.trim() || editingArticle?.quote || "";
-                              const p2Val = (document.getElementById('input-article-paragraph2') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.paragraph2 || "";
-                              const card1TitleVal = (document.getElementById('input-card1-title') as HTMLInputElement)?.value?.trim() || editingArticle?.card1Title || "";
-                              const card1TextVal = (document.getElementById('input-card1-text') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.card1Text || "";
-                              const card2TitleVal = (document.getElementById('input-card2-title') as HTMLInputElement)?.value?.trim() || editingArticle?.card2Title || "";
-                              const card2TextVal = (document.getElementById('input-card2-text') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.card2Text || "";
-                              const p3Val = (document.getElementById('input-article-paragraph3') as HTMLTextAreaElement)?.value?.trim() || editingArticle?.paragraph3 || "";
+                              const firstP = editorBlocks.find(b => b.type === 'paragraph')?.text || '';
+                              const firstQuote = editorBlocks.find(b => b.type === 'quote')?.text || '';
+                              const secondP = editorBlocks.filter(b => b.type === 'paragraph')[1]?.text || '';
+                              const firstCards = editorBlocks.find(b => b.type === 'cards');
+                              const thirdP = editorBlocks.filter(b => b.type === 'paragraph')[2]?.text || '';
 
                               const previewArt: Article = {
                                 id: editingArticle?.id || 'preview-current',
@@ -7222,17 +7768,18 @@ export function App() {
                                 role: roleVal,
                                 date: editingArticle?.date || "Hoy",
                                 readTime: "4 min de lectura",
-                                summary: contentVal.slice(0, 180) + "...",
+                                summary: firstP.slice(0, 180) + "...",
                                 image: articleCover || editingArticle?.image || "/Fotos/Imagen para Inicio - 02.jpg",
                                 status: "Publicado",
-                                content: contentVal,
-                                quote: quoteVal,
-                                paragraph2: p2Val,
-                                card1Title: card1TitleVal,
-                                card1Text: card1TextVal,
-                                card2Title: card2TitleVal,
-                                card2Text: card2TextVal,
-                                paragraph3: p3Val
+                                blocks: editorBlocks,
+                                content: firstP,
+                                quote: firstQuote,
+                                paragraph2: secondP,
+                                card1Title: firstCards?.card1Title,
+                                card1Text: firstCards?.card1Text,
+                                card2Title: firstCards?.card2Title,
+                                card2Text: firstCards?.card2Text,
+                                paragraph3: thirdP
                               };
 
                               setSelectedArticle(previewArt);

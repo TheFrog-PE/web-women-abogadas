@@ -239,29 +239,52 @@ Por ello, el Instituto Peruano de Compliance asume el compromiso en fomentar la 
 ];
 
 export function App() {
-  // Estados reactivos dinámicos con persistencia en localStorage entre Intranet y Web Pública
+  // Estados reactivos dinámicos con persistencia real en localStorage entre Intranet y Web Pública
   const [membersList, setMembersList] = useState<Member[]>(() => {
-    // Forzar la lista limpia de las 4 fundadoras oficiales de MEMBERS_DATA
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('wic_members_list');
+      const saved = localStorage.getItem('wic_members_db_v1');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        } catch (e) {
+          console.error("Error al cargar miembros desde localStorage", e);
+        }
+      }
     }
     return MEMBERS_DATA;
   });
 
   const [articlesList, setArticlesList] = useState<Article[]>(() => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('wic_articles_list');
+      const saved = localStorage.getItem('wic_articles_db_v1');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        } catch (e) {
+          console.error("Error al cargar articulos desde localStorage", e);
+        }
+      }
     }
     return DEFAULT_ARTICLES;
   });
 
   // Guardar dinámicamente en localStorage cada cambio
   useEffect(() => {
-    localStorage.setItem('wic_members_list', JSON.stringify(membersList));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('wic_members_db_v1', JSON.stringify(membersList));
+    }
   }, [membersList]);
 
   useEffect(() => {
-    localStorage.setItem('wic_articles_list', JSON.stringify(articlesList));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('wic_articles_db_v1', JSON.stringify(articlesList));
+    }
   }, [articlesList]);
 
   const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404' | 'unete'>('inicio');
@@ -400,10 +423,13 @@ export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [adminSubTab, setAdminSubTab] = useState<'dashboard' | 'blog-list' | 'blog-editor' | 'members-list' | 'member-editor'>('dashboard');
-  const [memberPhoto, setMemberPhoto] = useState<string | null>('/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg');
+  const [memberPhoto, setMemberPhoto] = useState<string | null>(null);
   
-  // Estado para edición o creación de miembro
-  const [editingMember, setEditingMember] = useState<{ id?: string; name: string; role: string; bio: string; photo: string | null } | null>(null);
+  // Estado para edición o creación de miembro con soporte completo de tags y campos
+  const [editingMember, setEditingMember] = useState<Member | null>(null);
+  const [memberTags, setMemberTags] = useState<string[]>([]);
+  const [newTagInput, setNewTagInput] = useState<string>('');
+  const [isAddingTag, setIsAddingTag] = useState<boolean>(false);
   
   // Estado para edición o creación de artículo
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
@@ -5644,6 +5670,9 @@ export function App() {
                         onClick={() => {
                           setEditingMember(null);
                           setMemberPhoto(null);
+                          setMemberTags(['Compliance Bancario', 'Ley de Protección de Datos', 'Fintech']);
+                          setNewTagInput('');
+                          setIsAddingTag(false);
                           setAdminSubTab('member-editor');
                         }}
                         style={{ fontSize: '0.85rem', padding: '0.75rem 1.5rem', backgroundColor: '#af1daa', fontWeight: '700', letterSpacing: '0.5px', borderRadius: '8px' }}
@@ -5705,14 +5734,11 @@ export function App() {
                               <td style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>
                                 <div style={{ display: 'inline-flex', gap: '0.85rem', color: '#64748B' }}>
                                   <span onClick={() => {
-                                    setEditingMember({
-                                      id: member.id,
-                                      name: member.name,
-                                      role: member.role,
-                                      bio: member.complianceExperience,
-                                      photo: member.photo
-                                    });
+                                    setEditingMember(member);
                                     setMemberPhoto(member.photo);
+                                    setMemberTags(member.tags && member.tags.length > 0 ? [...member.tags] : ['Compliance']);
+                                    setNewTagInput('');
+                                    setIsAddingTag(false);
                                     setAdminSubTab('member-editor');
                                   }} title="Editar" style={{ cursor: 'pointer', transition: 'color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#af1daa'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}><Edit2 size={16} /></span>
                                   <span onClick={() => setSelectedMember(member)} title="Ver Perfil" style={{ cursor: 'pointer', transition: 'color 0.15s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#af1daa'} onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}><Eye size={16} /></span>
@@ -5771,7 +5797,17 @@ export function App() {
                       </div>
                       <div style={{ display: 'flex', gap: '1rem' }}>
                         <button 
-                          onClick={() => setAdminSubTab('members-list')}
+                          onClick={() => {
+                            if (editingMember && editingMember.id) {
+                              if (confirm(`¿Seguro que deseas eliminar el perfil de ${editingMember.name}?`)) {
+                                setMembersList(prev => prev.filter(m => m.id !== editingMember.id));
+                                alert('Miembro eliminado con éxito.');
+                                setAdminSubTab('members-list');
+                              }
+                            } else {
+                              setAdminSubTab('members-list');
+                            }
+                          }}
                           style={{ 
                             padding: '0.75rem 1.25rem', 
                             backgroundColor: '#FFFFFF', 
@@ -5794,18 +5830,25 @@ export function App() {
                             const nameInput = (document.getElementById('input-member-name') as HTMLInputElement)?.value;
                             const roleInput = (document.getElementById('input-member-role') as HTMLInputElement)?.value;
                             const bioInput = (document.getElementById('input-member-bio') as HTMLTextAreaElement)?.value;
-                            const newName = nameInput || (editingMember ? editingMember.name : 'NUEVO MIEMBRO');
-                            const newRole = roleInput || (editingMember ? editingMember.role : 'SOCIA AFILIADA');
-                            const newBio = bioInput || (editingMember ? editingMember.bio : 'Perfil en actualización...');
-                            const newPhoto = memberPhoto || '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg';
+                            const linkedinInput = (document.getElementById('input-member-linkedin') as HTMLInputElement)?.value;
+
+                            const newName = (nameInput || (editingMember ? editingMember.name : 'NUEVO MIEMBRO')).trim();
+                            const newRole = (roleInput || (editingMember ? editingMember.role : 'SOCIA AFILIADA')).trim();
+                            const newBio = (bioInput || (editingMember ? (editingMember.complianceExperience || '') : 'Perfil en actualización...')).trim();
+                            const newLinkedin = (linkedinInput || (editingMember ? editingMember.linkedin : 'https://linkedin.com')).trim();
+                            const newPhoto = memberPhoto || (editingMember ? editingMember.photo : '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.webp');
+                            const finalTags = memberTags.length > 0 ? [...memberTags] : ['Compliance'];
 
                             if (editingMember && editingMember.id) {
                               setMembersList(prev => prev.map(m => m.id === editingMember.id ? {
                                 ...m,
                                 name: newName.toUpperCase(),
                                 role: newRole.toUpperCase(),
+                                currentCargo: newRole,
                                 complianceExperience: newBio,
-                                photo: newPhoto
+                                linkedin: newLinkedin,
+                                photo: newPhoto,
+                                tags: finalTags
                               } : m));
                             } else {
                               const newObj: Member = {
@@ -5817,13 +5860,14 @@ export function App() {
                                 complianceExperience: newBio,
                                 profession: 'ABOGADA',
                                 academicBg: ['Especialista en Compliance'],
-                                workBg: ['Directora Ejecutiva'],
-                                linkedin: 'https://linkedin.com',
-                                photo: newPhoto
+                                workBg: [newRole],
+                                linkedin: newLinkedin,
+                                photo: newPhoto,
+                                tags: finalTags
                               };
                               setMembersList(prev => [newObj, ...prev]);
                             }
-                            alert('Miembro guardado con éxito y publicado en la Web de WIC!');
+                            alert('¡Miembro guardado con éxito y publicado en la Web de WIC!');
                             setAdminSubTab('members-list');
                           }}
                           style={{ 
@@ -5963,10 +6007,10 @@ export function App() {
                           </label>
                           <textarea 
                             id="input-member-bio"
-                            key={editingMember ? editingMember.bio : 'new-member-bio'}
+                            key={editingMember ? (editingMember.id || editingMember.name) : 'new-member-bio'}
                             rows={5}
                             placeholder="Escribe aquí la trayectoria y perfil profesional..."
-                            defaultValue={editingMember ? editingMember.bio : ''}
+                            defaultValue={editingMember ? (editingMember.complianceExperience || '') : ''}
                             style={{ 
                               width: '100%', 
                               padding: '1rem', 
@@ -5988,23 +6032,140 @@ export function App() {
                           </label>
 
                           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
-                              <span>Compliance Bancario</span>
-                              <span style={{ cursor: 'pointer' }}>✕</span>
-                            </div>
-                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
-                              <span>Ley de Protección de Datos</span>
-                              <span style={{ cursor: 'pointer' }}>✕</span>
-                            </div>
-                            <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #e6affc' }}>
-                              <span>Fintech</span>
-                              <span style={{ cursor: 'pointer' }}>✕</span>
-                            </div>
+                            {memberTags.map((tag, idx) => (
+                              <div 
+                                key={idx} 
+                                style={{ 
+                                  backgroundColor: '#f4f4f4', 
+                                  color: '#af1daa', 
+                                  padding: '0.4rem 0.85rem', 
+                                  borderRadius: '4px', 
+                                  fontSize: '0.8rem', 
+                                  fontWeight: '700', 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  gap: '0.5rem', 
+                                  border: '1px solid #e6affc' 
+                                }}
+                              >
+                                <span>{tag}</span>
+                                <span 
+                                  onClick={() => setMemberTags(prev => prev.filter((_, i) => i !== idx))}
+                                  title="Eliminar etiqueta" 
+                                  style={{ cursor: 'pointer', opacity: 0.7, fontSize: '0.85rem', paddingLeft: '2px' }}
+                                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+                                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.7')}
+                                >
+                                  ✕
+                                </span>
+                              </div>
+                            ))}
+                            {memberTags.length === 0 && (
+                              <span style={{ color: '#94A3B8', fontSize: '0.8rem', fontStyle: 'italic' }}>
+                                Sin etiquetas. Añade etiquetas para habilitar el filtrado en la web pública.
+                              </span>
+                            )}
                           </div>
 
-                          <button style={{ background: 'none', border: '1px dashed #CBD5E1', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.8rem', color: '#64748B', fontWeight: '600', cursor: 'pointer' }}>
-                            + Añadir Etiqueta
-                          </button>
+                          {isAddingTag ? (
+                            <div style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center', backgroundColor: '#FAF5FF', padding: '0.4rem 0.6rem', borderRadius: '6px', border: '1px solid #e6affc' }}>
+                              <input 
+                                type="text"
+                                placeholder="Nueva etiqueta (ej. Derecho Penal)..."
+                                value={newTagInput}
+                                onChange={(e) => setNewTagInput(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    const trimmed = newTagInput.trim();
+                                    if (trimmed && !memberTags.includes(trimmed)) {
+                                      setMemberTags(prev => [...prev, trimmed]);
+                                      setNewTagInput('');
+                                      setIsAddingTag(false);
+                                    }
+                                  } else if (e.key === 'Escape') {
+                                    setIsAddingTag(false);
+                                    setNewTagInput('');
+                                  }
+                                }}
+                                style={{
+                                  padding: '0.35rem 0.6rem',
+                                  fontSize: '0.8rem',
+                                  border: '1px solid #af1daa',
+                                  borderRadius: '4px',
+                                  outline: 'none',
+                                  color: '#1E1B4B'
+                                }}
+                                autoFocus
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const trimmed = newTagInput.trim();
+                                  if (trimmed && !memberTags.includes(trimmed)) {
+                                    setMemberTags(prev => [...prev, trimmed]);
+                                  }
+                                  setNewTagInput('');
+                                  setIsAddingTag(false);
+                                }}
+                                style={{
+                                  backgroundColor: '#af1daa',
+                                  color: '#FFFFFF',
+                                  border: 'none',
+                                  padding: '0.35rem 0.75rem',
+                                  borderRadius: '4px',
+                                  fontSize: '0.75rem',
+                                  fontWeight: '700',
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                Añadir
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setIsAddingTag(false);
+                                  setNewTagInput('');
+                                }}
+                                style={{
+                                  background: 'none',
+                                  border: 'none',
+                                  color: '#64748B',
+                                  fontSize: '0.75rem',
+                                  cursor: 'pointer',
+                                  padding: '0.35rem'
+                                }}
+                              >
+                                Cancelar
+                              </button>
+                            </div>
+                          ) : (
+                            <button 
+                              type="button"
+                              onClick={() => setIsAddingTag(true)}
+                              style={{ 
+                                background: 'none', 
+                                border: '1px dashed #CBD5E1', 
+                                padding: '0.4rem 0.85rem', 
+                                borderRadius: '4px', 
+                                fontSize: '0.8rem', 
+                                color: '#64748B', 
+                                fontWeight: '600', 
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.borderColor = '#af1daa';
+                                e.currentTarget.style.color = '#af1daa';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.borderColor = '#CBD5E1';
+                                e.currentTarget.style.color = '#64748B';
+                              }}
+                            >
+                              + Añadir Etiqueta
+                            </button>
+                          )}
                         </div>
 
                       </div>
@@ -6050,8 +6211,11 @@ export function App() {
                           </h3>
                           <div style={{ position: 'relative' }}>
                             <input 
+                              id="input-member-linkedin"
+                              key={editingMember ? editingMember.linkedin : 'new-member-linkedin'}
                               type="text" 
                               placeholder="ingresa tu enlace"
+                              defaultValue={editingMember ? editingMember.linkedin : ''}
                               style={{ width: '100%', padding: '0.75rem 0.75rem 0.75rem 2.25rem', border: '1px solid #FAF5FF', backgroundColor: '#FAF5FF', borderRadius: '4px', fontSize: '0.85rem', color: '#1E1B4B', outline: 'none' }}
                             />
                             <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#af1daa', display: 'flex', alignItems: 'center' }}>
@@ -6131,7 +6295,10 @@ export function App() {
                           <button 
                             onClick={() => {
                               setEditingMember(null);
-                              setMemberPhoto('');
+                              setMemberPhoto(null);
+                              setMemberTags(['Compliance Bancario', 'Ley de Protección de Datos', 'Fintech']);
+                              setNewTagInput('');
+                              setIsAddingTag(false);
                               setAdminSubTab('member-editor');
                             }}
                             style={{ 

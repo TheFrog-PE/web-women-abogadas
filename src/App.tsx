@@ -2533,11 +2533,6 @@ export function App() {
                         <Briefcase size={15} /> Open to Work (Servicios)
                       </button>
                     </div>
-
-                    <div style={{ display: 'flex', gap: '0.75rem', color: '#64748B' }}>
-                      <span style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', padding: '0.4rem', borderRadius: '50%', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }} title="Compartir"><Share2 size={16} /></span>
-                      <span style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', padding: '0.4rem', borderRadius: '50%', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }} title="Descargar Perfil"><Download size={16} /></span>
-                    </div>
                   </div>
 
                 </div>

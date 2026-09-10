@@ -220,38 +220,74 @@ export interface ArticleBlock {
   imageCaption?: string;
 }
 
+const FULL_ARTICLE_BLOCKS: ArticleBlock[] = [
+  {
+    id: 'blk-p1',
+    type: 'paragraph',
+    text: 'En muchas organizaciones, las funciones de Compliance y Gestión de Riesgos suelen incorporarse cuando una decisión ya fue tomada, un producto ya fue diseñado o un proyecto se encuentra próximo a implementarse. En ese escenario, su participación termina enfocándose en validar, observar o corregir, más que en contribuir estratégicamente a la decisión.'
+  },
+  {
+    id: 'blk-p2',
+    type: 'paragraph',
+    text: 'Esta dinámica no responde necesariamente a una falta de interés, sino a una visión históricamente asociada a estas funciones: áreas orientadas principalmente al cumplimiento regulatorio, la mitigación de riesgos y la prevención de incumplimientos. Bajo este enfoque, su involucramiento suele activarse cuando existe una exigencia normativa específica, una observación pendiente o la necesidad de revisar impactos antes de una implementación.'
+  },
+  {
+    id: 'blk-quote',
+    type: 'quote',
+    text: 'El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.'
+  },
+  {
+    id: 'blk-h1',
+    type: 'heading',
+    text: 'Cuando la oportunidad marca la diferencia'
+  },
+  {
+    id: 'blk-p3',
+    type: 'paragraph',
+    text: 'Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.'
+  },
+  {
+    id: 'blk-list',
+    type: 'list',
+    items: [
+      'Identificación temprana de riesgos regulatorios en nuevos mercados.',
+      'Reducción de costos por reprocesos en el diseño de productos.',
+      'Fortalecimiento de la cultura ética desde la base de la operación.'
+    ]
+  },
+  {
+    id: 'blk-h2',
+    type: 'heading',
+    text: '¿Cómo avanzar hacia una participación más estratégica?'
+  },
+  {
+    id: 'blk-p4',
+    type: 'paragraph',
+    text: 'Reconocer la importancia de una intervención temprana es solo el primer paso. El reto organizacional consiste en generar condiciones para que Compliance y Gestión de Riesgos participen oportunamente, aportando valor no solo desde el cumplimiento, sino también desde una mejor comprensión de los riesgos y sus impactos.'
+  },
+  {
+    id: 'blk-cards',
+    type: 'cards',
+    card1Title: 'Integración Temprana',
+    card1Text: 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
+    card2Title: 'Intervención Continua',
+    card2Text: 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
+  },
+  {
+    id: 'blk-h3',
+    type: 'heading',
+    text: 'Reflexión final'
+  },
+  {
+    id: 'blk-p5',
+    type: 'paragraph',
+    text: 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'
+  }
+];
+
 function getArticleBlocks(art?: Partial<Article> | null): ArticleBlock[] {
   if (!art) {
-    return [
-      {
-        id: 'blk-init-1',
-        type: 'paragraph',
-        text: 'Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores.'
-      },
-      {
-        id: 'blk-init-2',
-        type: 'quote',
-        text: 'El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.'
-      },
-      {
-        id: 'blk-init-3',
-        type: 'paragraph',
-        text: 'Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.'
-      },
-      {
-        id: 'blk-init-4',
-        type: 'cards',
-        card1Title: 'Integración Temprana',
-        card1Text: 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
-        card2Title: 'Intervención Continua',
-        card2Text: 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
-      },
-      {
-        id: 'blk-init-5',
-        type: 'paragraph',
-        text: 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'
-      }
-    ];
+    return FULL_ARTICLE_BLOCKS;
   }
   if (art.blocks && Array.isArray(art.blocks) && art.blocks.length > 0) {
     return art.blocks;
@@ -280,11 +316,7 @@ function getArticleBlocks(art?: Partial<Article> | null): ArticleBlock[] {
     res.push({ id: 'blk-c3', type: 'paragraph', text: art.paragraph3 });
   }
   if (res.length === 0) {
-    res.push({
-      id: 'blk-default-p',
-      type: 'paragraph',
-      text: 'Escribe aquí el contenido de tu publicación...'
-    });
+    return FULL_ARTICLE_BLOCKS;
   }
   return res;
 }
@@ -324,48 +356,19 @@ const DEFAULT_ARTICLES: Article[] = [
     authorPhoto: "/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.jpg",
     role: "Alianza Estratégica & Aliado Institucional",
     date: "15 de Diciembre, 2026",
-    readTime: "4 min de lectura",
-    summary: "Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores.",
+    readTime: "5 min de lectura",
+    summary: "En muchas organizaciones, las funciones de Compliance y Gestión de Riesgos suelen incorporarse cuando una decisión ya fue tomada, un producto ya fue diseñado o un proyecto se encuentra próximo a implementarse. En ese escenario, su participación termina enfocándose en validar, observar o corregir, más que en contribuir estratégicamente a la decisión.",
     image: "/Fotos/Imagen para Inicio - 02.jpg",
     status: "Publicado",
-    content: "Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.",
+    content: "En muchas organizaciones, las funciones de Compliance y Gestión de Riesgos suelen incorporarse cuando una decisión ya fue tomada, un producto ya fue diseñado o un proyecto se encuentra próximo a implementarse. En ese escenario, su participación termina enfocándose en validar, observar o corregir, más que en contribuir estratégicamente a la decisión.",
     quote: "El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.",
-    paragraph2: "Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.",
+    paragraph2: "Esta dinámica no responde necesariamente a una falta de interés, sino a una visión históricamente asociada a estas funciones: áreas orientadas principalmente al cumplimiento regulatorio, la mitigación de riesgos y la prevención de incumplimientos.",
     card1Title: "Integración Temprana",
     card1Text: "Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.",
     card2Title: "Intervención Continua",
     card2Text: "Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.",
     paragraph3: "El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.",
-    blocks: [
-      {
-        id: 'b-init-1',
-        type: 'paragraph',
-        text: 'Desde la instauración de la responsabilidad de las personas jurídicas al reconocerse el poder que estas poseen en las dimensiones económica, social y política; se han rediseñado constantemente las medidas preventivas de comisión de infracciones o delitos que vinculen a la sociedad, sus representantes o colaboradores. A consecuencia de la incidencia del comportamiento corporativo, el control del riesgo es trasladado a las empresas a fin de desarrollar una autorregulación que mitigue contingencias de diversa índole, proteja a los stakeholders (personas o entidades con interés en la empresa) y desde el punto de vista empresarial, prosiga en la consecución de prácticas de buen gobierno corporativo.'
-      },
-      {
-        id: 'b-init-2',
-        type: 'quote',
-        text: 'El reto es cambiar una lógica todavía frecuente: involucrar a Compliance y Gestión de Riesgos para cumplir una exigencia, en lugar de integrarlos como parte del proceso de toma de decisiones.'
-      },
-      {
-        id: 'b-init-3',
-        type: 'paragraph',
-        text: 'Una participación tardía de Compliance y Gestión de Riesgos puede generar un efecto que muchas veces pasa desapercibido: limita la capacidad de influir en decisiones ya encaminadas. Cuando proyectos, productos o iniciativas avanzan sin incorporar criterios de riesgo y cumplimiento desde etapas tempranas, el margen para anticipar impactos o proponer alternativas se reduce considerablemente.'
-      },
-      {
-        id: 'b-init-4',
-        type: 'cards',
-        card1Title: 'Integración Temprana',
-        card1Text: 'Involucrar tempranamente a estas funciones en iniciativas relevantes permite una visión proactiva.',
-        card2Title: 'Intervención Continua',
-        card2Text: 'Fortalecer espacios de interacción con las líneas de negocio para una retroalimentación constante.'
-      },
-      {
-        id: 'b-init-5',
-        type: 'paragraph',
-        text: 'El cumplimiento no debería perseguirse al final del proceso; debería suceder de forma natural como resultado de decisiones bien diseñadas desde el inicio.'
-      }
-    ]
+    blocks: FULL_ARTICLE_BLOCKS
   }
 ];
 
@@ -395,12 +398,20 @@ export function App() {
         try {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
+            // Sincronizar y actualizar con la nota completa estructurada de la web si faltan bloques
+            const hasComplete = parsed.some((a: Article) => a.id === "art-compliance-gobierno" && a.blocks && a.blocks.length >= 10);
+            if (!hasComplete) {
+              const updated = [DEFAULT_ARTICLES[0], ...parsed.filter((a: Article) => a.id !== "art-compliance-gobierno")];
+              localStorage.setItem('wic_articles_db_v1', JSON.stringify(updated));
+              return updated;
+            }
             return parsed;
           }
         } catch (e) {
           console.error("Error al cargar articulos desde localStorage", e);
         }
       }
+      localStorage.setItem('wic_articles_db_v1', JSON.stringify(DEFAULT_ARTICLES));
     }
     return DEFAULT_ARTICLES;
   });

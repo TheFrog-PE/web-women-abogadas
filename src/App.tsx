@@ -23,6 +23,7 @@ import {
   Link as LinkIcon,
   Edit2,
   Eye,
+  EyeOff,
   LogOut,
   Share2,
   Download,
@@ -372,6 +373,28 @@ const DEFAULT_ARTICLES: Article[] = [
   }
 ];
 
+export interface AdminUser {
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+}
+
+export const AUTHORIZED_ADMINS: AdminUser[] = [
+  {
+    email: 'admin@wiccolombia.com',
+    password: 'WicAdmin2026*',
+    name: 'Dirección General WIC',
+    role: 'Super Administrador'
+  },
+  {
+    email: 'presidencia@wiccolombia.com',
+    password: 'WicPresidencia2026!',
+    name: 'Presidencia WIC Colombia',
+    role: 'Administrador Ejecutivo'
+  }
+];
+
 export function App() {
   // Estados reactivos dinámicos con persistencia real en localStorage entre Intranet y Web Pública
   const [membersList, setMembersList] = useState<Member[]>(() => {
@@ -562,7 +585,59 @@ export function App() {
   const currentEvent = EVENTS_DATA[activeEventId] || EVENTS_DATA['desayuno-1'];
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('wic_admin_session') === 'true' || sessionStorage.getItem('wic_admin_session') === 'true';
+    }
+    return false;
+  });
+  const [currentAdminUser, setCurrentAdminUser] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('wic_admin_user') || sessionStorage.getItem('wic_admin_user') || 'Dirección General WIC';
+    }
+    return 'Dirección General WIC';
+  });
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setLoginPassword('');
+    setLoginError('');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('wic_admin_session');
+      localStorage.removeItem('wic_admin_user');
+      sessionStorage.removeItem('wic_admin_session');
+      sessionStorage.removeItem('wic_admin_user');
+    }
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+
+    const trimmedEmail = loginEmail.trim().toLowerCase();
+    const foundAdmin = AUTHORIZED_ADMINS.find(
+      admin => admin.email.toLowerCase() === trimmedEmail && admin.password === loginPassword
+    );
+
+    if (foundAdmin) {
+      if (rememberMe) {
+        localStorage.setItem('wic_admin_session', 'true');
+        localStorage.setItem('wic_admin_user', foundAdmin.name);
+      } else {
+        sessionStorage.setItem('wic_admin_session', 'true');
+        sessionStorage.setItem('wic_admin_user', foundAdmin.name);
+      }
+      setCurrentAdminUser(foundAdmin.name);
+      setIsLoggedIn(true);
+      setLoginError('');
+      setLoginPassword('');
+    } else {
+      setLoginError('Credenciales incorrectas. Verifique el correo y la contraseña autorizados para WIC Colombia.');
+    }
+  };
   const [isScrolled, setIsScrolled] = useState(false);
   const [adminSubTab, setAdminSubTab] = useState<'dashboard' | 'blog-list' | 'blog-editor' | 'members-list' | 'member-editor'>('dashboard');
   const [memberPhoto, setMemberPhoto] = useState<string | null>(null);
@@ -5672,6 +5747,9 @@ export function App() {
                         <span style={{ color: '#1E1B4B', fontSize: '1.25rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', display: 'block', lineHeight: '1.1' }}>
                           Admin Portal
                         </span>
+                        <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '0.3px', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.2rem' }}>
+                          <ShieldCheck size={12} /> {currentAdminUser}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -5808,7 +5886,7 @@ export function App() {
                   </button>
 
                   <button 
-                    onClick={() => setIsLoggedIn(false)}
+                    onClick={handleLogout}
                     style={{ 
                       display: 'flex', 
                       alignItems: 'center', 
@@ -7862,45 +7940,109 @@ export function App() {
                 }}>
                   Iniciar Sesión
                 </h1>
-                <p style={{ color: '#64748B', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                  Acceso restringido para especialistas en cumplimiento.
+                <p style={{ color: '#64748B', fontSize: '0.9rem', marginBottom: '1.75rem' }}>
+                  Acceso exclusivo y seguro para administradores y directivas de WIC Colombia.
                 </p>
 
                 {isLoggedIn ? (
                   <div style={{ textAlign: 'center', padding: '1rem 0' }}>
                     <div style={{ 
-                      width: '60px', 
-                      height: '60px', 
+                      width: '64px', 
+                      height: '64px', 
                       backgroundColor: '#DCFCE7', 
                       color: '#166534', 
                       borderRadius: '50%', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
-                      margin: '0 auto 1rem auto',
-                      fontSize: '1.5rem',
-                      fontWeight: 'bold'
+                      margin: '0 auto 1.25rem auto',
+                      fontSize: '1.75rem',
+                      fontWeight: 'bold',
+                      boxShadow: '0 4px 14px rgba(22, 101, 52, 0.15)'
                     }}>
                       ✓
                     </div>
-                    <h3 style={{ color: '#0F172A', marginBottom: '0.5rem', fontSize: '1.25rem' }}>Autenticación Exitosa</h3>
-                    <p style={{ color: '#64748B', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Cargando Panel de Administración de WIC Colombia...</p>
+                    <span style={{ 
+                      display: 'inline-block',
+                      backgroundColor: '#F3E8FF',
+                      color: '#af1daa',
+                      padding: '0.3rem 0.85rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.75rem',
+                      fontWeight: '700',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
+                      marginBottom: '0.6rem'
+                    }}>
+                      Sesión Activa
+                    </span>
+                    <h3 style={{ color: '#0F172A', marginBottom: '0.4rem', fontSize: '1.3rem', fontWeight: '800' }}>{currentAdminUser}</h3>
+                    <p style={{ color: '#64748B', fontSize: '0.88rem', marginBottom: '1.75rem' }}>
+                      Tu cuenta directiva se encuentra autenticada y lista para gestionar miembros y contenidos.
+                    </p>
                     
-                    <button 
-                      className="btn btn-fuchsia"
-                      onClick={() => setIsLoggedIn(false)}
-                      style={{ width: '100%', backgroundColor: '#af1daa', padding: '0.75rem' }}
-                    >
-                      Cerrar Sesión
-                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <button 
+                        className="btn btn-fuchsia"
+                        onClick={() => {
+                          setAdminSubTab('dashboard');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        style={{ width: '100%', backgroundColor: '#af1daa', padding: '0.85rem', fontWeight: '700', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                      >
+                        <LayoutDashboard size={18} /> Ir al Panel de Control
+                      </button>
+
+                      <button 
+                        onClick={handleLogout}
+                        style={{ 
+                          width: '100%', 
+                          padding: '0.75rem', 
+                          backgroundColor: 'transparent', 
+                          color: '#EF4444', 
+                          border: '1px solid #FCA5A5', 
+                          borderRadius: '6px', 
+                          fontWeight: '700', 
+                          fontSize: '0.88rem', 
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0.4rem',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FEF2F2'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                      >
+                        <LogOut size={16} /> Cerrar Sesión
+                      </button>
+                    </div>
                   </div>
                 ) : (
-                  <form onSubmit={(e) => {
-                    e.preventDefault();
-                    if (!loginEmail) setLoginEmail('admin@wiccolombia.com');
-                    if (!loginPassword) setLoginPassword('admin2026');
-                    setIsLoggedIn(true);
-                  }}>
+                  <form onSubmit={handleLogin}>
+                    {/* MENSAJE DE ERROR SI CREDENCIALES SON INVÁLIDAS */}
+                    {loginError && (
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '0.65rem',
+                        backgroundColor: '#FEF2F2',
+                        border: '1px solid #FCA5A5',
+                        borderRadius: '8px',
+                        padding: '0.85rem 1rem',
+                        marginBottom: '1.5rem',
+                        color: '#991B1B',
+                        fontSize: '0.85rem',
+                        lineHeight: '1.4'
+                      }}>
+                        <AlertTriangle size={18} style={{ color: '#EF4444', flexShrink: 0, marginTop: '2px' }} />
+                        <div>
+                          <strong style={{ display: 'block', marginBottom: '0.15rem' }}>Acceso denegado</strong>
+                          <span>{loginError}</span>
+                        </div>
+                      </div>
+                    )}
+
                     {/* INPUT CORREO */}
                     <div style={{ marginBottom: '1.5rem' }}>
                       <label style={{ 
@@ -7912,24 +8054,28 @@ export function App() {
                         marginBottom: '0.4rem',
                         textTransform: 'uppercase'
                       }}>
-                        CORREO ELECTRÓNICO
+                        CORREO ELECTRÓNICO INSTITUCIONAL
                       </label>
                       <div style={{ position: 'relative' }}>
                         <input 
                           type="email"
                           required
                           value={loginEmail}
-                          onChange={(e) => setLoginEmail(e.target.value)}
+                          onChange={(e) => {
+                            setLoginEmail(e.target.value);
+                            if (loginError) setLoginError('');
+                          }}
                           placeholder="admin@wiccolombia.com"
                           style={{ 
                             width: '100%', 
                             padding: '0.75rem 2.5rem 0.75rem 0.85rem', 
-                            border: '1px solid #E2E8F0', 
-                            borderRadius: '4px', 
+                            border: loginError ? '1.5px solid #EF4444' : '1px solid #E2E8F0', 
+                            borderRadius: '6px', 
                             fontSize: '0.95rem',
                             backgroundColor: '#FAF5FF',
                             color: '#1E1B4B',
-                            outline: 'none'
+                            outline: 'none',
+                            transition: 'border-color 0.2s ease'
                           }}
                         />
                         <Mail size={18} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }} />
@@ -7946,39 +8092,72 @@ export function App() {
                           letterSpacing: '0.5px',
                           textTransform: 'uppercase'
                         }}>
-                          CONTRASEÑA
+                          CONTRASEÑA DIRECTIVA
                         </label>
-                        <a href="#forgot" onClick={(e) => e.preventDefault()} style={{ color: '#af1daa', fontSize: '0.8rem', fontWeight: '600', textDecoration: 'none' }}>
+                        <button
+                          type="button"
+                          onClick={() => alert('Para restablecer sus credenciales directivas de WIC Colombia, por favor contacte al soporte institucional: wiccolombia@outlook.com')}
+                          style={{ background: 'none', border: 'none', color: '#af1daa', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer', padding: 0 }}
+                        >
                           ¿Olvidó su clave?
-                        </a>
+                        </button>
                       </div>
                       <div style={{ position: 'relative' }}>
                         <input 
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           required
                           value={loginPassword}
-                          onChange={(e) => setLoginPassword(e.target.value)}
-                          placeholder="Ingresa tu contraseña"
+                          onChange={(e) => {
+                            setLoginPassword(e.target.value);
+                            if (loginError) setLoginError('');
+                          }}
+                          placeholder="Ingresa tu clave de acceso"
                           style={{ 
                             width: '100%', 
-                            padding: '0.75rem 2.5rem 0.75rem 0.85rem', 
-                            border: '1px solid #E2E8F0', 
-                            borderRadius: '4px', 
+                            padding: '0.75rem 2.75rem 0.75rem 0.85rem', 
+                            border: loginError ? '1.5px solid #EF4444' : '1px solid #E2E8F0', 
+                            borderRadius: '6px', 
                             fontSize: '0.95rem',
                             backgroundColor: '#FAF5FF',
                             color: '#1E1B4B',
-                            outline: 'none'
+                            outline: 'none',
+                            transition: 'border-color 0.2s ease'
                           }}
                         />
-                        <LockIcon size={18} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }} />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          style={{
+                            position: 'absolute',
+                            right: '10px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            background: 'none',
+                            border: 'none',
+                            color: '#94A3B8',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '4px'
+                          }}
+                          title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
+                        >
+                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
                       </div>
                     </div>
 
                     {/* CHECKBOX */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '2rem' }}>
-                      <input type="checkbox" id="remember" defaultChecked style={{ cursor: 'pointer', accentColor: '#af1daa' }} />
-                      <label htmlFor="remember" style={{ color: '#64748B', fontSize: '0.85rem', cursor: 'pointer' }}>
-                        Mantener sesión activa por 8 horas
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.75rem' }}>
+                      <input 
+                        type="checkbox" 
+                        id="remember" 
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        style={{ cursor: 'pointer', accentColor: '#af1daa', width: '16px', height: '16px' }} 
+                      />
+                      <label htmlFor="remember" style={{ color: '#64748B', fontSize: '0.85rem', cursor: 'pointer', userSelect: 'none' }}>
+                        Recordar mi sesión en este dispositivo
                       </label>
                     </div>
 
@@ -7987,12 +8166,12 @@ export function App() {
                       type="submit"
                       style={{ 
                         width: '100%', 
-                        padding: '0.85rem', 
+                        padding: '0.9rem', 
                         backgroundColor: '#af1daa', 
                         color: '#FFFFFF', 
                         border: 'none', 
-                        borderRadius: '4px', 
-                        fontSize: '0.9rem', 
+                        borderRadius: '6px', 
+                        fontSize: '0.92rem', 
                         fontWeight: '700', 
                         letterSpacing: '1px',
                         cursor: 'pointer',
@@ -8000,45 +8179,20 @@ export function App() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '0.5rem',
-                        transition: 'background-color 0.2s ease'
+                        boxShadow: '0 4px 14px rgba(175, 29, 170, 0.35)',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#90128c'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#af1daa'}
                     >
-                      INGRESAR <span>→</span>
+                      <LockIcon size={16} /> INGRESAR AL PANEL <span>→</span>
                     </button>
 
-                    {/* ACCESO RÁPIDO DEMO */}
-                    <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px dashed #E2E8F0', textAlign: 'center' }}>
-                      <p style={{ color: '#64748B', fontSize: '0.8rem', marginBottom: '0.75rem' }}>
-                        Acceso para administradores WIC
+                    {/* PIE DE SEGURIDAD INSTITUCIONAL */}
+                    <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+                      <p style={{ color: '#94A3B8', fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem', margin: 0 }}>
+                        <ShieldCheck size={14} style={{ color: '#af1daa' }} /> Acceso protegido. Sistema de autenticación directiva WIC Colombia.
                       </p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setLoginEmail('admin@wiccolombia.com');
-                          setLoginPassword('admin2026');
-                          setIsLoggedIn(true);
-                        }}
-                        style={{
-                          width: '100%',
-                          padding: '0.7rem 1rem',
-                          backgroundColor: '#FAF5FF',
-                          color: '#af1daa',
-                          border: '1px solid #D6C0D2',
-                          borderRadius: '4px',
-                          fontSize: '0.85rem',
-                          fontWeight: '700',
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '0.4rem',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(175, 29, 170, 0.12)'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FAF5FF'}
-                      >
-                        ⚡ Ingreso Rápido con 1 Clic (Admin)
-                      </button>
                     </div>
                   </form>
                 )}

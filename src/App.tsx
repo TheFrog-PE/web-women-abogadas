@@ -1819,28 +1819,28 @@ export function App() {
                       </div>
                     )}
 
-                    {/* ── AUSPICIADORES / COLABORADORES OFICIALES ── */}
-                    <div style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem' }}>
+                    {/* ── EMPRESAS PATROCINADORAS / COLABORADORES OFICIALES (PÁGINA 3 DEL PDF) ── */}
+                    <div style={{ backgroundColor: '#f4f4f4', padding: '4.5rem 2rem' }}>
                       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-                        <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
-                        <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem', marginBottom: '2.5rem' }}>Auspiciadores</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '950px', margin: '0 auto' }} className="events-grid-3col">
+                        <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>COLABORADORES OFICIALES</span>
+                        <h2 style={{ fontSize: '2.4rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem', marginBottom: '2.5rem' }}>Empresas Patrocinadoras</h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', maxWidth: '1080px', margin: '0 auto' }} className="events-grid-3col">
                           {/* LOGO 1: CREMADES & CALVO-SOTELO */}
-                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
-                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA INTERNACIONAL</span>
-                            <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '48px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0)' }} />
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '2.5rem 2rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 25px rgba(175, 29, 170, 0.08)', minHeight: '165px', transition: 'all 0.3s ease' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1.25rem' }}>FIRMA INTERNACIONAL</span>
+                            <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
                           </div>
 
                           {/* LOGO 2: PRECIADO ABOGADOS */}
-                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
-                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>FIRMA COLABORADORA</span>
-                            <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '48px', maxWidth: '100%', objectFit: 'contain', filter: 'brightness(0)' }} />
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '2.5rem 2rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 25px rgba(175, 29, 170, 0.08)', minHeight: '165px', transition: 'all 0.3s ease' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1.25rem' }}>FIRMA COLABORADORA</span>
+                            <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
                           </div>
 
                           {/* LOGO 3: WIC COLOMBIA */}
-                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '1.25rem 1.75rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(175, 29, 170, 0.08)', minHeight: '110px' }}>
-                            <span style={{ color: '#af1daa', fontSize: '0.65rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>ORGANIZACIÓN</span>
-                            <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ maxHeight: '45px', maxWidth: '100%', objectFit: 'contain' }} />
+                          <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '2.5rem 2rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 25px rgba(175, 29, 170, 0.08)', minHeight: '165px', transition: 'all 0.3s ease' }}>
+                            <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1.25rem' }}>ORGANIZACIÓN</span>
+                            <img src="/Logo/Logo WIC COL  (1).png" alt="WIC Colombia" style={{ maxHeight: '72px', maxWidth: '85%', objectFit: 'contain' }} />
                           </div>
                         </div>
                       </div>
@@ -2164,10 +2164,10 @@ export function App() {
                   DIRECTORIO PROFESIONAL
                 </span>
                 <h1 className="anim-fade-up anim-d2" style={{ color: '#FFFFFF', fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', fontWeight: '800', marginBottom: '1.25rem', maxWidth: '1100px', width: '100%', lineHeight: '1.15' }}>
-                  Nuestras afiliadas<br />fundadoras
+                  Nuestras afiliadas<br />y patrocinadores
                 </h1>
-                <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '680px', lineHeight: '1.7', margin: '0 auto' }}>
-                  Líderes de Cumplimiento, Ética y Gobierno Corporativo en Colombia
+                <p className="anim-fade-up anim-d3" style={{ color: '#F1F5F9', fontSize: '1.2rem', maxWidth: '780px', lineHeight: '1.7', margin: '0 auto' }}>
+                  Líderes de alto nivel y empresas aliadas unidas por la excelencia en compliance.
                 </p>
               </div>
             </section>
@@ -2483,12 +2483,140 @@ export function App() {
                 );
               })()}
 
-              {/* ── BANNER CTA EN LA PARTE INFERIOR DE MIEMBROS (PÁGINA 2 DEL PDF) ── */}
-              <div className="reveal" style={{ marginTop: '4rem' }}>
-                <p style={{ color: '#64748B', fontSize: '0.95rem', fontWeight: '600', textAlign: 'center', marginBottom: '1.5rem', maxWidth: '750px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6' }}>
+              {/* ── BANNER FRASE OFICIAL EN COLOR CORPORATIVO WIC (PÁGINA 1 Y 2 DEL PDF) ── */}
+              <div className="reveal" style={{ 
+                background: 'linear-gradient(135deg, #7B1FA2 0%, #af1daa 50%, #eb54ff 100%)', 
+                borderRadius: '18px', 
+                padding: '2.25rem 2rem', 
+                textAlign: 'center', 
+                marginTop: '4.5rem',
+                marginBottom: '3.5rem',
+                boxShadow: '0 12px 32px rgba(175, 29, 170, 0.28)',
+                border: '1px solid rgba(255, 255, 255, 0.22)'
+              }}>
+                <p style={{ 
+                  color: '#FFFFFF', 
+                  fontSize: 'clamp(1.05rem, 2vw, 1.3rem)', 
+                  fontWeight: '700', 
+                  margin: 0, 
+                  lineHeight: '1.6',
+                  letterSpacing: '0.2px',
+                  maxWidth: '920px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto'
+                }}>
                   Unirte a nuestra comunidad te brinda la oportunidad de seguir creciendo junto a la red más importante de <strong>Compliance</strong>.
                 </p>
+              </div>
 
+              {/* ── SECCIÓN EMPRESAS AFILIADAS (PÁGINA 2 DEL PDF) ── */}
+              <div className="reveal" style={{ 
+                backgroundColor: '#FFFFFF', 
+                borderRadius: '24px', 
+                padding: '3.5rem 2.5rem', 
+                border: '1.5px solid #e6affc', 
+                boxShadow: '0 8px 30px rgba(175, 29, 170, 0.06)',
+                marginBottom: '3.5rem',
+                textAlign: 'center'
+              }}>
+                <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase', display: 'block', marginBottom: '0.35rem' }}>
+                  ALIANZAS Y FIRMAS CORPORATIVAS
+                </span>
+                <h2 style={{ fontSize: '2.3rem', fontWeight: '800', color: '#1E1B4B', marginTop: 0, marginBottom: '0.75rem', letterSpacing: '-0.5px' }}>
+                  Empresas Afiliadas
+                </h2>
+                <p style={{ color: '#64748B', fontSize: '1rem', maxWidth: '640px', margin: '0 auto 2.5rem', lineHeight: '1.6' }}>
+                  Organizaciones y firmas de primer nivel unidas por el fortalecimiento de la cultura de integridad y cumplimiento en Colombia.
+                </p>
+
+                {/* GRILLA DE LOGOS EN TAMAÑO DESTACADO (QUE SE NOTEN GRANDE) */}
+                <div style={{ maxWidth: '1080px', margin: '0 auto' }} className="events-grid-3col">
+                  {/* LOGO 1: CREMADES & CALVO-SOTELO */}
+                  <div className="card-hover" style={{ 
+                    backgroundColor: '#FAF5FF', 
+                    borderRadius: '20px', 
+                    padding: '2.25rem 2rem', 
+                    border: '1.5px solid #e6affc', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    boxShadow: '0 4px 16px rgba(175, 29, 170, 0.06)', 
+                    minHeight: '150px',
+                    transition: 'all 0.3s ease'
+                  }}>
+                    <span style={{ color: '#af1daa', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                      FIRMA INTERNACIONAL
+                    </span>
+                    <img 
+                      src="/Logo/Logo Cremades.png" 
+                      alt="Cremades & Calvo-Sotelo Abogados" 
+                      style={{ maxHeight: '72px', maxWidth: '85%', objectFit: 'contain' }} 
+                    />
+                  </div>
+
+                  {/* LOGO 2: PRECIADO ABOGADOS */}
+                  <div className="card-hover" style={{ 
+                    backgroundColor: '#FAF5FF', 
+                    borderRadius: '20px', 
+                    padding: '2.25rem 2rem', 
+                    border: '1.5px solid #e6affc', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    boxShadow: '0 4px 16px rgba(175, 29, 170, 0.06)', 
+                    minHeight: '150px',
+                    transition: 'all 0.3s ease'
+                  }}>
+                    <span style={{ color: '#af1daa', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                      FIRMA COLABORADORA
+                    </span>
+                    <img 
+                      src="/Logo/Logo Preciado.png" 
+                      alt="Preciado Abogados" 
+                      style={{ maxHeight: '72px', maxWidth: '85%', objectFit: 'contain' }} 
+                    />
+                  </div>
+
+                  {/* LOGO 3: WIC COLOMBIA */}
+                  <div className="card-hover" style={{ 
+                    backgroundColor: '#FAF5FF', 
+                    borderRadius: '20px', 
+                    padding: '2.25rem 2rem', 
+                    border: '1.5px solid #e6affc', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    boxShadow: '0 4px 16px rgba(175, 29, 170, 0.06)', 
+                    minHeight: '150px',
+                    transition: 'all 0.3s ease'
+                  }}>
+                    <span style={{ color: '#af1daa', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                      RED INSTITUCIONAL
+                    </span>
+                    <img 
+                      src="/Logo/Logo WIC COL  (1).png" 
+                      alt="WIC Colombia" 
+                      style={{ maxHeight: '68px', maxWidth: '85%', objectFit: 'contain' }} 
+                    />
+                  </div>
+                </div>
+
+                {/* INDICADOR ESTILO SLIDER / CARRUSEL (IDÉNTICO A LA CAPTURA DEL PDF) */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', marginTop: '2.25rem' }}>
+                  <span style={{ width: '28px', height: '4px', backgroundColor: '#af1daa', borderRadius: '9999px', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#CBD5E1', borderRadius: '50%', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#CBD5E1', borderRadius: '50%', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#CBD5E1', borderRadius: '50%', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#CBD5E1', borderRadius: '50%', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#CBD5E1', borderRadius: '50%', display: 'inline-block' }} />
+                </div>
+              </div>
+
+              {/* ── BANNER CTA EN LA PARTE INFERIOR DE MIEMBROS (PÁGINA 2 Y 3 DEL PDF) ── */}
+              <div className="reveal" style={{ marginTop: '1rem' }}>
                 <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '3rem 2.5rem', border: '1.5px solid #e6affc', boxShadow: '0 10px 30px rgba(175, 29, 170, 0.08)', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '3rem', alignItems: 'center' }}>
                   <div>
                     <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', fontWeight: '800', marginBottom: '0.85rem', lineHeight: '1.25' }}>
@@ -2647,7 +2775,7 @@ export function App() {
                       )}
                     </div>
 
-                    {/* BIOGRAFÍA PROFESIONAL */}
+                    {/* DESCRIPCIÓN */}
                     <div style={{ marginBottom: '1.5rem' }}>
                       <span style={{ 
                         color: '#af1daa', 
@@ -2660,7 +2788,7 @@ export function App() {
                         borderBottom: '1px solid #e6affc',
                         paddingBottom: '0.4rem'
                       }}>
-                        BIOGRAFÍA PROFESIONAL
+                        DESCRIPCIÓN
                       </span>
 
                       <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.7', textAlign: 'justify', margin: 0 }}>
@@ -6260,10 +6388,10 @@ export function App() {
                           </div>
                         </div>
 
-                        {/* BIOGRAFÍA PROFESIONAL */}
+                        {/* DESCRIPCIÓN */}
                         <div style={{ marginBottom: '2rem' }}>
                           <label style={{ display: 'block', color: '#64748B', fontSize: '0.7rem', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '0.4rem' }}>
-                            BIOGRAFÍA PROFESIONAL
+                            DESCRIPCIÓN
                           </label>
                           <textarea 
                             id="input-member-bio"

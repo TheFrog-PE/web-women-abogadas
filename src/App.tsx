@@ -1828,13 +1828,13 @@ export function App() {
                           {/* LOGO 1: CREMADES & CALVO-SOTELO */}
                           <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '2.5rem 2rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 25px rgba(175, 29, 170, 0.08)', minHeight: '165px', transition: 'all 0.3s ease' }}>
                             <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1.25rem' }}>FIRMA INTERNACIONAL</span>
-                            <img src="/Logo/Logo Cremades.png" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
+                            <img src="/Logo/Logo Cremades.png?v=2" alt="Cremades & Calvo-Sotelo Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
                           </div>
 
                           {/* LOGO 2: PRECIADO ABOGADOS */}
                           <div className="card-hover" style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '2.5rem 2rem', border: '1.5px solid #e6affc', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 25px rgba(175, 29, 170, 0.08)', minHeight: '165px', transition: 'all 0.3s ease' }}>
                             <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1.25rem' }}>FIRMA COLABORADORA</span>
-                            <img src="/Logo/Logo Preciado.png" alt="Preciado Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
+                            <img src="/Logo/Logo Preciado.png?v=2" alt="Preciado Abogados" style={{ maxHeight: '76px', maxWidth: '85%', objectFit: 'contain' }} />
                           </div>
 
                           {/* LOGO 3: WIC COLOMBIA */}
@@ -2549,7 +2549,7 @@ export function App() {
                       FIRMA INTERNACIONAL
                     </span>
                     <img 
-                      src="/Logo/Logo Cremades.png" 
+                      src="/Logo/Logo Cremades.png?v=2" 
                       alt="Cremades & Calvo-Sotelo Abogados" 
                       style={{ maxHeight: '72px', maxWidth: '85%', objectFit: 'contain' }} 
                     />
@@ -2573,7 +2573,7 @@ export function App() {
                       FIRMA COLABORADORA
                     </span>
                     <img 
-                      src="/Logo/Logo Preciado.png" 
+                      src="/Logo/Logo Preciado.png?v=2" 
                       alt="Preciado Abogados" 
                       style={{ maxHeight: '72px', maxWidth: '85%', objectFit: 'contain' }} 
                     />

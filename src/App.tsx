@@ -386,12 +386,6 @@ export const AUTHORIZED_ADMINS: AdminUser[] = [
     passwordHash: '980ab7ac7551807cc4bf312131ebbf4a787fa34622811ecf99ffb57bd2a0f2c0',
     name: 'Dirección General WIC',
     role: 'Super Administrador'
-  },
-  {
-    email: 'presidencia@wiccolombia.com',
-    passwordHash: '9d8836c50b22c4a688acd7bf1dcf228d459b94cbd05445c4dcb5fac417d287ea',
-    name: 'Presidencia WIC Colombia',
-    role: 'Administrador Ejecutivo'
   }
 ];
 

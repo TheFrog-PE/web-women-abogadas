@@ -375,7 +375,7 @@ const DEFAULT_ARTICLES: Article[] = [
 
 export interface AdminUser {
   email: string;
-  password: string;
+  passwordHash: string;
   name: string;
   role: string;
 }
@@ -383,17 +383,31 @@ export interface AdminUser {
 export const AUTHORIZED_ADMINS: AdminUser[] = [
   {
     email: 'admin@wiccolombia.com',
-    password: 'WicAdmin2026*',
+    passwordHash: '980ab7ac7551807cc4bf312131ebbf4a787fa34622811ecf99ffb57bd2a0f2c0',
     name: 'Dirección General WIC',
     role: 'Super Administrador'
   },
   {
     email: 'presidencia@wiccolombia.com',
-    password: 'WicPresidencia2026!',
+    passwordHash: '9d8836c50b22c4a688acd7bf1dcf228d459b94cbd05445c4dcb5fac417d287ea',
     name: 'Presidencia WIC Colombia',
     role: 'Administrador Ejecutivo'
   }
 ];
+
+async function verifyPassword(password: string, expectedHash: string): Promise<boolean> {
+  try {
+    const enc = new TextEncoder();
+    const data = enc.encode("wic_colombia_salt_2026_" + password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const computedHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return computedHash === expectedHash;
+  } catch (err) {
+    console.error("Error al verificar credenciales:", err);
+    return false;
+  }
+}
 
 export function App() {
   // Estados reactivos dinámicos con persistencia real en localStorage entre Intranet y Web Pública
@@ -613,30 +627,33 @@ export function App() {
     }
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
 
     const trimmedEmail = loginEmail.trim().toLowerCase();
     const foundAdmin = AUTHORIZED_ADMINS.find(
-      admin => admin.email.toLowerCase() === trimmedEmail && admin.password === loginPassword
+      admin => admin.email.toLowerCase() === trimmedEmail
     );
 
     if (foundAdmin) {
-      if (rememberMe) {
-        localStorage.setItem('wic_admin_session', 'true');
-        localStorage.setItem('wic_admin_user', foundAdmin.name);
-      } else {
-        sessionStorage.setItem('wic_admin_session', 'true');
-        sessionStorage.setItem('wic_admin_user', foundAdmin.name);
+      const isValid = await verifyPassword(loginPassword, foundAdmin.passwordHash);
+      if (isValid) {
+        if (rememberMe) {
+          localStorage.setItem('wic_admin_session', 'true');
+          localStorage.setItem('wic_admin_user', foundAdmin.name);
+        } else {
+          sessionStorage.setItem('wic_admin_session', 'true');
+          sessionStorage.setItem('wic_admin_user', foundAdmin.name);
+        }
+        setCurrentAdminUser(foundAdmin.name);
+        setIsLoggedIn(true);
+        setLoginError('');
+        setLoginPassword('');
+        return;
       }
-      setCurrentAdminUser(foundAdmin.name);
-      setIsLoggedIn(true);
-      setLoginError('');
-      setLoginPassword('');
-    } else {
-      setLoginError('Credenciales incorrectas. Verifique el correo y la contraseña autorizados para WIC Colombia.');
     }
+    setLoginError('Credenciales incorrectas. Verifique el correo y la contraseña autorizados para WIC Colombia.');
   };
   const [isScrolled, setIsScrolled] = useState(false);
   const [adminSubTab, setAdminSubTab] = useState<'dashboard' | 'blog-list' | 'blog-editor' | 'members-list' | 'member-editor'>('dashboard');

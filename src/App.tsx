@@ -2439,7 +2439,7 @@ export function App() {
                           }} />
                         )}
 
-                        {/* INSIGNIA PLATINADA VIP (ELEGANTE, SUAVE Y LUMINOSA) */}
+                        {/* INSIGNIA PLATINADA VIP (ELEGANTE, SIN ICONOS, PURA TIPOGRAFÍA) */}
                         {isFounder && (
                           <div style={{
                             position: 'absolute',
@@ -2448,23 +2448,21 @@ export function App() {
                             zIndex: 5,
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.35rem',
-                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 249, 0.96) 50%, rgba(226, 232, 240, 0.94) 100%)',
+                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.97) 50%, rgba(226, 232, 240, 0.95) 100%)',
                             backdropFilter: 'blur(8px)',
                             border: '1px solid rgba(255, 255, 255, 0.95)',
-                            boxShadow: '0 4px 14px rgba(100, 116, 139, 0.25), 0 0 12px rgba(255, 255, 255, 0.6)',
+                            boxShadow: '0 4px 14px rgba(100, 116, 139, 0.22), 0 0 12px rgba(255, 255, 255, 0.6)',
                             color: '#0F172A',
-                            padding: '0.3rem 0.75rem',
+                            padding: '0.3rem 0.8rem',
                             borderRadius: '9999px',
                             fontSize: '0.66rem',
-                            fontWeight: '800',
-                            letterSpacing: '0.5px'
+                            fontWeight: '900',
+                            letterSpacing: '0.6px'
                           }}>
-                            <Sparkles size={12} style={{ color: '#475569' }} />
                             <span style={{ 
                               color: '#0F172A',
                               fontWeight: '900',
-                              letterSpacing: '0.5px'
+                              letterSpacing: '0.6px'
                             }}>
                               FUNDADORA VIP
                             </span>
@@ -2514,51 +2512,64 @@ export function App() {
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
 
-                          {/* CARGO CON LÍMITE DE 2 LÍNEAS PARA EVITAR DESBORDES */}
+                          {/* CARGO CON ALTURA HOMOGÉNEA EXACTA DE 2 LÍNEAS */}
                           <p style={{ 
                             color: '#64748B', 
                             fontSize: '0.78rem', 
                             lineHeight: '1.4', 
-                            marginBottom: '0.75rem', 
+                            marginBottom: '0.65rem', 
                             display: '-webkit-box',
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: 'vertical',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
-                            minHeight: '2.2rem'
+                            height: '2.25rem'
                           }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* COMPETENCIAS EN FORMATO MINIMALISTA Y ELEGANTE */}
-                          {member.tags && member.tags.length > 0 && (
-                            <div style={{ marginBottom: '0.9rem', display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
-                              {member.tags.slice(0, 2).map((tag, tIdx) => (
-                                <span 
-                                  key={tIdx} 
-                                  onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
-                                  style={{ 
-                                    backgroundColor: '#FAF5FF', 
-                                    color: '#af1daa', 
-                                    border: '1px solid #F3E8FF', 
-                                    fontSize: '0.62rem', 
-                                    fontWeight: '700', 
-                                    padding: '0.2rem 0.5rem', 
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                  }}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                              {member.tags.length > 2 && (
-                                <span style={{ fontSize: '0.62rem', color: '#94A3B8', alignSelf: 'center', fontWeight: '600' }}>
-                                  +{member.tags.length - 2}
-                                </span>
-                              )}
-                            </div>
-                          )}
+                          {/* COMPETENCIAS EN FORMATO COMPACTO Y CON ALTURA HOMOGÉNEA */}
+                          <div style={{ 
+                            marginBottom: '1rem', 
+                            display: 'flex', 
+                            gap: '0.3rem', 
+                            alignItems: 'center', 
+                            overflow: 'hidden',
+                            height: '1.5rem'
+                          }}>
+                            {member.tags && member.tags.length > 0 ? (
+                              <>
+                                {member.tags.slice(0, 2).map((tag, tIdx) => (
+                                  <span 
+                                    key={tIdx} 
+                                    onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
+                                    style={{ 
+                                      backgroundColor: '#FAF5FF', 
+                                      color: '#af1daa', 
+                                      border: '1px solid #F3E8FF', 
+                                      fontSize: '0.62rem', 
+                                      fontWeight: '700', 
+                                      padding: '0.18rem 0.45rem', 
+                                      borderRadius: '4px',
+                                      cursor: 'pointer',
+                                      whiteSpace: 'nowrap'
+                                    }}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                                {member.tags.length > 2 && (
+                                  <span style={{ fontSize: '0.62rem', color: '#94A3B8', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                                    +{member.tags.length - 2}
+                                  </span>
+                                )}
+                              </>
+                            ) : (
+                              <div style={{ height: '1.5rem' }} />
+                            )}
+                          </div>
 
+                          {/* BOTÓN ALINEADO AL FONDO HORIZONTAL DE TODAS LAS TARJETAS (marginTop: auto) */}
                           <button 
                             className="btn btn-outline-fuchsia"
                             onClick={() => setSelectedMember(member)}
@@ -2568,6 +2579,7 @@ export function App() {
                               fontSize: '0.82rem',
                               padding: '0.55rem 0.85rem',
                               borderRadius: '8px',
+                              marginTop: 'auto',
                               background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
                               color: isFounder ? '#FFFFFF' : undefined,
                               borderColor: isFounder ? '#94A3B8' : undefined,

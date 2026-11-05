@@ -11,6 +11,7 @@ export interface Member {
   linkedin: string;
   photo: string;
   tags?: string[];
+  isFoundingMember?: boolean;
 }
 
 export const MEMBERS_DATA: Member[] = [
@@ -22,6 +23,7 @@ export const MEMBERS_DATA: Member[] = [
     currentCargo: "Directora de la línea de Gobierno Corporativo, Riesgos y Compliance / Socia Cremades & Calvo-Sotelo",
     complianceExperience: "Experiencia de más de 15 años en aspectos legales y regulatorios de gobierno corporativo, gestión de riesgos y compliance.",
     profession: "ABOGADA",
+    isFoundingMember: true,
     academicBg: [
       "Universidad Externado de Colombia - Abogada, Derecho",
       "Universitat de València - Candidata a Doctora en Derecho",
@@ -52,6 +54,7 @@ export const MEMBERS_DATA: Member[] = [
     currentCargo: "Subsecretaria Jurídica Distrital - Alcaldía Mayor de Bogotá",
     complianceExperience: "18 años de experiencia en Derecho Corporativo, Tributario y asesoría jurídica de empresas en el sector público y privado.",
     profession: "ABOGADA",
+    isFoundingMember: true,
     academicBg: [
       "Universidad del Rosario - Abogada",
       "Universidad del Rosario - Especialista en Derecho Comercial",
@@ -79,6 +82,7 @@ export const MEMBERS_DATA: Member[] = [
     currentCargo: "Directora Financiera y de Riesgos - ASOBANCARIA",
     complianceExperience: "Líder del gremio bancario en prevención del riesgo LAFT/PADM, mercado de capitales, riesgos financieros y estándares internacionales.",
     profession: "ECONOMISTA",
+    isFoundingMember: true,
     academicBg: [
       "Universidad Externado de Colombia - Economista",
       "Universidad de los Andes - Especialista en Gestión y Control de Instituciones Financieras",
@@ -103,6 +107,7 @@ export const MEMBERS_DATA: Member[] = [
     currentCargo: "Gerente de Cumplimiento - Grupo Prosegur",
     complianceExperience: "Más de 12 años liderando modelos de Compliance (Ética, Protección de Datos, Anticorrupción, Competencia y SAGRILAFT).",
     profession: "CONTADORA PÚBLICA",
+    isFoundingMember: true,
     academicBg: [
       "Pontificia Universidad Javeriana - Contadora Pública",
       "Universidad de La Sabana - Especialista en Finanzas y Negocios Internacionales",

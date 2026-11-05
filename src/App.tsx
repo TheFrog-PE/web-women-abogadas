@@ -656,6 +656,7 @@ export function App() {
   // Estado para edición o creación de miembro con soporte completo de tags y campos
   const [editingMember, setEditingMember] = useState<Member | null>(null);
   const [memberTags, setMemberTags] = useState<string[]>([]);
+  const [memberIsFounder, setMemberIsFounder] = useState<boolean>(false);
   const [newTagInput, setNewTagInput] = useState<string>('');
   const [isAddingTag, setIsAddingTag] = useState<boolean>(false);
   
@@ -2371,6 +2372,10 @@ export function App() {
                     (member.tags || []).some(tag => normalizeText(tag) === tagQuery);
 
                   return matchesSearch && matchesTag;
+                }).sort((a, b) => {
+                  const aFounder = a.isFoundingMember ? 1 : 0;
+                  const bFounder = b.isFoundingMember ? 1 : 0;
+                  return bFounder - aFounder;
                 });
 
                 if (filteredMembers.length === 0) {
@@ -2395,7 +2400,9 @@ export function App() {
 
                 return (
                   <div className="members-grid" style={{ position: 'relative', zIndex: 1 }}>
-                    {filteredMembers.map((member, idx) => (
+                    {filteredMembers.map((member, idx) => {
+                      const isFounder = !!member.isFoundingMember;
+                      return (
                       <div 
                         key={member.id}
                         className={`card-hover anim-scale-in anim-d${(idx % 4) + 1}`}
@@ -2403,13 +2410,54 @@ export function App() {
                           backgroundColor: '#FFFFFF', 
                           borderRadius: '1.25rem', 
                           overflow: 'hidden', 
-                          border: '1px solid #E2E8F0',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+                          border: isFounder ? '2px solid transparent' : '1px solid #E2E8F0',
+                          backgroundImage: isFounder 
+                            ? 'linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(135deg, #F8FAFC 0%, #94A3B8 25%, #CBD5E1 50%, #475569 75%, #E2E8F0 100%)' 
+                            : 'none',
+                          backgroundOrigin: 'border-box',
+                          backgroundClip: 'padding-box, border-box',
+                          boxShadow: isFounder 
+                            ? '0 12px 30px -4px rgba(100, 116, 139, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08)' 
+                            : '0 4px 15px rgba(0,0,0,0.03)',
                           display: 'flex',
                           flexDirection: 'column',
-                          transition: 'all 0.3s ease'
+                          transition: 'all 0.3s ease',
+                          position: 'relative'
                         }}
                       >
+                        {/* DISTINTIVO SUPERIOR PLATINADO PARA MIEMBRO FUNDADORA */}
+                        {isFounder && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '12px',
+                            left: '12px',
+                            zIndex: 3,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.9) 100%)',
+                            backdropFilter: 'blur(8px)',
+                            border: '1px solid rgba(226, 232, 240, 0.6)',
+                            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)',
+                            color: '#F8FAFC',
+                            padding: '0.35rem 0.85rem',
+                            borderRadius: '9999px',
+                            fontSize: '0.68rem',
+                            fontWeight: '800',
+                            letterSpacing: '0.6px',
+                            textTransform: 'uppercase'
+                          }}>
+                            <Award size={13} style={{ color: '#E2E8F0' }} />
+                            <span style={{ 
+                              background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%)', 
+                              WebkitBackgroundClip: 'text', 
+                              WebkitTextFillColor: 'transparent',
+                              fontWeight: '900'
+                            }}>
+                              Socia Fundadora
+                            </span>
+                          </div>
+                        )}
                         <div style={{ height: '320px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
                           <img 
                             src={member.photo} 
@@ -2483,13 +2531,22 @@ export function App() {
                           <button 
                             className="btn btn-outline-fuchsia"
                             onClick={() => setSelectedMember(member)}
-                            style={{ width: '100%', justifyContent: 'center', fontSize: '0.9rem' }}
+                            style={{ 
+                              width: '100%', 
+                              justifyContent: 'center', 
+                              fontSize: '0.9rem',
+                              background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
+                              color: isFounder ? '#FFFFFF' : undefined,
+                              borderColor: isFounder ? '#94A3B8' : undefined,
+                              boxShadow: isFounder ? '0 4px 14px rgba(15, 23, 42, 0.2)' : undefined
+                            }}
                           >
-                            Ver Perfil Profesional
+                            {isFounder ? 'Ver Perfil Fundadora' : 'Ver Perfil Profesional'}
                           </button>
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 );
               })()}
@@ -2747,6 +2804,33 @@ export function App() {
 
                     {/* BADGES ROL Y LINKEDIN */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                      {selectedMember.isFoundingMember && (
+                        <span style={{ 
+                          background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)', 
+                          color: '#F8FAFC', 
+                          border: '1px solid #94A3B8',
+                          padding: '0.35rem 1rem', 
+                          fontSize: '0.75rem', 
+                          fontWeight: '800', 
+                          borderRadius: '9999px',
+                          letterSpacing: '0.6px',
+                          textTransform: 'uppercase',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
+                        }}>
+                          <Award size={14} style={{ color: '#E2E8F0' }} />
+                          <span style={{ 
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%)', 
+                            WebkitBackgroundClip: 'text', 
+                            WebkitTextFillColor: 'transparent',
+                            fontWeight: '900'
+                          }}>
+                            Socia Fundadora VIP
+                          </span>
+                        </span>
+                      )}
                       <span style={{ 
                         backgroundColor: '#f4f4f4', 
                         color: '#af1daa', 
@@ -6070,6 +6154,7 @@ export function App() {
                           setEditingMember(null);
                           setMemberPhoto(null);
                           setMemberTags(['Compliance Bancario', 'Ley de Protección de Datos', 'Fintech']);
+                          setMemberIsFounder(false);
                           setNewTagInput('');
                           setIsAddingTag(false);
                           setAdminSubTab('member-editor');
@@ -6088,7 +6173,7 @@ export function App() {
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>FUNDADORAS ACTIVAS</span>
-                        <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>4</h2>
+                        <h2 style={{ fontSize: '2.2rem', color: '#1E1B4B', marginTop: '0.25rem', marginBottom: 0, fontWeight: '800', fontFamily: "'Montserrat', sans-serif" }}>{membersList.filter(m => m.isFoundingMember).length}</h2>
                       </div>
                       <div style={{ paddingRight: '1rem', borderRight: '1px solid #E2E8F0', paddingLeft: '0.5rem' }}>
                         <span style={{ color: '#64748B', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.5px' }}>ESTADO DE PERFILES</span>
@@ -6117,7 +6202,23 @@ export function App() {
                               <td style={{ padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <img src={member.photo} alt={member.name} style={{ width: '46px', height: '46px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #E2E8F0' }} />
                                 <div>
-                                  <div style={{ fontWeight: '700', color: '#1E1B4B', fontSize: '0.95rem' }}>{member.name}</div>
+                                  <div style={{ fontWeight: '700', color: '#1E1B4B', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    {member.name}
+                                    {member.isFoundingMember && (
+                                      <span style={{ 
+                                        background: 'linear-gradient(135deg, #1E293B 0%, #475569 100%)', 
+                                        color: '#F8FAFC', 
+                                        padding: '0.15rem 0.55rem', 
+                                        borderRadius: '9999px', 
+                                        fontSize: '0.65rem', 
+                                        fontWeight: '800', 
+                                        letterSpacing: '0.5px',
+                                        border: '1px solid #94A3B8'
+                                      }}>
+                                        ★ FUNDADORA VIP
+                                      </span>
+                                    )}
+                                  </div>
                                   <div style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase' }}>{member.role}</div>
                                 </div>
                               </td>
@@ -6136,6 +6237,7 @@ export function App() {
                                     setEditingMember(member);
                                     setMemberPhoto(member.photo);
                                     setMemberTags(member.tags && member.tags.length > 0 ? [...member.tags] : ['Compliance']);
+                                    setMemberIsFounder(!!member.isFoundingMember);
                                     setNewTagInput('');
                                     setIsAddingTag(false);
                                     setAdminSubTab('member-editor');
@@ -6247,7 +6349,8 @@ export function App() {
                                 complianceExperience: newBio,
                                 linkedin: newLinkedin,
                                 photo: newPhoto,
-                                tags: finalTags
+                                tags: finalTags,
+                                isFoundingMember: memberIsFounder
                               } : m));
                             } else {
                               const newObj: Member = {
@@ -6262,7 +6365,8 @@ export function App() {
                                 workBg: [newRole],
                                 linkedin: newLinkedin,
                                 photo: newPhoto,
-                                tags: finalTags
+                                tags: finalTags,
+                                isFoundingMember: memberIsFounder
                               };
                               setMembersList(prev => [newObj, ...prev]);
                             }
@@ -6603,6 +6707,85 @@ export function App() {
                           </div>
                         </div>
 
+                        {/* TARJETA DISTINCIÓN SOCIA FUNDADORA VIP (PLATINADA) */}
+                        <div style={{ 
+                          background: memberIsFounder 
+                            ? 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)' 
+                            : '#FFFFFF', 
+                          borderRadius: '8px', 
+                          padding: '1.5rem', 
+                          border: memberIsFounder ? '1px solid #94A3B8' : '1px solid #E2E8F0',
+                          boxShadow: memberIsFounder ? '0 10px 25px -5px rgba(15, 23, 42, 0.35)' : 'none',
+                          transition: 'all 0.3s ease'
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <Award size={20} style={{ color: memberIsFounder ? '#E2E8F0' : '#af1daa' }} />
+                              <h3 style={{ 
+                                color: memberIsFounder ? '#FFFFFF' : '#1E1B4B', 
+                                fontSize: '1.15rem', 
+                                fontFamily: "'Montserrat', sans-serif", 
+                                margin: 0, 
+                                fontWeight: '700' 
+                              }}>
+                                Miembro Fundadora
+                              </h3>
+                            </div>
+                            {memberIsFounder && (
+                              <span style={{ 
+                                background: 'linear-gradient(135deg, #E2E8F0 0%, #94A3B8 100%)', 
+                                color: '#0F172A', 
+                                fontSize: '0.65rem', 
+                                fontWeight: '800', 
+                                letterSpacing: '0.5px', 
+                                padding: '0.2rem 0.5rem', 
+                                borderRadius: '4px' 
+                              }}>
+                                VIP
+                              </span>
+                            )}
+                          </div>
+                          
+                          <p style={{ 
+                            color: memberIsFounder ? '#CBD5E1' : '#64748B', 
+                            fontSize: '0.8rem', 
+                            lineHeight: '1.45', 
+                            marginBottom: '1rem' 
+                          }}>
+                            Al activar esta opción, la socia tendrá el diseño platinado de alta distinción y se fijará automáticamente en la parte superior del directorio público.
+                          </p>
+
+                          <label style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: '0.75rem', 
+                            cursor: 'pointer',
+                            backgroundColor: memberIsFounder ? 'rgba(255,255,255,0.08)' : '#FAF5FF',
+                            padding: '0.75rem 1rem',
+                            borderRadius: '6px',
+                            border: memberIsFounder ? '1px solid rgba(255,255,255,0.2)' : '1px solid #e6affc'
+                          }}>
+                            <input 
+                              type="checkbox" 
+                              checked={memberIsFounder} 
+                              onChange={(e) => setMemberIsFounder(e.target.checked)}
+                              style={{ 
+                                accentColor: '#af1daa', 
+                                width: '20px', 
+                                height: '20px', 
+                                cursor: 'pointer' 
+                              }} 
+                            />
+                            <span style={{ 
+                              color: memberIsFounder ? '#F8FAFC' : '#1E1B4B', 
+                              fontWeight: '700', 
+                              fontSize: '0.85rem' 
+                            }}>
+                              {memberIsFounder ? '✓ Es Socia Fundadora VIP (Fijada Arriba)' : 'Marcar como Socia Fundadora'}
+                            </span>
+                          </label>
+                        </div>
+
                         {/* TARJETA LINKEDIN */}
                         <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
                           <h3 style={{ color: '#1E1B4B', fontSize: '1.3rem', fontFamily: "'Montserrat', sans-serif", marginBottom: '1rem' }}>
@@ -6696,6 +6879,7 @@ export function App() {
                               setEditingMember(null);
                               setMemberPhoto(null);
                               setMemberTags(['Compliance Bancario', 'Ley de Protección de Datos', 'Fintech']);
+                              setMemberIsFounder(false);
                               setNewTagInput('');
                               setIsAddingTag(false);
                               setAdminSubTab('member-editor');

@@ -407,12 +407,18 @@ export function App() {
   // Estados reactivos dinámicos con persistencia real en localStorage entre Intranet y Web Pública
   const [membersList, setMembersList] = useState<Member[]>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('wic_members_db_v1');
+      const saved = localStorage.getItem('wic_members_db_v2') || localStorage.getItem('wic_members_db_v1');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            return parsed;
+            // Asegurar que las fundadoras tengan isFoundingMember: true siempre incluso con caché anterior
+            return parsed.map((m: Member) => {
+              const isFounder = m.isFoundingMember === true ||
+                (m.role && (m.role.toUpperCase().includes('FUNDADORA') || m.role.toUpperCase().includes('PRESIDENTA'))) ||
+                ['adriana-gomez', 'maria-paula-rueda', 'liz-marcela-bejarano', 'yolima-bautista'].includes(m.id);
+              return { ...m, isFoundingMember: isFounder };
+            });
           }
         } catch (e) {
           console.error("Error al cargar miembros desde localStorage", e);
@@ -450,7 +456,8 @@ export function App() {
   // Guardar dinámicamente en localStorage cada cambio
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('wic_members_db_v1', JSON.stringify(membersList));
+      localStorage.setItem('wic_members_db_v2', JSON.stringify(membersList));
+      try { localStorage.removeItem('wic_members_db_v1'); } catch (_) {}
     }
   }, [membersList]);
 
@@ -2410,14 +2417,9 @@ export function App() {
                           backgroundColor: '#FFFFFF', 
                           borderRadius: '1.25rem', 
                           overflow: 'hidden', 
-                          border: isFounder ? '2px solid transparent' : '1px solid #E2E8F0',
-                          backgroundImage: isFounder 
-                            ? 'linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(135deg, #F8FAFC 0%, #94A3B8 25%, #CBD5E1 50%, #475569 75%, #E2E8F0 100%)' 
-                            : 'none',
-                          backgroundOrigin: 'border-box',
-                          backgroundClip: 'padding-box, border-box',
+                          border: isFounder ? '2px solid #94A3B8' : '1px solid #E2E8F0',
                           boxShadow: isFounder 
-                            ? '0 12px 30px -4px rgba(100, 116, 139, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08)' 
+                            ? '0 16px 36px -4px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(203, 213, 225, 0.9)' 
                             : '0 4px 15px rgba(0,0,0,0.03)',
                           display: 'flex',
                           flexDirection: 'column',
@@ -2425,36 +2427,47 @@ export function App() {
                           position: 'relative'
                         }}
                       >
-                        {/* DISTINTIVO SUPERIOR PLATINADO PARA MIEMBRO FUNDADORA */}
+                        {/* FRANJA SUPERIOR PLATINADA METÁLICA DE ALTA DISTINCIÓN */}
+                        {isFounder && (
+                          <div style={{
+                            height: '5px',
+                            background: 'linear-gradient(90deg, #475569 0%, #94A3B8 25%, #F8FAFC 50%, #CBD5E1 75%, #1E293B 100%)',
+                            width: '100%',
+                            position: 'relative',
+                            zIndex: 4
+                          }} />
+                        )}
+
+                        {/* DISTINTIVO SUPERIOR PLATINADO FLOTANTE: SOCIA FUNDADORA VIP */}
                         {isFounder && (
                           <div style={{
                             position: 'absolute',
-                            top: '12px',
-                            left: '12px',
-                            zIndex: 3,
+                            top: '16px',
+                            left: '14px',
+                            zIndex: 5,
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.4rem',
-                            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.9) 100%)',
+                            gap: '0.45rem',
+                            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 41, 59, 0.96) 100%)',
                             backdropFilter: 'blur(8px)',
-                            border: '1px solid rgba(226, 232, 240, 0.6)',
-                            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)',
+                            border: '1.5px solid rgba(226, 232, 240, 0.85)',
+                            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.35)',
                             color: '#F8FAFC',
-                            padding: '0.35rem 0.85rem',
+                            padding: '0.4rem 0.95rem',
                             borderRadius: '9999px',
-                            fontSize: '0.68rem',
-                            fontWeight: '800',
+                            fontSize: '0.72rem',
+                            fontWeight: '900',
                             letterSpacing: '0.6px',
                             textTransform: 'uppercase'
                           }}>
-                            <Award size={13} style={{ color: '#E2E8F0' }} />
+                            <Award size={14} style={{ color: '#E2E8F0' }} />
                             <span style={{ 
-                              background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%)', 
+                              background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%)', 
                               WebkitBackgroundClip: 'text', 
                               WebkitTextFillColor: 'transparent',
                               fontWeight: '900'
                             }}>
-                              Socia Fundadora
+                              Socia Fundadora VIP
                             </span>
                           </div>
                         )}
@@ -2488,9 +2501,37 @@ export function App() {
                           </span>
                         </div>
 
-                        <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
-                            {member.role}
+                        <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: isFounder ? '#FAFAFA' : '#FFFFFF' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                            <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem' }}>
+                              {member.role}
+                            </div>
+                            {isFounder && (
+                              <span style={{
+                                background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
+                                color: '#F8FAFC',
+                                border: '1px solid #94A3B8',
+                                padding: '0.15rem 0.6rem',
+                                borderRadius: '9999px',
+                                fontSize: '0.65rem',
+                                fontWeight: '800',
+                                letterSpacing: '0.5px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.3rem',
+                                boxShadow: '0 2px 6px rgba(15, 23, 42, 0.15)'
+                              }}>
+                                <Sparkles size={11} style={{ color: '#E2E8F0' }} />
+                                <span style={{
+                                  background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%)',
+                                  WebkitBackgroundClip: 'text',
+                                  WebkitTextFillColor: 'transparent',
+                                  fontWeight: '900'
+                                }}>
+                                  FUNDADORA VIP
+                                </span>
+                              </span>
+                            )}
                           </div>
                           <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
@@ -2535,13 +2576,14 @@ export function App() {
                               width: '100%', 
                               justifyContent: 'center', 
                               fontSize: '0.9rem',
-                              background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
+                              background: isFounder ? 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)' : undefined,
                               color: isFounder ? '#FFFFFF' : undefined,
                               borderColor: isFounder ? '#94A3B8' : undefined,
-                              boxShadow: isFounder ? '0 4px 14px rgba(15, 23, 42, 0.2)' : undefined
+                              boxShadow: isFounder ? '0 4px 14px rgba(15, 23, 42, 0.25)' : undefined,
+                              fontWeight: isFounder ? '800' : undefined
                             }}
                           >
-                            {isFounder ? 'Ver Perfil Fundadora' : 'Ver Perfil Profesional'}
+                            {isFounder ? 'Ver Perfil Fundadora VIP' : 'Ver Perfil Profesional'}
                           </button>
                         </div>
                       </div>

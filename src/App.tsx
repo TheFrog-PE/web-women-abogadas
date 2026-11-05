@@ -2415,63 +2415,64 @@ export function App() {
                         className={`card-hover anim-scale-in anim-d${(idx % 4) + 1}`}
                         style={{ 
                           backgroundColor: '#FFFFFF', 
-                          borderRadius: '1.25rem', 
+                          borderRadius: '1rem', 
                           overflow: 'hidden', 
-                          border: isFounder ? '2px solid #94A3B8' : '1px solid #E2E8F0',
+                          border: isFounder ? '1.5px solid #CBD5E1' : '1px solid #E2E8F0',
                           boxShadow: isFounder 
-                            ? '0 16px 36px -4px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(203, 213, 225, 0.9)' 
-                            : '0 4px 15px rgba(0,0,0,0.03)',
+                            ? '0 10px 25px -4px rgba(100, 116, 139, 0.16), 0 0 16px rgba(226, 232, 240, 0.65), 0 2px 6px rgba(15, 23, 42, 0.04)' 
+                            : '0 4px 14px rgba(0,0,0,0.03)',
                           display: 'flex',
                           flexDirection: 'column',
                           transition: 'all 0.3s ease',
                           position: 'relative'
                         }}
                       >
-                        {/* FRANJA SUPERIOR PLATINADA METÁLICA DE ALTA DISTINCIÓN */}
+                        {/* BRILLO / FILO PLATINADO SUTIL SUPERIOR */}
                         {isFounder && (
                           <div style={{
-                            height: '5px',
-                            background: 'linear-gradient(90deg, #475569 0%, #94A3B8 25%, #F8FAFC 50%, #CBD5E1 75%, #1E293B 100%)',
+                            height: '3px',
+                            background: 'linear-gradient(90deg, #94A3B8 0%, #E2E8F0 25%, #FFFFFF 50%, #CBD5E1 75%, #94A3B8 100%)',
                             width: '100%',
                             position: 'relative',
-                            zIndex: 4
+                            zIndex: 4,
+                            boxShadow: '0 1px 6px rgba(255, 255, 255, 0.8)'
                           }} />
                         )}
 
-                        {/* DISTINTIVO SUPERIOR PLATINADO FLOTANTE: SOCIA FUNDADORA VIP */}
+                        {/* INSIGNIA PLATINADA VIP (ELEGANTE, SUAVE Y LUMINOSA) */}
                         {isFounder && (
                           <div style={{
                             position: 'absolute',
-                            top: '16px',
-                            left: '14px',
+                            top: '12px',
+                            left: '12px',
                             zIndex: 5,
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.45rem',
-                            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 41, 59, 0.96) 100%)',
+                            gap: '0.35rem',
+                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 249, 0.96) 50%, rgba(226, 232, 240, 0.94) 100%)',
                             backdropFilter: 'blur(8px)',
-                            border: '1.5px solid rgba(226, 232, 240, 0.85)',
-                            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.35)',
-                            color: '#F8FAFC',
-                            padding: '0.4rem 0.95rem',
+                            border: '1px solid rgba(255, 255, 255, 0.95)',
+                            boxShadow: '0 4px 14px rgba(100, 116, 139, 0.25), 0 0 12px rgba(255, 255, 255, 0.6)',
+                            color: '#0F172A',
+                            padding: '0.3rem 0.75rem',
                             borderRadius: '9999px',
-                            fontSize: '0.72rem',
-                            fontWeight: '900',
-                            letterSpacing: '0.6px',
-                            textTransform: 'uppercase'
+                            fontSize: '0.66rem',
+                            fontWeight: '800',
+                            letterSpacing: '0.5px'
                           }}>
-                            <Award size={14} style={{ color: '#E2E8F0' }} />
+                            <Sparkles size={12} style={{ color: '#475569' }} />
                             <span style={{ 
-                              background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%)', 
-                              WebkitBackgroundClip: 'text', 
-                              WebkitTextFillColor: 'transparent',
-                              fontWeight: '900'
+                              color: '#0F172A',
+                              fontWeight: '900',
+                              letterSpacing: '0.5px'
                             }}>
-                              Socia Fundadora VIP
+                              FUNDADORA VIP
                             </span>
                           </div>
                         )}
-                        <div style={{ height: '320px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
+
+                        {/* CONTENEDOR DE FOTO OPTIMIZADO EN ALTURA (235px) */}
+                        <div style={{ height: '235px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
                           <img 
                             src={member.photo} 
                             alt={member.name}
@@ -2482,90 +2483,79 @@ export function App() {
                           />
                           <span style={{ 
                             position: 'absolute', 
-                            bottom: '1rem', 
-                            left: '1rem', 
-                            right: '1rem',
+                            bottom: '0.65rem', 
+                            left: '0.75rem', 
+                            right: '0.75rem',
                             background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
                             color: '#FFFFFF', 
-                            padding: '0.45rem 1rem', 
+                            padding: '0.3rem 0.75rem', 
                             borderRadius: '9999px', 
-                            fontSize: '0.72rem', 
+                            fontSize: '0.67rem', 
                             fontWeight: '800',
-                            letterSpacing: '0.5px',
+                            letterSpacing: '0.4px',
                             textAlign: 'center',
                             textTransform: 'uppercase',
-                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.4)',
-                            border: '1px solid rgba(255,255,255,0.3)'
+                            boxShadow: '0 3px 10px rgba(175, 29, 170, 0.35)',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
                           }}>
                             {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
                         </div>
 
-                        <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: isFounder ? '#FAFAFA' : '#FFFFFF' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
-                            <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem' }}>
-                              {member.role}
-                            </div>
-                            {isFounder && (
-                              <span style={{
-                                background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
-                                color: '#F8FAFC',
-                                border: '1px solid #94A3B8',
-                                padding: '0.15rem 0.6rem',
-                                borderRadius: '9999px',
-                                fontSize: '0.65rem',
-                                fontWeight: '800',
-                                letterSpacing: '0.5px',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '0.3rem',
-                                boxShadow: '0 2px 6px rgba(15, 23, 42, 0.15)'
-                              }}>
-                                <Sparkles size={11} style={{ color: '#E2E8F0' }} />
-                                <span style={{
-                                  background: 'linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%)',
-                                  WebkitBackgroundClip: 'text',
-                                  WebkitTextFillColor: 'transparent',
-                                  fontWeight: '900'
-                                }}>
-                                  FUNDADORA VIP
-                                </span>
-                              </span>
-                            )}
+                        {/* CUERPO DE LA TARJETA COMPACTO Y CON TEXTOS EQUILIBRADOS */}
+                        <div style={{ padding: '1.15rem 1.25rem 1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.2rem' }}>
+                            {member.role}
                           </div>
-                          <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
+                          
+                          <h3 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', lineHeight: '1.25', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, lineHeight: '1.5' }}>
+
+                          {/* CARGO CON LÍMITE DE 2 LÍNEAS PARA EVITAR DESBORDES */}
+                          <p style={{ 
+                            color: '#64748B', 
+                            fontSize: '0.78rem', 
+                            lineHeight: '1.4', 
+                            marginBottom: '0.75rem', 
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            minHeight: '2.2rem'
+                          }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO */}
+                          {/* COMPETENCIAS EN FORMATO MINIMALISTA Y ELEGANTE */}
                           {member.tags && member.tags.length > 0 && (
-                            <div style={{ marginBottom: '1.25rem' }}>
-                              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.35rem' }}>
-                                ESPECIALIDADES & COMPETENCIAS:
-                              </span>
-                              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
-                                {member.tags.slice(0, 3).map((tag, tIdx) => (
-                                  <span 
-                                    key={tIdx} 
-                                    onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
-                                    style={{ 
-                                      backgroundColor: '#f4f4f4', 
-                                      color: '#af1daa', 
-                                      border: '1px solid #e6affc', 
-                                      fontSize: '0.65rem', 
-                                      fontWeight: '700', 
-                                      padding: '0.25rem 0.6rem', 
-                                      borderRadius: '4px',
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
+                            <div style={{ marginBottom: '0.9rem', display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
+                              {member.tags.slice(0, 2).map((tag, tIdx) => (
+                                <span 
+                                  key={tIdx} 
+                                  onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
+                                  style={{ 
+                                    backgroundColor: '#FAF5FF', 
+                                    color: '#af1daa', 
+                                    border: '1px solid #F3E8FF', 
+                                    fontSize: '0.62rem', 
+                                    fontWeight: '700', 
+                                    padding: '0.2rem 0.5rem', 
+                                    borderRadius: '4px',
+                                    cursor: 'pointer'
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                              {member.tags.length > 2 && (
+                                <span style={{ fontSize: '0.62rem', color: '#94A3B8', alignSelf: 'center', fontWeight: '600' }}>
+                                  +{member.tags.length - 2}
+                                </span>
+                              )}
                             </div>
                           )}
 
@@ -2575,15 +2565,17 @@ export function App() {
                             style={{ 
                               width: '100%', 
                               justifyContent: 'center', 
-                              fontSize: '0.9rem',
-                              background: isFounder ? 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)' : undefined,
+                              fontSize: '0.82rem',
+                              padding: '0.55rem 0.85rem',
+                              borderRadius: '8px',
+                              background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
                               color: isFounder ? '#FFFFFF' : undefined,
                               borderColor: isFounder ? '#94A3B8' : undefined,
-                              boxShadow: isFounder ? '0 4px 14px rgba(15, 23, 42, 0.25)' : undefined,
-                              fontWeight: isFounder ? '800' : undefined
+                              boxShadow: isFounder ? '0 4px 12px rgba(15, 23, 42, 0.18)' : undefined,
+                              fontWeight: isFounder ? '700' : '600'
                             }}
                           >
-                            {isFounder ? 'Ver Perfil Fundadora VIP' : 'Ver Perfil Profesional'}
+                            {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil'}
                           </button>
                         </div>
                       </div>

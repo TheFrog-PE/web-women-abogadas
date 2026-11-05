@@ -2463,7 +2463,7 @@ export function App() {
                               fontWeight: '900',
                               letterSpacing: '0.6px'
                             }}>
-                              ★ FUNDADORA VIP
+                              FUNDADORA VIP
                             </span>
                           </div>
                         )}
@@ -6262,7 +6262,7 @@ export function App() {
                                         letterSpacing: '0.5px',
                                         border: '1px solid #94A3B8'
                                       }}>
-                                        ★ FUNDADORA VIP
+                                        FUNDADORA VIP
                                       </span>
                                     )}
                                   </div>

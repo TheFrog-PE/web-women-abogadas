@@ -2530,7 +2530,8 @@ export function App() {
 
                           {/* COMPETENCIAS EN FORMATO COMPACTO Y CON ALTURA HOMOGÉNEA */}
                           <div style={{ 
-                            marginBottom: '1rem', 
+                            marginTop: 'auto',
+                            marginBottom: '0.75rem', 
                             display: 'flex', 
                             gap: '0.3rem', 
                             alignItems: 'center', 

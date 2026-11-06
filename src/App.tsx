@@ -2487,12 +2487,11 @@ export function App() {
                               <div style={{ 
                                 display: 'flex', 
                                 gap: '0.35rem', 
-                                rowGap: '0.35rem', 
+                                rowGap: '0.4rem', 
                                 flexWrap: 'wrap', 
                                 alignItems: 'center',
-                                minHeight: '2.85rem',
-                                maxHeight: '2.85rem',
-                                overflow: 'hidden'
+                                minHeight: '3.4rem',
+                                padding: '2px 0 4px 0'
                               }}>
                                 {member.tags.slice(0, 3).map((tag, tIdx) => (
                                   <span 

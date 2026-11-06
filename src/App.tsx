@@ -2407,7 +2407,9 @@ export function App() {
 
                 return (
                   <div className="members-grid" style={{ position: 'relative', zIndex: 1 }}>
-                    {filteredMembers.map((member, idx) => (
+                    {filteredMembers.map((member, idx) => {
+                      const isFounder = !!member.isFoundingMember;
+                      return (
                       <div 
                         key={member.id}
                         className={`card-hover anim-scale-in anim-d${(idx % 4) + 1}`}
@@ -2422,6 +2424,7 @@ export function App() {
                           transition: 'all 0.3s ease'
                         }}
                       >
+                        {/* CONTENEDOR DE FOTO */}
                         <div style={{ height: '320px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
                           <img 
                             src={member.photo} 
@@ -2431,27 +2434,29 @@ export function App() {
                               (e.target as HTMLImageElement).style.backgroundColor = '#CBD5E1';
                             }}
                           />
+                          {/* ETIQUETA EN LA FOTO: MÁS PEQUEÑA Y EN COLOR OSCURO ELEGANTE */}
                           <span style={{ 
                             position: 'absolute', 
-                            bottom: '1rem', 
-                            left: '1rem', 
-                            right: '1rem',
-                            background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
+                            bottom: '0.85rem', 
+                            left: '1.25rem', 
+                            right: '1.25rem',
+                            background: 'linear-gradient(135deg, #1E1B4B 0%, #3B0764 50%, #4A044E 100%)', 
                             color: '#FFFFFF', 
-                            padding: '0.45rem 1rem', 
+                            padding: '0.32rem 0.75rem', 
                             borderRadius: '9999px', 
-                            fontSize: '0.72rem', 
-                            fontWeight: '800',
-                            letterSpacing: '0.5px',
+                            fontSize: '0.64rem', 
+                            fontWeight: '700',
+                            letterSpacing: '0.4px',
                             textAlign: 'center',
                             textTransform: 'uppercase',
-                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.4)',
-                            border: '1px solid rgba(255,255,255,0.3)'
+                            boxShadow: '0 4px 14px rgba(15, 23, 42, 0.45)',
+                            border: '1px solid rgba(255, 255, 255, 0.18)'
                           }}>
                             {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
                         </div>
 
+                        {/* CUERPO DE LA TARJETA */}
                         <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                           <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
                             {member.role}
@@ -2459,30 +2464,34 @@ export function App() {
                           <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, lineHeight: '1.5' }}>
+                          <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1.15rem', lineHeight: '1.5' }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO */}
+                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO - CON ESPACIADO CÓMODO Y NO APRETADOS */}
                           {member.tags && member.tags.length > 0 && (
-                            <div style={{ marginBottom: '1.25rem' }}>
-                              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.35rem' }}>
+                            <div style={{ marginBottom: '1.5rem' }}>
+                              <span style={{ fontSize: '0.67rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.5rem' }}>
                                 ESPECIALIDADES & COMPETENCIAS:
                               </span>
-                              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                              <div style={{ display: 'flex', gap: '0.45rem', rowGap: '0.5rem', flexWrap: 'wrap' }}>
                                 {member.tags.slice(0, 3).map((tag, tIdx) => (
                                   <span 
                                     key={tIdx} 
                                     onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
                                     style={{ 
-                                      backgroundColor: '#f4f4f4', 
+                                      backgroundColor: '#FAF5FF', 
                                       color: '#af1daa', 
-                                      border: '1px solid #e6affc', 
-                                      fontSize: '0.65rem', 
-                                      fontWeight: '700', 
-                                      padding: '0.25rem 0.6rem', 
-                                      borderRadius: '4px',
-                                      cursor: 'pointer'
+                                      border: '1px solid #F0ABFC', 
+                                      fontSize: '0.68rem', 
+                                      fontWeight: '600', 
+                                      padding: '0.32rem 0.75rem', 
+                                      borderRadius: '6px',
+                                      cursor: 'pointer',
+                                      lineHeight: '1.25',
+                                      transition: 'all 0.2s ease',
+                                      display: 'inline-flex',
+                                      alignItems: 'center'
                                     }}
                                   >
                                     {tag}
@@ -2492,16 +2501,29 @@ export function App() {
                             </div>
                           )}
 
+                          {/* BOTÓN: SÓLIDO 'VER PERFIL VIP' PARA FUNDADORAS, DELINEADO 'VER PERFIL PROFESIONAL' PARA REGULARES */}
                           <button 
-                            className="btn btn-outline-fuchsia"
+                            className={isFounder ? "btn btn-fuchsia" : "btn btn-outline-fuchsia"}
                             onClick={() => setSelectedMember(member)}
-                            style={{ width: '100%', justifyContent: 'center', fontSize: '0.9rem' }}
+                            style={{ 
+                              width: '100%', 
+                              justifyContent: 'center', 
+                              fontSize: '0.9rem',
+                              marginTop: 'auto',
+                              padding: '0.75rem 1.25rem',
+                              backgroundColor: isFounder ? '#af1daa' : 'transparent',
+                              color: isFounder ? '#FFFFFF' : '#af1daa',
+                              border: isFounder ? 'none' : '2px solid #af1daa',
+                              boxShadow: isFounder ? '0 4px 14px rgba(175, 29, 170, 0.4)' : 'none',
+                              fontWeight: isFounder ? '800' : '600'
+                            }}
                           >
-                            Ver Perfil Profesional
+                            {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil Profesional'}
                           </button>
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 );
               })()}

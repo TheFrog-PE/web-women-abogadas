@@ -2439,7 +2439,7 @@ export function App() {
                           }} />
                         )}
 
-                        {/* INSIGNIA LLAMATIVA VIP (DORADA BRILLANTE & DE ALTO IMPACTO) */}
+                        {/* INSIGNIA PLATINADA VIP (ELEGANTE, SIN ICONOS, PURA TIPOGRAFÍA) */}
                         {isFounder && (
                           <div style={{
                             position: 'absolute',
@@ -2448,13 +2448,14 @@ export function App() {
                             zIndex: 5,
                             display: 'inline-flex',
                             alignItems: 'center',
-                            background: 'linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #D97706 100%)',
-                            border: '1.5px solid #FEF08A',
-                            boxShadow: '0 4px 14px rgba(245, 158, 11, 0.45), 0 0 10px rgba(254, 240, 138, 0.5)',
+                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.97) 50%, rgba(226, 232, 240, 0.95) 100%)',
+                            backdropFilter: 'blur(8px)',
+                            border: '1px solid rgba(255, 255, 255, 0.95)',
+                            boxShadow: '0 4px 14px rgba(100, 116, 139, 0.22), 0 0 12px rgba(255, 255, 255, 0.6)',
                             color: '#0F172A',
-                            padding: '0.32rem 0.85rem',
+                            padding: '0.3rem 0.8rem',
                             borderRadius: '9999px',
-                            fontSize: '0.67rem',
+                            fontSize: '0.66rem',
                             fontWeight: '900',
                             letterSpacing: '0.6px'
                           }}>
@@ -2503,11 +2504,11 @@ export function App() {
 
                         {/* CUERPO DE LA TARJETA COMPACTO Y CON TEXTOS EQUILIBRADOS */}
                         <div style={{ padding: '1.15rem 1.25rem 1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.2rem', height: '1.1rem', overflow: 'hidden' }}>
+                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.2rem' }}>
                             {member.role}
                           </div>
                           
-                          <h3 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', lineHeight: '1.25', color: '#1E1B4B', fontWeight: '800', height: '2.65rem', overflow: 'hidden' }}>
+                          <h3 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', lineHeight: '1.25', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
 
@@ -2527,69 +2528,67 @@ export function App() {
                             {member.currentCargo}
                           </p>
 
-                          {/* CONTENEDOR INFERIOR AGRUPADO (TAGS + BOTÓN) FIJADO AL FONDO */}
-                          <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
-                            {/* TAGS CON ALTURA UNIFORME */}
-                            <div style={{ 
-                              marginBottom: '0.75rem', 
-                              display: 'flex', 
-                              gap: '0.3rem', 
-                              alignItems: 'center', 
-                              overflow: 'hidden',
-                              height: '1.5rem'
-                            }}>
-                              {member.tags && member.tags.length > 0 ? (
-                                <>
-                                  {member.tags.slice(0, 2).map((tag, tIdx) => (
-                                    <span 
-                                      key={tIdx} 
-                                      onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
-                                      style={{ 
-                                        backgroundColor: '#FAF5FF', 
-                                        color: '#af1daa', 
-                                        border: '1px solid #F3E8FF', 
-                                        fontSize: '0.62rem', 
-                                        fontWeight: '700', 
-                                        padding: '0.18rem 0.45rem', 
-                                        borderRadius: '4px', 
-                                        cursor: 'pointer',
-                                        whiteSpace: 'nowrap'
-                                      }}
-                                    >
-                                      {tag}
-                                    </span>
-                                  ))}
-                                  {member.tags.length > 2 && (
-                                    <span style={{ fontSize: '0.62rem', color: '#94A3B8', fontWeight: '600', whiteSpace: 'nowrap' }}>
-                                      +{member.tags.length - 2}
-                                    </span>
-                                  )}
-                                </>
-                              ) : (
-                                <div style={{ height: '1.5rem' }} />
-                              )}
-                            </div>
-
-                            {/* BOTÓN ALINEADO EXACTAMENTE AL PIE */}
-                            <button 
-                              className="btn btn-outline-fuchsia"
-                              onClick={() => setSelectedMember(member)}
-                              style={{ 
-                                width: '100%', 
-                                justifyContent: 'center', 
-                                fontSize: '0.82rem',
-                                padding: '0.55rem 0.85rem',
-                                borderRadius: '8px',
-                                background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
-                                color: isFounder ? '#FFFFFF' : undefined,
-                                borderColor: isFounder ? '#94A3B8' : undefined,
-                                boxShadow: isFounder ? '0 4px 12px rgba(15, 23, 42, 0.18)' : undefined,
-                                fontWeight: isFounder ? '700' : '600'
-                              }}
-                            >
-                              {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil'}
-                            </button>
+                          {/* COMPETENCIAS EN FORMATO COMPACTO Y CON ALTURA HOMOGÉNEA */}
+                          <div style={{ 
+                            marginBottom: '1rem', 
+                            display: 'flex', 
+                            gap: '0.3rem', 
+                            alignItems: 'center', 
+                            overflow: 'hidden',
+                            height: '1.5rem'
+                          }}>
+                            {member.tags && member.tags.length > 0 ? (
+                              <>
+                                {member.tags.slice(0, 2).map((tag, tIdx) => (
+                                  <span 
+                                    key={tIdx} 
+                                    onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
+                                    style={{ 
+                                      backgroundColor: '#FAF5FF', 
+                                      color: '#af1daa', 
+                                      border: '1px solid #F3E8FF', 
+                                      fontSize: '0.62rem', 
+                                      fontWeight: '700', 
+                                      padding: '0.18rem 0.45rem', 
+                                      borderRadius: '4px',
+                                      cursor: 'pointer',
+                                      whiteSpace: 'nowrap'
+                                    }}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                                {member.tags.length > 2 && (
+                                  <span style={{ fontSize: '0.62rem', color: '#94A3B8', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                                    +{member.tags.length - 2}
+                                  </span>
+                                )}
+                              </>
+                            ) : (
+                              <div style={{ height: '1.5rem' }} />
+                            )}
                           </div>
+
+                          {/* BOTÓN ALINEADO AL FONDO HORIZONTAL DE TODAS LAS TARJETAS (marginTop: auto) */}
+                          <button 
+                            className="btn btn-outline-fuchsia"
+                            onClick={() => setSelectedMember(member)}
+                            style={{ 
+                              width: '100%', 
+                              justifyContent: 'center', 
+                              fontSize: '0.82rem',
+                              padding: '0.55rem 0.85rem',
+                              borderRadius: '8px',
+                              marginTop: 'auto',
+                              background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
+                              color: isFounder ? '#FFFFFF' : undefined,
+                              borderColor: isFounder ? '#94A3B8' : undefined,
+                              boxShadow: isFounder ? '0 4px 12px rgba(15, 23, 42, 0.18)' : undefined,
+                              fontWeight: isFounder ? '700' : '600'
+                            }}
+                          >
+                            {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil'}
+                          </button>
                         </div>
                       </div>
                       );
@@ -6262,7 +6261,7 @@ export function App() {
                                         letterSpacing: '0.5px',
                                         border: '1px solid #94A3B8'
                                       }}>
-                                        FUNDADORA VIP
+                                        ★ FUNDADORA VIP
                                       </span>
                                     )}
                                   </div>

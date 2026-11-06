@@ -2407,70 +2407,22 @@ export function App() {
 
                 return (
                   <div className="members-grid" style={{ position: 'relative', zIndex: 1 }}>
-                    {filteredMembers.map((member, idx) => {
-                      const isFounder = !!member.isFoundingMember;
-                      return (
+                    {filteredMembers.map((member, idx) => (
                       <div 
                         key={member.id}
                         className={`card-hover anim-scale-in anim-d${(idx % 4) + 1}`}
                         style={{ 
                           backgroundColor: '#FFFFFF', 
-                          borderRadius: '1rem', 
+                          borderRadius: '1.25rem', 
                           overflow: 'hidden', 
-                          border: isFounder ? '1.5px solid #CBD5E1' : '1px solid #E2E8F0',
-                          boxShadow: isFounder 
-                            ? '0 10px 25px -4px rgba(100, 116, 139, 0.16), 0 0 16px rgba(226, 232, 240, 0.65), 0 2px 6px rgba(15, 23, 42, 0.04)' 
-                            : '0 4px 14px rgba(0,0,0,0.03)',
+                          border: '1px solid #E2E8F0',
+                          boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
                           display: 'flex',
                           flexDirection: 'column',
-                          transition: 'all 0.3s ease',
-                          position: 'relative'
+                          transition: 'all 0.3s ease'
                         }}
                       >
-                        {/* BRILLO / FILO PLATINADO SUTIL SUPERIOR */}
-                        {isFounder && (
-                          <div style={{
-                            height: '3px',
-                            background: 'linear-gradient(90deg, #94A3B8 0%, #E2E8F0 25%, #FFFFFF 50%, #CBD5E1 75%, #94A3B8 100%)',
-                            width: '100%',
-                            position: 'relative',
-                            zIndex: 4,
-                            boxShadow: '0 1px 6px rgba(255, 255, 255, 0.8)'
-                          }} />
-                        )}
-
-                        {/* INSIGNIA PLATINADA VIP (ELEGANTE, SIN ICONOS, PURA TIPOGRAFÍA) */}
-                        {isFounder && (
-                          <div style={{
-                            position: 'absolute',
-                            top: '12px',
-                            left: '12px',
-                            zIndex: 5,
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.97) 50%, rgba(226, 232, 240, 0.95) 100%)',
-                            backdropFilter: 'blur(8px)',
-                            border: '1px solid rgba(255, 255, 255, 0.95)',
-                            boxShadow: '0 4px 14px rgba(100, 116, 139, 0.22), 0 0 12px rgba(255, 255, 255, 0.6)',
-                            color: '#0F172A',
-                            padding: '0.3rem 0.8rem',
-                            borderRadius: '9999px',
-                            fontSize: '0.66rem',
-                            fontWeight: '900',
-                            letterSpacing: '0.6px'
-                          }}>
-                            <span style={{ 
-                              color: '#0F172A',
-                              fontWeight: '900',
-                              letterSpacing: '0.6px'
-                            }}>
-                              FUNDADORA VIP
-                            </span>
-                          </div>
-                        )}
-
-                        {/* CONTENEDOR DE FOTO OPTIMIZADO EN ALTURA (235px) */}
-                        <div style={{ height: '235px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
+                        <div style={{ height: '320px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
                           <img 
                             src={member.photo} 
                             alt={member.name}
@@ -2481,118 +2433,75 @@ export function App() {
                           />
                           <span style={{ 
                             position: 'absolute', 
-                            bottom: '0.65rem', 
-                            left: '0.75rem', 
-                            right: '0.75rem',
+                            bottom: '1rem', 
+                            left: '1rem', 
+                            right: '1rem',
                             background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)', 
                             color: '#FFFFFF', 
-                            padding: '0.3rem 0.75rem', 
+                            padding: '0.45rem 1rem', 
                             borderRadius: '9999px', 
-                            fontSize: '0.67rem', 
+                            fontSize: '0.72rem', 
                             fontWeight: '800',
-                            letterSpacing: '0.4px',
+                            letterSpacing: '0.5px',
                             textAlign: 'center',
                             textTransform: 'uppercase',
-                            boxShadow: '0 3px 10px rgba(175, 29, 170, 0.35)',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
+                            boxShadow: '0 4px 14px rgba(175, 29, 170, 0.4)',
+                            border: '1px solid rgba(255,255,255,0.3)'
                           }}>
                             {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
                         </div>
 
-                        {/* CUERPO DE LA TARJETA COMPACTO Y CON TEXTOS EQUILIBRADOS */}
-                        <div style={{ padding: '1.15rem 1.25rem 1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: '0.2rem' }}>
+                        <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
                             {member.role}
                           </div>
-                          
-                          <h3 style={{ fontSize: '1.05rem', marginBottom: '0.35rem', lineHeight: '1.25', color: '#1E1B4B', fontWeight: '800' }}>
+                          <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
-
-                          {/* CARGO CON ALTURA HOMOGÉNEA EXACTA DE 2 LÍNEAS */}
-                          <p style={{ 
-                            color: '#64748B', 
-                            fontSize: '0.78rem', 
-                            lineHeight: '1.4', 
-                            marginBottom: '0.65rem', 
-                            display: '-webkit-box',
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            height: '2.25rem'
-                          }}>
+                          <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, lineHeight: '1.5' }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* COMPETENCIAS EN FORMATO COMPACTO Y CON ALTURA HOMOGÉNEA */}
-                          <div style={{ 
-                            marginBottom: '1rem', 
-                            display: 'flex', 
-                            gap: '0.3rem', 
-                            alignItems: 'center', 
-                            overflow: 'hidden',
-                            height: '1.5rem'
-                          }}>
-                            {member.tags && member.tags.length > 0 ? (
-                              <>
-                                {member.tags.slice(0, 2).map((tag, tIdx) => (
+                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO */}
+                          {member.tags && member.tags.length > 0 && (
+                            <div style={{ marginBottom: '1.25rem' }}>
+                              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.35rem' }}>
+                                ESPECIALIDADES & COMPETENCIAS:
+                              </span>
+                              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                                {member.tags.slice(0, 3).map((tag, tIdx) => (
                                   <span 
                                     key={tIdx} 
                                     onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
                                     style={{ 
-                                      backgroundColor: '#FAF5FF', 
+                                      backgroundColor: '#f4f4f4', 
                                       color: '#af1daa', 
-                                      border: '1px solid #F3E8FF', 
-                                      fontSize: '0.62rem', 
+                                      border: '1px solid #e6affc', 
+                                      fontSize: '0.65rem', 
                                       fontWeight: '700', 
-                                      padding: '0.18rem 0.45rem', 
+                                      padding: '0.25rem 0.6rem', 
                                       borderRadius: '4px',
-                                      cursor: 'pointer',
-                                      whiteSpace: 'nowrap'
+                                      cursor: 'pointer'
                                     }}
                                   >
                                     {tag}
                                   </span>
                                 ))}
-                                {member.tags.length > 2 && (
-                                  <span style={{ fontSize: '0.62rem', color: '#94A3B8', fontWeight: '600', whiteSpace: 'nowrap' }}>
-                                    +{member.tags.length - 2}
-                                  </span>
-                                )}
-                              </>
-                            ) : (
-                              <div style={{ height: '1.5rem' }} />
-                            )}
-                          </div>
+                              </div>
+                            </div>
+                          )}
 
-                          {/* BOTÓN ALINEADO AL FONDO HORIZONTAL DE TODAS LAS TARJETAS (marginTop: auto) */}
                           <button 
                             className="btn btn-outline-fuchsia"
                             onClick={() => setSelectedMember(member)}
-                            style={{ 
-                              width: '100%', 
-                              justifyContent: 'center', 
-                              fontSize: '0.82rem',
-                              padding: '0.55rem 0.85rem',
-                              borderRadius: '8px',
-                              marginTop: 'auto',
-                              background: isFounder ? 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' : undefined,
-                              color: isFounder ? '#FFFFFF' : undefined,
-                              borderColor: isFounder ? '#94A3B8' : undefined,
-                              boxShadow: isFounder ? '0 4px 12px rgba(15, 23, 42, 0.18)' : undefined,
-                              fontWeight: isFounder ? '700' : '600'
-                            }}
+                            style={{ width: '100%', justifyContent: 'center', fontSize: '0.9rem' }}
                           >
-                            {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil'}
+                            Ver Perfil Profesional
                           </button>
                         </div>
                       </div>
-                      );
-                    })}
+                    ))}
                   </div>
                 );
               })()}

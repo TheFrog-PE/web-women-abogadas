@@ -2548,7 +2548,7 @@ export function App() {
                             </div>
                           )}
 
-                          {/* BOTÓN: SÓLIDO 'VER PERFIL VIP' PARA FUNDADORAS, DELINEADO 'VER PERFIL PROFESIONAL' PARA REGULARES */}
+                          {/* BOTÓN: SÓLIDO PARA FUNDADORAS, LINEAL PARA DEMÁS MIEMBROS ('VER PERFIL PROFESIONAL') */}
                           <button 
                             className={isFounder ? "btn btn-fuchsia" : "btn btn-outline-fuchsia"}
                             onClick={() => setSelectedMember(member)}
@@ -2565,7 +2565,7 @@ export function App() {
                               fontWeight: isFounder ? '800' : '600'
                             }}
                           >
-                            {isFounder ? 'Ver Perfil VIP' : 'Ver Perfil Profesional'}
+                            Ver Perfil Profesional
                           </button>
                         </div>
                       </div>

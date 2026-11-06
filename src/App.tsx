@@ -2443,24 +2443,29 @@ export function App() {
                               (e.target as HTMLImageElement).style.backgroundColor = '#CBD5E1';
                             }}
                           />
-                          {/* ETIQUETA EN LA FOTO: TAMAÑO REDUCIDO Y EN COLOR OSCURO ELEGANTE */}
+                          {/* ETIQUETA EN LA FOTO: PEGADA A LA IZQUIERDA Y AJUSTADA AL ANCHO DEL TEXTO */}
                           <span style={{ 
                             position: 'absolute', 
                             bottom: '0.75rem', 
                             left: '1rem', 
-                            right: '1rem',
+                            maxWidth: 'calc(100% - 2rem)',
+                            width: 'fit-content',
+                            display: 'inline-flex',
+                            alignItems: 'center',
                             background: 'linear-gradient(135deg, #1E1B4B 0%, #3B0764 50%, #4A044E 100%)', 
                             color: '#FFFFFF', 
-                            padding: '0.22rem 0.55rem', 
+                            padding: '0.24rem 0.65rem', 
                             borderRadius: '9999px', 
                             fontSize: '0.58rem', 
                             fontWeight: '700',
                             letterSpacing: '0.3px',
-                            textAlign: 'center',
                             textTransform: 'uppercase',
                             boxShadow: '0 4px 14px rgba(15, 23, 42, 0.45)',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
-                            lineHeight: '1.2'
+                            lineHeight: '1.2',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
                           }}>
                             {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
@@ -2502,10 +2507,10 @@ export function App() {
                                       backgroundColor: '#FAF5FF', 
                                       color: '#af1daa', 
                                       border: '1px solid #F0ABFC', 
-                                      fontSize: '0.62rem', 
+                                      fontSize: '0.54rem', 
                                       fontWeight: '600', 
-                                      padding: '0.2rem 0.5rem', 
-                                      borderRadius: '5px',
+                                      padding: '0.18rem 0.45rem', 
+                                      borderRadius: '4px',
                                       cursor: 'pointer',
                                       lineHeight: '1.2',
                                       transition: 'all 0.2s ease',
@@ -2522,13 +2527,13 @@ export function App() {
                                     onClick={(e) => { e.stopPropagation(); setSelectedMember(member); }}
                                     title={`Ver todas (${member.tags.length})`}
                                     style={{ 
-                                      fontSize: '0.62rem', 
+                                      fontSize: '0.54rem', 
                                       color: '#af1daa', 
                                       fontWeight: '700', 
                                       backgroundColor: '#FAF5FF', 
                                       border: '1px dashed #F0ABFC', 
-                                      padding: '0.2rem 0.45rem', 
-                                      borderRadius: '5px', 
+                                      padding: '0.18rem 0.42rem', 
+                                      borderRadius: '4px', 
                                       cursor: 'pointer',
                                       lineHeight: '1.2',
                                       whiteSpace: 'nowrap',

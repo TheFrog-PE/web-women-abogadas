@@ -2405,6 +2405,15 @@ export function App() {
                   );
                 }
 
+                const formatTag = (tag: string) => {
+                  if (!tag) return '';
+                  const words = tag.trim().split(/\s+/);
+                  if (words.length > 2) {
+                    return `${words[0]} ${words[1]}...`;
+                  }
+                  return tag;
+                };
+
                 return (
                   <div className="members-grid" style={{ position: 'relative', zIndex: 1 }}>
                     {filteredMembers.map((member, idx) => {
@@ -2434,69 +2443,103 @@ export function App() {
                               (e.target as HTMLImageElement).style.backgroundColor = '#CBD5E1';
                             }}
                           />
-                          {/* ETIQUETA EN LA FOTO: MÁS PEQUEÑA Y EN COLOR OSCURO ELEGANTE */}
+                          {/* ETIQUETA EN LA FOTO: TAMAÑO REDUCIDO Y EN COLOR OSCURO ELEGANTE */}
                           <span style={{ 
                             position: 'absolute', 
-                            bottom: '0.85rem', 
-                            left: '1.25rem', 
-                            right: '1.25rem',
+                            bottom: '0.75rem', 
+                            left: '1rem', 
+                            right: '1rem',
                             background: 'linear-gradient(135deg, #1E1B4B 0%, #3B0764 50%, #4A044E 100%)', 
                             color: '#FFFFFF', 
-                            padding: '0.32rem 0.75rem', 
+                            padding: '0.22rem 0.55rem', 
                             borderRadius: '9999px', 
-                            fontSize: '0.64rem', 
+                            fontSize: '0.58rem', 
                             fontWeight: '700',
-                            letterSpacing: '0.4px',
+                            letterSpacing: '0.3px',
                             textAlign: 'center',
                             textTransform: 'uppercase',
                             boxShadow: '0 4px 14px rgba(15, 23, 42, 0.45)',
-                            border: '1px solid rgba(255, 255, 255, 0.18)'
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            lineHeight: '1.2'
                           }}>
                             {member.sector || 'ESPECIALISTA EN COMPLIANCE'}
                           </span>
                         </div>
 
                         {/* CUERPO DE LA TARJETA */}
-                        <div style={{ padding: '1.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.35rem' }}>
+                        <div style={{ padding: '1.5rem 1.4rem 1.4rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                          <div style={{ color: '#af1daa', fontWeight: '700', fontSize: '0.78rem', marginBottom: '0.3rem' }}>
                             {member.role}
                           </div>
-                          <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
+                          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.45rem', lineHeight: '1.3', color: '#1E1B4B', fontWeight: '800' }}>
                             {member.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
                           </h3>
-                          <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1.15rem', lineHeight: '1.5' }}>
+                          <p style={{ color: '#64748B', fontSize: '0.82rem', marginBottom: '0.9rem', lineHeight: '1.45', height: '2.4rem', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', textOverflow: 'ellipsis' }}>
                             {member.currentCargo}
                           </p>
 
-                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO - CON ESPACIADO CÓMODO Y NO APRETADOS */}
+                          {/* ESPECIALIDADES / COMPETENCIAS DE MIEMBRO: EXACTAMENTE DOS FILAS, CON PUNTOS SUSPENSIVOS Y BADGE +N */}
                           {member.tags && member.tags.length > 0 && (
-                            <div style={{ marginBottom: '1.5rem' }}>
-                              <span style={{ fontSize: '0.67rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.5rem' }}>
+                            <div style={{ marginBottom: '1.25rem' }}>
+                              <span style={{ fontSize: '0.64rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '0.4rem' }}>
                                 ESPECIALIDADES & COMPETENCIAS:
                               </span>
-                              <div style={{ display: 'flex', gap: '0.45rem', rowGap: '0.5rem', flexWrap: 'wrap' }}>
+                              <div style={{ 
+                                display: 'flex', 
+                                gap: '0.35rem', 
+                                rowGap: '0.35rem', 
+                                flexWrap: 'wrap', 
+                                alignItems: 'center',
+                                minHeight: '2.85rem',
+                                maxHeight: '2.85rem',
+                                overflow: 'hidden'
+                              }}>
                                 {member.tags.slice(0, 3).map((tag, tIdx) => (
                                   <span 
                                     key={tIdx} 
                                     onClick={(e) => { e.stopPropagation(); setSelectedTag(tag); }}
+                                    title={tag}
                                     style={{ 
                                       backgroundColor: '#FAF5FF', 
                                       color: '#af1daa', 
                                       border: '1px solid #F0ABFC', 
-                                      fontSize: '0.68rem', 
+                                      fontSize: '0.62rem', 
                                       fontWeight: '600', 
-                                      padding: '0.32rem 0.75rem', 
-                                      borderRadius: '6px',
+                                      padding: '0.2rem 0.5rem', 
+                                      borderRadius: '5px',
                                       cursor: 'pointer',
-                                      lineHeight: '1.25',
+                                      lineHeight: '1.2',
                                       transition: 'all 0.2s ease',
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      whiteSpace: 'nowrap'
+                                    }}
+                                  >
+                                    {formatTag(tag)}
+                                  </span>
+                                ))}
+                                {member.tags.length > 3 && (
+                                  <span 
+                                    onClick={(e) => { e.stopPropagation(); setSelectedMember(member); }}
+                                    title={`Ver todas (${member.tags.length})`}
+                                    style={{ 
+                                      fontSize: '0.62rem', 
+                                      color: '#af1daa', 
+                                      fontWeight: '700', 
+                                      backgroundColor: '#FAF5FF', 
+                                      border: '1px dashed #F0ABFC', 
+                                      padding: '0.2rem 0.45rem', 
+                                      borderRadius: '5px', 
+                                      cursor: 'pointer',
+                                      lineHeight: '1.2',
+                                      whiteSpace: 'nowrap',
                                       display: 'inline-flex',
                                       alignItems: 'center'
                                     }}
                                   >
-                                    {tag}
+                                    +{member.tags.length - 3}
                                   </span>
-                                ))}
+                                )}
                               </div>
                             </div>
                           )}

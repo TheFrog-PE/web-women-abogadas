@@ -5740,29 +5740,134 @@ export function App() {
               </div>
             </div>
 
-            {/* SECCIÓN 5: FORMULARIO DE POSTULACIÓN / ADMISIÓN */}
-            <div id="postulacion-form" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 1.5rem' }}>
-              <div 
-                className="reveal"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: '24px',
-                  padding: '3rem 2.5rem',
-                  border: '1px solid #E2E8F0',
-                  boxShadow: '0 10px 40px rgba(0,0,0,0.05)'
-                }}
-              >
-                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.4rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1rem' }}>
-                    ADMISIONES ABIERTAS WIC
+            {/* SECCIÓN 5: FORMULARIO DE POSTULACIÓN / ADMISIÓN CON FOTO REFERENCIAL */}
+            <div id="postulacion-form" style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 1.5rem' }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+                gap: '2.5rem',
+                alignItems: 'stretch'
+              }}>
+                {/* TARJETA VISUAL REFERENCIAL */}
+                <div 
+                  className="reveal"
+                  style={{
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    minHeight: '520px',
+                    boxShadow: '0 12px 40px rgba(10, 17, 40, 0.08)',
+                    border: '1px solid #E2E8F0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    backgroundColor: '#0F172A'
+                  }}
+                >
+                  <img 
+                    src="/Fotos/Imagen para Inicio - 01.webp" 
+                    alt="Líderes Women in Compliance Colombia" 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/Fotos/Imagen para Inicio - 01.jpg';
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0.45) 35%, rgba(15, 23, 42, 0.94) 100%)'
+                  }} />
+                  <div style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    padding: '2.75rem 2.25rem',
+                    color: '#FFFFFF'
+                  }}>
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      backgroundColor: 'rgba(235, 84, 255, 0.22)',
+                      backdropFilter: 'blur(8px)',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      padding: '0.4rem 1rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.74rem',
+                      fontWeight: '800',
+                      letterSpacing: '0.6px',
+                      textTransform: 'uppercase',
+                      marginBottom: '1.25rem',
+                      color: '#FFFFFF'
+                    }}>
+                      <Sparkles size={14} style={{ color: '#eb54ff' }} />
+                      RED DE LIDERAZGO ÉTICO
+                    </div>
+                    <h3 style={{
+                      fontSize: 'clamp(1.35rem, 2.2vw, 1.7rem)',
+                      fontWeight: '800',
+                      lineHeight: '1.3',
+                      marginBottom: '0.85rem',
+                      color: '#FFFFFF'
+                    }}>
+                      Tu experiencia es poder. Es hora de que el mundo te conozca.
+                    </h3>
+                    <p style={{
+                      fontSize: '0.92rem',
+                      color: '#E2E8F0',
+                      lineHeight: '1.6',
+                      marginBottom: '1.5rem'
+                    }}>
+                      Conecta con tomadores de decisiones, comparte tu visión, accede a convocatorias exclusivas de juntas directivas y fortalece tu posición en el compliance nacional e internacional.
+                    </p>
+                    <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', borderTop: '1px solid rgba(255, 255, 255, 0.2)', paddingTop: '1.25rem' }}>
+                      <div>
+                        <div style={{ fontSize: '1.35rem', fontWeight: '900', color: '#eb54ff' }}>+100</div>
+                        <div style={{ fontSize: '0.75rem', color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Abogadas & Oficiales</div>
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '1.35rem', fontWeight: '900', color: '#eb54ff' }}>100%</div>
+                        <div style={{ fontSize: '0.75rem', color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Enfoque en Integridad</div>
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '1.35rem', fontWeight: '900', color: '#eb54ff' }}>VIP</div>
+                        <div style={{ fontSize: '0.75rem', color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Red de Contactos</div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
-                    ¿Lista para transformar tu alcance profesional?
-                  </h3>
-                  <p style={{ color: '#64748B', fontSize: '0.9rem', lineHeight: '1.5' }}>
-                    Diligencia tu información de postulación. Nuestro comité de admisiones evaluará tu perfil en menos de 48 horas hábiles.
-                  </p>
                 </div>
+
+                {/* TARJETA DEL FORMULARIO */}
+                <div 
+                  className="reveal"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '24px',
+                    padding: '3rem 2.5rem',
+                    border: '1px solid #E2E8F0',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.05)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(175, 29, 170, 0.08)', border: '1px solid rgba(175, 29, 170, 0.25)', padding: '0.4rem 1.25rem', borderRadius: '9999px', color: '#af1daa', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                      ADMISIONES ABIERTAS WIC
+                    </div>
+                    <h3 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
+                      ¿Lista para transformar tu alcance profesional?
+                    </h3>
+                    <p style={{ color: '#64748B', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                      Diligencia tu información de postulación. Nuestro comité de admisiones evaluará tu perfil en menos de 48 horas hábiles.
+                    </p>
+                  </div>
 
                 {uneteFormSubmitted ? (
                   <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
@@ -5989,13 +6094,25 @@ export function App() {
                       SOLICITAR MI INGRESO A WIC COLOMBIA <ArrowRight size={18} />
                     </button>
 
-                    <div style={{ textAlign: 'center', color: '#94A3B8', fontSize: '0.75rem', marginTop: '0.5rem' }}>
-                      🔒 Tus datos están protegidos por nuestra estricta política de confidencialidad y privacidad WIC.
+                    <div style={{ 
+                      textAlign: 'center', 
+                      color: '#94A3B8', 
+                      fontSize: '0.75rem', 
+                      marginTop: '0.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.45rem',
+                      lineHeight: '1.4'
+                    }}>
+                      <LockIcon size={14} style={{ color: '#94A3B8', flexShrink: 0 }} />
+                      <span>Tus datos están protegidos por nuestra estricta política de confidencialidad y privacidad WIC.</span>
                     </div>
                   </form>
                 )}
               </div>
             </div>
+          </div>
 
           </div>
         )}

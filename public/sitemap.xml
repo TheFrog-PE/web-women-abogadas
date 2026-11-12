@@ -4,12 +4,12 @@
   
   <!-- 1. Página de Inicio (Home) -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/</loc>
+    <loc>https://wiccolombia.com/</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%2001.webp</image:loc>
+      <image:loc>https://wiccolombia.com/Fotos/Imagen%20para%20Inicio%20-%2001.webp</image:loc>
       <image:title>Women in Compliance Colombia - Red de Líderes en Cumplimiento</image:title>
       <image:caption>Comunidad oficial de mujeres abogadas y líderes de compliance en Colombia</image:caption>
     </image:image>
@@ -17,31 +17,31 @@
 
   <!-- 2. Directorio de Afiliadas Fundadoras y Miembros -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/miembros</loc>
+    <loc>https://wiccolombia.com/miembros</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://web-women-abogadas.vercel.app/Logo/Logo%20WIC%20COL%20%20(1).png</image:loc>
+      <image:loc>https://wiccolombia.com/Logo/Logo%20WIC%20COL%20%20(1).png</image:loc>
       <image:title>Directorio de Afiliadas y Patrocinadores WIC Colombia</image:title>
     </image:image>
   </url>
 
   <!-- 3. Eventos, Seminarios y Desayunos de Liderazgo -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/eventos</loc>
+    <loc>https://wiccolombia.com/eventos</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%20Eventos%2004.webp</image:loc>
+      <image:loc>https://wiccolombia.com/Fotos/Imagen%20para%20Inicio%20-%20Eventos%2004.webp</image:loc>
       <image:title>Eventos de Networking y Alta Dirección en Compliance</image:title>
     </image:image>
   </url>
 
   <!-- 4. Contenidos, Artículos de Compliance y Buen Gobierno -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/contenido</loc>
+    <loc>https://wiccolombia.com/contenido</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -49,7 +49,7 @@
 
   <!-- 5. Portal de Empleabilidad y Bolsa de Talento (Open to Work) -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/opentowork</loc>
+    <loc>https://wiccolombia.com/opentowork</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -57,7 +57,7 @@
 
   <!-- 6. Convocatoria de Admisión y Membresía (Únete) -->
   <url>
-    <loc>https://web-women-abogadas.vercel.app/unete</loc>
+    <loc>https://wiccolombia.com/unete</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>

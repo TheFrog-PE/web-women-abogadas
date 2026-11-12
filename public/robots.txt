@@ -1,5 +1,5 @@
 # robots.txt para Women in Compliance Colombia (WIC Colombia)
-# Sitio oficial: https://web-women-abogadas.vercel.app/
+# Sitio oficial: https://wiccolombia.com/
 
 User-agent: *
 Allow: /
@@ -26,4 +26,4 @@ User-agent: WhatsApp
 Allow: /
 
 # Declaración Oficial del Mapa del Sitio (Sitemap XML)
-Sitemap: https://web-women-abogadas.vercel.app/sitemap.xml
+Sitemap: https://wiccolombia.com/sitemap.xml

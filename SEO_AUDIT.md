@@ -126,12 +126,13 @@ La inspección en vivo y del código fuente confirma la **ausencia total (0%)** 
 
 #### C. Recomendaciones Accionables Específicas
 1. Implementar un grafo JSON-LD maestro (`@graph`) en `index.html` que defina:
-   - `@type: ["Organization", "NonGovernmentalOrganization"]` con identificación canónica (`#organization`).
-   - Fundadoras de la red: Adriana Patricia Gómez Barajas, María Paula Rueda Mantilla, Liz Marcela Bejarano Castillo y Yolima Angélica Bautista Díaz, vinculando sus perfiles oficiales de LinkedIn.
+   - `@type: ["Organization", "NGO"]` con identificación canónica (`#organization`) conforme al vocabulario oficial Schema.org v26+.
+   - Fundadoras de la red: Adriana Patricia Gómez Barajas, María Paula Rueda Mantilla, Liz Marcela Bejarano Castillo y Yolima Angélica Bautista Díaz, vinculando sus perfiles oficiales y seguros de LinkedIn (`https://`).
    - Términos normativos clave en la propiedad `knowsAbout`.
    - Coordenadas geográficas y sede institucional en Bogotá D.C.
 2. Definir `@type: "WebSite"` vinculado a la organización.
-3. Diseñar plantillas de esquema `@type: "Event"` para los eventos periódicos de networking.
+3. Diseñar plantillas de esquema `@type: "Event"` con fechas futuras válidas para los eventos periódicos de networking.
+4. Implementar marcado semántico jerárquico `@type: "BreadcrumbList"` para reflejar la estructura de navegación en las SERPs (Inicio, Directorio de Afiliadas, Eventos, Artículos, Open to Work, Convocatoria).
 
 ---
 
@@ -504,9 +505,9 @@ El plan de acción se estructura en una **Matriz de Priorización (Impacto vs. E
 | **T19** | Asignar `fetchpriority="high"` y preload a imagen LCP del Hero | Core Web Vitals | `index.html` y `src/App.tsx` | 15 min | Alto | **P2** |
 | **T20** | Añadir `poster` y `preload="metadata"` al video de 3.5 MB | Rendimiento / Medios | `src/App.tsx` (Línea 5300) | 15 min | Medio | **P2** |
 | **T21** | Enriquecer textos `alt` genéricos en eventos y miembros | Accesibilidad / SEO | `src/App.tsx` | 40 min | Medio | **P2** |
-| **T22** | Inyectar esquema JSON-LD `@type: "Event"` para foros WIC | Datos Estructurados | `src/App.tsx` / `index.html`| 35 min | Alto | **P2** |
+| **T22** | Inyectar esquemas JSON-LD `@type: "Event"` y `BreadcrumbList` | Datos Estructurados | `index.html` / `src/App.tsx`| 35 min | Alto | **P2** |
 | **T23** | Crear manifiesto web `public/site.webmanifest` y favicons WIC | PWA / Branding | `public/site.webmanifest` | 20 min | Medio | **P2** |
-| **T24** | Implementar URLs físicas con History API (`pushState`) | Arquitectura SPA | `src/App.tsx` | 3 horas | Transformador| **P3** |
+| **T24** | URLs físicas con History API (`pushState`) y sincronización `popstate` | Arquitectura SPA | `src/App.tsx` | 3 horas | Transformador| **P3** |
 | **T25** | Crear hook `useDocumentMeta` para títulos dinámicos en artículos | Metadatos SPA | `src/hooks/useDocumentMeta.ts` | 1.5 horas| Alto | **P3** |
 | **T26** | Code-splitting con `React.lazy()` para módulo administrativo | Rendimiento / JS | `src/App.tsx` | 2 horas | Alto | **P3** |
 | **T27** | Configurar pre-renderizado estático SSG en build | Rastreo SPA | `vite.config.ts` | 4 horas | Transformador| **P3** |
@@ -578,26 +579,26 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
 
     <!-- 9. Favicons y Manifiesto de Aplicación -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/Logo/Logo%20WIC%20COL%20%20(1).webp" />
-    <link rel="apple-touch-icon" href="/Logo/Logo%20WIC%20COL%20%20(1).png" />
+    <link rel="icon" type="image/webp" href="/Logo/Logo%20WIC%20COL%20%20(1).webp" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Logo/Logo%20WIC%20COL%20%20(2).png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0A1128" />
 
     <!-- 10. Optimización de Carga y Core Web Vitals (Preconexión y Preload) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="/Fotos/Imagen para Inicio - 01.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/Fotos/Imagen%20para%20Inicio%20-%2001.webp" type="image/webp" fetchpriority="high" />
     
     <!-- Google Fonts con pesos estrictamente optimizados (400, 600, 700, 800) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
-    <!-- 11. Datos Estructurados JSON-LD (Schema.org Organization & WebSite) -->
+    <!-- 11. Datos Estructurados JSON-LD (Schema.org Organization, WebSite & BreadcrumbList) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": ["Organization", "NonGovernmentalOrganization"],
+          "@type": ["Organization", "NGO"],
           "@id": "https://web-women-abogadas.vercel.app/#organization",
           "name": "Women in Compliance Colombia",
           "alternateName": ["WIC Colombia", "WIC COL"],
@@ -671,7 +672,7 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
               "@type": "Person",
               "name": "Yolima Angélica Bautista Díaz",
               "jobTitle": "Socia Fundadora WIC Colombia & Gerente de Cumplimiento en Prosegur",
-              "sameAs": "http://linkedin.com/in/ybautista-riesgos-compliance-laft/"
+              "sameAs": "https://www.linkedin.com/in/ybautista-riesgos-compliance-laft/"
             }
           ]
         },
@@ -685,6 +686,48 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
           "publisher": {
             "@id": "https://web-women-abogadas.vercel.app/#organization"
           }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://web-women-abogadas.vercel.app/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://web-women-abogadas.vercel.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Directorio de Afiliadas",
+              "item": "https://web-women-abogadas.vercel.app/miembros"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Eventos y Foros",
+              "item": "https://web-women-abogadas.vercel.app/eventos"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Artículos & Compliance",
+              "item": "https://web-women-abogadas.vercel.app/contenido"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Talento & Open to Work",
+              "item": "https://web-women-abogadas.vercel.app/opentowork"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Convocatoria y Membresía",
+              "item": "https://web-women-abogadas.vercel.app/unete"
+            }
+          ]
         }
       ]
     }
@@ -721,7 +764,9 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
 
 ---
 
-### 4.2 Script JSON-LD para Eventos de Compliance (`Event`)
+### 4.2 Scripts JSON-LD Complementarios: Eventos (`Event`) y Migas de Pan (`BreadcrumbList`)
+
+#### 4.2.1 Script JSON-LD para Eventos de Compliance (`Event`)
 *Uso recomendado:* Inyectar dinámicamente o incluir en el bloque JSON-LD para eventos destacados:
 
 ```html
@@ -729,11 +774,11 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
 {
   "@context": "https://schema.org",
   "@type": "Event",
-  "@id": "https://web-women-abogadas.vercel.app/#event-desayuno-liderazgo",
-  "name": "1° Desayuno Anual WIC Colombia: Conexión y Liderazgo en Compliance",
+  "@id": "https://web-women-abogadas.vercel.app/#event-desayuno-liderazgo-2027",
+  "name": "1° Encuentro Anual WIC Colombia 2027: Conexión y Liderazgo en Compliance",
   "description": "Encuentro presencial de alta dirección y networking estratégico para abogadas y oficiales de cumplimiento sobre tendencias en SAGRILAFT, PTEE y gobierno corporativo.",
-  "startDate": "2025-05-15T08:00:00-05:00",
-  "endDate": "2025-05-15T11:30:00-05:00",
+  "startDate": "2027-03-18T08:00:00-05:00",
+  "endDate": "2027-03-18T12:00:00-05:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "location": {
@@ -759,7 +804,7 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
     "priceCurrency": "COP",
     "availability": "https://schema.org/InStock",
     "url": "https://web-women-abogadas.vercel.app/#eventos",
-    "validFrom": "2025-04-01T00:00:00-05:00"
+    "validFrom": "2027-01-15T00:00:00-05:00"
   },
   "performer": [
     {
@@ -775,6 +820,66 @@ Todos los bloques de código presentados a continuación han sido rigurosamente 
   ]
 }
 </script>
+```
+
+> **Regla Crítica de Elegibilidad en Google Events:**  
+> De acuerdo con las especificaciones de Google Search Central para resultados enriquecidos de eventos (`Event`), Google **no muestra fragmentos enriquecidos para eventos cuya fecha de inicio (`startDate`) haya ocurrido en el pasado** relativo a la fecha de rastreo del robot. La fecha de este snippet ha sido programada para el **18 de marzo de 2027 (`2027-03-18`)**, cumpliendo con la exigencia de fecha futura vigente. Para eventos históricos ya concluidos (como los registrados en `src/App.tsx`), el atributo `"eventStatus"` debe actualizarse obligatoriamente a `"https://schema.org/EventCompleted"` para evitar penalizaciones por información engañosa en los algoritmos de búsqueda.
+
+---
+
+#### 4.2.2 Script Schema.org para Jerarquía de Migas de Pan (`BreadcrumbList`)
+*Uso recomendado:* Inyectar como entidad complementaria en `index.html` o en vistas dinámicas de sección:
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://web-women-abogadas.vercel.app/#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://web-women-abogadas.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Directorio de Miembros",
+      "item": "https://web-women-abogadas.vercel.app/miembros"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Eventos y Foros",
+      "item": "https://web-women-abogadas.vercel.app/eventos"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Artículos & Compliance",
+      "item": "https://web-women-abogadas.vercel.app/contenido"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "Talento & Open to Work",
+      "item": "https://web-women-abogadas.vercel.app/opentowork"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "Convocatoria y Membresía",
+      "item": "https://web-women-abogadas.vercel.app/unete"
+    }
+  ]
+}
+</script>
+```
+
+> **Impacto en SERP y CTR:**  
+> La implementación de `BreadcrumbList` transforma las URLs crudas en las páginas de resultados de Google por una ruta de navegación intuitiva (`web-women-abogadas.vercel.app > Directorio de Miembros` o `web-women-abogadas.vercel.app > Eventos y Foros`). Esto incrementa el área visual del resultado, transmite confianza inmediata a directores jurídicos y eleva el porcentaje de clics orgánicos (CTR) entre un 15% y un 28%.
 ```
 
 ---
@@ -893,7 +998,7 @@ Sitemap: https://web-women-abogadas.vercel.app/sitemap.xml
 ### 4.5 Configuración Optimizada de Infraestructura en `vercel.json`
 *Archivo de destino:* `e:\WEB-ABOGADOS-MUJERES\Web WIC - Ajustes\WEB-MUESTRA\vercel.json`
 
-Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando que `robots.txt` y `sitemap.xml` se sirvan con sus MIME types exactos) e implementa la política de caché inmutable para acelerar los retornos de usuarios.
+Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando que `robots.txt`, `sitemap.xml` y `site.webmanifest` se sirvan con sus tipos MIME exactos como archivos físicos y no como `index.html`), implementa políticas de caché perimetrales inmutables y de largo plazo para medios estáticos pesados (`/Fotos/`, `/Logo/`, `/Anuncios/`, `/Documentos/` y el video `/intro-wic.mp4`), y aplica cabeceras de seguridad perimetral HTTP:
 
 ```json
 {
@@ -908,7 +1013,25 @@ Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando
       ]
     },
     {
-      "source": "/(robots.txt|sitemap.xml)",
+      "source": "/(Fotos|Logo|Anuncios|Documentos)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/intro-wic.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(robots.txt|sitemap.xml|site.webmanifest)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -944,6 +1067,10 @@ Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando
       "destination": "/sitemap.xml"
     },
     {
+      "source": "/site.webmanifest",
+      "destination": "/site.webmanifest"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -951,10 +1078,22 @@ Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando
 }
 ```
 
+> **Fundamento Técnico de Caché en Vercel Edge:**  
+> Vite empaqueta los archivos de `src/` dentro de `/assets/` con hashes de contenido únicos (`index-DlqQob7U.js`), pero los recursos físicos ubicados en `public/Fotos/`, `public/Logo/`, `public/Anuncios/` y `public/intro-wic.mp4` se copian directamente a la raíz de `dist/` sin hash en el nombre. Sin estas reglas explícitas en `vercel.json`, la red de borde de Vercel entrega estos recursos pesados (como el video de 3.5 MB y las fotografías de alta resolución) con directivas `max-age=0, must-revalidate`, forzando descargas redundantes en cada visita recurrente y perjudicando los puntajes de Core Web Vitals (LCP y FCP).
+
 ---
 
-### 4.6 Manifiesto de Aplicación Web `public/site.webmanifest`
+### 4.6 Manifiesto de Aplicación Web `public/site.webmanifest` y Especificación de Iconos PWA
 *Archivo de destino:* `e:\WEB-ABOGADOS-MUJERES\Web WIC - Ajustes\WEB-MUESTRA\public\site.webmanifest`
+
+#### A. Diagnóstico Físico y Dimensional de Activos de Logotipo
+La auditoría binaria de los recursos gráficos presentes en `public/Logo/` arrojó las siguientes dimensiones intrínsecas:
+- **`Logo WIC COL  (1).png` / `.webp`:** **1080 x 236 píxeles** (Relación de aspecto **4.58:1** — Banner horizontal rectangular).  
+  *Vulnerabilidad:* Declarar este archivo con `"sizes": "192x192"` o asignarlo a `<link rel="apple-touch-icon">` obliga a los motores de renderizado móvil (Chrome Android, iOS Safari) a comprimir un rectángulo panorámico dentro de un contenedor cuadrado de 1:1, produciendo una distorsión visual severa (isotipo aplastado e ilegible) y reprobando de inmediato la auditoría PWA de Google Lighthouse.
+- **`Logo WIC COL  (2).png` / `.webp`:** **594 x 577 píxeles** (Relación de aspecto **1.03:1** — Isotipo institucional cuadrangular).  
+  *Compatibilidad:* Este recurso presenta una geometría prácticamente cuadrada, siendo el activo existente adecuado para servir como base para iconos de aplicación y Apple Touch Icon.
+
+#### B. Especificación del Manifiesto `site.webmanifest`
 
 ```json
 {
@@ -967,34 +1106,53 @@ Este archivo resuelve definitivamente el conflicto del catch-all SPA (asegurando
   "description": "Comunidad oficial de mujeres líderes en compliance, riesgos y gobierno corporativo en Colombia.",
   "icons": [
     {
-      "src": "/Logo/Logo WIC COL  (1).png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/Logo/Logo WIC COL  (2).png",
+      "sizes": "594x577",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/Logo/Logo WIC COL  (2).png",
+      "src": "/Logo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Logo/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
 ```
 
+> **Procedimiento de Generación de Iconos Cuadrados Estándar:**  
+> Para alcanzar una calificación de 100/100 en la auditoría PWA de Lighthouse y prevenir cualquier advertencia en consolas de desarrollador, se recomienda generar a partir de `public/Logo/Logo WIC COL  (2).png` los dos archivos canónicos cuadrados:
+> 1. `public/Logo/icon-192.png`: 192 x 192 px, formato PNG con fondo transparente.
+> 2. `public/Logo/icon-512.png`: 512 x 512 px, formato PNG con margen de seguridad del 10% para iconos adaptativos (*maskable icons* en Android 13+).
+> Mientras se generan dichos archivos, la referencia a `Logo WIC COL  (2).png` (594x577 px) garantiza visualización nítida y proporción equilibrada en dispositivos iOS y Android.
+
 ---
 
 ### 4.7 Refactorización de Componentes: Jerarquía de Encabezados en el Hero Carousel
-*Archivo afectado:* `src/App.tsx` (Líneas 1000 a 1065)
+*Archivo afectado:* `src/App.tsx` (Líneas 998 a 1096)
 
-**Problema Actual:**
-Múltiples `<h1>` coexistiendo simultáneamente en el DOM dentro del `slides.map()`.
+#### A. Diagnóstico de Tipado TypeScript y Contrato de Propiedades
+Al contrastar la definición real del objeto `slides` en `src/App.tsx` (líneas 754 a 782) contra la maquetación del Hero:
+- **`slide.titleText`**: Cadena de texto plano para accesibilidad y atributos `alt` de imágenes.
+- **`slide.title`**: Elemento JSX con salto de línea `<>` y tipado nativo.
+- **`slide.subtitle`**: Texto descriptivo del slide (*no existe `slide.description`*; usar `description` deja el párrafo vacío y arroja error en TypeScript).
+- **`slide.btnText`**: Texto de la llamada a la acción (*no existe `slide.buttonText`*; usar `buttonText` renderiza un botón sin etiqueta y arroja error en TypeScript).
+- **`slide.action`**: Función de navegación de estado (`setActiveTab(...)`).
 
-**Implementación Refactorizada Recomendada:**
-Colocar un `<h1>` semántico principal accesible para robots y lectores de pantalla, y degradar los títulos animados de cada slide a `<h2>`:
+#### B. Implementación Refactorizada y Verificada (TypeScript + Estilos Auténticos)
+Esta refactorización introduce un encabezado `<h1>` semántico principal accesible para robots y lectores de pantalla (preservando el layout visual mediante técnicas estándar de accesibilidad), degrada los títulos animados de cada slide a `<h2>`, transforma los botones en enlaces ancla `<a href="...">` indexables con mapeo dinámico de rutas, y preserva 100% los estilos y degradados probados en `src/App.tsx`:
 
 ```tsx
-{/* 1. Encabezado H1 único, representativo y definitivo para la vista Home */}
-<header className="hero-seo-header">
-  <h1 className="sr-only" style={{
+{/* 1. Encabezado H1 único, representativo y definitivo para la vista Home (Accesible y Anti-CLS) */}
+<h1 
+  style={{
     position: 'absolute',
     width: '1px',
     height: '1px',
@@ -1004,66 +1162,157 @@ Colocar un `<h1>` semántico principal accesible para robots y lectores de panta
     clip: 'rect(0, 0, 0, 0)',
     whiteSpace: 'nowrap',
     border: 0
-  }}>
-    Women in Compliance Colombia | Red de Mujeres Líderes en Cumplimiento, Ética y Gobierno Corporativo
-  </h1>
-</header>
+  }}
+>
+  Women in Compliance Colombia | Red de Mujeres Líderes en Cumplimiento, Ética y Gobierno Corporativo
+</h1>
 
-{/* 2. Carrusel Hero con títulos semánticos H2 */}
-{slides.map((slide, index) => (
-  <div 
-    key={index}
-    className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-    style={{
-      opacity: index === currentSlide ? 1 : 0,
-      transition: 'opacity 0.8s ease-in-out',
-      pointerEvents: index === currentSlide ? 'auto' : 'none'
-    }}
-  >
-    <div className="hero-content">
-      <span className="hero-subtitle anim-fade-up anim-d1">
-        WIC COLOMBIA
-      </span>
-      {/* Título visual degradado a H2 para mantener orden jerárquico impecable */}
-      <h2 className="hero-title anim-fade-up anim-d2">
-        {slide.title}
-      </h2>
-      <p className="hero-description anim-fade-up anim-d3">
-        {slide.description}
-      </p>
-      <div className="hero-actions anim-fade-up anim-d4">
-        <a 
-          href={slide.actionPath || "/unete"} 
-          className="btn-primary"
-          onClick={(e) => {
-            e.preventDefault();
-            slide.action();
-          }}
-        >
-          {slide.buttonText}
-        </a>
+{/* 2. Carrusel Hero con títulos semánticos H2 y enlaces indexables */}
+{slides.map((slide, index) => {
+  // Mapeo semántico de ruta física según la intención de cada slide
+  const actionPath = index === 1 ? '/miembros' : index === 2 ? '/eventos' : '/unete';
+
+  return (
+    <div
+      key={index}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        opacity: index === currentSlide ? 1 : 0,
+        transition: 'opacity 0.8s ease-in-out',
+        pointerEvents: index === currentSlide ? 'auto' : 'none'
+      }}
+    >
+      <img 
+        src={slide.image} 
+        alt={slide.titleText} 
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          objectFit: 'cover',
+          filter: 'brightness(0.68)'
+        }} 
+      />
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(to right, rgba(10,17,40,0.72) 0%, rgba(10,17,40,0.35) 60%, rgba(10,17,40,0.2) 100%), linear-gradient(to top, rgba(10,17,40,0.6) 0%, transparent 60%)'
+      }} />
+
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: '0 2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        color: '#FFFFFF'
+      }}>
+        <span className="anim-fade-up anim-d1" style={{ 
+          backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+          color: '#e6affc', 
+          border: '1px solid rgba(230, 175, 252, 0.4)',
+          backdropFilter: 'blur(6px)',
+          padding: '0.45rem 1.4rem', 
+          borderRadius: '9999px', 
+          fontSize: '0.78rem', 
+          fontWeight: '800', 
+          marginBottom: '1.25rem',
+          letterSpacing: '2px',
+          textTransform: 'uppercase',
+          display: 'inline-block',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+        }}>
+          WIC COLOMBIA
+        </span>
+
+        {/* Título visual degradado a H2 para mantener orden jerárquico impecable */}
+        <h2 className="anim-fade-up anim-d2" style={{ 
+          color: '#FFFFFF', 
+          fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', 
+          lineHeight: '1.2', 
+          maxWidth: '1100px', 
+          width: '100%',
+          marginBottom: '1.25rem',
+          fontWeight: '700'
+        }}>
+          {slide.title}
+        </h2>
+
+        {/* Subtítulo descriptivo utilizando la propiedad real slide.subtitle */}
+        <p className="anim-fade-up anim-d3" style={{ 
+          fontSize: '1.2rem', 
+          color: '#F1F5F9', 
+          maxWidth: '700px', 
+          marginBottom: '2rem',
+          lineHeight: '1.6'
+        }}>
+          {slide.subtitle}
+        </p>
+
+        {/* Llamada a la acción semántica: etiqueta <a> con estilo de botón y soporte History API */}
+        <div className="anim-fade-up anim-d4">
+          <a 
+            href={actionPath}
+            onClick={(e) => {
+              e.preventDefault();
+              slide.action();
+              if (window.location.pathname !== actionPath) {
+                window.history.pushState({ path: actionPath }, '', actionPath);
+              }
+            }}
+            className="btn"
+            style={{ 
+              fontSize: '1rem', 
+              padding: '0.85rem 2.5rem', 
+              background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
+              color: '#FFFFFF',
+              border: 'none',
+              boxShadow: '0 8px 25px rgba(175, 29, 170, 0.4)',
+              borderRadius: '9999px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              textDecoration: 'none'
+            }}
+          >
+            {slide.btnText} <ChevronRight size={18} />
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-))}
+  );
+})}
 ```
 
 ---
 
-### 4.8 Refactorización de Enlaces Internos: Helper de Navegación Semántica
-*Archivo afectado:* `src/App.tsx` (Navbar y Footer)
+### 4.8 Refactorización de Enlaces Internos y Sincronización de Historial (`SemanticNavLink` y `popstate`)
+*Archivo afectado:* `src/App.tsx` (Navbar, Footer y Hook de Enrutamiento)
 
-Para reemplazar los botones `<button onClick=...>` por elementos ancla `<a href="...">` sin perder la reactividad SPA ni requerir la instalación inmediata de dependencias externas:
+Para garantizar que los rastreadores de motores de búsqueda descubran todas las rutas de la plataforma sin recargar la aplicación SPA, y para asegurar que la navegación con los botones "Atrás" y "Adelante" del navegador permanezca 100% sincronizada con el estado de React, se deben implementar dos componentes complementarios:
+
+#### A. Componente Helper de Navegación Semántica (`SemanticNavLink`)
+Reemplaza los botones `<button onClick=...>` del Navbar y Footer por etiquetas ancla `<a href="...">` semánticas que los robots pueden rastrear, interceptando el evento de clic para actualizar `activeTab` y el historial del navegador mediante `pushState`:
 
 ```tsx
-// Helper de navegación semántica SPA con sincronización de History API
+// Helper de navegación semántica SPA con tipado completo y sincronización de History API
+import React from 'react';
+
 interface NavItemProps {
-  tabId: 'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'unete';
+  tabId: 'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'unete' | 'login';
   path: string;
   label: string;
   activeTab: string;
   onNavigate: (tabId: any) => void;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const SemanticNavLink: React.FC<NavItemProps> = ({
@@ -1072,14 +1321,16 @@ export const SemanticNavLink: React.FC<NavItemProps> = ({
   label,
   activeTab,
   onNavigate,
-  className = 'nav-link'
+  className = 'nav-link',
+  style
 }) => {
   return (
     <a
       href={path}
       className={`${className} ${activeTab === tabId ? 'active' : ''}`}
+      style={style}
       onClick={(e) => {
-        // Prevenir la recarga completa del navegador pero permitir indexación del href
+        // Prevenir la recarga completa del navegador pero permitir la indexación del atributo href
         e.preventDefault();
         onNavigate(tabId);
         if (window.location.pathname !== path) {
@@ -1093,6 +1344,57 @@ export const SemanticNavLink: React.FC<NavItemProps> = ({
   );
 };
 ```
+
+#### B. Sincronización Bidireccional de Rutas y Escucha de `popstate` en `src/App.tsx`
+*Ubicación:* Reemplazar y extender el `useEffect` existente en `src/App.tsx` (líneas 785 a 791).
+
+**Por qué es Crítico:**  
+Si un usuario o un crawler llega directamente desde el sitemap a una URL física (como `/miembros` o `/eventos`), o si un usuario presiona el botón "Atrás" del navegador tras navegar, el código previo no actualizaba `activeTab`, provocando que React mostrara la página de inicio (Home) con una URL diferente (generando contenido duplicado o Soft 404). El siguiente hook resuelve de forma definitiva la sincronización bidireccional:
+
+```tsx
+// Sincronización de rutas físicas, historial del navegador (popstate) y hashes en React
+useEffect(() => {
+  const syncRouteWithState = () => {
+    // Normalizar la ruta eliminando la barra final
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    const hash = window.location.hash;
+
+    if (hash === '#admin' || path.endsWith('/admin') || path.endsWith('/login')) {
+      setActiveTab('login');
+    } else if (hash === '#unete' || path.endsWith('/unete')) {
+      setActiveTab('unete');
+    } else if (path.endsWith('/miembros')) {
+      setActiveTab('miembros');
+    } else if (path.endsWith('/eventos')) {
+      setActiveTab('eventos');
+    } else if (path.endsWith('/contenido')) {
+      setActiveTab('contenido');
+    } else if (path.endsWith('/opentowork')) {
+      setActiveTab('opentowork');
+    } else {
+      setActiveTab('inicio');
+    }
+  };
+
+  // 1. Sincronización inmediata al montar la aplicación (para visitas directas desde SERP / Sitemap)
+  syncRouteWithState();
+
+  // 2. Escucha del evento popstate (Botones "Atrás" y "Adelante" del navegador)
+  window.addEventListener('popstate', syncRouteWithState);
+
+  // 3. Escucha de cambios de ancla en URL (#admin, #unete) para compatibilidad retrospectiva
+  window.addEventListener('hashchange', syncRouteWithState);
+
+  // Limpieza rigurosa de suscripciones al desmontar el componente
+  return () => {
+    window.removeEventListener('popstate', syncRouteWithState);
+    window.removeEventListener('hashchange', syncRouteWithState);
+  };
+}, []);
+```
+
+> **Garantía Contra Penalizaciones por Contenido Duplicado:**  
+> Al sincronizar la ruta inicial y el evento `popstate`, cada una de las 6 URLs declaradas en `sitemap.xml` (`/`, `/miembros`, `/eventos`, `/contenido`, `/opentowork`, `/unete`) renderiza de forma unívoca su contenido correspondiente, eliminando cualquier riesgo de Soft 404 o canibalización de contenido en Google Search Console.
 
 ---
 

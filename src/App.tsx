@@ -995,105 +995,136 @@ export function App() {
             
             {/* HERO CAROUSEL - PANTALLA COMPLETA */}
             <section style={{ position: 'relative', height: 'calc(100vh - 75px)', minHeight: '620px', overflow: 'hidden', backgroundColor: '#0A1128' }}>
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    opacity: index === currentSlide ? 1 : 0,
-                    transition: 'opacity 0.8s ease-in-out',
-                    pointerEvents: index === currentSlide ? 'auto' : 'none'
-                  }}
-                >
-                  <img 
-                    src={slide.image} 
-                    alt={slide.titleText} 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover',
-                      filter: 'brightness(0.68)'
-                    }} 
-                  />
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to right, rgba(10,17,40,0.72) 0%, rgba(10,17,40,0.35) 60%, rgba(10,17,40,0.2) 100%), linear-gradient(to top, rgba(10,17,40,0.6) 0%, transparent 60%)'
-                  }} />
+              {/* Encabezado H1 único y semántico para indexación y accesibilidad */}
+              <h1 
+                style={{
+                  position: 'absolute',
+                  width: '1px',
+                  height: '1px',
+                  padding: 0,
+                  margin: '-1px',
+                  overflow: 'hidden',
+                  clip: 'rect(0, 0, 0, 0)',
+                  whiteSpace: 'nowrap',
+                  border: 0
+                }}
+              >
+                Women in Compliance Colombia | Red de Mujeres Líderes en Cumplimiento, Ética y Gobierno Corporativo
+              </h1>
 
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    maxWidth: '1280px',
-                    margin: '0 auto',
-                    padding: '0 2rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    color: '#FFFFFF'
-                  }}>
-                    <span className="anim-fade-up anim-d1" style={{ 
-                      backgroundColor: 'rgba(230, 175, 252, 0.18)', 
-                      color: '#e6affc', 
-                      border: '1px solid rgba(230, 175, 252, 0.4)',
-                      backdropFilter: 'blur(6px)',
-                      padding: '0.45rem 1.4rem', 
-                      borderRadius: '9999px', 
-                      fontSize: '0.78rem', 
-                      fontWeight: '800', 
-                      marginBottom: '1.25rem',
-                      letterSpacing: '2px',
-                      textTransform: 'uppercase',
-                      display: 'inline-block',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+              {slides.map((slide, index) => {
+                const actionPath = index === 1 ? '/miembros' : index === 2 ? '/eventos' : '/unete';
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      opacity: index === currentSlide ? 1 : 0,
+                      transition: 'opacity 0.8s ease-in-out',
+                      pointerEvents: index === currentSlide ? 'auto' : 'none'
+                    }}
+                  >
+                    <img 
+                      src={slide.image} 
+                      alt={slide.titleText} 
+                      fetchPriority={index === 0 ? 'high' : 'auto'}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        filter: 'brightness(0.68)'
+                      }} 
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(to right, rgba(10,17,40,0.72) 0%, rgba(10,17,40,0.35) 60%, rgba(10,17,40,0.2) 100%), linear-gradient(to top, rgba(10,17,40,0.6) 0%, transparent 60%)'
+                    }} />
+
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      maxWidth: '1280px',
+                      margin: '0 auto',
+                      padding: '0 2rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      color: '#FFFFFF'
                     }}>
-                      WIC COLOMBIA
-                    </span>
-                    <h1 className="anim-fade-up anim-d2" style={{ 
-                      color: '#FFFFFF', 
-                      fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', 
-                      lineHeight: '1.2', 
-                      maxWidth: '1100px', 
-                      width: '100%',
-                      marginBottom: '1.25rem',
-                      fontWeight: '700'
-                    }}>
-                      {slide.title}
-                    </h1>
-                    <p className="anim-fade-up anim-d3" style={{ 
-                      fontSize: '1.2rem', 
-                      color: '#F1F5F9', 
-                      maxWidth: '700px', 
-                      marginBottom: '2rem',
-                      lineHeight: '1.6'
-                    }}>
-                      {slide.subtitle}
-                    </p>
-                    <div className="anim-fade-up anim-d4">
-                      <button 
-                        className="btn"
-                        onClick={slide.action}
-                        style={{ 
-                          fontSize: '1rem', 
-                          padding: '0.85rem 2.5rem', 
-                          background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
-                          color: '#FFFFFF',
-                          border: 'none',
-                          boxShadow: '0 8px 25px rgba(175, 29, 170, 0.4)',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.5rem'
-                        }}
-                      >
-                        {slide.btnText} <ChevronRight size={18} />
-                      </button>
+                      <span className="anim-fade-up anim-d1" style={{ 
+                        backgroundColor: 'rgba(230, 175, 252, 0.18)', 
+                        color: '#e6affc', 
+                        border: '1px solid rgba(230, 175, 252, 0.4)',
+                        backdropFilter: 'blur(6px)',
+                        padding: '0.45rem 1.4rem', 
+                        borderRadius: '9999px', 
+                        fontSize: '0.78rem', 
+                        fontWeight: '800', 
+                        marginBottom: '1.25rem',
+                        letterSpacing: '2px',
+                        textTransform: 'uppercase',
+                        display: 'inline-block',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+                      }}>
+                        WIC COLOMBIA
+                      </span>
+                      <h2 className="anim-fade-up anim-d2" style={{ 
+                        color: '#FFFFFF', 
+                        fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)', 
+                        lineHeight: '1.2', 
+                        maxWidth: '1100px', 
+                        width: '100%',
+                        marginBottom: '1.25rem',
+                        fontWeight: '700'
+                      }}>
+                        {slide.title}
+                      </h2>
+                      <p className="anim-fade-up anim-d3" style={{ 
+                        fontSize: '1.2rem', 
+                        color: '#F1F5F9', 
+                        maxWidth: '700px', 
+                        marginBottom: '2rem',
+                        lineHeight: '1.6'
+                      }}>
+                        {slide.subtitle}
+                      </p>
+                      <div className="anim-fade-up anim-d4">
+                        <a 
+                          href={actionPath}
+                          className="btn"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            slide.action();
+                          }}
+                          style={{ 
+                            fontSize: '1rem', 
+                            padding: '0.85rem 2.5rem', 
+                            background: 'linear-gradient(135deg, #af1daa 0%, #eb54ff 100%)',
+                            color: '#FFFFFF',
+                            border: 'none',
+                            boxShadow: '0 8px 25px rgba(175, 29, 170, 0.4)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            borderRadius: '9999px',
+                            fontWeight: '700',
+                            textDecoration: 'none',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {slide.btnText} <ChevronRight size={18} />
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {/* Slider controls */}
               <button 
@@ -1604,7 +1635,14 @@ export function App() {
                           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.75rem' }}>
                             {currentEvent.photos.map((src, i) => (
                               <div key={i} className={`reveal-scale delay-${i + 1}`} style={{ borderRadius: '8px', overflow: 'hidden', height: '175px', backgroundColor: '#F1F5F9' }}>
-                                <img src={src} alt={`Evento foto ${i+1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = PHOTO_FALLBACK; }} />
+                                <img 
+                                  src={src} 
+                                  alt={`Fotografía del evento ${currentEvent.title} - WIC Colombia (${i+1})`} 
+                                  loading="lazy"
+                                  decoding="async"
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} 
+                                  onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = PHOTO_FALLBACK; }} 
+                                />
                               </div>
                             ))}
                           </div>
@@ -1797,7 +1835,9 @@ export function App() {
                               >
                                 <img 
                                   src={src} 
-                                  alt={`Galería Fotográfica ${i+1}`} 
+                                  alt={`Registro fotográfico del evento ${currentEvent.title} - WIC Colombia (${i+1})`} 
+                                  loading="lazy"
+                                  decoding="async"
                                   style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} 
                                   onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = PHOTO_FALLBACK; }} 
                                 />
@@ -2437,7 +2477,9 @@ export function App() {
                         <div style={{ height: '320px', overflow: 'hidden', backgroundColor: '#CBD5E1', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #F1F5F9' }}>
                           <img 
                             src={member.photo} 
-                            alt={member.name}
+                            alt={`Fotografía profesional de ${member.name} - WIC Colombia`}
+                            loading="lazy"
+                            decoding="async"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', backgroundColor: '#CBD5E1' }}
                             onError={(e) => {
                               (e.target as HTMLImageElement).style.backgroundColor = '#CBD5E1';
@@ -5298,6 +5340,8 @@ export function App() {
               >
                 <video 
                   src="/intro-wic.mp4"
+                  poster="/Fotos/Imagen para Inicio - 01.webp"
+                  preload="metadata"
                   controls
                   playsInline
                   autoPlay

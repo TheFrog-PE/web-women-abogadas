@@ -1,15 +1,192 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-CO">
   <head>
+    <!-- 1. Codificación de Caracteres y Viewport Móvil -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-    <title>web-muestra</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- 2. Metadatos Primarios de SEO On-Page -->
+    <title>Women in Compliance Colombia | Red de Liderazgo, Ética y Gobierno Corporativo</title>
+    <meta name="description" content="Comunidad oficial y red profesional de mujeres líderes y abogadas en Colombia dedicadas a la ética empresarial, cumplimiento normativo (SAGRILAFT, PTEE) y gobierno corporativo." />
+    <meta name="keywords" content="Women in Compliance Colombia, WIC Colombia, Compliance Colombia, Abogadas Compliance Bogotá, Oficial de Cumplimiento SAGRILAFT, SARLAFT 4.0, PTEE, Gobierno Corporativo, Transparencia e Integridad" />
+    <meta name="author" content="Women in Compliance Colombia" />
+    
+    <!-- 3. Control de Indexación y Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- 4. Declaración de URL Canónica -->
+    <link rel="canonical" href="https://web-women-abogadas.vercel.app/" />
+
+    <!-- 5. Metadatos de Geolocalización y Local SEO (Colombia / Bogotá) -->
+    <meta name="geo.region" content="CO-DC" />
+    <meta name="geo.placename" content="Bogotá, Colombia" />
+    <meta name="geo.position" content="4.60971;-74.08175" />
+    <meta name="ICBM" content="4.60971, -74.08175" />
+
+    <!-- 6. Hreflang Tags para Orientación Lingüística -->
+    <link rel="alternate" hreflang="es-CO" href="https://web-women-abogadas.vercel.app/" />
+    <link rel="alternate" hreflang="es" href="https://web-women-abogadas.vercel.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://web-women-abogadas.vercel.app/" />
+
+    <!-- 7. Protocolo Open Graph (Facebook, LinkedIn, WhatsApp, Slack) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Women in Compliance Colombia (WIC Colombia)" />
+    <meta property="og:title" content="Women in Compliance Colombia | Red de Liderazgo y Ética Corporativa" />
+    <meta property="og:description" content="Red profesional que impulsa el liderazgo femenino en compliance, integridad corporativa, gestión de riesgos regulatorios y gobierno corporativo en Colombia." />
+    <meta property="og:url" content="https://web-women-abogadas.vercel.app/" />
+    <meta property="og:image" content="https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%2001.webp" />
+    <meta property="og:image:secure_url" content="https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%2001.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Directiva y líderes de Women in Compliance Colombia" />
+    <meta property="og:locale" content="es_CO" />
+
+    <!-- 8. Tarjetas Twitter / X (Twitter Cards) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://web-women-abogadas.vercel.app/" />
+    <meta name="twitter:title" content="Women in Compliance Colombia | Red de Líderes en Cumplimiento" />
+    <meta name="twitter:description" content="Comunidad oficial de abogadas y especialistas en compliance, riesgos normativos y gobierno corporativo en Colombia." />
+    <meta name="twitter:image" content="https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%2001.webp" />
+    <meta name="twitter:image:alt" content="Logotipo e imagen institucional de Women in Compliance Colombia" />
+
+    <!-- 9. Favicons y Manifiesto de Aplicación -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/Logo/Logo WIC COL  (1).png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A1128" />
+
+    <!-- 10. Optimización de Carga y Core Web Vitals (Preconexión y Preload) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/Fotos/Imagen para Inicio - 01.webp" type="image/webp" />
+    
+    <!-- Google Fonts con pesos optimizados (400, 600, 700, 800) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+    <!-- 11. Datos Estructurados JSON-LD (Schema.org Organization & WebSite) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "NonGovernmentalOrganization"],
+          "@id": "https://web-women-abogadas.vercel.app/#organization",
+          "name": "Women in Compliance Colombia",
+          "alternateName": ["WIC Colombia", "WIC COL"],
+          "url": "https://web-women-abogadas.vercel.app/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://web-women-abogadas.vercel.app/#logo",
+            "url": "https://web-women-abogadas.vercel.app/Logo/Logo%20WIC%20COL%20%20(1).png",
+            "caption": "Logo Oficial Women in Compliance Colombia",
+            "width": 1080,
+            "height": 236
+          },
+          "image": "https://web-women-abogadas.vercel.app/Fotos/Imagen%20para%20Inicio%20-%2001.webp",
+          "description": "Comunidad oficial y red profesional de mujeres abogadas y especialistas dedicadas a promover la ética empresarial, la gestión de riesgos normativos (SAGRILAFT, SARLAFT, PTEE) y el buen gobierno corporativo en Colombia.",
+          "telephone": "+57-310-217-3249",
+          "email": "wiccolombia@outlook.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Bogotá D.C.",
+            "addressCountry": "CO"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+57-310-217-3249",
+              "contactType": "general inquiries",
+              "email": "wiccolombia@outlook.com",
+              "areaServed": "CO",
+              "availableLanguage": ["es"]
+            }
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/company/wic-colombia",
+            "https://www.instagram.com/wiccolombia/",
+            "https://www.facebook.com/wiccolombia/"
+          ],
+          "knowsAbout": [
+            "Compliance Corporativo y Penal",
+            "Gobierno Corporativo",
+            "SAGRILAFT",
+            "SARLAFT 4.0",
+            "PTEE - Programa de Transparencia y Ética Empresarial",
+            "Sistemas de Gestión Antisoborno ISO 37001",
+            "Sistemas de Gestión de Compliance ISO 37301",
+            "Oficial de Cumplimiento",
+            "Protección de Datos Personales Ley 1581",
+            "Gestión de Riesgos LA/FT/FPADM",
+            "Liderazgo Femenino en Juntas Directivas"
+          ],
+          "founder": [
+            {
+              "@type": "Person",
+              "name": "Adriana Patricia Gómez Barajas",
+              "jobTitle": "Presidenta WIC Colombia & Socia Cremades & Calvo-Sotelo",
+              "sameAs": "https://www.linkedin.com/in/adriana-g%C3%B3mez-barajas/"
+            },
+            {
+              "@type": "Person",
+              "name": "María Paula Rueda Mantilla",
+              "jobTitle": "Socia Fundadora WIC Colombia & Subsecretaria Jurídica Distrital",
+              "sameAs": "https://www.linkedin.com/in/maria-paula-rueda-mantilla-6a218059/"
+            },
+            {
+              "@type": "Person",
+              "name": "Liz Marcela Bejarano Castillo",
+              "jobTitle": "Socia Fundadora WIC Colombia & Directora Financiera y de Riesgos en Asobancaria",
+              "sameAs": "https://www.linkedin.com/in/liz-marcela-bejarano-castillo-2089b624a/"
+            },
+            {
+              "@type": "Person",
+              "name": "Yolima Angélica Bautista Díaz",
+              "jobTitle": "Socia Fundadora WIC Colombia & Gerente de Cumplimiento en Prosegur",
+              "sameAs": "http://linkedin.com/in/ybautista-riesgos-compliance-laft/"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://web-women-abogadas.vercel.app/#website",
+          "url": "https://web-women-abogadas.vercel.app/",
+          "name": "Women in Compliance Colombia",
+          "alternateName": "WIC Colombia",
+          "inLanguage": "es-CO",
+          "publisher": {
+            "@id": "https://web-women-abogadas.vercel.app/#organization"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- 12. Fallback Semántico para Rastreadores sin JS y Accesibilidad -->
+    <noscript>
+      <header>
+        <h1>Women in Compliance Colombia (WIC Colombia)</h1>
+        <p>Comunidad oficial de mujeres líderes dedicadas al fortalecimiento de la ética empresarial, el cumplimiento normativo (SAGRILAFT, PTEE) y el gobierno corporativo en Colombia.</p>
+      </header>
+      <nav aria-label="Navegación principal accesible">
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/miembros">Afiliadas Fundadoras y Directorio</a></li>
+          <li><a href="/eventos">Eventos y Desayunos de Liderazgo</a></li>
+          <li><a href="/contenido">Contenidos y Artículos Técnicos</a></li>
+          <li><a href="/opentowork">Directorio de Talento Open to Work</a></li>
+          <li><a href="/unete">Convocatoria de Admisión y Membresía</a></li>
+        </ul>
+      </nav>
+      <section>
+        <h2>Contacto Institucional</h2>
+        <p>Sede: Bogotá D.C., Colombia | Teléfono: +57 310 217 3249 | Correo Electrónico: wiccolombia@outlook.com</p>
+      </section>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

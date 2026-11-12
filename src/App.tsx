@@ -468,13 +468,13 @@ export function App() {
   }, [articlesList]);
 
   const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404' | 'unete'>('inicio');
-  const [unetePlanSelected, setUnetePlanSelected] = useState<'estandar' | 'fundadora'>('estandar');
+  const [unetePlanSelected, setUnetePlanSelected] = useState<'estandar' | 'corporativa'>('estandar');
   const [uneteFormData, setUneteFormData] = useState({
     name: '',
     email: '',
     phone: '',
     experience: '4 - 7 años',
-    plan: 'Membresía Anual Estándar ($0 COP)',
+    plan: 'Afiliación Estándar WIC ($100 USD)',
     company: '',
     linkedin: ''
   });
@@ -5396,21 +5396,21 @@ export function App() {
                   {
                     icon: <FileText size={22} style={{ color: '#af1daa' }} />,
                     title: 'Visibilidad en Medios y Publicaciones',
-                    desc: 'Publicación y difusión de tus artículos técnicos y columnas de opinión a través de los canales institucionales de WIC y medios aliados.'
+                    desc: 'Publicación y difusión de tus artículos técnicos y columnas de opinión a través de los canales institucionales de WIC y medios afiliados.'
                   },
                   {
                     icon: <Sparkles size={22} style={{ color: '#af1daa' }} />,
                     title: 'Participación en Eventos como Speaker',
-                    desc: 'Oportunidad prioritaria para ser panelista o conferencista en nuestros conversatorios, foros y congresos especializados.'
+                    desc: 'Oportunidad para ser panelista o conferencista en nuestros conversatorios, foros y congresos especializados.'
                   },
                   {
                     icon: <TrendingUp size={22} style={{ color: '#af1daa' }} />,
-                    title: 'Acceso a Bolsa de Empleo y Mandatos',
-                    desc: 'Convocatorias directas para ternas de juntas directivas, comités de ética, peritajes y asesorías corporativas de alta complejidad.'
+                    title: 'Acceso a la Bolsa de Empleo y Mandatos',
+                    desc: 'Convocatorias directas para temas de juntas directivas, comités de ética, peritajes y asesorías corporativas de alta complejidad.'
                   },
                   {
                     icon: <ShieldCheck size={22} style={{ color: '#af1daa' }} />,
-                    title: 'Comunidad de Consulta & Apoyo Técnico',
+                    title: 'Comunidad de Consulta y Apoyo Técnico',
                     desc: 'Canal privado de consulta y debate entre afiliadas para resolver inquietudes doctrinales, SAGRILAFT y PTEE en tiempo real.'
                   },
                   {
@@ -5426,7 +5426,7 @@ export function App() {
                   {
                     icon: <Globe size={22} style={{ color: '#af1daa' }} />,
                     title: 'Comités Técnicos Especializados',
-                    desc: 'Participación activa en mesas temáticas sobre compliance penal, fintech, debida diligencia y protección de datos.'
+                    desc: 'Participación activa en mesas temáticas sobre compliance penal, Fintech, debida diligencia y protección de datos.'
                   }
                 ].map((item, idx) => (
                   <div
@@ -5524,31 +5524,36 @@ export function App() {
                     </span>
 
                     <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
-                      Membresía Anual Estándar
+                      Afiliación Estándar WIC
                     </h3>
                     <p style={{ color: '#64748B', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.5rem' }}>
                       Para abogadas y profesionales del compliance que buscan visibilidad, comunidad y networking de alto nivel.
                     </p>
 
                     <div style={{ marginBottom: '1.75rem', paddingBottom: '1.5rem', borderBottom: '1px solid #F1F5F9' }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
-                        <span style={{ fontSize: '2.4rem', fontWeight: '900', color: '#0A1128' }}>$0</span>
-                        <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600' }}>COP / año</span>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem' }}>
+                        <span style={{ fontSize: '2.4rem', fontWeight: '900', color: '#0A1128' }}>$100</span>
+                        <span style={{ fontSize: '0.9rem', color: '#64748B', fontWeight: '700' }}>USD</span>
                       </div>
-                      <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>Pago anual único • Acceso a todos los beneficios</span>
+                      <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>Membresía anual • Acceso a todos los beneficios estándar</span>
                     </div>
 
-                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                       {[
-                        'Perfil verificado en Directorio Oficial de Socias WIC',
-                        'Acceso a todos los desayunos y eventos presenciales',
-                        'Participación activa en el canal privado de consulta',
-                        'Descuentos exclusivos en formación académica aliada',
-                        'Acceso a bolsa de empleo y mandatos corporativos'
+                        'Desayunos Privados & Networking VIP',
+                        'Directorio Profesional Open to Work',
+                        'Programa de Mentoría de Alto Nivel',
+                        'Visibilidad en Medios y Publicaciones',
+                        'Participación en Eventos como Speaker',
+                        'Acceso a la Bolsa de Empleo y Mandatos',
+                        'Comunidad de Consulta y Apoyo Técnico',
+                        'Descuentos en Certificaciones y Posgrados',
+                        'Sello Oficial de Acreditación WIC',
+                        'Comités Técnicos Especializados'
                       ].map((feat, idx) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.88rem', color: '#334155' }}>
-                          <CheckCircle2 size={16} style={{ color: '#22C55E', flexShrink: 0 }} />
-                          {feat}
+                        <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', fontSize: '0.86rem', color: '#334155', lineHeight: '1.4' }}>
+                          <CheckCircle2 size={16} style={{ color: '#22C55E', flexShrink: 0, marginTop: '2px' }} />
+                          <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
@@ -5557,7 +5562,7 @@ export function App() {
                   <button
                     onClick={() => {
                       setUnetePlanSelected('estandar');
-                      setUneteFormData(prev => ({ ...prev, plan: 'Membresía Anual Estándar ($0 COP)' }));
+                      setUneteFormData(prev => ({ ...prev, plan: 'Afiliación Estándar WIC ($100 USD)' }));
                       const el = document.getElementById('postulacion-form');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
@@ -5585,18 +5590,18 @@ export function App() {
                   </button>
                 </div>
 
-                {/* TARJETA 2: MEMBRESÍA FUNDADORA / ALIADA (DESTACADA) */}
+                {/* TARJETA 2: AFILIACIÓN CORPORATIVA WIC (DESTACADA) */}
                 <div 
                   className="reveal"
                   style={{
                     backgroundColor: '#FFFFFF',
                     borderRadius: '24px',
-                    border: unetePlanSelected === 'fundadora' ? '2.5px solid #af1daa' : '1.5px solid rgba(175, 29, 170, 0.5)',
+                    border: unetePlanSelected === 'corporativa' ? '2.5px solid #af1daa' : '1.5px solid rgba(175, 29, 170, 0.5)',
                     padding: '2.5rem 2.25rem',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    boxShadow: unetePlanSelected === 'fundadora' ? '0 12px 40px rgba(175, 29, 170, 0.22)' : '0 6px 25px rgba(175, 29, 170, 0.1)',
+                    boxShadow: unetePlanSelected === 'corporativa' ? '0 12px 40px rgba(175, 29, 170, 0.22)' : '0 6px 25px rgba(175, 29, 170, 0.1)',
                     position: 'relative'
                   }}
                 >
@@ -5631,37 +5636,70 @@ export function App() {
                         letterSpacing: '0.5px',
                         textTransform: 'uppercase'
                       }}>
-                        LÍDERES & FIRMAS
+                        EMPRESAS & FIRMAS
                       </span>
                     </div>
 
                     <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#0A1128', marginBottom: '0.5rem' }}>
-                      Membresía Fundadora / Aliada
+                      Afiliación Corporativa WIC
                     </h3>
                     <p style={{ color: '#64748B', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.5rem' }}>
-                      Para socias consolidadas, firmas y organizaciones que desean respaldar el ecosistema y liderar comités.
+                      Para empresas, firmas y organizaciones que desean respaldar el ecosistema e integrar a su equipo de cumplimiento.
                     </p>
 
                     <div style={{ marginBottom: '1.75rem', paddingBottom: '1.5rem', borderBottom: '1px solid #F1F5F9' }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
-                        <span style={{ fontSize: '2.4rem', fontWeight: '900', color: '#af1daa' }}>$0</span>
-                        <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600' }}>COP / año</span>
+                      <div style={{ fontSize: '1.2rem', fontWeight: '800', color: '#af1daa', lineHeight: '1.3', marginBottom: '0.35rem' }}>
+                        Contáctanos para más información
                       </div>
-                      <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>Inversión anual institucional • Máxima representatividad</span>
+                      <a
+                        href="mailto:wiccolombia@outlook.com"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          fontSize: '0.88rem',
+                          fontWeight: '700',
+                          color: '#0A1128',
+                          textDecoration: 'underline'
+                        }}
+                      >
+                        <Mail size={15} style={{ color: '#af1daa' }} />
+                        wiccolombia@outlook.com
+                      </a>
                     </div>
 
                     <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                       {[
-                        'Todo lo incluido en la Membresía Estándar',
-                        'Sello distintivo de Socia Fundadora / Firma Aliada',
-                        'Prioridad absoluta como Speaker y moderadora en foros',
-                        'Publicación de hasta 4 artículos al año en el portal WIC',
-                        'Presencia del logo de tu firma en web oficial y eventos',
-                        'Participación directa en comités estratégicos de admisión'
+                        {
+                          title: 'Afiliación de Hasta 3 Miembros:',
+                          desc: 'Derecho a afiliar hasta tres personas naturales de su organización, quienes gozarán de todos los beneficios de la membresía estándar, salvo oferta distinta acordada por correo.'
+                        },
+                        {
+                          title: 'Sello Distintivo de Firma Aliada:',
+                          desc: 'Derecho de uso del logo de WIC Colombia como empresa asociada en sus correos institucionales y redes sociales, como señal de compromiso con la integridad y el cumplimiento normativo.'
+                        },
+                        {
+                          title: 'Acceso Libre y Prioritario a Eventos:',
+                          desc: 'Entrada sin costo y con reserva preferente a los eventos gratuitos organizados por WIC Colombia.'
+                        },
+                        {
+                          title: 'Descuento Exclusivo del 10%:',
+                          desc: 'Tarifa preferencial en eventos, capacitaciones in-house y programas de pago de la red.'
+                        },
+                        {
+                          title: 'Espacios para Publicar Contenidos:',
+                          desc: 'Difusión de sus contenidos web, blogs y publicaciones en el portal y en todas las redes de WIC Colombia.'
+                        },
+                        {
+                          title: 'Difusión de Ofertas Laborales de Compliance:',
+                          desc: 'Publicación directa de sus vacantes en los grupos de difusión de la red, con acceso a talento especializado.'
+                        }
                       ].map((feat, idx) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.88rem', color: '#1E293B', fontWeight: idx === 0 ? '700' : '500' }}>
-                          <CheckCircle2 size={16} style={{ color: '#af1daa', flexShrink: 0 }} />
-                          {feat}
+                        <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', fontSize: '0.85rem', color: '#1E293B', lineHeight: '1.45' }}>
+                          <CheckCircle2 size={16} style={{ color: '#af1daa', flexShrink: 0, marginTop: '3px' }} />
+                          <span>
+                            <strong style={{ color: '#0A1128' }}>{feat.title}</strong> {feat.desc}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -5669,8 +5707,8 @@ export function App() {
 
                   <button
                     onClick={() => {
-                      setUnetePlanSelected('fundadora');
-                      setUneteFormData(prev => ({ ...prev, plan: 'Membresía Fundadora / Aliada ($0 COP)' }));
+                      setUnetePlanSelected('corporativa');
+                      setUneteFormData(prev => ({ ...prev, plan: 'Afiliación Corporativa WIC (Contáctanos - wiccolombia@outlook.com)' }));
                       const el = document.getElementById('postulacion-form');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
@@ -5695,7 +5733,7 @@ export function App() {
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                   >
-                    POSTULAR A PLAN FUNDADORA <ArrowRight size={16} />
+                    POSTULAR A PLAN CORPORATIVO <ArrowRight size={16} />
                   </button>
                 </div>
 
@@ -5875,8 +5913,8 @@ export function App() {
                           outline: 'none'
                         }}
                       >
-                        <option value="Membresía Anual Estándar ($0 COP)">Membresía Anual Estándar ($0 COP)</option>
-                        <option value="Membresía Fundadora / Aliada ($0 COP)">Membresía Fundadora / Aliada ($0 COP)</option>
+                        <option value="Afiliación Estándar WIC ($100 USD)">Afiliación Estándar WIC ($100 USD)</option>
+                        <option value="Afiliación Corporativa WIC (Contáctanos - wiccolombia@outlook.com)">Afiliación Corporativa WIC (Contáctanos - wiccolombia@outlook.com)</option>
                       </select>
                     </div>
 

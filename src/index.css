@@ -514,6 +514,29 @@ h3 {
   gap: 1.5rem;
 }
 
+/* ── CARRUSEL INTERACTIVO DE FOTOS (MOVIMIENTO CONSTANTE & TOUCH SWIPE) ── */
+.event-carousel-track::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.event-carousel-track {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.event-carousel-card {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease !important;
+}
+
+.event-carousel-card:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 14px 30px rgba(175, 29, 170, 0.18) !important;
+  border-color: #af1daa !important;
+}
+
 @media (max-width: 992px) {
   .events-grid-3col {
     grid-template-columns: repeat(2, 1fr) !important;

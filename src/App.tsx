@@ -53,6 +53,7 @@ import {
   Quote,
   Type
 } from 'lucide-react';
+import { EventPhotosCarousel } from './EventPhotosCarousel';
 
 const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -122,8 +123,6 @@ export interface EventDetailData {
 }
 
 const AVATAR_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Crect width='24' height='24' fill='%23CBD5E1'/%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
-
-const PHOTO_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Crect width='24' height='24' fill='%23CBD5E1'/%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E";
 
 export interface AnuncioItem {
   id: string;
@@ -1631,33 +1630,31 @@ export function App() {
                     {/* ── CUERPO PRINCIPAL ── */}
                     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4.5rem 2rem 3rem' }}>
 
-                      {/* ── GALERÍA 4 FOTOS + PANEL INSCRIPCIÓN / RESUMEN ── */}
+                      {/* ── GALERÍA DE FOTOS INTERACTIVA + PANEL INSCRIPCIÓN / RESUMEN ── */}
                       <div className="events-detail-grid">
                         
-                        {/* Izquierda: descripción + grilla fotos */}
+                        {/* Izquierda: descripción + carrusel interactivo en movimiento */}
                         <div className="reveal-left">
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.75rem' }}>
-                            {currentEvent.photos.map((src, i) => (
-                              <div key={i} className={`reveal-scale delay-${i + 1}`} style={{ borderRadius: '8px', overflow: 'hidden', height: '175px', backgroundColor: '#F1F5F9' }}>
-                                <img 
-                                  src={src} 
-                                  alt={`Fotografía del evento ${currentEvent.title} - WIC Colombia (${i+1})`} 
-                                  loading="lazy"
-                                  decoding="async"
-                                  style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} 
-                                  onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = PHOTO_FALLBACK; }} 
-                                />
-                              </div>
+                          <div style={{ marginBottom: '1.75rem' }}>
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', backgroundColor: '#f4f4f4', border: '1px solid #e6affc', color: '#af1daa', padding: '0.35rem 0.85rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                              <Sparkles size={14} /> {currentEvent.isPast ? 'Memorias del Evento' : 'Presentación'}
+                            </div>
+                            <h3 style={{ color: '#1E1B4B', fontSize: '1.45rem', fontWeight: '800', marginBottom: '0.85rem' }}>
+                              {currentEvent.isPast ? 'Sobre este Encuentro Exclusivo' : 'Descripción del Evento'}
+                            </h3>
+                            {currentEvent.description.map((descParagraph, idx) => (
+                              <p key={idx} style={{ color: '#475569', fontSize: '1.02rem', lineHeight: '1.85', marginBottom: '1rem' }}>
+                                {descParagraph}
+                              </p>
                             ))}
                           </div>
-                          <h3 style={{ color: '#af1daa', fontSize: '1.2rem', fontWeight: '800', marginBottom: '1rem' }}>
-                            {currentEvent.isPast ? 'Galería Fotografías & Memorias' : 'Descripción del evento'}
-                          </h3>
-                          {currentEvent.description.map((descParagraph, idx) => (
-                            <p key={idx} style={{ color: '#475569', fontSize: '1rem', lineHeight: '1.8', marginBottom: '1rem' }}>
-                              {descParagraph}
-                            </p>
-                          ))}
+
+                          {/* Carrusel interactivo optimizado: auto-movimiento continuo ("de lado a lado") + swipe táctil */}
+                          <EventPhotosCarousel 
+                            photos={currentEvent.photos} 
+                            eventTitle={currentEvent.title} 
+                            isPast={currentEvent.isPast} 
+                          />
                         </div>
 
                         {/* Derecha: Panel Lateral (Inscripción O Resumen de Evento Realizado) */}
@@ -1829,31 +1826,11 @@ export function App() {
                             </p>
                           </div>
 
-                          <div className="events-past-gallery-grid">
-                            {currentEvent.photos.map((src, i) => (
-                              <div 
-                                key={i} 
-                                className={`reveal-scale delay-${(i % 4) + 1} card-hover`}
-                                style={{ 
-                                  borderRadius: '16px', 
-                                  overflow: 'hidden', 
-                                  height: '210px', 
-                                  backgroundColor: '#CBD5E1', 
-                                  boxShadow: '0 6px 20px rgba(0,0,0,0.06)',
-                                  border: '1px solid #E2E8F0'
-                                }}
-                              >
-                                <img 
-                                  src={src} 
-                                  alt={`Registro fotográfico del evento ${currentEvent.title} - WIC Colombia (${i+1})`} 
-                                  loading="lazy"
-                                  decoding="async"
-                                  style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#CBD5E1' }} 
-                                  onError={(e) => { const t = e.target as HTMLImageElement; t.onerror = null; t.src = PHOTO_FALLBACK; }} 
-                                />
-                              </div>
-                            ))}
-                          </div>
+                          <EventPhotosCarousel 
+                            photos={currentEvent.photos} 
+                            eventTitle={currentEvent.title} 
+                            isPast={currentEvent.isPast} 
+                          />
                         </div>
                       </div>
                     )}

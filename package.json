@@ -7,7 +7,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:r1": "playwright test tests/e2e/r1-events-gallery.spec.ts",
+    "test:r2": "playwright test tests/e2e/r2-responsive-overflow.spec.ts",
+    "test:mobile": "playwright test --project=Mobile-375",
+    "test:narrow": "playwright test --project=Mobile-320",
+    "test:build": "playwright test tests/e2e/build-smoke.spec.ts --project=Desktop-1280",
+    "test:audit": "tsx tests/runner/standalone-audit.ts"
   },
   "dependencies": {
     "lucide-react": "^1.31.0",
@@ -15,6 +23,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",

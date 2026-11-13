@@ -1599,15 +1599,15 @@ export function App() {
 
                         {/* Cajas del countdown O Estado de Evento Concluido */}
                         {!currentEvent.isPast ? (
-                          <div className="anim-fade-up anim-d5" style={{ display: 'flex', gap: '0.75rem' }}>
+                          <div className="anim-fade-up anim-d5 hero-countdown-wrapper" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                             {[
                               [String(countdown.days).padStart(2,'0'), 'DÍAS'],
                               [String(countdown.hours).padStart(2,'0'), 'HRS'],
                               [String(countdown.minutes).padStart(2,'0'), 'MIN'],
                               [String(countdown.seconds).padStart(2,'0'), 'SEG']
                             ].map(([n,l]) => (
-                              <div key={l} style={{ backgroundColor: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.25)', padding: '0.85rem 1.2rem', borderRadius: '14px', textAlign: 'center', minWidth: '72px' }}>
-                                <span style={{ fontSize: '1.85rem', fontWeight: '900', display: 'block', lineHeight: 1 }}>{n}</span>
+                              <div key={l} className="hero-countdown-box" style={{ backgroundColor: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.25)', padding: '0.65rem 0.85rem', borderRadius: '12px', textAlign: 'center', minWidth: '55px', flex: '1 1 55px', maxWidth: '85px' }}>
+                                <span style={{ fontSize: 'clamp(1.2rem, 3.5vw, 1.85rem)', fontWeight: '900', display: 'block', lineHeight: 1 }}>{n}</span>
                                 <span style={{ fontSize: '0.58rem', opacity: 0.75, letterSpacing: '1px', marginTop: '0.2rem', display: 'block' }}>{l}</span>
                               </div>
                             ))}
@@ -1628,7 +1628,7 @@ export function App() {
                     </div>
 
                     {/* ── CUERPO PRINCIPAL ── */}
-                    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4.5rem 2rem 3rem' }}>
+                    <div className="events-detail-container" style={{ maxWidth: '1200px', margin: '0 auto', padding: currentEvent.isPast ? '3.5rem 1.5rem 1.5rem' : '4.5rem 2rem 3rem', boxSizing: 'border-box' }}>
 
                       {/* ── GALERÍA DE FOTOS INTERACTIVA + PANEL INSCRIPCIÓN / RESUMEN ── */}
                       <div className="events-detail-grid">
@@ -1659,7 +1659,7 @@ export function App() {
 
                         {/* Derecha: Panel Lateral (Inscripción O Resumen de Evento Realizado) */}
                         {!currentEvent.isPast ? (
-                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
+                          <div className="reveal-right events-detail-panel" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px', boxSizing: 'border-box', maxWidth: '100%' }}>
                             <h4 style={{ color: '#1E1B4B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.4rem' }}>
                               Inscripción al Evento
                             </h4>
@@ -1712,7 +1712,7 @@ export function App() {
                             </div>
                           </div>
                         ) : (
-                          <div className="reveal-right" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px' }}>
+                          <div className="reveal-right events-detail-panel" style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #e6affc', boxShadow: '0 8px 32px rgba(175, 29, 170,0.10)', padding: '2rem', position: 'sticky', top: '100px', boxSizing: 'border-box', maxWidth: '100%' }}>
                             <div style={{ backgroundColor: '#f4f4f4', color: '#af1daa', padding: '0.35rem 0.85rem', borderRadius: '9999px', fontWeight: '800', fontSize: '0.7rem', width: 'fit-content', marginBottom: '1rem', letterSpacing: '1px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                               <CheckCircle2 size={14} /> EVENTO FINALIZADO
                             </div>
@@ -1742,9 +1742,10 @@ export function App() {
 
                             <button
                               onClick={() => alert('Descargando memorias técnicas del evento en PDF...')}
-                              style={{ width: '100%', background: 'linear-gradient(90deg, #af1daa, #eb54ff)', color: '#FFFFFF', border: 'none', padding: '0.9rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                              className="events-download-btn"
+                              style={{ width: '100%', maxWidth: '100%', background: 'linear-gradient(90deg, #af1daa, #eb54ff)', color: '#FFFFFF', border: 'none', padding: '0.85rem 0.65rem', fontWeight: '800', borderRadius: '8px', fontSize: '0.88rem', cursor: 'pointer', marginBottom: '1rem', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', whiteSpace: 'normal', wordBreak: 'break-word', boxSizing: 'border-box' }}
                             >
-                              <Download size={18} /> DESCARGAR MEMORIAS (PDF)
+                              <Download size={17} style={{ flexShrink: 0 }} /> <span>DESCARGAR MEMORIAS (PDF)</span>
                             </button>
 
                             <div style={{ borderTop: '1px solid #e6affc', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -1789,7 +1790,7 @@ export function App() {
                       </div>
 
                       {/* ── EXPOSITORES DEDICADOS ── */}
-                      <div style={{ marginBottom: '4.5rem' }}>
+                      <div style={{ marginBottom: currentEvent.isPast ? '2rem' : '4.5rem' }}>
                         <div className="reveal" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
                           <span style={{ color: '#af1daa', fontSize: '0.72rem', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }}>PANELISTAS INVITADOS</span>
                           <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1E1B4B', marginTop: '0.4rem' }}>EXPOSITORES</h2>
@@ -1812,9 +1813,9 @@ export function App() {
 
                     {/* ── GALERÍA DE FOTOS AUMENTADA DEL EVENTO CULMINADO (ANTES DEL FOOTER) ── */}
                     {currentEvent.isPast && (
-                      <div className="reveal" style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem', borderRadius: '0', marginBottom: '2.5rem', border: '1px solid #e6affc' }}>
+                      <div className="reveal" style={{ backgroundColor: '#f4f4f4', padding: '2.5rem 1.5rem', borderRadius: '0', marginBottom: '2.5rem', border: '1px solid #e6affc' }}>
                         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
                             <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
                               GALERÍA OFICIAL DE FOTOGRAFÍAS
                             </span>
@@ -1829,7 +1830,8 @@ export function App() {
                           <EventPhotosCarousel 
                             photos={currentEvent.photos} 
                             eventTitle={currentEvent.title} 
-                            isPast={currentEvent.isPast} 
+                            isPast={currentEvent.isPast}
+                            hideHeader={true}
                           />
                         </div>
                       </div>
@@ -1837,22 +1839,22 @@ export function App() {
 
                     {/* ── COUNTDOWN REAL OSCURO (FULL WIDTH) - SOLO PARA EVENTOS FUTUROS ── */}
                     {!currentEvent.isPast && (
-                      <div className="reveal" style={{ backgroundColor: '#0A1128', padding: '4rem 2rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '0', margin: '0 0 0 0' }}>
+                      <div className="reveal" style={{ backgroundColor: '#0A1128', padding: '4rem 1.5rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '0', margin: '0 0 0 0', boxSizing: 'border-box' }}>
                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>NO TE QUEDES SIN TU CUPO</p>
-                        <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '2.5rem', color: '#FFFFFF' }}>El Evento comienza en:</h2>
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
+                        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: '800', marginBottom: '2.5rem', color: '#FFFFFF' }}>El Evento comienza en:</h2>
+                        <div className="future-countdown-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2.5rem' }}>
                           {([
                             [String(countdown.days).padStart(2,'0'), 'DÍAS'],
                             [String(countdown.hours).padStart(2,'0'), 'HRS'],
                             [String(countdown.minutes).padStart(2,'0'), 'MIN'],
                             [String(countdown.seconds).padStart(2,'0'), 'SEG'],
                           ] as [string,string][]).map(([n,l], i) => (
-                            <div key={l} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                              <div style={{ textAlign: 'center', minWidth: '90px' }}>
-                                <span style={{ fontSize: '5rem', fontWeight: '900', color: '#eb54ff', display: 'block', lineHeight: 1 }}>{n}</span>
+                            <div key={l} className="future-countdown-item" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                              <div className="future-countdown-box" style={{ textAlign: 'center', minWidth: '55px', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: '12px' }}>
+                                <span className="future-countdown-number" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', fontWeight: '900', color: '#eb54ff', display: 'block', lineHeight: 1 }}>{n}</span>
                                 <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '2px', marginTop: '0.5rem', display: 'block' }}>{l}</span>
                               </div>
-                              {i < 3 && <span style={{ fontSize: '4rem', color: 'rgba(255,255,255,0.15)', lineHeight: 1 }}>:</span>}
+                              {i < 3 && <span className="future-countdown-sep" style={{ fontSize: 'clamp(1.5rem, 4vw, 3.5rem)', color: 'rgba(255,255,255,0.15)', lineHeight: 1 }}>:</span>}
                             </div>
                           ))}
                         </div>
@@ -4783,7 +4785,7 @@ export function App() {
 
               {/* BANNER NEWSLETTER / CONVOCATORIAS DIRECTIVAS (EXACTO SEGÚN MOCKUP FIGMA) */}
               <div 
-                className="reveal"
+                className="reveal opentowork-banner-card"
                 style={{
                   backgroundColor: '#0E0C16',
                   border: '1px solid rgba(235, 84, 255, 0.3)',
@@ -4827,22 +4829,24 @@ export function App() {
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <form onSubmit={(e) => { e.preventDefault(); alert('¡Gracias por tu interés! Nos contactaremos contigo a la brevedad.'); }} style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
+                  <form onSubmit={(e) => { e.preventDefault(); alert('¡Gracias por tu interés! Nos contactaremos contigo a la brevedad.'); }} style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', width: '100%' }}>
                     <input 
                       type="email"
                       required
                       placeholder="correo@corporativo.com"
                       style={{
-                        flex: 1,
-                        minWidth: '220px',
+                        flex: '1 1 200px',
+                        minWidth: 0,
+                        width: '100%',
                         padding: '0.85rem 1.25rem',
                         backgroundColor: '#05040A',
                         border: '1px solid rgba(255, 255, 255, 0.15)',
                         borderRadius: '9999px',
                         color: '#FFFFFF',
                         fontSize: '0.88rem',
-                        outline: 'none'
+                        outline: 'none',
+                        boxSizing: 'border-box'
                       }}
                     />
                     <button
@@ -4860,7 +4864,8 @@ export function App() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.4rem',
-                        transition: 'all 0.25s ease'
+                        transition: 'all 0.25s ease',
+                        whiteSpace: 'nowrap'
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                       onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -5431,7 +5436,7 @@ export function App() {
               {/* GRID 2 COLUMNAS DE 10 BENEFICIOS */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                 gap: '1.5rem'
               }}>
                 {[
@@ -8859,7 +8864,7 @@ export function App() {
           transition: 'background-color 0.25s ease'
         }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '3rem', marginBottom: '3rem' }}>
               
               {/* COLUMNA 1: SOBRE WIC */}
               <div>

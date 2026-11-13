@@ -1128,7 +1128,9 @@ export function App() {
 
               {/* Slider controls */}
               <button 
+                className="hero-carousel-arrow"
                 onClick={() => setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
+                aria-label="Diapositiva anterior"
                 style={{
                   position: 'absolute',
                   left: '1.5rem',
@@ -1149,7 +1151,9 @@ export function App() {
                 <ChevronLeft size={24} />
               </button>
               <button 
+                className="hero-carousel-arrow"
                 onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+                aria-label="Siguiente diapositiva"
                 style={{
                   position: 'absolute',
                   right: '1.5rem',
@@ -1213,7 +1217,7 @@ export function App() {
                   </p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2.5rem' }}>
                   
                   {/* MISIÓN */}
                   <div className="reveal-left card-hover" style={{ 
@@ -1400,7 +1404,7 @@ export function App() {
             {/* SECCIÓN NOTICIAS Y EVENTOS DESTACADOS (SEGÚN INSTRUCCIÓN DEL DOCX: Foto 04 + Texto + Botón) */}
             <section style={{ padding: '5rem 1.5rem', backgroundColor: '#F8FAFC', borderTop: '1px solid #E2E8F0' }}>
               <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '3rem', alignItems: 'center' }}>
                   
                   {/* TEXTO + BOTÓN */}
                   <div className="reveal-left">
@@ -1769,13 +1773,19 @@ export function App() {
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                           {currentEvent.agenda.map((item, i) => (
-                            <div key={i} className={`reveal delay-${i + 1} card-hover`} style={{ backgroundColor: '#FFFFFF', borderRadius: '10px', padding: '1.25rem 1.75rem', display: 'grid', gridTemplateColumns: '130px 1fr auto', gap: '1.5rem', alignItems: 'center', border: '1px solid #e6affc' }}>
-                              <span style={{ color: '#af1daa', fontWeight: '800', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>{item.time}</span>
-                              <div>
-                                <p style={{ color: '#1E1B4B', fontWeight: '700', fontSize: '1rem', margin: '0 0 0.25rem' }}>{item.title}</p>
-                                <p style={{ color: '#64748B', fontSize: '0.82rem', margin: 0 }}>{item.desc}</p>
+                            <div key={i} className={`reveal delay-${i + 1} card-hover events-agenda-card`}>
+                              <div className="agenda-time-pill">
+                                <Calendar size={13} style={{ marginRight: '6px', flexShrink: 0 }} />
+                                <span>{item.time}</span>
                               </div>
-                              <span style={{ color: '#94A3B8', fontSize: '0.75rem', fontWeight: '600', textAlign: 'right', whiteSpace: 'nowrap' }}>{item.sala}</span>
+                              <div className="agenda-body">
+                                <p className="agenda-title">{item.title}</p>
+                                <p className="agenda-desc">{item.desc}</p>
+                              </div>
+                              <div className="agenda-sala-pill">
+                                <MapPin size={12} style={{ color: '#af1daa', flexShrink: 0 }} />
+                                <span>{item.sala}</span>
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -2826,25 +2836,29 @@ export function App() {
               {/* BOTÓN CERRAR ESQUINA DERECHA */}
               <button 
                 onClick={() => setSelectedMember(null)}
+                aria-label="Cerrar modal de socia"
                 style={{
                   position: 'absolute',
                   top: '1rem',
                   right: '1rem',
-                  background: '#1E293B',
-                  border: 'none',
+                  background: '#0A1128',
+                  border: '1px solid rgba(255,255,255,0.2)',
                   borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
+                  width: '38px',
+                  height: '38px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#FFFFFF',
                   cursor: 'pointer',
                   zIndex: 20,
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.3)'
                 }}
               >
-                <X size={20} />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
               </button>
 
               <div className="member-modal-grid">
@@ -4470,21 +4484,9 @@ export function App() {
             {/* SECCIÓN PRINCIPAL: FILTROS Y GRILLA DE ANUNCIOS */}
             <div id="anuncios-grid" style={{ maxWidth: '1280px', margin: '3rem auto 0 auto', padding: '0 1.5rem' }}>
               
-              {/* BARRA DE FILTROS EN CAPSULA OSCURA (EXACTA SEGÚN MOCKUP) */}
-              <div style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '9999px',
-                padding: '0.4rem 0.6rem',
-                marginBottom: '2.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '0.5rem'
-              }} className="reveal">
-                
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              {/* BARRA DE FILTROS RESPONSIVE (PUNTO 3) */}
+              <div className="anuncios-filter-bar reveal">
+                <div className="anuncios-tabs-container">
                   {[
                     `Todos los Anuncios (${ANUNCIOS_DATA.length})`,
                     'Líderes de Confianza',
@@ -4496,6 +4498,7 @@ export function App() {
                     return (
                       <button
                         key={idx}
+                        className="anuncios-tab-btn"
                         onClick={() => {
                           if (idx === 0) setOpenToWorkCategory('Todas');
                           else if (idx === 1) setOpenToWorkCategory('Gobierno Corporativo');
@@ -4506,13 +4509,6 @@ export function App() {
                         style={{
                           backgroundColor: isSelected ? '#af1daa' : 'transparent',
                           color: isSelected ? '#FFFFFF' : '#94A3B8',
-                          border: 'none',
-                          padding: '0.55rem 1.25rem',
-                          borderRadius: '9999px',
-                          fontSize: '0.8rem',
-                          fontWeight: '700',
-                          cursor: 'pointer',
-                          transition: 'all 0.25s ease',
                           boxShadow: isSelected ? '0 4px 14px rgba(175, 29, 170, 0.4)' : 'none'
                         }}
                       >
@@ -4522,11 +4518,12 @@ export function App() {
                   })}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingRight: '1rem', color: '#94A3B8', fontSize: '0.8rem', fontWeight: '600' }}>
-                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#34D399', display: 'inline-block' }}></span>
-                  {filteredAnuncios.length} Anuncios Disponibles
+                <div className="anuncios-counter-badge">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#34D399', display: 'inline-block' }}></span>
+                    <span>{filteredAnuncios.length} Anuncios Disponibles</span>
+                  </div>
                 </div>
-
               </div>
 
               {/* ESTRUCTURA EDITORIAL: ANUNCIO PRINCIPAL GRANDE, 3 VOLANTES AL COSTADO Y TARJETA 'ÚNETE A WIC' ABAJO */}
@@ -4818,7 +4815,7 @@ export function App() {
                   backgroundImage: 'radial-gradient(circle at 90% 50%, rgba(175, 29, 170, 0.3) 0%, transparent 60%)',
                   boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5)',
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                   gap: '2.5rem',
                   alignItems: 'center',
                   transition: 'all 0.35s ease'
@@ -4940,29 +4937,41 @@ export function App() {
                     alignItems: 'center'
                   }}
                 >
+                  {/* BOTÓN X PARA CERRAR ANUNCIO EN MÓVIL Y DESKTOP (PUNTO 4) */}
                   <button 
                     onClick={() => setSelectedAnuncio(null)}
+                    aria-label="Cerrar anuncio"
                     style={{
                       position: 'absolute',
-                      top: '1rem',
-                      right: '1rem',
-                      background: 'rgba(255,255,255,0.1)',
-                      border: '1px solid rgba(255,255,255,0.2)',
+                      top: '0.85rem',
+                      right: '0.85rem',
+                      backgroundColor: '#0A1128',
+                      border: '2px solid #eb54ff',
                       color: '#FFFFFF',
-                      width: '38px',
-                      height: '38px',
+                      width: '42px',
+                      height: '42px',
                       borderRadius: '50%',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       cursor: 'pointer',
-                      zIndex: 10,
+                      zIndex: 50,
+                      boxShadow: '0 4px 18px rgba(0, 0, 0, 0.7), 0 0 12px rgba(235, 84, 255, 0.5)',
                       transition: 'all 0.2s ease'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(235, 84, 255, 0.4)'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#af1daa';
+                      e.currentTarget.style.transform = 'scale(1.08)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#0A1128';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
                   >
-                    <X size={20} />
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                   </button>
 
                   <div 
@@ -5052,6 +5061,27 @@ export function App() {
                     >
                       Descargar Anuncio <ArrowRight size={15} />
                     </a>
+                    <button
+                      onClick={() => setSelectedAnuncio(null)}
+                      style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                        color: '#CBD5E1',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        padding: '0.7rem 1.4rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.85rem',
+                        fontWeight: '700',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        cursor: 'pointer',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.18)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
+                    >
+                      <X size={15} /> Cerrar
+                    </button>
                   </div>
                 </div>
               </div>
@@ -5089,23 +5119,29 @@ export function App() {
                 >
                   <button 
                     onClick={() => setShowOpenToWorkModal(false)}
+                    aria-label="Cerrar modal"
                     style={{
                       position: 'absolute',
                       top: '1.25rem',
                       right: '1.25rem',
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.15)',
+                      background: '#0A1128',
+                      border: '1.5px solid #eb54ff',
                       color: '#FFFFFF',
-                      width: '36px',
-                      height: '36px',
+                      width: '38px',
+                      height: '38px',
                       borderRadius: '50%',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      zIndex: 20,
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.5), 0 0 10px rgba(235, 84, 255, 0.4)'
                     }}
                   >
-                    <X size={20} />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                   </button>
 
                   <h3 style={{ fontSize: '1.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: '800', color: '#FFFFFF', marginBottom: '0.5rem' }}>
@@ -5531,7 +5567,7 @@ export function App() {
               {/* 2 TARJETAS DE PLANES */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
                 gap: '2rem',
                 alignItems: 'stretch'
               }}>
@@ -5788,7 +5824,7 @@ export function App() {
             <div id="postulacion-form" style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 1.5rem' }}>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
                 gap: '2.5rem',
                 alignItems: 'stretch'
               }}>
@@ -9013,6 +9049,7 @@ export function App() {
           >
             <button 
               onClick={() => setShowTerminosModal(false)}
+              aria-label="Cerrar términos y condiciones"
               style={{
                 position: 'absolute',
                 top: '1.5rem',
@@ -9029,7 +9066,10 @@ export function App() {
                 cursor: 'pointer'
               }}
             >
-              <X size={20} />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
@@ -9161,6 +9201,7 @@ export function App() {
           >
             <button 
               onClick={() => setShowPrivacidadModal(false)}
+              aria-label="Cerrar política de privacidad"
               style={{
                 position: 'absolute',
                 top: '1.5rem',
@@ -9177,7 +9218,10 @@ export function App() {
                 cursor: 'pointer'
               }}
             >
-              <X size={20} />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>

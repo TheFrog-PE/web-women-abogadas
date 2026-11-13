@@ -342,7 +342,7 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               flex: '0 0 auto',
               width: 'min(310px, 78vw)',
               height: '215px',
-              borderRadius: '16px',
+              borderRadius: '0',
               overflow: 'hidden',
               backgroundColor: '#F1F5F9',
               border: '1.5px solid #e6affc',
@@ -597,7 +597,7 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 maxHeight: '72vh',
                 maxWidth: '92vw',
                 objectFit: 'contain',
-                borderRadius: '16px',
+                borderRadius: '0',
                 boxShadow: '0 25px 60px rgba(0, 0, 0, 0.65)',
                 border: '1px solid rgba(255, 255, 255, 0.15)'
               }}
@@ -670,7 +670,7 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 style={{
                   width: '52px',
                   height: '40px',
-                  borderRadius: '8px',
+                  borderRadius: '0',
                   overflow: 'hidden',
                   border: lightboxIndex === idx ? '2px solid #eb54ff' : '2px solid rgba(255, 255, 255, 0.25)',
                   opacity: lightboxIndex === idx ? 1 : 0.5,

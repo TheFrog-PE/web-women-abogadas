@@ -1532,7 +1532,7 @@ export function App() {
                     {/* ── HERO CON FOTO DE FONDO 100% COMPLETA Y GRADIENTE CORPORATIVO ── */}
                     <div style={{
                       position: 'relative',
-                      borderRadius: '24px',
+                      borderRadius: '0',
                       overflow: 'hidden',
                       minHeight: '460px',
                       boxShadow: '0 20px 40px rgba(175, 29, 170, 0.18)',
@@ -1812,7 +1812,7 @@ export function App() {
 
                     {/* ── GALERÍA DE FOTOS AUMENTADA DEL EVENTO CULMINADO (ANTES DEL FOOTER) ── */}
                     {currentEvent.isPast && (
-                      <div className="reveal" style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem', borderRadius: '24px', marginBottom: '2.5rem', border: '1px solid #e6affc' }}>
+                      <div className="reveal" style={{ backgroundColor: '#f4f4f4', padding: '4rem 2rem', borderRadius: '0', marginBottom: '2.5rem', border: '1px solid #e6affc' }}>
                         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
                             <span style={{ color: '#af1daa', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '2px', textTransform: 'uppercase' }}>
@@ -1837,7 +1837,7 @@ export function App() {
 
                     {/* ── COUNTDOWN REAL OSCURO (FULL WIDTH) - SOLO PARA EVENTOS FUTUROS ── */}
                     {!currentEvent.isPast && (
-                      <div className="reveal" style={{ backgroundColor: '#0A1128', padding: '4rem 2rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '24px', margin: '0 0 0 0' }}>
+                      <div className="reveal" style={{ backgroundColor: '#0A1128', padding: '4rem 2rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '0', margin: '0 0 0 0' }}>
                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>NO TE QUEDES SIN TU CUPO</p>
                         <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '2.5rem', color: '#FFFFFF' }}>El Evento comienza en:</h2>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
@@ -1893,7 +1893,7 @@ export function App() {
                     </div>
 
                     {/* ── BANNER INTERESADO EN AUSPICIAR (MORADO OSCURO) ── */}
-                    <div className="reveal" style={{ background: 'linear-gradient(105deg,#4A0772,#7E22CE)', padding: '4rem 2rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '24px' }}>
+                    <div className="reveal" style={{ background: 'linear-gradient(105deg,#4A0772,#7E22CE)', padding: '4rem 2rem', textAlign: 'center', color: '#FFFFFF', borderRadius: '0' }}>
                       <span style={{ fontSize: '0.72rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>¿TIENES UNA EMPRESA?</span>
                       <h2 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0.75rem 0 1rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.25', color: '#FFFFFF' }}>
                         Interesado en Auspiciar este Evento

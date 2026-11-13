@@ -8,8 +8,8 @@
   "description": "Comunidad oficial de mujeres líderes en compliance, riesgos y gobierno corporativo en Colombia.",
   "icons": [
     {
-      "src": "/Logo/Logo WIC COL  (2).png",
-      "sizes": "594x577",
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     }

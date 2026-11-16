@@ -90,7 +90,18 @@ const WhatsappIcon = ({ size = 16 }: { size?: number }) => (
 );
 import { MEMBERS_DATA } from './membersData';
 import type { Member } from './membersData';
-import { getSocias, submitSolicitud } from './services/api';
+import { 
+  getSocias, 
+  saveSocia, 
+  deleteSocia, 
+  getArticulos, 
+  saveArticulo, 
+  deleteArticulo, 
+  submitSolicitud, 
+  loginAdminApi, 
+  optimizeImageForWeb, 
+  uploadImageToServer 
+} from './services/api';
 import './index.css';
 
 export interface EventSpeaker {
@@ -382,9 +393,9 @@ export interface AdminUser {
 
 export const AUTHORIZED_ADMINS: AdminUser[] = [
   {
-    email: 'admin@wiccolombia.com',
-    passwordHash: '980ab7ac7551807cc4bf312131ebbf4a787fa34622811ecf99ffb57bd2a0f2c0',
-    name: 'Dirección General WIC',
+    email: 'direccion.seguridad@wiccolombia.com',
+    passwordHash: '242585c476e2a7003c6ede94360995cc7ac4d7a1fb4036cfe5be04440f7838b6',
+    name: 'Comité Directivo WIC Colombia',
     role: 'Super Administrador'
   }
 ];
@@ -479,6 +490,19 @@ export function App() {
       localStorage.setItem('wic_articles_db_v1', JSON.stringify(articlesList));
     }
   }, [articlesList]);
+
+  // Sincronizar artículos del blog desde la API de HostGator (con fallback resiliente)
+  useEffect(() => {
+    let isMounted = true;
+    getArticulos(true).then(data => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setArticlesList(data);
+      }
+    }).catch(err => {
+      console.warn('[WIC Sync] Usando fallback local para artículos:', err);
+    });
+    return () => { isMounted = false; };
+  }, []);
 
   const [activeTab, setActiveTab] = useState<'inicio' | 'miembros' | 'eventos' | 'contenido' | 'opentowork' | 'login' | '404' | 'unete'>('inicio');
   const [unetePlanSelected, setUnetePlanSelected] = useState<'estandar' | 'corporativa'>('estandar');
@@ -646,6 +670,30 @@ export function App() {
     setLoginError('');
 
     const trimmedEmail = loginEmail.trim().toLowerCase();
+
+    // 1. Intentar autenticación segura contra la base de datos MySQL de HostGator
+    try {
+      const apiAuth = await loginAdminApi(trimmedEmail, loginPassword);
+      if (apiAuth.success) {
+        const userName = apiAuth.user?.nombre || 'Comité Directivo WIC Colombia';
+        if (rememberMe) {
+          localStorage.setItem('wic_admin_session', 'true');
+          localStorage.setItem('wic_admin_user', userName);
+        } else {
+          sessionStorage.setItem('wic_admin_session', 'true');
+          sessionStorage.setItem('wic_admin_user', userName);
+        }
+        setCurrentAdminUser(userName);
+        setIsLoggedIn(true);
+        setLoginError('');
+        setLoginPassword('');
+        return;
+      }
+    } catch {
+      // Continuar al fallback local
+    }
+
+    // 2. Respaldo local de seguridad
     const foundAdmin = AUTHORIZED_ADMINS.find(
       admin => admin.email.toLowerCase() === trimmedEmail
     );
@@ -6566,6 +6614,9 @@ export function App() {
                             if (editingMember && editingMember.id) {
                               if (confirm(`¿Seguro que deseas eliminar el perfil de ${editingMember.name}?`)) {
                                 setMembersList(prev => prev.filter(m => m.id !== editingMember.id));
+                                deleteSocia(editingMember.id)
+                                  .then(() => getSocias().then(d => setMembersList(d)))
+                                  .catch(err => console.error("Error al eliminar socia en servidor:", err));
                                 alert('Miembro eliminado con éxito.');
                                 setAdminSubTab('members-list');
                               }
@@ -6604,37 +6655,35 @@ export function App() {
                             const newPhoto = memberPhoto || (editingMember ? editingMember.photo : '/Fotos/Miembros/ADRIANA PATRICIA GOMEZ BARAJAS.webp');
                             const finalTags = memberTags.length > 0 ? [...memberTags] : ['Compliance'];
 
+                            const targetId = editingMember?.id || `mem-${Date.now()}`;
+                            const memberPayload: Member = {
+                              id: targetId,
+                              name: newName.toUpperCase(),
+                              role: newRole.toUpperCase(),
+                              sector: editingMember?.sector || 'COMPLIANCE & GOBIERNO CORPORATIVO',
+                              currentCargo: newRole,
+                              complianceExperience: newBio,
+                              profession: editingMember?.profession || 'ABOGADA',
+                              academicBg: editingMember?.academicBg || ['Especialista en Compliance'],
+                              workBg: editingMember?.workBg || [newRole],
+                              linkedin: newLinkedin,
+                              photo: newPhoto,
+                              tags: finalTags,
+                              isFoundingMember: memberIsFounder
+                            };
+
                             if (editingMember && editingMember.id) {
-                              setMembersList(prev => prev.map(m => m.id === editingMember.id ? {
-                                ...m,
-                                name: newName.toUpperCase(),
-                                role: newRole.toUpperCase(),
-                                currentCargo: newRole,
-                                complianceExperience: newBio,
-                                linkedin: newLinkedin,
-                                photo: newPhoto,
-                                tags: finalTags,
-                                isFoundingMember: memberIsFounder
-                              } : m));
+                              setMembersList(prev => prev.map(m => m.id === editingMember.id ? memberPayload : m));
                             } else {
-                              const newObj: Member = {
-                                id: `mem-${Date.now()}`,
-                                name: newName.toUpperCase(),
-                                role: newRole.toUpperCase(),
-                                sector: 'COMPLIANCE & GOBIERNO CORPORATIVO',
-                                currentCargo: newRole,
-                                complianceExperience: newBio,
-                                profession: 'ABOGADA',
-                                academicBg: ['Especialista en Compliance'],
-                                workBg: [newRole],
-                                linkedin: newLinkedin,
-                                photo: newPhoto,
-                                tags: finalTags,
-                                isFoundingMember: memberIsFounder
-                              };
-                              setMembersList(prev => [newObj, ...prev]);
+                              setMembersList(prev => [memberPayload, ...prev]);
                             }
-                            alert('¡Miembro guardado con éxito y publicado en la Web de WIC!');
+
+                            // Persistir inmediatamente en MySQL de HostGator
+                            saveSocia({ ...memberPayload, db_id: (editingMember as any)?.db_id })
+                              .then(() => getSocias().then(d => setMembersList(d)))
+                              .catch(err => console.error("Error al persistir socia en MySQL:", err));
+
+                            alert('¡Miembro guardado con éxito y publicado en la Base de Datos de WIC!');
                             setAdminSubTab('members-list');
                           }}
                           style={{ 
@@ -6704,10 +6753,17 @@ export function App() {
                                   type="file" 
                                   accept="image/*" 
                                   style={{ display: 'none' }} 
-                                  onChange={(e) => {
+                                  onChange={async (e) => {
                                     if (e.target.files && e.target.files[0]) {
-                                      const newUrl = URL.createObjectURL(e.target.files[0]);
-                                      setMemberPhoto(newUrl);
+                                      try {
+                                        const file = e.target.files[0];
+                                        const opt = await optimizeImageForWeb(file, { maxWidth: 800, maxHeight: 800, quality: 0.82 });
+                                        setMemberPhoto(opt.base64);
+                                        const serverUrl = await uploadImageToServer(opt.base64, 'socias');
+                                        setMemberPhoto(serverUrl);
+                                      } catch (err) {
+                                        console.error('Error al optimizar/subir foto de socia:', err);
+                                      }
                                     }
                                   }}
                                 />
@@ -7336,6 +7392,9 @@ export function App() {
                                   <span onClick={() => {
                                     if (confirm(`¿Eliminar el artículo "${art.title}"?`)) {
                                       setArticlesList(prev => prev.filter(a => a.id !== art.id));
+                                      deleteArticulo(art.id)
+                                        .then(() => getArticulos(true).then(d => setArticlesList(d)))
+                                        .catch(err => console.error("Error al eliminar artículo de MySQL:", err));
                                     }
                                   }} title="Eliminar"><Trash2 size={16} /></span>
                                 </div>
@@ -7429,15 +7488,17 @@ export function App() {
                             type="file" 
                             accept="image/*" 
                             style={{ display: 'none' }} 
-                            onChange={(e) => {
+                            onChange={async (e) => {
                               const file = e.target.files?.[0];
                               if (file) {
-                                const reader = new FileReader();
-                                reader.onload = (event) => {
-                                  const imgUrl = event.target?.result as string;
-                                  setArticleCover(imgUrl);
-                                };
-                                reader.readAsDataURL(file);
+                                try {
+                                  const opt = await optimizeImageForWeb(file, { maxWidth: 1300, maxHeight: 1300, quality: 0.82 });
+                                  setArticleCover(opt.base64);
+                                  const serverUrl = await uploadImageToServer(opt.base64, 'articulos');
+                                  setArticleCover(serverUrl);
+                                } catch (err) {
+                                  console.error('Error al optimizar/subir portada:', err);
+                                }
                               }
                             }}
                           />
@@ -8042,19 +8103,20 @@ export function App() {
                                             type="file" 
                                             accept="image/*" 
                                             style={{ display: 'none' }}
-                                            onChange={(e) => {
+                                            onChange={async (e) => {
                                               const file = e.target.files?.[0];
                                               if (file) {
-                                                const reader = new FileReader();
-                                                reader.onload = (ev) => {
-                                                  const val = ev.target?.result as string;
+                                                try {
+                                                  const opt = await optimizeImageForWeb(file, { maxWidth: 1200, maxHeight: 1200, quality: 0.82 });
+                                                  const serverUrl = await uploadImageToServer(opt.base64, 'articulos');
                                                   setEditorBlocks(prev => {
                                                     const copy = [...prev];
-                                                    copy[index] = { ...copy[index], imageUrl: val };
+                                                    copy[index] = { ...copy[index], imageUrl: serverUrl };
                                                     return copy;
                                                   });
-                                                };
-                                                reader.readAsDataURL(file);
+                                                } catch (err) {
+                                                  console.error('Error al optimizar/subir imagen de bloque:', err);
+                                                }
                                               }
                                             }}
                                           />
@@ -8327,7 +8389,12 @@ export function App() {
                                 setArticlesList(prev => [articlePayload, ...prev]);
                               }
 
-                              alert(`¡Artículo ${statusVal === 'Borrador' ? 'guardado como Borrador' : 'publicado con éxito en la Web Pública de WIC'}!`);
+                              // Persistir inmediatamente en MySQL de HostGator
+                              saveArticulo(articlePayload)
+                                .then(() => getArticulos(true).then(d => setArticlesList(d)))
+                                .catch(err => console.error("Error al persistir artículo en MySQL:", err));
+
+                              alert(`¡Artículo ${statusVal === 'Borrador' ? 'guardado como Borrador' : 'publicado con éxito en la Base de Datos de WIC'}!`);
                               setAdminSubTab('blog-list');
                             }}
                             style={{ 
@@ -8398,7 +8465,12 @@ export function App() {
                                 setArticlesList(prev => [draftPayload, ...prev]);
                               }
 
-                              alert('Borrador guardado con éxito.');
+                              // Persistir inmediatamente en MySQL de HostGator
+                              saveArticulo(draftPayload)
+                                .then(() => getArticulos(true).then(d => setArticlesList(d)))
+                                .catch(err => console.error("Error al persistir borrador en MySQL:", err));
+
+                              alert('Borrador guardado con éxito en la Base de Datos.');
                               setAdminSubTab('blog-list');
                             }}
                             style={{ 

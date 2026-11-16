@@ -842,10 +842,11 @@ export function App() {
     }
   ];
 
-  // Listener for hash route #admin
+  // Listener for hash route #admin o parámetro ?admin
   useEffect(() => {
     const handleHash = () => {
-      if (window.location.hash === '#admin' || window.location.pathname.endsWith('/admin')) {
+      const hasAdminParam = new URLSearchParams(window.location.search).has('admin');
+      if (window.location.hash === '#admin' || window.location.pathname.endsWith('/admin') || hasAdminParam) {
         setActiveTab('login');
       } else if (window.location.hash === '#unete' || window.location.pathname.endsWith('/unete')) {
         setActiveTab('unete');
@@ -9066,26 +9067,6 @@ export function App() {
                   style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline' }}
                 >
                   Política de Privacidad
-                </button>
-                <button 
-                  onClick={() => {
-                    setActiveTab('login');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }} 
-                  style={{ 
-                    background: 'none', 
-                    border: 'none', 
-                    color: '#EB54FF', 
-                    fontSize: '0.85rem', 
-                    cursor: 'pointer', 
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    fontWeight: '600'
-                  }}
-                  title="Acceso al Panel Administrativo"
-                >
-                  <LockIcon size={14} /> Panel Administrativo
                 </button>
               </div>
             </div>

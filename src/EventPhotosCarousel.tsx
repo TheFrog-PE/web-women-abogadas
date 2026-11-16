@@ -77,6 +77,24 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
     }, resumeDelayMs);
   };
 
+  // Scroll strictly within container without ever triggering window scroll
+  const scrollToCard = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cards = el.querySelectorAll<HTMLElement>('.event-carousel-card');
+    const targetCard = cards[index];
+    if (!targetCard) return;
+
+    const containerRect = el.getBoundingClientRect();
+    const cardRect = targetCard.getBoundingClientRect();
+    const targetScrollLeft = el.scrollLeft + (cardRect.left - containerRect.left);
+
+    el.scrollTo({
+      left: targetScrollLeft,
+      behavior
+    });
+  }, []);
+
   // Feature F1: Sequential one-by-one periodic autoplay (right-to-left every ~3.5s)
   // Autoplay pauses on touch/hover and while lightbox modal is open, resuming after interaction ends.
   useEffect(() => {
@@ -87,13 +105,24 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
     const timer = window.setInterval(() => {
       const currentEl = scrollRef.current;
       if (!currentEl) return;
+
+      // Crucial: Only autoplay when the carousel is actually in the viewport!
+      // This prevents the carousel from stealing page focus or causing window scroll jumps when scrolled past it.
+      const rect = currentEl.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!isVisible) return;
+
       const cards = currentEl.querySelectorAll<HTMLElement>('.event-carousel-card');
       if (cards.length === 0) return;
 
       setActiveIndex((prev) => {
         const nextIdx = (prev + 1) % photos.length;
-        if (cards[nextIdx]) {
-          cards[nextIdx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        const targetCard = cards[nextIdx];
+        if (targetCard) {
+          const containerRect = currentEl.getBoundingClientRect();
+          const cardRect = targetCard.getBoundingClientRect();
+          const targetScrollLeft = currentEl.scrollLeft + (cardRect.left - containerRect.left);
+          currentEl.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
         }
         return nextIdx;
       });
@@ -127,23 +156,16 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
       targetIndex = photos.length - 1; // wrap around to last photo
     }
 
-    if (cards[targetIndex]) {
-      cards[targetIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      setActiveIndex(targetIndex);
-    }
+    scrollToCard(targetIndex);
+    setActiveIndex(targetIndex);
     handleInteractionEnd(3500);
   };
 
   // Scroll to specific index via dot
   const scrollToIndex = (index: number) => {
     handleInteractionStart();
-    const el = scrollRef.current;
-    if (!el) return;
-    const cards = el.querySelectorAll<HTMLElement>('.event-carousel-card');
-    if (cards[index]) {
-      cards[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      setActiveIndex(index);
-    }
+    scrollToCard(index);
+    setActiveIndex(index);
     handleInteractionEnd(3500);
   };
 
@@ -422,7 +444,6 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               flex: '0 0 auto',
               width: 'min(310px, 78vw)',
               height: '215px',
-              borderRadius: '0',
               overflow: 'hidden',
               backgroundColor: '#F1F5F9',
               border: '1.5px solid #e6affc',

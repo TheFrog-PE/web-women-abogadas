@@ -90,6 +90,7 @@ const WhatsappIcon = ({ size = 16 }: { size?: number }) => (
 );
 import { MEMBERS_DATA } from './membersData';
 import type { Member } from './membersData';
+import { getSocias, submitSolicitud } from './services/api';
 import './index.css';
 
 export interface EventSpeaker {
@@ -459,6 +460,19 @@ export function App() {
       try { localStorage.removeItem('wic_members_db_v1'); } catch (_) {}
     }
   }, [membersList]);
+
+  // Sincronizar directorio de socias desde la API de HostGator (con fallback resiliente)
+  useEffect(() => {
+    let isMounted = true;
+    getSocias().then(data => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setMembersList(data);
+      }
+    }).catch(err => {
+      console.warn('[WIC Sync] Usando fallback local para socias:', err);
+    });
+    return () => { isMounted = false; };
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -5962,6 +5976,16 @@ export function App() {
                     onSubmit={(e) => {
                       e.preventDefault();
                       setUneteFormSubmitted(true);
+                      submitSolicitud({
+                        tipo_solicitud: 'afiliacion',
+                        nombre_completo: uneteFormData.name,
+                        email: uneteFormData.email,
+                        telefono: uneteFormData.phone,
+                        empresa: uneteFormData.company,
+                        plan_interes: uneteFormData.plan,
+                        experiencia_anos: uneteFormData.experience,
+                        linkedin_url: uneteFormData.linkedin,
+                      }).catch(() => {});
                     }}
                     style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
                   >

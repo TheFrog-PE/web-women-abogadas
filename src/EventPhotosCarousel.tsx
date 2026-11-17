@@ -631,34 +631,36 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               type="button"
               className="lightbox-btn"
               onClick={() => setLightboxIndex(null)}
-              aria-label="Cerrar (Esc)"
-              title="Cerrar vista completa (Esc)"
+              aria-label="Cerrar"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.45rem',
-                padding: '0.55rem 1.15rem !important',
-                borderRadius: '9999px',
+                justifyContent: 'center',
+                width: '44px',
+                height: '44px',
+                minWidth: '44px',
+                minHeight: '44px',
+                padding: '0 !important',
+                borderRadius: '50%',
                 backgroundColor: 'rgba(255, 255, 255, 0.12)',
                 border: '1px solid rgba(255, 255, 255, 0.25)',
                 color: '#FFFFFF',
                 cursor: 'pointer',
-                fontSize: '0.85rem',
-                fontWeight: '700',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                backdropFilter: 'blur(8px)'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#af1daa';
                 e.currentTarget.style.borderColor = '#eb54ff';
+                e.currentTarget.style.transform = 'scale(1.08)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                e.currentTarget.style.transform = 'scale(1)';
               }}
             >
-              <X size={18} />
-              <span>Cerrar</span>
-              <span style={{ opacity: 0.65, fontSize: '0.72rem', marginLeft: '2px' }}>(Esc)</span>
+              <X size={22} />
             </button>
           </div>
 

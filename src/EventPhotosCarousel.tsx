@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronLeft, ChevronRight, X, Sparkles, Camera } from 'lucide-react';
 
 interface EventPhotosCarouselProps {
@@ -252,22 +253,40 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
     }
   };
 
-  // Lightbox keyboard navigation
+  // Lightbox: bloqueo de scroll de pantalla completa y navegación por teclado (ESC, flechas)
   useEffect(() => {
     if (lightboxIndex === null) return;
 
+    // Bloquear scroll de toda la pantalla hasta cerrar el lightbox
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = 'hidden';
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        e.preventDefault();
         setLightboxIndex(null);
       } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
         setLightboxIndex((prev) => (prev !== null ? (prev + 1) % photos.length : 0));
       } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         setLightboxIndex((prev) => (prev !== null ? (prev === 0 ? photos.length - 1 : prev - 1) : 0));
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [lightboxIndex, photos.length]);
 
   if (!photos || photos.length === 0) return null;
@@ -549,26 +568,32 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
         ))}
       </div>
 
-      {/* ── MODAL LIGHTBOX PANTALLA COMPLETA AL TOCAR / SELECCIONAR CON EL DEDO ── */}
-      {lightboxIndex !== null && (
+      {/* ── MODAL LIGHTBOX PANTALLA COMPLETA DIRECTO EN BODY (PORTAL) ── */}
+      {lightboxIndex !== null && typeof document !== 'undefined' && createPortal(
         <div
           role="dialog"
           aria-modal="true"
           onClick={() => setLightboxIndex(null)}
           style={{
             position: 'fixed',
-            inset: 0,
-            zIndex: 99999,
-            backgroundColor: 'rgba(15, 23, 42, 0.94)',
-            backdropFilter: 'blur(16px)',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: 9999999,
+            backgroundColor: 'rgba(5, 5, 10, 0.96)',
+            backdropFilter: 'blur(18px)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            padding: '1.25rem',
-            animation: 'fadeIn 0.25s ease-out'
+            padding: '1.25rem 1.5rem',
+            boxSizing: 'border-box',
+            animation: 'fadeIn 0.2s ease-out'
           }}
         >
-          {/* Header Lightbox */}
+          {/* Header Lightbox Superior */}
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -576,39 +601,50 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               alignItems: 'center',
               justifyContent: 'space-between',
               width: '100%',
-              maxWidth: '1200px',
+              maxWidth: '1300px',
               margin: '0 auto',
-              color: '#FFFFFF'
+              padding: '0.25rem 0.5rem',
+              color: '#FFFFFF',
+              zIndex: 10
             }}
           >
-            <div>
-              <p style={{ fontSize: '0.75rem', color: '#F472B6', fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <span style={{ 
+                backgroundColor: 'rgba(235, 84, 255, 0.16)', 
+                border: '1px solid rgba(235, 84, 255, 0.45)', 
+                color: '#F472B6', 
+                padding: '0.35rem 0.85rem', 
+                borderRadius: '9999px', 
+                fontSize: '0.75rem', 
+                fontWeight: '800', 
+                letterSpacing: '1px', 
+                textTransform: 'uppercase' 
+              }}>
                 {eventTitle} · {isPast ? 'Evento Realizado' : 'Galería'}
-              </p>
-              <h4 style={{ fontSize: '1.1rem', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>
+              </span>
+              <span style={{ fontSize: '0.95rem', fontWeight: '700', color: '#E2E8F0' }}>
                 Fotografía {lightboxIndex + 1} de {photos.length}
-              </h4>
+              </span>
             </div>
 
             <button
               type="button"
               className="lightbox-btn"
               onClick={() => setLightboxIndex(null)}
-              aria-label="Cerrar vista completa"
+              aria-label="Cerrar (Esc)"
+              title="Cerrar vista completa (Esc)"
               style={{
-                width: '44px',
-                height: '44px',
-                minWidth: '44px',
-                minHeight: '44px',
-                padding: '0 !important',
-                borderRadius: '50%',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.55rem 1.15rem !important',
+                borderRadius: '9999px',
                 backgroundColor: 'rgba(255, 255, 255, 0.12)',
                 border: '1px solid rgba(255, 255, 255, 0.25)',
                 color: '#FFFFFF',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 cursor: 'pointer',
+                fontSize: '0.85rem',
+                fontWeight: '700',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
@@ -620,22 +656,24 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
               }}
             >
-              <X size={22} />
+              <X size={18} />
+              <span>Cerrar</span>
+              <span style={{ opacity: 0.65, fontSize: '0.72rem', marginLeft: '2px' }}>(Esc)</span>
             </button>
           </div>
 
-          {/* Imagen Principal en Pantalla Completa */}
+          {/* Imagen Principal en Pantalla Completa Centrada */}
           <div
-            onClick={(e) => e.stopPropagation()}
             style={{
               position: 'relative',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              maxWidth: '1200px',
+              maxWidth: '1300px',
               width: '100%',
               margin: 'auto',
-              maxHeight: '75vh'
+              flex: 1,
+              maxHeight: '78vh'
             }}
           >
             {/* Flecha Izquierda Modal */}
@@ -649,16 +687,16 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               aria-label="Foto anterior"
               style={{
                 position: 'absolute',
-                left: '10px',
+                left: '12px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '48px',
-                height: '48px',
-                minWidth: '48px',
-                minHeight: '48px',
+                width: '52px',
+                height: '52px',
+                minWidth: '52px',
+                minHeight: '52px',
                 padding: '0 !important',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                backgroundColor: 'rgba(15, 23, 42, 0.82)',
                 backdropFilter: 'blur(8px)',
                 border: '1.5px solid rgba(255, 255, 255, 0.3)',
                 color: '#FFFFFF',
@@ -666,31 +704,34 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                zIndex: 10,
-                transition: 'all 0.2s ease'
+                zIndex: 20,
+                transition: 'all 0.2s ease',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#af1daa';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(15, 23, 42, 0.75)';
+                e.currentTarget.style.backgroundColor = 'rgba(15, 23, 42, 0.82)';
                 e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
               }}
             >
-              <ChevronLeft size={26} />
+              <ChevronLeft size={28} />
             </button>
 
             <img
               src={photos[lightboxIndex]}
               alt={`Fotografía ampliada ${lightboxIndex + 1} de ${eventTitle}`}
+              onClick={(e) => e.stopPropagation()}
               style={{
-                maxHeight: '72vh',
-                maxWidth: '92vw',
+                maxHeight: '75vh',
+                maxWidth: '88vw',
                 objectFit: 'contain',
-                borderRadius: '0',
-                boxShadow: '0 25px 60px rgba(0, 0, 0, 0.65)',
-                border: '1px solid rgba(255, 255, 255, 0.15)'
+                borderRadius: '8px',
+                boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                userSelect: 'none'
               }}
               onError={(e) => {
                 const t = e.target as HTMLImageElement;
@@ -710,16 +751,16 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               aria-label="Foto siguiente"
               style={{
                 position: 'absolute',
-                right: '10px',
+                right: '12px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '48px',
-                height: '48px',
-                minWidth: '48px',
-                minHeight: '48px',
+                width: '52px',
+                height: '52px',
+                minWidth: '52px',
+                minHeight: '52px',
                 padding: '0 !important',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                backgroundColor: 'rgba(15, 23, 42, 0.82)',
                 backdropFilter: 'blur(8px)',
                 border: '1.5px solid rgba(255, 255, 255, 0.3)',
                 color: '#FFFFFF',
@@ -727,19 +768,20 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                zIndex: 10,
-                transition: 'all 0.2s ease'
+                zIndex: 20,
+                transition: 'all 0.2s ease',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#af1daa';
-                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+                e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(15, 23, 42, 0.75)';
+                e.currentTarget.style.backgroundColor = 'rgba(15, 23, 42, 0.82)';
                 e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
               }}
             >
-              <ChevronRight size={26} />
+              <ChevronRight size={28} />
             </button>
           </div>
 
@@ -748,13 +790,14 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
             onClick={(e) => e.stopPropagation()}
             style={{
               display: 'flex',
-              gap: '0.6rem',
+              gap: '0.65rem',
               overflowX: 'auto',
               justifyContent: 'center',
-              padding: '0.75rem 0',
+              padding: '0.6rem 0.5rem',
               maxWidth: '900px',
               margin: '0 auto',
-              scrollbarWidth: 'none'
+              scrollbarWidth: 'none',
+              zIndex: 10
             }}
           >
             {photos.map((thumbSrc, idx) => (
@@ -764,17 +807,17 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
                 className="lightbox-btn"
                 onClick={() => setLightboxIndex(idx)}
                 style={{
-                  width: '52px',
-                  height: '40px',
-                  borderRadius: '0',
+                  width: '56px',
+                  height: '42px',
+                  borderRadius: '6px',
                   overflow: 'hidden',
                   border: lightboxIndex === idx ? '2px solid #eb54ff' : '2px solid rgba(255, 255, 255, 0.25)',
-                  opacity: lightboxIndex === idx ? 1 : 0.5,
+                  opacity: lightboxIndex === idx ? 1 : 0.45,
                   padding: 0,
                   cursor: 'pointer',
                   backgroundColor: '#1E293B',
                   flexShrink: 0,
-                  transform: lightboxIndex === idx ? 'scale(1.1)' : 'scale(1)',
+                  transform: lightboxIndex === idx ? 'scale(1.12)' : 'scale(1)',
                   transition: 'all 0.2s ease'
                 }}
               >
@@ -791,7 +834,8 @@ export const EventPhotosCarousel: React.FC<EventPhotosCarouselProps> = ({
               </button>
             ))}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
